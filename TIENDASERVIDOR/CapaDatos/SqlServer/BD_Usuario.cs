@@ -19,13 +19,15 @@ namespace CapaDatos
             {
                 try
                 {
-                    String SqlQuery = "INSERT INTO Usuario(NombreUsuario,Contraseña,IdTienda,IdRol,Estado) VALUES(@NombreUsuario,@Contraseña,@IdTienda,@IdRol,@Estado)";
+                    String SqlQuery = "INSERT INTO Usuario(IdEmpleado,NombreUsuario,Contraseña,IdTienda,IdRol,Email,Estado) VALUES(@IdEmpleado,@NombreUsuario,@Contraseña,@IdTienda,@IdRol,@Email,@Estado)";
                     SqlCommand cmd = new SqlCommand(SqlQuery, oConexion);
+                    cmd.Parameters.AddWithValue("IdEmpleado", oUsuario.OEmpleado.IdEmpleado);
                     cmd.Parameters.AddWithValue("NombreUsuario", oUsuario.NombreUsuario);
                     cmd.Parameters.AddWithValue("Contraseña", oUsuario.Contraseña);
-                    cmd.Parameters.AddWithValue("Tienda", oUsuario.Tienda);
-                    cmd.Parameters.AddWithValue("Rol", oUsuario.Rol);
-                    cmd.Parameters.AddWithValue("Estado", oUsuario.oEstado);
+                    cmd.Parameters.AddWithValue("Tienda", oUsuario.OTienda.IdTienda);
+                    cmd.Parameters.AddWithValue("Rol", oUsuario.ORol.IdRol);
+                    cmd.Parameters.AddWithValue("Email", oUsuario.Email);
+                    cmd.Parameters.AddWithValue("Estado", oUsuario.OEstado);
                     oConexion.Open();
                     respuesta = cmd.ExecuteNonQuery();
                 }
@@ -57,11 +59,13 @@ namespace CapaDatos
                             var user = new Usuario
                             {
                                 IdUsuario = Convert.ToInt32(data.Rows[i]["IdUsuario"]),
+                                //OEmpleado = BuscarEmpleado(Convert.ToInt32(data.Rows[i]["IdEmpleado"])),
                                 NombreUsuario = data.Rows[i]["NombreUsuario"].ToString(),
                                 Contraseña = data.Rows[i]["Contraseña"].ToString(),
-                                Tienda = data.Rows[i]["IdTienda"].ToString(),
-                                Rol = data.Rows[i]["IdRol"].ToString(),
-                                oEstado = BuscarEstado(data.Rows[i]["Estado"].ToString()),
+                                //OTienda = BuscarTienda(Convert.ToInt32(data.Rows[i]["IdTienda"])),
+                                //ORol = BuscarRol(Convert.ToInt32(data.Rows[i]["IdRol"])),
+                                Email = data.Rows[i]["Email"].ToString(),
+                                OEstado = BuscarEstado(data.Rows[i]["Estado"].ToString()),
                                 FechaRegistro = Convert.ToDateTime(data.Rows[i]["FechaRegistro"])
                             };
                             usuarioTabla.Add(user);
@@ -88,11 +92,13 @@ namespace CapaDatos
                     String SqlQuery = "UPDATE Usuario SET NombreUsuario = @NombreUsuario,Contraseña = @Contraseña,IdTienda = @IdTienda, IdRol = @IdRol,Estado = @Estado WHERE idUsuario = @IdUsuario";
                     SqlCommand cmd = new SqlCommand(SqlQuery, oConexion);
                     cmd.Parameters.AddWithValue("IdUsuario", IdUsuario);
+                    cmd.Parameters.AddWithValue("IdEmpleado", oUsuario.OEmpleado.IdEmpleado);
                     cmd.Parameters.AddWithValue("NombreUsuario", oUsuario.NombreUsuario);
                     cmd.Parameters.AddWithValue("Contraseña", oUsuario.Contraseña);
-                    cmd.Parameters.AddWithValue("Tienda", oUsuario.Tienda);
-                    cmd.Parameters.AddWithValue("Rol", oUsuario.Rol);
-                    cmd.Parameters.AddWithValue("Estado", oUsuario.oEstado);
+                    cmd.Parameters.AddWithValue("Tienda", oUsuario.OTienda.IdTienda);
+                    cmd.Parameters.AddWithValue("Rol", oUsuario.ORol.IdRol);
+                    cmd.Parameters.AddWithValue("Email", oUsuario.Email);
+                    cmd.Parameters.AddWithValue("Estado", oUsuario.OEstado);
                     oConexion.Open();
                     respuesta = cmd.ExecuteNonQuery();
                     return true;
@@ -196,8 +202,6 @@ namespace CapaDatos
                 }
             }
         }
-
-
         public static Usuario BuscarUsuario(Usuario oUsuario)
         {
             List<Usuario> lista = new List<Usuario>();

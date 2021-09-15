@@ -45,17 +45,6 @@ namespace CapaServicioServidor
             return CapaDatos.BD_Marca.ActualizarMarca(nuevo, IdMarca);
 
         }
-        private DtoMarca ConvertirRubro(Marca oMarca)
-        {
-            var rub = new DtoMarca
-            {
-                IdMarca = Convert.ToInt32(oMarca.IdMarca),
-                Descripcion = oMarca.Descripcion,
-                oEstado = oMarca.oEstado,
-            };
-            return rub;
-        }
-
         public List<DtoMarca> ListaMarca()
         {
             List<Marca> dato = CapaDatos.BD_Marca.MostrarMarca();

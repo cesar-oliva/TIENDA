@@ -73,6 +73,7 @@
     <Compile Include="SqlServer\BD_Producto.cs" />
     <Compile Include="SqlServer\BD_RubroProducto.cs" />
     <Compile Include="SqlServer\BD_Sucursal.cs" />
+    <Compile Include="SqlServer\BD_Talle.cs" />
     <Compile Include="SqlServer\BD_Usuario.cs" />
     <Compile Include="SqlServer\BD_Venta.cs" />
     <Compile Include="SqlServer\Conexion.cs" />

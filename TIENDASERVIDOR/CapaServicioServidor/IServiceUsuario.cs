@@ -24,8 +24,6 @@ namespace CapaServicioServidor
         [OperationContract] //metodos expuestos atraves del webservice
         List<DtoUsuario> ObtenerUsuario();
         [OperationContract] //metodos expuestos atraves del webservice
-        Estado BuscarEstado(string valor);
-        [OperationContract] //metodos expuestos atraves del webservice
         bool RecuperarContraseña(string usuario);
 
     }
@@ -35,15 +33,19 @@ namespace CapaServicioServidor
         [DataMember]
         public int IdUsuario { get; set; }
         [DataMember]
+        public Empleado OEmpleado { get; set; }
+        [DataMember]
         public string NombreUsuario { get; set; }
         [DataMember]
         public string Contraseña { get; set; }
         [DataMember]
-        public string Tienda { get; set; }
+        public Tienda OTienda { get; set; }
         [DataMember]
-        public string Rol { get; set; }
+        public Rol ORol { get; set; }
         [DataMember]
-        public Estado Estado { get; set; }
+        public string Email { get; set; }
+        [DataMember]
+        public Estado OEstado { get; set; }
         [DataMember]
         public DateTime FechaRegistro { get; set; }
     }

@@ -16,10 +16,14 @@ namespace CapaServicioServidor
         {
             var nuevo = new Usuario
             {
+                OEmpleado = oUsuario.OEmpleado,
                 NombreUsuario = oUsuario.NombreUsuario,
-                Contraseña = oUsuario.Contraseña
+                Contraseña = oUsuario.Contraseña,
+                OTienda = oUsuario.OTienda,
+                ORol = oUsuario.ORol,
+                Email = oUsuario.Email,
+                OEstado = oUsuario.OEstado
             };
-            //MessageBox.Show("Usuario cargadado");
             int i = CapaDatos.BD_Usuario.RegistrarUsuario(nuevo);
             if (i != 0)
             {
@@ -44,11 +48,13 @@ namespace CapaServicioServidor
         {
             var nuevo = new Usuario
             {
+                OEmpleado = oUsuario.OEmpleado,
                 NombreUsuario = oUsuario.NombreUsuario,
                 Contraseña = oUsuario.Contraseña,
-                Tienda = oUsuario.Tienda,
-                Rol = oUsuario.Rol,
-                oEstado = oUsuario.Estado
+                OTienda = oUsuario.OTienda,
+                ORol = oUsuario.ORol,
+                Email = oUsuario.Email,
+                OEstado = oUsuario.OEstado
             };
 
             return CapaDatos.BD_Usuario.ActualizarUsuario(nuevo, IdUsuario);
@@ -60,34 +66,23 @@ namespace CapaServicioServidor
             List<DtoUsuario> user = new List<DtoUsuario>();
             foreach (var item in dato)
             {
-                user.Add(ConvertirUsuario(item));
+                var usuario = new DtoUsuario
+                {
+                    IdUsuario = item.IdUsuario,
+                    OEmpleado = item.OEmpleado,
+                    NombreUsuario = item.NombreUsuario,
+                    Contraseña = item.Contraseña,
+                    OTienda = item.OTienda,
+                    ORol = item.ORol,
+                    Email = item.Email,
+                    OEstado = item.OEstado,
+                    FechaRegistro = item.FechaRegistro
+                };
+                user.Add(usuario);
+
             }
             return user;
         }
-        private DtoUsuario ConvertirUsuario(Usuario user)
-        {
-            var usuario = new DtoUsuario
-            {
-                IdUsuario = Convert.ToInt32(user.IdUsuario),
-                NombreUsuario = user.NombreUsuario,
-                //Contraseña = user.Contraseña,
-                Estado = Estado.Activo,
-                FechaRegistro = Convert.ToDateTime(user.FechaRegistro)
-            };
-            return usuario;
-        }
-        public Estado BuscarEstado(string valor)
-        {
-            if (valor.Equals("Activo"))
-            {
-                return Estado.Activo;
-            }
-            else
-            {
-                return Estado.Inactivo;
-            }
-        }
-
         public bool RecuperarContraseña(string usuario)
         {
             return CapaDatos.BD_Usuario.recoverPassword(usuario);
