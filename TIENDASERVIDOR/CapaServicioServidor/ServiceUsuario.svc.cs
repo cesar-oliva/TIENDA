@@ -57,7 +57,7 @@ namespace CapaServicioServidor
                 OEstado = oUsuario.OEstado
             };
 
-            return CapaDatos.BD_Usuario.ActualizarUsuario(nuevo, IdUsuario);
+            return CapaDatos.BD_Usuario.ModificarUsuario(nuevo, IdUsuario);
 
         }
         public List<DtoUsuario> ObtenerUsuario()
@@ -85,7 +85,7 @@ namespace CapaServicioServidor
         }
         public bool RecuperarContraseña(string usuario)
         {
-            return CapaDatos.BD_Usuario.recoverPassword(usuario);
+            return CapaDatos.BD_Usuario.RecoverPassword(usuario);
         }
     }
 }

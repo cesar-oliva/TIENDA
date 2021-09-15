@@ -54,6 +54,7 @@ namespace CapaDatos.SqlServer
                     cmd.Parameters.AddWithValue("Direccion", oTienda.Direccion);
                     cmd.Parameters.AddWithValue("Telefono", oTienda.Telefono);
                     cmd.Parameters.AddWithValue("Estado", oTienda.OEstado);
+                    cmd.Parameters.AddWithValue("IdTienda", IdTienda);
                     oConexion.Open();
                     respuesta = cmd.ExecuteNonQuery();
                     return true;
@@ -127,8 +128,7 @@ namespace CapaDatos.SqlServer
         }
         public static Tienda BuscarTienda(Tienda oTienda)
         {
-            List<Tienda> lista = new List<Tienda>();
-            lista = BD_Tienda.MostrarTienda();
+            List<Tienda> lista = MostrarTienda();
             foreach (var item in lista)
             {
                 if (oTienda.IdTienda.Equals(item.IdTienda)) return item;
@@ -137,8 +137,7 @@ namespace CapaDatos.SqlServer
         }
         public static Tienda BuscarTienda(string RazonSocial)
         {
-            List<Tienda> lista = new List<Tienda>();
-            lista = BD_Tienda.MostrarTienda();
+            List<Tienda> lista = MostrarTienda();
             foreach (var item in lista)
             {
                 if (item.RazonSocial.Equals(RazonSocial)) return item;
@@ -147,8 +146,7 @@ namespace CapaDatos.SqlServer
         }
         public static Tienda BuscarTienda(int IdTienda)
         {
-            List<Tienda> lista = new List<Tienda>();
-            lista = BD_Tienda.MostrarTienda();
+            List<Tienda> lista = MostrarTienda();
             foreach (var item in lista)
             {
                 if (item.IdTienda.Equals(IdTienda)) return item;

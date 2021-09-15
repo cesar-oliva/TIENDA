@@ -127,8 +127,7 @@ namespace CapaDatos
         }
         public static Comprobante BuscarComprobante(Comprobante oComprobante)
         {
-            List<Comprobante> lista = new List<Comprobante>();
-            lista = MostrarComprobante();
+            List<Comprobante> lista = MostrarComprobante();
             foreach (var item in lista)
             {
                 if (oComprobante.IdComprobante.Equals(item.IdComprobante)) return item;
@@ -137,8 +136,7 @@ namespace CapaDatos
         }
         public static Comprobante BuscarComprobante(string oComprobante)
         {
-            List<Comprobante> lista = new List<Comprobante>();
-            lista = MostrarComprobante();
+            List<Comprobante> lista = MostrarComprobante();
             foreach (var item in lista)
             {
                 if (item.Descripcion.Equals(oComprobante)) return item;
@@ -147,8 +145,7 @@ namespace CapaDatos
         }
         public static Comprobante BuscarComprobante(int oComprobante)
         {
-            List<Comprobante> lista = new List<Comprobante>();
-            lista = MostrarComprobante();
+            List<Comprobante> lista = MostrarComprobante();
             foreach (var item in lista)
             {
                 if (item.ContadorNumero.Equals(oComprobante)) return item;

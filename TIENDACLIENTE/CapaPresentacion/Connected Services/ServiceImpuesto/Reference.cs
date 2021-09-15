@@ -26,7 +26,7 @@ namespace ServiceImpuesto
         
         private int IdImpuestoField;
         
-        private string oEstadoField;
+        private ServiceImpuesto.Estado OEstadoField;
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         public double Alicuota
@@ -81,17 +81,29 @@ namespace ServiceImpuesto
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string oEstado
+        public ServiceImpuesto.Estado OEstado
         {
             get
             {
-                return this.oEstadoField;
+                return this.OEstadoField;
             }
             set
             {
-                this.oEstadoField = value;
+                this.OEstadoField = value;
             }
         }
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.3-preview3.21351.2")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Estado", Namespace="http://schemas.datacontract.org/2004/07/CapaNegocio")]
+    public enum Estado : int
+    {
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        Activo = 0,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        Inactivo = 1,
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.3-preview3.21351.2")]
@@ -105,11 +117,11 @@ namespace ServiceImpuesto
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceImpuesto/IngresarImpuesto", ReplyAction="http://tempuri.org/IServiceImpuesto/IngresarImpuestoResponse")]
         System.Threading.Tasks.Task<bool> IngresarImpuestoAsync(ServiceImpuesto.DtoImpuesto oImpuesto);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceImpuesto/ActualizarImpuesto", ReplyAction="http://tempuri.org/IServiceImpuesto/ActualizarImpuestoResponse")]
-        bool ActualizarImpuesto(ServiceImpuesto.DtoImpuesto oImpuestoo);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceImpuesto/ModificarImpuesto", ReplyAction="http://tempuri.org/IServiceImpuesto/ModificarImpuestoResponse")]
+        bool ModificarImpuesto(ServiceImpuesto.DtoImpuesto oImpuesto, int IdImpuesto);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceImpuesto/ActualizarImpuesto", ReplyAction="http://tempuri.org/IServiceImpuesto/ActualizarImpuestoResponse")]
-        System.Threading.Tasks.Task<bool> ActualizarImpuestoAsync(ServiceImpuesto.DtoImpuesto oImpuestoo);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceImpuesto/ModificarImpuesto", ReplyAction="http://tempuri.org/IServiceImpuesto/ModificarImpuestoResponse")]
+        System.Threading.Tasks.Task<bool> ModificarImpuestoAsync(ServiceImpuesto.DtoImpuesto oImpuesto, int IdImpuesto);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceImpuesto/EliminarImpuesto", ReplyAction="http://tempuri.org/IServiceImpuesto/EliminarImpuestoResponse")]
         bool EliminarImpuesto(int IdImpuesto);
@@ -184,14 +196,14 @@ namespace ServiceImpuesto
             return base.Channel.IngresarImpuestoAsync(oImpuesto);
         }
         
-        public bool ActualizarImpuesto(ServiceImpuesto.DtoImpuesto oImpuestoo)
+        public bool ModificarImpuesto(ServiceImpuesto.DtoImpuesto oImpuesto, int IdImpuesto)
         {
-            return base.Channel.ActualizarImpuesto(oImpuestoo);
+            return base.Channel.ModificarImpuesto(oImpuesto, IdImpuesto);
         }
         
-        public System.Threading.Tasks.Task<bool> ActualizarImpuestoAsync(ServiceImpuesto.DtoImpuesto oImpuestoo)
+        public System.Threading.Tasks.Task<bool> ModificarImpuestoAsync(ServiceImpuesto.DtoImpuesto oImpuesto, int IdImpuesto)
         {
-            return base.Channel.ActualizarImpuestoAsync(oImpuestoo);
+            return base.Channel.ModificarImpuestoAsync(oImpuesto, IdImpuesto);
         }
         
         public bool EliminarImpuesto(int IdImpuesto)

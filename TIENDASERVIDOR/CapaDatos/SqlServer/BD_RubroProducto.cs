@@ -48,7 +48,7 @@ namespace CapaDatos
                     SqlCommand cmd = new SqlCommand(SqlQuery, oConexion);
                     cmd.Parameters.AddWithValue("Descripcion", oRubro.Descripcion);
                     cmd.Parameters.AddWithValue("Estado", oRubro.OEstado);
-                    cmd.Parameters.AddWithValue("IdRubroProducto", oRubro.IdRubroProducto);
+                    cmd.Parameters.AddWithValue("IdRubroProducto", IdRubroProducto);
                     oConexion.Open();
                     respuesta = cmd.ExecuteNonQuery();
                     return true;
@@ -82,7 +82,7 @@ namespace CapaDatos
                 }
             }
         }
-        public static List<RubroProducto> MostrarRubro()
+        public static List<RubroProducto> MostrarRubroProducto()
         {
             List<RubroProducto> rubroTabla = new List<RubroProducto>();
             DataTable data = new DataTable();
@@ -120,8 +120,7 @@ namespace CapaDatos
         }
         public static RubroProducto BuscarRubroProducto(RubroProducto oRubro)
         {
-            List<RubroProducto> lista = new List<RubroProducto>();
-            lista = BD_RubroProducto.MostrarRubro();
+            List<RubroProducto> lista = MostrarRubroProducto();
             foreach (var item in lista)
             {
                 if (oRubro.IdRubroProducto.Equals(item.IdRubroProducto)) return item;
@@ -130,8 +129,7 @@ namespace CapaDatos
         }
         public static RubroProducto BuscarRubroProducto(string oRubro)
         {
-            List<RubroProducto> lista = new List<RubroProducto>();
-            lista = BD_RubroProducto.MostrarRubro();
+            List<RubroProducto> lista = MostrarRubroProducto();
             foreach (var item in lista)
             {
                 if (item.Descripcion.Equals(oRubro)) return item;
@@ -140,8 +138,7 @@ namespace CapaDatos
         }
         public static RubroProducto BuscarRubroProducto(int oRubro)
         {
-            List<RubroProducto> lista = new List<RubroProducto>();
-            lista = BD_RubroProducto.MostrarRubro();
+            List<RubroProducto> lista = MostrarRubroProducto();
             foreach (var item in lista)
             {
                 if (item.IdRubroProducto.Equals(oRubro)) return item;

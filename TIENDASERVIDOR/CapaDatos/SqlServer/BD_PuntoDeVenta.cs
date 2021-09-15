@@ -103,7 +103,7 @@ namespace CapaDatos
                                 CodigoPuntoDeVenta = data.Rows[i]["CodigoPuntoDeVenta"].ToString(),
                                 DomicilioFacturacion = data.Rows[i]["DomicilioFacturacion"].ToString(),
                                 NombreFantasia = data.Rows[i]["NombreFantasia"].ToString(),
-                                oEstado = Operaciones.BuscarEstado(data.Rows[i]["Estado"].ToString()),
+                                OEstado = Operaciones.BuscarEstado(data.Rows[i]["Estado"].ToString()),
                                 FechaRegistro = Convert.ToDateTime(data.Rows[i]["FechaRegistro"].ToString())
                             };
                             marcaTabla.Add(marc);
@@ -122,8 +122,7 @@ namespace CapaDatos
         }
         public static PuntoDeVenta BuscarPuntoDeVenta(PuntoDeVenta oPuntoDeVenta)
         {
-            List<PuntoDeVenta> lista = new List<PuntoDeVenta>();
-            lista = MostrarPuntoDeVenta();
+            List<PuntoDeVenta> lista = MostrarPuntoDeVenta();
             foreach (var item in lista)
             {
                 if (oPuntoDeVenta.IdPuntoDeVenta.Equals(item.IdPuntoDeVenta)) return item;
@@ -132,8 +131,7 @@ namespace CapaDatos
         }
         public static PuntoDeVenta BuscarPuntoDeVenta(string oPuntoDeVenta)
         {
-            List<PuntoDeVenta> lista = new List<PuntoDeVenta>();
-            lista = MostrarPuntoDeVenta();
+            List<PuntoDeVenta> lista = MostrarPuntoDeVenta();
             foreach (var item in lista)
             {
                 if (item.DomicilioFacturacion.Equals(oPuntoDeVenta)) return item;
@@ -142,8 +140,7 @@ namespace CapaDatos
         }
         public static PuntoDeVenta BuscarPuntoDeVenta(int oPuntoDeVenta)
         {
-            List<PuntoDeVenta> lista = new List<PuntoDeVenta>();
-            lista = MostrarPuntoDeVenta();
+            List<PuntoDeVenta> lista = MostrarPuntoDeVenta();
             foreach (var item in lista)
             {
                 if (item.CodigoPuntoDeVenta.Equals(oPuntoDeVenta)) return item;
@@ -152,9 +149,8 @@ namespace CapaDatos
         }
         public static List<PuntoDeVenta> BuscarListaPuntoDeVenta(int oPuntoDeVenta)
         {
-            List<PuntoDeVenta> lista = new List<PuntoDeVenta>();
+            List<PuntoDeVenta> lista =  MostrarPuntoDeVenta();
             List<PuntoDeVenta> listaresultado = new List<PuntoDeVenta>();
-            lista = MostrarPuntoDeVenta();
             foreach (var item in lista)
             {
                 if (item.CodigoPuntoDeVenta.Equals(oPuntoDeVenta)) listaresultado.Add(item);

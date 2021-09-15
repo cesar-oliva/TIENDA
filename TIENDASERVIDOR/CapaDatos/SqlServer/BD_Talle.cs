@@ -53,6 +53,7 @@ namespace CapaDatos.SqlServer
                     cmd.Parameters.AddWithValue("SglaInternacional", oTalle.SiglaInternacional);
                     cmd.Parameters.AddWithValue("Descripcion", oTalle.Descripcion);
                     cmd.Parameters.AddWithValue("Estado", oTalle.OEstado);
+                    cmd.Parameters.AddWithValue("IdTalle", IdTalle);
                     oConexion.Open();
                     respuesta = cmd.ExecuteNonQuery();
                     return true;
@@ -124,8 +125,7 @@ namespace CapaDatos.SqlServer
         }
         public static Talle BuscarTalle(Talle oTalle)
         {
-            List<Talle> lista = new List<Talle>();
-            lista = BD_Talle.MostrarTalle();
+            List<Talle> lista = MostrarTalle();
             foreach (var item in lista)
             {
                 if (oTalle.IdTalle.Equals(item.IdTalle)) return item;
@@ -134,8 +134,7 @@ namespace CapaDatos.SqlServer
         }
         public static Talle BuscarTalle(string Descripcion)
         {
-            List<Talle> lista = new List<Talle>();
-            lista = BD_Talle.MostrarTalle();
+            List<Talle> lista = MostrarTalle();
             foreach (var item in lista)
             {
                 if (item.Descripcion.Equals(Descripcion)) return item;
@@ -144,8 +143,7 @@ namespace CapaDatos.SqlServer
         }
         public static Talle BuscarTalle(int IdTalle)
         {
-            List<Talle> lista = new List<Talle>();
-            lista = BD_Talle.MostrarTalle();
+            List<Talle> lista = MostrarTalle();
             foreach (var item in lista)
             {
                 if (item.IdTalle.Equals(IdTalle)) return item;

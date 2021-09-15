@@ -24,7 +24,7 @@ namespace ServiceRubro
         
         private int IdRubroField;
         
-        private ServiceRubro.Estado oEstadoField;
+        private ServiceRubro.Estado OEstadoField;
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         public string Descripcion
@@ -66,15 +66,15 @@ namespace ServiceRubro
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public ServiceRubro.Estado oEstado
+        public ServiceRubro.Estado OEstado
         {
             get
             {
-                return this.oEstadoField;
+                return this.OEstadoField;
             }
             set
             {
-                this.oEstadoField = value;
+                this.OEstadoField = value;
             }
         }
     }
@@ -101,9 +101,9 @@ namespace ServiceRubro
         
         private System.DateTime FechaRegistroField;
         
-        private int IdRubroField;
+        private int IdRubroProductoField;
         
-        private ServiceRubro.Estado oEstadoField;
+        private ServiceRubro.Estado OEstadoField;
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         public string Descripcion
@@ -132,28 +132,28 @@ namespace ServiceRubro
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public int IdRubro
+        public int IdRubroProducto
         {
             get
             {
-                return this.IdRubroField;
+                return this.IdRubroProductoField;
             }
             set
             {
-                this.IdRubroField = value;
+                this.IdRubroProductoField = value;
             }
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public ServiceRubro.Estado oEstado
+        public ServiceRubro.Estado OEstado
         {
             get
             {
-                return this.oEstadoField;
+                return this.OEstadoField;
             }
             set
             {
-                this.oEstadoField = value;
+                this.OEstadoField = value;
             }
         }
     }

@@ -124,8 +124,7 @@ namespace CapaDatos.SqlServer
         }
         public static Empleado BuscarEmpleado(Empleado oEmpleado)
         {
-            List<Empleado> lista = new List<Empleado>();
-            lista = BD_Empleado.MostrarEmpleado();
+            List<Empleado> lista = MostrarEmpleado();
             foreach (var item in lista)
             {
                 if (oEmpleado.IdEmpleado.Equals(item.IdEmpleado)) return item;
@@ -134,8 +133,7 @@ namespace CapaDatos.SqlServer
         }
         public static Empleado BuscarEmpleado(string cuil)
         {
-            List<Empleado> lista = new List<Empleado>();
-            lista = BD_Empleado.MostrarEmpleado();
+            List<Empleado> lista = MostrarEmpleado();
             foreach (var item in lista)
             {
                 if (item.Cuil.Equals(cuil)) return item;
@@ -144,8 +142,7 @@ namespace CapaDatos.SqlServer
         }
         public static Empleado BuscarEmpleado(int IdEmpleado)
         {
-            List<Empleado> lista = new List<Empleado>();
-            lista = BD_Empleado.MostrarEmpleado();
+            List<Empleado> lista = MostrarEmpleado();
             foreach (var item in lista)
             {
                 if (item.IdEmpleado.Equals(IdEmpleado)) return item;

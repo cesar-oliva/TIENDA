@@ -17,15 +17,7 @@ namespace CapaPresentacion
         {
             InitializeComponent();
         }
-        private void btnCerrar_Click(object sender, EventArgs e) 
-        {
-            if (MessageBox.Show("¿Estas Seguro de cerrar el programa?", "¡Alerta!", MessageBoxButtons.YesNo) == DialogResult.Yes)
-            {
-                Application.Exit();
-            }
-        }
-
-        private void pictureBox2_Click(object sender, EventArgs e)
+        private void PictureBox2_Click(object sender, EventArgs e)
         {
             this.WindowState = FormWindowState.Minimized;
         }
@@ -35,20 +27,20 @@ namespace CapaPresentacion
         [DllImport("user32.DLL", EntryPoint = "SendMessage")]
         private extern static void SendMessage(System.IntPtr hWnd, int wMsg, int wParam, int lParam);
 
-        private void pnlBarraTitulo_MouseDown(object sender, MouseEventArgs e)
+        private void Pnl_BarraTitulo_MouseDown(object sender, MouseEventArgs e)
         {
             ReleaseCapture();
             SendMessage(this.Handle, 0x112, 0xf012, 0);
         }
-        private void btnProducto_Click(object sender, EventArgs e)
+        private void Btn_Producto_Click(object sender, EventArgs e)
         {
-            frm_Contenedor(new frmProducto());
+            Frm_Contenedor(new FrmProducto());
         }
-        private void btnVenta_Click(object sender, EventArgs e)
+        private void Btn_Venta_Click(object sender, EventArgs e)
         {
-            frm_Contenedor(new frmVenta());
+            Frm_Contenedor(new frmVenta());
         }
-        private void frm_Contenedor(Object formulario)
+        private void Frm_Contenedor(Object formulario)
         {
             if (this.pnlContenedor.Controls.Count > 0)
                 this.pnlContenedor.Controls.RemoveAt(0);
@@ -58,6 +50,14 @@ namespace CapaPresentacion
             this.pnlContenedor.Controls.Add(frm);
             this.pnlContenedor.Tag = frm;
             frm.Show();
-        }        
+        }
+
+        private void Btn_Cerrar_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("¿Estas Seguro de cerrar el programa?", "¡Alerta!", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            {
+                Application.Exit();
+            }
+        }
     }
 }

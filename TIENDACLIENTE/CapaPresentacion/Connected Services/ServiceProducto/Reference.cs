@@ -34,15 +34,15 @@ namespace ServiceProducto
         
         private double NetoGravadoField;
         
+        private ServiceProducto.Estado OEstadoField;
+        
+        private ServiceProducto.GeneroProducto OGeneroProductoField;
+        
+        private ServiceProducto.Marca OMarcaField;
+        
+        private ServiceProducto.RubroProducto ORubroProductoField;
+        
         private double PrecioVentaField;
-        
-        private ServiceProducto.RubroProducto RubroField;
-        
-        private ServiceProducto.Estado oEstadoField;
-        
-        private ServiceProducto.GeneroProducto oGeneroProductoField;
-        
-        private ServiceProducto.Marca oMarcaField;
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         public string Codigo
@@ -149,6 +149,58 @@ namespace ServiceProducto
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
+        public ServiceProducto.Estado OEstado
+        {
+            get
+            {
+                return this.OEstadoField;
+            }
+            set
+            {
+                this.OEstadoField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public ServiceProducto.GeneroProducto OGeneroProducto
+        {
+            get
+            {
+                return this.OGeneroProductoField;
+            }
+            set
+            {
+                this.OGeneroProductoField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public ServiceProducto.Marca OMarca
+        {
+            get
+            {
+                return this.OMarcaField;
+            }
+            set
+            {
+                this.OMarcaField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public ServiceProducto.RubroProducto ORubroProducto
+        {
+            get
+            {
+                return this.ORubroProductoField;
+            }
+            set
+            {
+                this.ORubroProductoField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
         public double PrecioVenta
         {
             get
@@ -158,125 +210,6 @@ namespace ServiceProducto
             set
             {
                 this.PrecioVentaField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public ServiceProducto.RubroProducto Rubro
-        {
-            get
-            {
-                return this.RubroField;
-            }
-            set
-            {
-                this.RubroField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public ServiceProducto.Estado oEstado
-        {
-            get
-            {
-                return this.oEstadoField;
-            }
-            set
-            {
-                this.oEstadoField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public ServiceProducto.GeneroProducto oGeneroProducto
-        {
-            get
-            {
-                return this.oGeneroProductoField;
-            }
-            set
-            {
-                this.oGeneroProductoField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public ServiceProducto.Marca oMarca
-        {
-            get
-            {
-                return this.oMarcaField;
-            }
-            set
-            {
-                this.oMarcaField = value;
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.3-preview3.21351.2")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="RubroProducto", Namespace="http://schemas.datacontract.org/2004/07/CapaNegocio")]
-    public partial class RubroProducto : object
-    {
-        
-        private string DescripcionField;
-        
-        private System.DateTime FechaRegistroField;
-        
-        private int IdRubroField;
-        
-        private ServiceProducto.Estado oEstadoField;
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Descripcion
-        {
-            get
-            {
-                return this.DescripcionField;
-            }
-            set
-            {
-                this.DescripcionField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime FechaRegistro
-        {
-            get
-            {
-                return this.FechaRegistroField;
-            }
-            set
-            {
-                this.FechaRegistroField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int IdRubro
-        {
-            get
-            {
-                return this.IdRubroField;
-            }
-            set
-            {
-                this.IdRubroField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public ServiceProducto.Estado oEstado
-        {
-            get
-            {
-                return this.oEstadoField;
-            }
-            set
-            {
-                this.oEstadoField = value;
             }
         }
     }
@@ -291,7 +224,7 @@ namespace ServiceProducto
         
         private int IdMarcaField;
         
-        private ServiceProducto.Estado oEstadoField;
+        private ServiceProducto.Estado OEstadoField;
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         public string Descripcion
@@ -320,15 +253,82 @@ namespace ServiceProducto
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public ServiceProducto.Estado oEstado
+        public ServiceProducto.Estado OEstado
         {
             get
             {
-                return this.oEstadoField;
+                return this.OEstadoField;
             }
             set
             {
-                this.oEstadoField = value;
+                this.OEstadoField = value;
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.3-preview3.21351.2")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="RubroProducto", Namespace="http://schemas.datacontract.org/2004/07/CapaNegocio")]
+    public partial class RubroProducto : object
+    {
+        
+        private string DescripcionField;
+        
+        private System.DateTime FechaRegistroField;
+        
+        private int IdRubroProductoField;
+        
+        private ServiceProducto.Estado OEstadoField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Descripcion
+        {
+            get
+            {
+                return this.DescripcionField;
+            }
+            set
+            {
+                this.DescripcionField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime FechaRegistro
+        {
+            get
+            {
+                return this.FechaRegistroField;
+            }
+            set
+            {
+                this.FechaRegistroField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int IdRubroProducto
+        {
+            get
+            {
+                return this.IdRubroProductoField;
+            }
+            set
+            {
+                this.IdRubroProductoField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public ServiceProducto.Estado OEstado
+        {
+            get
+            {
+                return this.OEstadoField;
+            }
+            set
+            {
+                this.OEstadoField = value;
             }
         }
     }
@@ -371,11 +371,11 @@ namespace ServiceProducto
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceProducto/IngresarProducto", ReplyAction="http://tempuri.org/IServiceProducto/IngresarProductoResponse")]
         System.Threading.Tasks.Task<bool> IngresarProductoAsync(ServiceProducto.DtoProducto oProducto);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceProducto/ActualizarProducto", ReplyAction="http://tempuri.org/IServiceProducto/ActualizarProductoResponse")]
-        bool ActualizarProducto(ServiceProducto.DtoProducto oProducto);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceProducto/ModificarProducto", ReplyAction="http://tempuri.org/IServiceProducto/ModificarProductoResponse")]
+        bool ModificarProducto(ServiceProducto.DtoProducto oProducto);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceProducto/ActualizarProducto", ReplyAction="http://tempuri.org/IServiceProducto/ActualizarProductoResponse")]
-        System.Threading.Tasks.Task<bool> ActualizarProductoAsync(ServiceProducto.DtoProducto oProducto);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceProducto/ModificarProducto", ReplyAction="http://tempuri.org/IServiceProducto/ModificarProductoResponse")]
+        System.Threading.Tasks.Task<bool> ModificarProductoAsync(ServiceProducto.DtoProducto oProducto);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceProducto/EliminarProducto", ReplyAction="http://tempuri.org/IServiceProducto/EliminarProductoResponse")]
         bool EliminarProducto(int IdProducto);
@@ -474,14 +474,14 @@ namespace ServiceProducto
             return base.Channel.IngresarProductoAsync(oProducto);
         }
         
-        public bool ActualizarProducto(ServiceProducto.DtoProducto oProducto)
+        public bool ModificarProducto(ServiceProducto.DtoProducto oProducto)
         {
-            return base.Channel.ActualizarProducto(oProducto);
+            return base.Channel.ModificarProducto(oProducto);
         }
         
-        public System.Threading.Tasks.Task<bool> ActualizarProductoAsync(ServiceProducto.DtoProducto oProducto)
+        public System.Threading.Tasks.Task<bool> ModificarProductoAsync(ServiceProducto.DtoProducto oProducto)
         {
-            return base.Channel.ActualizarProductoAsync(oProducto);
+            return base.Channel.ModificarProductoAsync(oProducto);
         }
         
         public bool EliminarProducto(int IdProducto)

@@ -25,7 +25,7 @@ namespace CapaDatos
                     cmd.Parameters.AddWithValue("Codigo", oProducto.Codigo);
                     cmd.Parameters.AddWithValue("Descripcion", oProducto.Descripcion);
                     cmd.Parameters.AddWithValue("GeneroProducto", Operaciones.BuscarGenero(oProducto.OGeneroProducto));
-                    cmd.Parameters.AddWithValue("IdRubroProducto", BD_RubroProducto.BuscarRubroProducto(oProducto.Rubro).IdRubroProducto);
+                    cmd.Parameters.AddWithValue("IdRubroProducto", BD_RubroProducto.BuscarRubroProducto(oProducto.ORubroProducto).IdRubroProducto);
                     cmd.Parameters.AddWithValue("IdMarca", BD_Marca.BuscarMarca(oProducto.OMarca).IdMarca);
                     cmd.Parameters.AddWithValue("IdImpuesto", oProducto.Impuesto);
                     cmd.Parameters.AddWithValue("Costo", oProducto.Costo);
@@ -46,34 +46,21 @@ namespace CapaDatos
             return respuesta;
         }
         #region ACTUALIZAR PRODUCTO
-        public static bool ActualizarProducto(Producto oProducto)
+        public static bool ModificarProducto(Producto oProducto)
         {
             bool respuesta = false;
-            int cantidad = 0;
+            int cantidad;
             using (SqlConnection oConexion = new SqlConnection(Conexion.conexion))
             {
                 try
                 {
-                    string SqlQuery = "UPDATE PRODUCTO " +
-                                      "SET Codigo=@Codigo," +
-                                      "Descripcion=@Descripcion," +
-                                      "GeneroProducto=@GeneroProducto," +
-                                      "IdRubroProducto=@IdRubroProducto," +
-                                      "IdMarca=@IdMarca," +
-                                      "IdImpuesto=@IdImpuesto," +
-                                      "Costo=@Costo," +
-                                      "MargenGanancia=@MargenGanancia," +
-                                      "NetoGravado=@NetoGravado," +
-                                      "PrecioVenta=@PrecioVenta," +
-                                      "Estado=@Estado " +
-                                      "WHERE IdProducto=@IdProducto";
-                    //string SqlQuery = "UPDATE producto SET Codigo='" + oProducto.Codigo + "',Descripcion='" + oProducto.Descripcion + "',GeneroProducto='" + Operaciones.BuscarGenero(oProducto.oGeneroProducto) + "',Rubro='" + BD_Rubro.BuscarRubro(oProducto.Rubro).IdRubro + "',Marca='" + oProducto.Marca + "',Impuesto='" + oProducto.Impuesto + "',Costo='" + oProducto.Costo + "',NetoGravado='" + oProducto.NetoGravado + "',PrecioVenta='" + oProducto.PrecioVenta + "',Estado='" + Operaciones.BuscarEstado(oProducto.oEstado) + "'WHERE IdProducto" + oProducto.IdProducto;
-
+                    string SqlQuery = "UPDATE PRODUCTO SET Codigo=@Codigo,Descripcion=@Descripcion,GeneroProducto=@GeneroProducto,IdRubroProducto=@IdRubroProducto,IdMarca=@IdMarca," +
+                                      "IdImpuesto=@IdImpuesto,Costo=@Costo,MargenGanancia=@MargenGanancia,NetoGravado=@NetoGravado,PrecioVenta=@PrecioVenta,Estado=@Estado WHERE IdProducto=@IdProducto";
                     SqlCommand cmd = new SqlCommand(SqlQuery, oConexion);
                     cmd.Parameters.AddWithValue("@Codigo", oProducto.Codigo);
                     cmd.Parameters.AddWithValue("@Descripcion", oProducto.Descripcion);
                     cmd.Parameters.AddWithValue("@GeneroProducto", Operaciones.BuscarGenero(oProducto.OGeneroProducto));
-                    cmd.Parameters.AddWithValue("@IdRubroProducto", BD_RubroProducto.BuscarRubroProducto(oProducto.Rubro).IdRubroProducto);
+                    cmd.Parameters.AddWithValue("@IdRubroProducto", BD_RubroProducto.BuscarRubroProducto(oProducto.ORubroProducto).IdRubroProducto);
                     cmd.Parameters.AddWithValue("@IdMarca", BD_Marca.BuscarMarca(oProducto.OMarca).IdMarca);
                     cmd.Parameters.AddWithValue("@IDImpuesto", oProducto.Impuesto);
                     cmd.Parameters.AddWithValue("@Costo", oProducto.Costo);
@@ -148,7 +135,7 @@ namespace CapaDatos
                                 Codigo = data.Rows[i]["Codigo"].ToString(),
                                 Descripcion = data.Rows[i]["Descripcion"].ToString(),
                                 OGeneroProducto = Operaciones.BuscarGenero(data.Rows[i]["GeneroProducto"].ToString()),
-                                Rubro = BD_RubroProducto.BuscarRubroProducto(Convert.ToInt32(data.Rows[i]["IdRubroProducto"].ToString())),
+                                ORubroProducto = BD_RubroProducto.BuscarRubroProducto(Convert.ToInt32(data.Rows[i]["IdRubroProducto"].ToString())),
                                 OMarca = BD_Marca.BuscarMarca(Convert.ToInt32(data.Rows[i]["IdMarca"].ToString())),
                                 Impuesto = Convert.ToDouble(data.Rows[i]["IdImpuesto"].ToString()),
                                 Costo = Convert.ToDouble(data.Rows[i]["Costo"].ToString()),
@@ -174,8 +161,7 @@ namespace CapaDatos
         }
         public static Producto BuscarProducto(Producto oProducto)
         {
-            List<Producto> lista = new List<Producto>();
-            lista = MostrarProducto();
+            List<Producto> lista = MostrarProducto();
             foreach (var item in lista)
             {
                 if (oProducto.IdProducto.Equals(item.IdProducto)) return item;
@@ -184,8 +170,7 @@ namespace CapaDatos
         }
         public static Producto BuscarProducto(string oProducto)
         {
-            List<Producto> lista = new List<Producto>();
-            lista = MostrarProducto();
+            List<Producto> lista = MostrarProducto();
             foreach (var item in lista)
             {
                 if (item.Descripcion.Equals(oProducto)) return item;
@@ -194,8 +179,7 @@ namespace CapaDatos
         }
         public static Producto BuscarProducto(int oProducto)
         {
-            List<Producto> lista = new List<Producto>();
-            lista = MostrarProducto();
+            List<Producto> lista = MostrarProducto();
             foreach (var item in lista)
             {
                 if (item.IdProducto.Equals(oProducto)) return item;

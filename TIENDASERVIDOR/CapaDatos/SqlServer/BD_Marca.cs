@@ -23,7 +23,7 @@ namespace CapaDatos
                                       "VALUES(@Descripcion,@Estado)";
                     SqlCommand cmd = new SqlCommand(SqlQuery, oConexion);
                     cmd.Parameters.AddWithValue("Descripcion", oMarca.Descripcion);
-                    cmd.Parameters.AddWithValue("Estado", oMarca.oEstado);
+                    cmd.Parameters.AddWithValue("Estado", oMarca.OEstado);
                     oConexion.Open();
                     respuesta = cmd.ExecuteNonQuery();
 
@@ -47,7 +47,8 @@ namespace CapaDatos
                     String SqlQuery = "UPDATE Marca SET Descripcion = @Descripcion, Estado = @Estado  WHERE IdMarca = @IdMarca";
                     SqlCommand cmd = new SqlCommand(SqlQuery, oConexion);
                     cmd.Parameters.AddWithValue("Descripcion", oMarca.Descripcion);
-                    cmd.Parameters.AddWithValue("Estado", oMarca.oEstado);
+                    cmd.Parameters.AddWithValue("Estado", oMarca.OEstado);
+                    cmd.Parameters.AddWithValue("IdMarca", IdMarca);
                     oConexion.Open();
                     respuesta = cmd.ExecuteNonQuery();
                     return true;
@@ -100,7 +101,7 @@ namespace CapaDatos
                             {
                                 IdMarca = Convert.ToInt32(data.Rows[i]["IdMarca"]),
                                 Descripcion = data.Rows[i]["Descripcion"].ToString(),
-                                oEstado = Operaciones.BuscarEstado(data.Rows[i]["Estado"].ToString()),
+                                OEstado = Operaciones.BuscarEstado(data.Rows[i]["Estado"].ToString()),
                             };
                             marcaTabla.Add(marc);
                         }
@@ -118,8 +119,7 @@ namespace CapaDatos
         }
         public static Marca BuscarMarca(Marca oMarca)
         {
-            List<Marca> lista = new List<Marca>();
-            lista = BD_Marca.MostrarMarca();
+            List<Marca> lista = MostrarMarca();
             foreach (var item in lista)
             {
                 if (oMarca.IdMarca.Equals(item.IdMarca)) return item;
@@ -128,8 +128,7 @@ namespace CapaDatos
         }
         public static Marca BuscarMarca(string oMarca)
         {
-            List<Marca> lista = new List<Marca>();
-            lista = BD_Marca.MostrarMarca();
+            List<Marca> lista = MostrarMarca();
             foreach (var item in lista)
             {
                 if (item.Descripcion.Equals(oMarca)) return item;
@@ -138,8 +137,7 @@ namespace CapaDatos
         }
         public static Marca BuscarMarca(int oMarca)
         {
-            List<Marca> lista = new List<Marca>();
-            lista = BD_Marca.MostrarMarca();
+            List<Marca> lista = MostrarMarca();
             foreach (var item in lista)
             {
                 if (item.IdMarca.Equals(oMarca)) return item;

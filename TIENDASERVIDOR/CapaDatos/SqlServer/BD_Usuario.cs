@@ -83,7 +83,7 @@ namespace CapaDatos
 
             }
         }
-        public static bool ActualizarUsuario(Usuario oUsuario, int IdUsuario)
+        public static bool ModificarUsuario(Usuario oUsuario, int IdUsuario)
         {
             int respuesta;
             using (SqlConnection oConexion = new SqlConnection(Conexion.conexion))
@@ -161,7 +161,7 @@ namespace CapaDatos
                 }
             }
         }
-        public static bool recoverPassword(string userRequesting)
+        public static bool RecoverPassword(string userRequesting)
         {
             using(SqlConnection oConexion = new SqlConnection(Conexion.conexion))
             {
@@ -180,7 +180,7 @@ namespace CapaDatos
                         string MailUsuario = reader.GetString(5);
                         string contraseña = reader.GetString(3);
                         var mailService = new MailServices.MailSupport();
-                        mailService.sendMail(
+                        mailService.SendMail(
                             subject:"SYSTEM: Password recovery request",
                             body: "Hi,"+NombreUsuario+"\nYou Requested to Recover your password. \n"+
                             "your current pasword is: "+contraseña+
@@ -205,8 +205,7 @@ namespace CapaDatos
         }
         public static Usuario BuscarUsuario(Usuario oUsuario)
         {
-            List<Usuario> lista = new List<Usuario>();
-            lista = MostrarUsuario();
+            List<Usuario> lista = MostrarUsuario();
             foreach (var item in lista)
             {
                 if (oUsuario.IdUsuario.Equals(item.IdUsuario)) return item;
@@ -215,8 +214,7 @@ namespace CapaDatos
         }
         public static Usuario BuscarUsuario(string oUsuario)
         {
-            List<Usuario> lista = new List<Usuario>();
-            lista = MostrarUsuario();
+            List<Usuario> lista = MostrarUsuario();
             foreach (var item in lista)
             {
                 if (item.NombreUsuario.Equals(oUsuario)) return item;
@@ -225,8 +223,7 @@ namespace CapaDatos
         }
         public static Usuario BuscarUsuario(int oUsuario)
         {
-            List<Usuario> lista = new List<Usuario>();
-            lista = MostrarUsuario();
+            List<Usuario> lista = MostrarUsuario();
             foreach (var item in lista)
             {
                 if (item.IdUsuario.Equals(oUsuario)) return item;

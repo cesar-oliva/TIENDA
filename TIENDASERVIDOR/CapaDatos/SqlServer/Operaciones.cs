@@ -26,6 +26,11 @@ namespace CapaDatos
             if (oEstado.Equals("False")) return Estado.Activo;
             return Estado.Inactivo;
         }
+        public static Estado BuscarEstado(int oEstado)
+        {
+            if (oEstado.Equals(0)) return Estado.Activo;
+            return Estado.Inactivo;
+        }
         public static GeneroProducto BuscarGenero(string oGenero)
         {
             if (oGenero.Equals("Unisex")) return GeneroProducto.Unisex;

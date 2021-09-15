@@ -12,26 +12,35 @@ namespace CapaDatos.MailServices
     public abstract class MailServer
     {
         private SmtpClient smtpClient;
-        protected string senderMail { get; set; }
-        protected string password { get; set; }
-        protected string host { get; set; }
-        protected int port { get; set; }
-        protected bool ssl { get; set; }
+        private string senderMail;
+        private string password;
+        private string host;
+        private int port;
+        private bool ssl;
 
-        protected void initializeSmtpClient()
+        public SmtpClient SmtpClient { get => smtpClient; set => smtpClient = value; }
+        protected string SenderMail { get => senderMail; set => senderMail = value; }
+        protected string Password { get => password; set => password = value; }
+        protected string Host { get => host; set => host = value; }
+        protected int Port { get => port; set => port = value; }
+        protected bool Ssl { get => ssl; set => ssl = value; }
+
+        protected void InitializeSmtpClient()
         {
-            smtpClient = new SmtpClient();
-            smtpClient.Credentials = new NetworkCredential(senderMail, password);
-            smtpClient.Host = host;
-            smtpClient.Port = port;
-            smtpClient.EnableSsl = ssl;
+            SmtpClient = new SmtpClient
+            {
+                Credentials = new NetworkCredential(SenderMail, Password),
+                Host = Host,
+                Port = Port,
+                EnableSsl = Ssl
+            };
         }
-        public void sendMail(string subject, string body, List<string> recipientMail)
+        public void SendMail(string subject, string body, List<string> recipientMail)
         {
             var mailMessage = new MailMessage();
             try
             {
-                mailMessage.From = new MailAddress(senderMail);
+                mailMessage.From = new MailAddress(SenderMail);
                 foreach (string mail in recipientMail)
                 {
                     mailMessage.To.Add(mail);
@@ -39,7 +48,7 @@ namespace CapaDatos.MailServices
                 mailMessage.Subject = subject;
                 mailMessage.Body = body;
                 mailMessage.Priority = MailPriority.Normal;
-                smtpClient.Send(mailMessage);
+                SmtpClient.Send(mailMessage);
             }
             catch (Exception ex) 
             {
@@ -48,7 +57,7 @@ namespace CapaDatos.MailServices
             finally
             {
                 mailMessage.Dispose();
-                smtpClient.Dispose();
+                SmtpClient.Dispose();
             }
         }
 

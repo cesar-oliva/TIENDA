@@ -52,8 +52,7 @@ namespace CapaDatos
         }
         public static CondicionTributaria BuscarCondicionTributaria(string descripcion)
         {
-            List<CondicionTributaria> lista = new List<CondicionTributaria>();
-            lista = MostrarCondicionTributaria();
+            List<CondicionTributaria> lista = MostrarCondicionTributaria();
             foreach (var item in lista)
             {
                 if (item.Descripcion.Equals(descripcion)) return item;
@@ -62,8 +61,7 @@ namespace CapaDatos
         }
         public static CondicionTributaria BuscarCondicionTributaria(int idCondicionTributaria)
         {
-            List<CondicionTributaria> lista = new List<CondicionTributaria>();
-            lista = MostrarCondicionTributaria();
+            List<CondicionTributaria> lista = MostrarCondicionTributaria();
             foreach (var item in lista)
             {
                 if (item.IdCondicionTributaria.Equals(idCondicionTributaria)) return item;

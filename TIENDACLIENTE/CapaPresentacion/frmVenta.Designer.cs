@@ -351,7 +351,6 @@ namespace CapaPresentacion
             this.txtTelefono.Name = "txtTelefono";
             this.txtTelefono.Size = new System.Drawing.Size(100, 23);
             this.txtTelefono.TabIndex = 13;
-            this.txtTelefono.TextChanged += new System.EventHandler(this.txtTelefono_TextChanged);
             // 
             // label11
             // 
@@ -361,7 +360,6 @@ namespace CapaPresentacion
             this.label11.Size = new System.Drawing.Size(59, 15);
             this.label11.TabIndex = 12;
             this.label11.Text = "Telefono:";
-            this.label11.Click += new System.EventHandler(this.label11_Click);
             // 
             // txtDomicilio
             // 

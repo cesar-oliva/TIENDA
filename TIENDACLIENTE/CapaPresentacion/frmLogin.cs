@@ -10,19 +10,19 @@ using System.Windows.Forms;
 
 namespace CapaPresentacion
 {
-    public partial class frmLogin : Form
+    public partial class FrmLogin : Form
     {
-        public frmLogin()
+        public FrmLogin()
         {
             InitializeComponent();
         }
 
-        private void btnCancelar_Click(object sender, EventArgs e)
+        private void BtnCancelar_Click(object sender, EventArgs e)
         {
             Application.Exit();
         }
 
-        private void btnAceptar_Click(object sender, EventArgs e)
+        private void BtnAceptar_Click(object sender, EventArgs e)
         {
             while (true)
             {
@@ -40,35 +40,32 @@ namespace CapaPresentacion
                 }
                 else
                 {
-                    using (ServiceUsuario.ServiceUsuarioClient client = new ServiceUsuario.ServiceUsuarioClient())
+                    using ServiceUsuario.ServiceUsuarioClient client = new();
+                    bool respuesta = false;
+                    string NombreUsuario = txtNombreUsuario.Text.Trim(); ;
+                    string Clave = txtContraseña.Text.Trim();
+                    respuesta = client.LoginUsuario(NombreUsuario, Clave);
+                    if (respuesta == true)
                     {
-                        bool respuesta = false;
-                        string NombreUsuario = txtNombreUsuario.Text.Trim(); ;
-                        string Clave = txtContraseña.Text.Trim();
-                        respuesta = client.LoginUsuario(NombreUsuario, Clave);
-                        if (respuesta == true)
-                        {                       
-                            frmBienvenida frm = new frmBienvenida();
-                            frm.Show();
-                            this.Visible = false;
-                            break;
+                        frmBienvenida frm = new();
+                        frm.Show();
+                        this.Visible = false;
+                        break;
 
-                        }
-                        else
-                        {
-                            txtNombreUsuario.ResetText();
-                            txtContraseña.ResetText();
-                            lblMensajeLogin.Text = "Usuario o Contraseña mal ingresados";
-                            lblMensajeLogin.Visible = true;
-                            break;
-                        }
-
+                    }
+                    else
+                    {
+                        txtNombreUsuario.ResetText();
+                        txtContraseña.ResetText();
+                        lblMensajeLogin.Text = "Usuario o Contraseña mal ingresados";
+                        lblMensajeLogin.Visible = true;
+                        break;
                     }
                 }
             }
         }
 
-        private void btnRecuperar_Click(object sender, EventArgs e)
+        private void Btn_Recuperar_Click(object sender, EventArgs e)
         {
             while (true)
             {
@@ -78,16 +75,14 @@ namespace CapaPresentacion
                     lblUsuario.Visible = true;
                     break;
                 }
-                using (ServiceUsuario.ServiceUsuarioClient client = new ServiceUsuario.ServiceUsuarioClient())
-                {
-                    string NombreUsuario = txtNombreUsuario.Text.Trim(); ;
-                    client.RecuperarContraseña(NombreUsuario);
-                    break;
-                }
+                using ServiceUsuario.ServiceUsuarioClient client = new();
+                string NombreUsuario = txtNombreUsuario.Text.Trim(); ;
+                client.RecuperarContraseña(NombreUsuario);
+                break;
             }
         }
 
-        private void txtNombreUsuario_TextChanged(object sender, EventArgs e)
+        private void Txt_NombreUsuario_TextChanged(object sender, EventArgs e)
         {
             lblMensajeLogin.ResetText();
             lblUsuario.ResetText();

@@ -8,11 +8,22 @@ namespace CapaNegocio
 {
     public class LineaDeVenta
     {
-        public int IdLineaDeVenta { get; set; }
-        public Venta oVenta { get; set; }
-        public Producto oProducto { get; set; }
-        public int Cantidad { get; set; }
-        public double PrecioUnitario { get; set; }
-        public double ImporteSubtotal { get; set; }
+        private int idLineaDeVenta;
+        private Venta oVenta;
+        private Producto oProducto;
+        private int cantidad;    
+        private double precioUnitario;
+        private double importeSubtotal;
+
+        public int IdLineaDeVenta { get => idLineaDeVenta; set => idLineaDeVenta = value; }
+        public Venta OVenta { get => oVenta; set => oVenta = value; }
+        public Producto OProducto { get => oProducto; set => oProducto = value; }
+        public int Cantidad { get => cantidad; set => cantidad = value; }
+        public double PrecioUnitario { get => precioUnitario; set => precioUnitario = value; }
+        public double ImporteSubtotal { get => importeSubtotal; set => importeSubtotal = value; }
+
+        public LineaDeVenta()
+        {
+        }
     }
 }

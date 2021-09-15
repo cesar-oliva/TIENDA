@@ -22,7 +22,7 @@ namespace ServiceMarca
         
         private int IdMarcaField;
         
-        private ServiceMarca.Estado oEstadoField;
+        private ServiceMarca.Estado OEstadoField;
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         public string Descripcion
@@ -51,15 +51,15 @@ namespace ServiceMarca
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public ServiceMarca.Estado oEstado
+        public ServiceMarca.Estado OEstado
         {
             get
             {
-                return this.oEstadoField;
+                return this.OEstadoField;
             }
             set
             {
-                this.oEstadoField = value;
+                this.OEstadoField = value;
             }
         }
     }
@@ -74,6 +74,58 @@ namespace ServiceMarca
         
         [System.Runtime.Serialization.EnumMemberAttribute()]
         Inactivo = 1,
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.3-preview3.21351.2")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Marca", Namespace="http://schemas.datacontract.org/2004/07/CapaNegocio")]
+    public partial class Marca : object
+    {
+        
+        private string DescripcionField;
+        
+        private int IdMarcaField;
+        
+        private ServiceMarca.Estado OEstadoField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Descripcion
+        {
+            get
+            {
+                return this.DescripcionField;
+            }
+            set
+            {
+                this.DescripcionField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int IdMarca
+        {
+            get
+            {
+                return this.IdMarcaField;
+            }
+            set
+            {
+                this.IdMarcaField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public ServiceMarca.Estado OEstado
+        {
+            get
+            {
+                return this.OEstadoField;
+            }
+            set
+            {
+                this.OEstadoField = value;
+            }
+        }
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.3-preview3.21351.2")]
@@ -104,6 +156,12 @@ namespace ServiceMarca
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceMarca/ListaMarca", ReplyAction="http://tempuri.org/IServiceMarca/ListaMarcaResponse")]
         System.Threading.Tasks.Task<System.Collections.Generic.List<ServiceMarca.DtoMarca>> ListaMarcaAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceMarca/ObtenerMarca", ReplyAction="http://tempuri.org/IServiceMarca/ObtenerMarcaResponse")]
+        ServiceMarca.Marca ObtenerMarca(string oMarca);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceMarca/ObtenerMarca", ReplyAction="http://tempuri.org/IServiceMarca/ObtenerMarcaResponse")]
+        System.Threading.Tasks.Task<ServiceMarca.Marca> ObtenerMarcaAsync(string oMarca);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.3-preview3.21351.2")]
@@ -194,6 +252,16 @@ namespace ServiceMarca
         public System.Threading.Tasks.Task<System.Collections.Generic.List<ServiceMarca.DtoMarca>> ListaMarcaAsync()
         {
             return base.Channel.ListaMarcaAsync();
+        }
+        
+        public ServiceMarca.Marca ObtenerMarca(string oMarca)
+        {
+            return base.Channel.ObtenerMarca(oMarca);
+        }
+        
+        public System.Threading.Tasks.Task<ServiceMarca.Marca> ObtenerMarcaAsync(string oMarca)
+        {
+            return base.Channel.ObtenerMarcaAsync(oMarca);
         }
         
         public virtual System.Threading.Tasks.Task OpenAsync()

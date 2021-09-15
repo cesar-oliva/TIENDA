@@ -28,7 +28,7 @@ namespace ServiceUsuario
         
         private string ContraseñaField;
         
-        private ServiceUsuario.Estado EstadoField;
+        private string EmailField;
         
         private System.DateTime FechaRegistroField;
         
@@ -36,9 +36,13 @@ namespace ServiceUsuario
         
         private string NombreUsuarioField;
         
-        private string RolField;
+        private ServiceUsuario.Empleado OEmpleadoField;
         
-        private string TiendaField;
+        private ServiceUsuario.Estado OEstadoField;
+        
+        private ServiceUsuario.Rol ORolField;
+        
+        private ServiceUsuario.Tienda OTiendaField;
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         public string Contraseña
@@ -54,15 +58,15 @@ namespace ServiceUsuario
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public ServiceUsuario.Estado Estado
+        public string Email
         {
             get
             {
-                return this.EstadoField;
+                return this.EmailField;
             }
             set
             {
-                this.EstadoField = value;
+                this.EmailField = value;
             }
         }
         
@@ -106,28 +110,345 @@ namespace ServiceUsuario
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Rol
+        public ServiceUsuario.Empleado OEmpleado
         {
             get
             {
-                return this.RolField;
+                return this.OEmpleadoField;
             }
             set
             {
-                this.RolField = value;
+                this.OEmpleadoField = value;
             }
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Tienda
+        public ServiceUsuario.Estado OEstado
         {
             get
             {
-                return this.TiendaField;
+                return this.OEstadoField;
             }
             set
             {
-                this.TiendaField = value;
+                this.OEstadoField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public ServiceUsuario.Rol ORol
+        {
+            get
+            {
+                return this.ORolField;
+            }
+            set
+            {
+                this.ORolField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public ServiceUsuario.Tienda OTienda
+        {
+            get
+            {
+                return this.OTiendaField;
+            }
+            set
+            {
+                this.OTiendaField = value;
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.3-preview3.21351.2")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Empleado", Namespace="http://schemas.datacontract.org/2004/07/CapaNegocio")]
+    public partial class Empleado : ServiceUsuario.Persona
+    {
+        
+        private int AntiguedadField;
+        
+        private string CuilField;
+        
+        private System.DateTime FechaAltaField;
+        
+        private System.DateTime FechaRegistroField;
+        
+        private int IdEmpleadoField;
+        
+        private ServiceUsuario.Estado OEstadoField;
+        
+        private ServiceUsuario.Persona OPersonaField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Antiguedad
+        {
+            get
+            {
+                return this.AntiguedadField;
+            }
+            set
+            {
+                this.AntiguedadField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Cuil
+        {
+            get
+            {
+                return this.CuilField;
+            }
+            set
+            {
+                this.CuilField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime FechaAlta
+        {
+            get
+            {
+                return this.FechaAltaField;
+            }
+            set
+            {
+                this.FechaAltaField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime FechaRegistro
+        {
+            get
+            {
+                return this.FechaRegistroField;
+            }
+            set
+            {
+                this.FechaRegistroField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int IdEmpleado
+        {
+            get
+            {
+                return this.IdEmpleadoField;
+            }
+            set
+            {
+                this.IdEmpleadoField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public ServiceUsuario.Estado OEstado
+        {
+            get
+            {
+                return this.OEstadoField;
+            }
+            set
+            {
+                this.OEstadoField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public ServiceUsuario.Persona OPersona
+        {
+            get
+            {
+                return this.OPersonaField;
+            }
+            set
+            {
+                this.OPersonaField = value;
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.3-preview3.21351.2")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Rol", Namespace="http://schemas.datacontract.org/2004/07/CapaNegocio")]
+    public partial class Rol : object
+    {
+        
+        private string DescripcionField;
+        
+        private System.DateTime FechaRegistroField;
+        
+        private int IdRolField;
+        
+        private ServiceUsuario.Estado OEstadoField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Descripcion
+        {
+            get
+            {
+                return this.DescripcionField;
+            }
+            set
+            {
+                this.DescripcionField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime FechaRegistro
+        {
+            get
+            {
+                return this.FechaRegistroField;
+            }
+            set
+            {
+                this.FechaRegistroField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int IdRol
+        {
+            get
+            {
+                return this.IdRolField;
+            }
+            set
+            {
+                this.IdRolField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public ServiceUsuario.Estado OEstado
+        {
+            get
+            {
+                return this.OEstadoField;
+            }
+            set
+            {
+                this.OEstadoField = value;
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.3-preview3.21351.2")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Tienda", Namespace="http://schemas.datacontract.org/2004/07/CapaNegocio")]
+    public partial class Tienda : object
+    {
+        
+        private string CuitTiendaField;
+        
+        private string DireccionField;
+        
+        private System.DateTime FechaRegistroField;
+        
+        private int IdTiendaField;
+        
+        private ServiceUsuario.Estado OEstadoField;
+        
+        private string RazonSocialField;
+        
+        private string TelefonoField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string CuitTienda
+        {
+            get
+            {
+                return this.CuitTiendaField;
+            }
+            set
+            {
+                this.CuitTiendaField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Direccion
+        {
+            get
+            {
+                return this.DireccionField;
+            }
+            set
+            {
+                this.DireccionField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime FechaRegistro
+        {
+            get
+            {
+                return this.FechaRegistroField;
+            }
+            set
+            {
+                this.FechaRegistroField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int IdTienda
+        {
+            get
+            {
+                return this.IdTiendaField;
+            }
+            set
+            {
+                this.IdTiendaField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public ServiceUsuario.Estado OEstado
+        {
+            get
+            {
+                return this.OEstadoField;
+            }
+            set
+            {
+                this.OEstadoField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string RazonSocial
+        {
+            get
+            {
+                return this.RazonSocialField;
+            }
+            set
+            {
+                this.RazonSocialField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Telefono
+        {
+            get
+            {
+                return this.TelefonoField;
+            }
+            set
+            {
+                this.TelefonoField = value;
             }
         }
     }
@@ -142,6 +463,216 @@ namespace ServiceUsuario
         
         [System.Runtime.Serialization.EnumMemberAttribute()]
         Inactivo = 1,
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.3-preview3.21351.2")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Persona", Namespace="http://schemas.datacontract.org/2004/07/CapaNegocio")]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(ServiceUsuario.Empleado))]
+    public partial class Persona : object
+    {
+        
+        private string ApellidosField;
+        
+        private string DomicilioField;
+        
+        private int EdadField;
+        
+        private System.DateTime FechaNacimientoField;
+        
+        private int IdPersonaField;
+        
+        private string NombresField;
+        
+        private string NumeroDocumentoField;
+        
+        private ServiceUsuario.Sexo OSexoField;
+        
+        private string TelefonoField;
+        
+        private string TipoDocumentoField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Apellidos
+        {
+            get
+            {
+                return this.ApellidosField;
+            }
+            set
+            {
+                this.ApellidosField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Domicilio
+        {
+            get
+            {
+                return this.DomicilioField;
+            }
+            set
+            {
+                this.DomicilioField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Edad
+        {
+            get
+            {
+                return this.EdadField;
+            }
+            set
+            {
+                this.EdadField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime FechaNacimiento
+        {
+            get
+            {
+                return this.FechaNacimientoField;
+            }
+            set
+            {
+                this.FechaNacimientoField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int IdPersona
+        {
+            get
+            {
+                return this.IdPersonaField;
+            }
+            set
+            {
+                this.IdPersonaField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Nombres
+        {
+            get
+            {
+                return this.NombresField;
+            }
+            set
+            {
+                this.NombresField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string NumeroDocumento
+        {
+            get
+            {
+                return this.NumeroDocumentoField;
+            }
+            set
+            {
+                this.NumeroDocumentoField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public ServiceUsuario.Sexo OSexo
+        {
+            get
+            {
+                return this.OSexoField;
+            }
+            set
+            {
+                this.OSexoField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Telefono
+        {
+            get
+            {
+                return this.TelefonoField;
+            }
+            set
+            {
+                this.TelefonoField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string TipoDocumento
+        {
+            get
+            {
+                return this.TipoDocumentoField;
+            }
+            set
+            {
+                this.TipoDocumentoField = value;
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.3-preview3.21351.2")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Sexo", Namespace="http://schemas.datacontract.org/2004/07/CapaNegocio")]
+    public partial class Sexo : object
+    {
+        
+        private string DescripcionField;
+        
+        private int IdSexoField;
+        
+        private ServiceUsuario.Estado oEstadoField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Descripcion
+        {
+            get
+            {
+                return this.DescripcionField;
+            }
+            set
+            {
+                this.DescripcionField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int IdSexo
+        {
+            get
+            {
+                return this.IdSexoField;
+            }
+            set
+            {
+                this.IdSexoField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public ServiceUsuario.Estado oEstado
+        {
+            get
+            {
+                return this.oEstadoField;
+            }
+            set
+            {
+                this.oEstadoField = value;
+            }
+        }
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.3-preview3.21351.2")]
@@ -178,12 +709,6 @@ namespace ServiceUsuario
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceUsuario/ObtenerUsuario", ReplyAction="http://tempuri.org/IServiceUsuario/ObtenerUsuarioResponse")]
         System.Threading.Tasks.Task<System.Collections.Generic.List<ServiceUsuario.DtoUsuario>> ObtenerUsuarioAsync();
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceUsuario/BuscarEstado", ReplyAction="http://tempuri.org/IServiceUsuario/BuscarEstadoResponse")]
-        ServiceUsuario.Estado BuscarEstado(string valor);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceUsuario/BuscarEstado", ReplyAction="http://tempuri.org/IServiceUsuario/BuscarEstadoResponse")]
-        System.Threading.Tasks.Task<ServiceUsuario.Estado> BuscarEstadoAsync(string valor);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceUsuario/RecuperarContraseña", ReplyAction="http://tempuri.org/IServiceUsuario/RecuperarContraseñaResponse")]
         bool RecuperarContraseña(string usuario);
@@ -290,16 +815,6 @@ namespace ServiceUsuario
         public System.Threading.Tasks.Task<System.Collections.Generic.List<ServiceUsuario.DtoUsuario>> ObtenerUsuarioAsync()
         {
             return base.Channel.ObtenerUsuarioAsync();
-        }
-        
-        public ServiceUsuario.Estado BuscarEstado(string valor)
-        {
-            return base.Channel.BuscarEstado(valor);
-        }
-        
-        public System.Threading.Tasks.Task<ServiceUsuario.Estado> BuscarEstadoAsync(string valor)
-        {
-            return base.Channel.BuscarEstadoAsync(valor);
         }
         
         public bool RecuperarContraseña(string usuario)

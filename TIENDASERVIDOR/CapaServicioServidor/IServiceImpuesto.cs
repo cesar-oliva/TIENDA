@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CapaNegocio;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
@@ -14,7 +15,7 @@ namespace CapaServicioServidor
         [OperationContract]
         bool IngresarImpuesto(DtoImpuesto oImpuesto);
         [OperationContract]
-        bool ActualizarImpuesto(DtoImpuesto oImpuestoo);
+        bool ModificarImpuesto(DtoImpuesto oImpuesto, int IdImpuesto);
         [OperationContract]
         bool EliminarImpuesto(int IdImpuesto);
         [OperationContract]
@@ -32,7 +33,7 @@ namespace CapaServicioServidor
         [DataMember]
         public double Alicuota { get; set; }
         [DataMember]
-        public string oEstado { get; set; } //activo o inactivo
+        public Estado OEstado { get; set; } //activo o inactivo
         [DataMember]
         public DateTime FechaRegistro { get; set; }
     }

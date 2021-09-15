@@ -28,21 +28,21 @@ namespace CapaServicioServidor
         [DataMember]
         public int IdVenta { get; set; }
         [DataMember]
-        public Comprobante oComprobante { get; set; }
+        public Comprobante OComprobante { get; set; }
         [DataMember]
-        public Sucursal oSucursal { get; set; }
+        public Sucursal OSucursal { get; set; }
         [DataMember]
-        public Usuario oUsuario { get; set; }
+        public Usuario OUsuario { get; set; }
         [DataMember]
-        public Cliente oCliente { get; set; }
+        public Cliente OCliente { get; set; }
         [DataMember]
-        public List<LineaDeVenta> oLineaDeVenta { get; set; }
+        public List<LineaDeVenta> OLineaDeVenta { get; set; }
         [DataMember]
         public int CantidadProducto { get; set; }
         [DataMember]
         public double ImporteTotalDeVenta { get; set; }
         [DataMember]
-        public List<FormaDePago> oFormaDePago { get; set; }
+        public List<FormaDePago> OFormaDePago { get; set; }
         [DataMember]
         public DateTime FechaRegistro { get; set; }
     }
@@ -52,11 +52,11 @@ namespace CapaServicioServidor
         [DataMember]
         public int IdLineaDeVenta { get; set; }
         [DataMember]
-        public Venta oVenta { get; set; }
+        public Venta OVenta { get; set; }
         [DataMember]
-        public Producto oProducto { get; set; }
+        public Producto OProducto { get; set; }
         [DataMember]
-        public int cantidad { get; set; }
+        public int Cantidad { get; set; }
         [DataMember]
         public double PrecioUnitario { get; set; }
         [DataMember]

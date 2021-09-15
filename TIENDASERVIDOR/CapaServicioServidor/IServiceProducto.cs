@@ -16,7 +16,7 @@ namespace CapaServicioServidor
         [OperationContract]
         bool IngresarProducto(DtoProducto oProducto);
         [OperationContract]
-        bool ActualizarProducto(DtoProducto oProducto);
+        bool ModificarProducto(DtoProducto oProducto);
         [OperationContract]
         bool EliminarProducto(int IdProducto);
         [OperationContract]
@@ -43,11 +43,11 @@ namespace CapaServicioServidor
         [DataMember]
         public string Descripcion { get; set; }
         [DataMember]
-        public GeneroProducto oGeneroProducto { get; set; }
+        public GeneroProducto OGeneroProducto { get; set; }
         [DataMember]
-        public RubroProducto Rubro { get; set; }
+        public RubroProducto ORubroProducto { get; set; }
         [DataMember]
-        public Marca oMarca { get; set; }
+        public Marca OMarca { get; set; }
         [DataMember]
         public double Impuesto { get; set; }
         [DataMember]
@@ -59,7 +59,7 @@ namespace CapaServicioServidor
         [DataMember]
         public double PrecioVenta { get; set; }
         [DataMember]
-        public Estado oEstado { get; set; } //activo o inactivo
+        public Estado OEstado { get; set; } //activo o inactivo
         [DataMember]
         public DateTime FechaRegistro { get; set; }
     }

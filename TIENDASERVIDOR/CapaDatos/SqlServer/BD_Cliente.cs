@@ -137,8 +137,7 @@ namespace CapaDatos
         //}
         public static Cliente BuscarCliente(string razonSocial)
         {
-            List<Cliente> lista = new List<Cliente>();
-            lista = MostrarCliente();
+            List<Cliente> lista = MostrarCliente();
             foreach (var item in lista)
             {
                 if (item.RazonSocial.Equals(razonSocial)) return item;
@@ -147,8 +146,7 @@ namespace CapaDatos
         }
         public static Cliente BuscarCliente(int idCliente)
         {
-            List<Cliente> lista = new List<Cliente>();
-            lista = MostrarCliente();
+            List<Cliente> lista = MostrarCliente();
             foreach (var item in lista)
             {
                 if (item.IdCliente.Equals(idCliente)) return item;

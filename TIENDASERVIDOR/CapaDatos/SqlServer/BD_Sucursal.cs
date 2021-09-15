@@ -50,6 +50,7 @@ namespace CapaDatos
                     cmd.Parameters.AddWithValue("Telefono", oSucursal.Telefono);
                     cmd.Parameters.AddWithValue("IdPuntoDeVenta", oSucursal.oPuntoDeVenta);
                     cmd.Parameters.AddWithValue("Estado", oSucursal.oEstado);
+                    cmd.Parameters.AddWithValue("IdSucursal", IdSucursal);
                     oConexion.Open();
                     respuesta = cmd.ExecuteNonQuery();
                     return true;
@@ -123,8 +124,7 @@ namespace CapaDatos
         }
         public static Sucursal BuscarSucursal(Sucursal oSucursal)
         {
-            List<Sucursal> lista = new List<Sucursal>();
-            lista = MostrarSucursal();
+            List<Sucursal> lista = MostrarSucursal();
             foreach (var item in lista)
             {
                 if (oSucursal.IdSucursal.Equals(item.IdSucursal)) return item;
@@ -133,8 +133,7 @@ namespace CapaDatos
         }
         public static Sucursal BuscarSucursal(string oSucursal)
         {
-            List<Sucursal> lista = new List<Sucursal>();
-            lista = MostrarSucursal();
+            List<Sucursal> lista = MostrarSucursal();
             foreach (var item in lista)
             {
                 if (item.Domicilio.Equals(oSucursal)) return item;
@@ -143,8 +142,7 @@ namespace CapaDatos
         }
         public static Sucursal BuscarSucursal(int oSucursal)
         {
-            List<Sucursal> lista = new List<Sucursal>();
-            lista = MostrarSucursal();
+            List<Sucursal> lista = MostrarSucursal();
             foreach (var item in lista)
             {
                 if (item.IdSucursal.Equals(oSucursal)) return item;

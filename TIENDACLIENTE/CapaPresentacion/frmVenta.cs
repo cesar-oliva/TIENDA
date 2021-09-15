@@ -17,20 +17,6 @@ namespace CapaPresentacion
             InitializeComponent();
         }
 
-        private void label11_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void txtTelefono_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void btnNuevoCliente_Click(object sender, EventArgs e)
-        {
-
-        }
     }
 
 }

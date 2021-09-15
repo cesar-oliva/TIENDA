@@ -48,6 +48,7 @@ namespace CapaDatos.SqlServer
                     SqlCommand cmd = new SqlCommand(SqlQuery, oConexion);
                     cmd.Parameters.AddWithValue("Descripcion", oRol.Descripcion);
                     cmd.Parameters.AddWithValue("Estado", oRol.OEstado);
+                    cmd.Parameters.AddWithValue("IdRol", IdRol);
                     oConexion.Open();
                     respuesta = cmd.ExecuteNonQuery();
                     return true;
@@ -119,8 +120,7 @@ namespace CapaDatos.SqlServer
         }
         public static Rol BuscarRol(Rol oRol)
         {
-            List<Rol> lista = new List<Rol>();
-            lista = BD_Rol.MostrarRol();
+            List<Rol> lista = MostrarRol();
             foreach (var item in lista)
             {
                 if (oRol.IdRol.Equals(item.IdRol)) return item;
@@ -129,8 +129,7 @@ namespace CapaDatos.SqlServer
         }
         public static Rol BuscarRol(string descripcion)
         {
-            List<Rol> lista = new List<Rol>();
-            lista = BD_Rol.MostrarRol();
+            List<Rol> lista = MostrarRol();
             foreach (var item in lista)
             {
                 if (item.Descripcion.Equals(descripcion)) return item;
@@ -139,8 +138,7 @@ namespace CapaDatos.SqlServer
         }
         public static Rol BuscarRol(int idRol)
         {
-            List<Rol> lista = new List<Rol>();
-            lista = BD_Rol.MostrarRol();
+            List<Rol> lista = MostrarRol();
             foreach (var item in lista)
             {
                 if (item.IdRol.Equals(idRol)) return item;

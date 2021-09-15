@@ -16,14 +16,14 @@ namespace CapaServicioServidor
         {
             var nuevo = new Venta
             {
-                oComprobante = oVenta.oComprobante,
-                oSucursal = oVenta.oSucursal,
-                oUsuario = oVenta.oUsuario,
-                oCliente = oVenta.oCliente,
-                oLineaDeVenta = oVenta.oLineaDeVenta,
+                OComprobante = oVenta.OComprobante,
+                OSucursal = oVenta.OSucursal,
+                OUsuario = oVenta.OUsuario,
+                OCliente = oVenta.OCliente,
+                OLineaDeVenta = oVenta.OLineaDeVenta,
                 CantidadProducto = oVenta.CantidadProducto,
                 ImporteTotalDeVenta = oVenta.ImporteTotalDeVenta,
-                oFormaDePago = oVenta.oFormaDePago
+                OFormaDePago = oVenta.OFormaDePago
             };
             int i = CapaDatos.BD_Venta.RegistrarVenta(nuevo);
             if (i != 0)

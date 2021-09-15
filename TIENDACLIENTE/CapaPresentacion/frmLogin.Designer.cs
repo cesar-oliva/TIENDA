@@ -1,7 +1,7 @@
 ﻿
 namespace CapaPresentacion
 {
-    partial class frmLogin
+    partial class FrmLogin
     {
         /// <summary>
         /// Required designer variable.
@@ -29,7 +29,7 @@ namespace CapaPresentacion
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmLogin));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmLogin));
             this.panel1 = new System.Windows.Forms.Panel();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.btnCancelar = new System.Windows.Forms.Button();
@@ -67,7 +67,7 @@ namespace CapaPresentacion
             this.btnCancelar.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.UseVisualStyleBackColor = false;
-            this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
+            //this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
             // 
             // btnAceptar
             // 
@@ -77,7 +77,7 @@ namespace CapaPresentacion
             this.btnAceptar.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.btnAceptar.Name = "btnAceptar";
             this.btnAceptar.UseVisualStyleBackColor = false;
-            this.btnAceptar.Click += new System.EventHandler(this.btnAceptar_Click);
+            //this.btnAceptar.Click += new System.EventHandler(this.btnAceptar_Click);
             // 
             // txtNombreUsuario
             // 
@@ -87,7 +87,7 @@ namespace CapaPresentacion
             this.txtNombreUsuario.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.txtNombreUsuario.Name = "txtNombreUsuario";
             this.txtNombreUsuario.Tag = "";
-            this.txtNombreUsuario.TextChanged += new System.EventHandler(this.txtNombreUsuario_TextChanged);
+            this.txtNombreUsuario.TextChanged += new System.EventHandler(this.Txt_NombreUsuario_TextChanged);
             // 
             // label2
             // 
@@ -115,7 +115,7 @@ namespace CapaPresentacion
             this.btnRecuperar.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.btnRecuperar.Name = "btnRecuperar";
             this.btnRecuperar.UseVisualStyleBackColor = false;
-            this.btnRecuperar.Click += new System.EventHandler(this.btnRecuperar_Click);
+            this.btnRecuperar.Click += new System.EventHandler(this.Btn_Recuperar_Click);
             // 
             // lblMensajeLogin
             // 

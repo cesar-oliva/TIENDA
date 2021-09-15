@@ -10,12 +10,12 @@ namespace CapaDatos.MailServices
     {
         public MailSupport()
         {
-            senderMail = "ftasmartcard@gmail.com";
-            password = "Cesar110900";
-            host = "smtp.gmail.com";
-            port = 587;
-            ssl = true;
-            initializeSmtpClient();
+            SenderMail = "ftasmartcard@gmail.com";
+            Password = "Cesar110900";
+            Host = "smtp.gmail.com";
+            Port = 587;
+            Ssl = true;
+            InitializeSmtpClient();
         }
     }
 

@@ -22,14 +22,14 @@ namespace CapaDatos
                     string SqlQuery = "INSERT INTO Venta(IdComprobante,IdSucursal,IdUsuario,IdCliente,IdLineaDeVenta,CantidadProducto,ImporteTotalDeVenta,IdFormaDePago)" +
                                       "VALUES(@IdComprobante,@IdSucursal,@IdUsuario,@IdCliente,@IdLineaDeVenta,@CantidadProducto,@ImporteTotalDeVenta,@IdFormaDePago)";
                     SqlCommand cmd = new SqlCommand(SqlQuery, oConexion);
-                    cmd.Parameters.AddWithValue("IdComprobante", oVenta.oComprobante);
-                    cmd.Parameters.AddWithValue("IdSucursal", oVenta.oSucursal);
-                    cmd.Parameters.AddWithValue("IdUsuario", oVenta.oUsuario);
-                    cmd.Parameters.AddWithValue("IdCliente", oVenta.oCliente);
-                    cmd.Parameters.AddWithValue("IdLineaDeVenta", oVenta.oLineaDeVenta);
+                    cmd.Parameters.AddWithValue("IdComprobante", oVenta.OComprobante);
+                    cmd.Parameters.AddWithValue("IdSucursal", oVenta.OSucursal);
+                    cmd.Parameters.AddWithValue("IdUsuario", oVenta.OUsuario);
+                    cmd.Parameters.AddWithValue("IdCliente", oVenta.OCliente);
+                    cmd.Parameters.AddWithValue("IdLineaDeVenta", oVenta.OLineaDeVenta);
                     cmd.Parameters.AddWithValue("CantidadProducto", oVenta.CantidadProducto);
                     cmd.Parameters.AddWithValue("ImporteTotalDeVenta", oVenta.ImporteTotalDeVenta);
-                    cmd.Parameters.AddWithValue("IdFormaDePago", oVenta.oFormaDePago);
+                    cmd.Parameters.AddWithValue("IdFormaDePago", oVenta.OFormaDePago);
                     oConexion.Open();
                     respuesta = cmd.ExecuteNonQuery();
 
@@ -61,11 +61,11 @@ namespace CapaDatos
                             var ven = new Venta
                             {
                                 IdVenta = Convert.ToInt32(data.Rows[i]["IdVenta"]),
-                                oComprobante = BD_Comprobante.BuscarComprobante(Convert.ToInt32(data.Rows[i]["IdComprobante"].ToString())),
-                                oSucursal = BD_Sucursal.BuscarSucursal(Convert.ToInt32(data.Rows[i]["IdSucursal"].ToString())),
-                                oUsuario = BD_Usuario.BuscarUsuario(Convert.ToInt32(data.Rows[i]["IdUsuario"].ToString())),
-                                oCliente = BD_Cliente.BuscarCliente(Convert.ToInt32(data.Rows[i]["IdCCliente"].ToString())),
-                                oLineaDeVenta = BD_LineaDeVenta.BuscarListaLineaDeVenta(Convert.ToInt32(data.Rows[i]["IdLineaDeVenta"].ToString())),
+                                OComprobante = BD_Comprobante.BuscarComprobante(Convert.ToInt32(data.Rows[i]["IdComprobante"].ToString())),
+                                OSucursal = BD_Sucursal.BuscarSucursal(Convert.ToInt32(data.Rows[i]["IdSucursal"].ToString())),
+                                OUsuario = BD_Usuario.BuscarUsuario(Convert.ToInt32(data.Rows[i]["IdUsuario"].ToString())),
+                                OCliente = BD_Cliente.BuscarCliente(Convert.ToInt32(data.Rows[i]["IdCCliente"].ToString())),
+                                OLineaDeVenta = BD_LineaDeVenta.BuscarListaLineaDeVenta(Convert.ToInt32(data.Rows[i]["IdLineaDeVenta"].ToString())),
                                 CantidadProducto = Convert.ToInt32(data.Rows[i]["CantidadDeProducto"].ToString()),
                                 ImporteTotalDeVenta = Convert.ToDouble(data.Rows[i]["ImporteTotalDeVEnta"].ToString()),
                                 FechaRegistro = Convert.ToDateTime(data.Rows[i]["FechaRegistro"])
@@ -86,8 +86,7 @@ namespace CapaDatos
         }
         public static Venta BuscarVenta(Venta oVenta)
         {
-            List<Venta> lista = new List<Venta>();
-            lista = BD_Venta.MostrarVenta();
+            List<Venta> lista = MostrarVenta();
             foreach (var item in lista)
             {
                 if (oVenta.IdVenta.Equals(item.IdVenta)) return item;
@@ -96,21 +95,19 @@ namespace CapaDatos
         }
         public static Venta BuscarVenta(string oVenta)
         {
-            List<Venta> lista = new List<Venta>();
-            lista = BD_Venta.MostrarVenta();
+            List<Venta> lista = MostrarVenta();
             foreach (var item in lista)
             {
-                if (item.oCliente.RazonSocial.Equals(oVenta)) return item;
+                if (item.OCliente.RazonSocial.Equals(oVenta)) return item;
             }
             return null;
         }
         public static Venta BuscarVenta(int oVenta)
         {
-            List<Venta> lista = new List<Venta>();
-            lista = BD_Venta.MostrarVenta();
+            List<Venta> lista = MostrarVenta();
             foreach (var item in lista)
             {
-                if (item.oCliente.IdCliente.Equals(oVenta)) return item;
+                if (item.OCliente.IdCliente.Equals(oVenta)) return item;
             }
             return null;
         }

@@ -1,6 +1,7 @@
 ﻿using CapaDatos;
 using CapaNegocio;
 using System;
+using System.Windows;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
@@ -13,22 +14,16 @@ namespace CapaServicioServidor
     // NOTA: para iniciar el Cliente de prueba WCF para probar este servicio, seleccione ServiceImpuesto.svc o ServiceImpuesto.svc.cs en el Explorador de soluciones e inicie la depuración.
     public class ServiceImpuesto : IServiceImpuesto
     {
-        public bool ActualizarImpuesto(DtoImpuesto oImpuesto)
+        public bool ModificarImpuesto(DtoImpuesto oImpuesto, int IdImpuesto)
         {
-            string Descripcion = oImpuesto.Descripcion;
-            double Alicuota = oImpuesto.Alicuota;
-            string oEstado = oImpuesto.oEstado;
-            var nuevo = new Impuesto(Descripcion,Alicuota, BuscarEstado(oEstado));
-
-            if (BD_Impuesto.ActualizarImpuesto(nuevo))
+            var nuevo = new Impuesto
             {
-                return true;
-            }
-            else
-            {
+                Descripcion = oImpuesto.Descripcion,
+                Alicuota = oImpuesto.Alicuota,
+                OEstado = oImpuesto.OEstado
+            };
 
-                return false;
-            }
+            return BD_Impuesto.ModificarImpuesto(nuevo,IdImpuesto);
         }
         public bool EliminarImpuesto(int IdImpuesto)
         {
@@ -37,21 +32,13 @@ namespace CapaServicioServidor
 
         public bool IngresarImpuesto(DtoImpuesto oImpuesto)
         {
-            string Descripcion = oImpuesto.Descripcion;
-            double Alicuota = oImpuesto.Alicuota;
-            string oEstado = oImpuesto.oEstado;
-            var nuevo = new Impuesto(Descripcion,Alicuota, BuscarEstado(oEstado));
-
-            //if (RepositorioProducto.agregarProducto(nuevo))
-            if (BD_Impuesto.RegistrarImpuesto(nuevo) > 0)
+            var nuevo = new Impuesto
             {
-                return true;
-            }
-            else
-            {
-
-                return false;
-            }
+                Descripcion = oImpuesto.Descripcion,
+                Alicuota = oImpuesto.Alicuota,
+                OEstado = oImpuesto.OEstado
+            };
+            return BD_Impuesto.RegistrarImpuesto(nuevo);
         }
 
         public List<DtoImpuesto> ListaImpuesto()
@@ -64,25 +51,13 @@ namespace CapaServicioServidor
                     IdImpuesto = item.IdImpuesto,
                     Descripcion = item.Descripcion,
                     Alicuota = item.Alicuota,
-                    oEstado = item.oEstado.ToString(),
+                    OEstado = item.OEstado,
                     FechaRegistro = item.FechaRegistro
                 };
                 lista.Add(prod);
+                
             }
             return lista;
         }
-
-        private Estado BuscarEstado(string oEstado)
-        {
-            if (oEstado.Equals("Activo")) return Estado.Activo;
-            return Estado.Inactivo;
-        }
-        private GeneroProducto BuscarGenero(string oGenero)
-        {
-            if (oGenero.Equals("Unisex")) return GeneroProducto.Unisex;
-            if (oGenero.Equals("Masculino")) return GeneroProducto.Masculino;
-            return GeneroProducto.Femenino;
-        }
-
     }
 }

@@ -11,6 +11,7 @@
       "*, ServiceProducto"
     ],
     "references": [
+      "CircularProgressBar, {CircularProgressBar, 2.8.0.16}",
       "System.Reflection.DispatchProxy, {System.Reflection.DispatchProxy, 4.7.1}",
       "System.Security.AccessControl, {System.Security.AccessControl, 4.7.0}",
       "System.Security.Cryptography.Xml, {System.Security.Cryptography.Xml, 4.7.0}",

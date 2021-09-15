@@ -14,14 +14,14 @@ using ServiceRubro;
 using ServiceMarca;
 namespace CapaPresentacion
 {
-    public partial class mtnProducto : Form
+    public partial class MtnProducto : Form
     {
         private bool modoEditar = false;
-        public mtnProducto(DtoProducto pProducto = null)
+        public MtnProducto(DtoProducto pProducto = null)
         {
             InitializeComponent();
-            cargarCombosSeleccion();
-            ServiceProductoClient client_prod = new ServiceProductoClient();
+            CargarCombosSeleccion();
+            ServiceProductoClient client_prod = new();
             List<DtoProducto> producto = client_prod.ListaProducto();
             var IdProducto = 0;
             foreach (var item in producto)
@@ -30,7 +30,7 @@ namespace CapaPresentacion
             }
             if (pProducto != null)
             {
-                ServiceImpuestoClient client_imp = new ServiceImpuestoClient();
+                ServiceImpuestoClient client_imp = new();
                 List<DtoImpuesto> imp = client_imp.ListaImpuesto();
                 var Impuesto =0;
                 foreach (var item in imp)
@@ -42,19 +42,19 @@ namespace CapaPresentacion
                 txtCodigo.Text = pProducto.Codigo;
                 txtDescripcion.Text = pProducto.Descripcion;
                 txtCosto.Text = pProducto.Costo.ToString();
-                cmbGenero.Text = pProducto.oGeneroProducto.ToString();
+                cmbGenero.Text = pProducto.OGeneroProducto.ToString();
                 txtUtilidad.Text = pProducto.MargenGanancia.ToString();
                 txtPrecioVenta.Text = pProducto.PrecioVenta.ToString();
                 txtNetoGravado.Text = pProducto.NetoGravado.ToString();
                 txtUtilidad.Text = pProducto.MargenGanancia.ToString();
-                cmbRubro.Text = pProducto.Rubro.Descripcion.ToString();
-                cmbEstado.Text = pProducto.oEstado.ToString();
+                cmbRubro.Text = pProducto.ORubroProducto.Descripcion.ToString();
+                cmbEstado.Text = pProducto.OEstado.ToString();
                 cmbImpuesto.SelectedIndex = Impuesto;
-                cmbMarca.Text = pProducto.oMarca.Descripcion.ToString();
+                cmbMarca.Text = pProducto.OMarca.Descripcion.ToString();
             }
 
         }
-        private void cargarCombosSeleccion()
+        private void CargarCombosSeleccion()
         {
             cmbEstado.Items.Add("Activo");
             cmbEstado.Items.Add("Inactivo");
@@ -64,36 +64,38 @@ namespace CapaPresentacion
             cmbEstado.DisplayMember = "Text";
             cmbEstado.ValueMember = "Value";
             cmbEstado.SelectedIndex = 0;
-            using (ServiceRubro.ServiceRubroClient client = new ServiceRubro.ServiceRubroClient())
+            using (ServiceRubro.ServiceRubroClient client = new ())
             {
                 List<DtoRubro> oListaRubro = client.ListaRubro();
                 foreach (var item in oListaRubro)
                 {
-                    if (item.oEstado.Equals(ServiceRubro.Estado.Activo)) cmbRubro.Items.Add(item.Descripcion);
+                    if (item.OEstado.Equals(ServiceRubro.Estado.Activo)) cmbRubro.Items.Add(item.Descripcion);
                 }
                 cmbRubro.DisplayMember = "Text";
                 cmbRubro.ValueMember = "Value";
                 client.Close();
             }
-            using (ServiceImpuesto.ServiceImpuestoClient client = new ServiceImpuesto.ServiceImpuestoClient())
+            using (ServiceImpuesto.ServiceImpuestoClient client = new())
             {
-
                 List<DtoImpuesto> oListaImpuesto = client.ListaImpuesto();
                 foreach (var item in oListaImpuesto)
                 {
-                    if (item.oEstado.ToString().Equals("Activo")) cmbImpuesto.Items.Add(item.Descripcion);
+                    if (item.OEstado.Equals("Activo"))
+                    {
+                        cmbImpuesto.Items.Add(item.Descripcion);
+                    }
                 }
                 cmbImpuesto.DisplayMember = "Text";
                 cmbImpuesto.ValueMember = "Value";
                 client.Close();
             }
-            using (ServiceMarca.ServiceMarcaClient client = new ServiceMarca.ServiceMarcaClient())
+            using (ServiceMarca.ServiceMarcaClient client = new())
             {
 
                 List<DtoMarca> oListaMarca = client.ListaMarca();
                 foreach (var item in oListaMarca)
                 {
-                    if (item.oEstado.ToString().Equals("Activo")) cmbMarca.Items.Add(item.Descripcion);
+                    if (item.OEstado.ToString().Equals("Activo")) cmbMarca.Items.Add(item.Descripcion);
                 }
                 cmbMarca.DisplayMember = "Text";
                 cmbMarca.ValueMember = "Value";
@@ -101,17 +103,46 @@ namespace CapaPresentacion
             }
         }
 
-        private void mtnProducto_Load(object sender, EventArgs e)
+        private void Mtn_Producto_Load(object sender, EventArgs e)
         {
             txtCodigo.Focus();
         }
 
-        private void btnGuardar_Click(object sender, EventArgs e)
+        private void Txt_Utilidad_KeyPress(object sender, KeyPressEventArgs e)
         {
-            ServiceProductoClient client_prod = new ServiceProductoClient();
-            ServiceImpuestoClient client_imp = new ServiceImpuestoClient();
+          
+        }
+        
+        private void Cmb_Impuesto_SelectedIndexChanged_1(object sender, EventArgs e)
+        {
+            ServiceImpuestoClient client_imp = new();
             List<DtoImpuesto> imp = client_imp.ListaImpuesto();
-            List<DtoProducto> producto = client_prod.ListaProducto();
+            var Impuesto = 0.00;
+            foreach (var item in imp)
+            {
+                if (item.Descripcion.Equals(cmbImpuesto.Items[cmbImpuesto.SelectedIndex].ToString())) Impuesto = item.Alicuota;
+            }
+            double Costo = Math.Round(Convert.ToDouble(txtCosto.Text.Trim()), 2);
+            double MargenGanancia = Math.Round(Convert.ToDouble(txtUtilidad.Text.Trim()), 2);
+            var NetoGravado = Math.Round(Costo * Math.Round(((MargenGanancia / 100) + 1), 2), 2);
+            var PrecioVenta = Math.Round(NetoGravado * ((Impuesto / 100) + 1), 2);
+            txtNetoGravado.Text = NetoGravado.ToString();
+            txtPrecioVenta.Text = PrecioVenta.ToString();
+
+        }
+
+        private void Btn_Cancelar_Click(object sender, EventArgs e)
+        {
+            this.Close();
+
+        }
+
+        private void Btn_Guardar_Click(object sender, EventArgs e)
+        {
+            ServiceProductoClient client_prod = new();
+            ServiceImpuestoClient client_imp = new();
+            List<DtoImpuesto> imp = client_imp.ListaImpuesto();
+            _ = client_prod.ListaProducto();
 
             if (txtCodigo.Text.Trim() == "" && txtDescripcion.Text.Trim() == "" && txtCosto.Text.Trim() == "" && txtUtilidad.Text.Trim() == "")
             {
@@ -133,26 +164,26 @@ namespace CapaPresentacion
             var NetoGravado = Costo * Math.Round(((MargenGanancia / 100) + 1), 2);
             var PrecioVenta = NetoGravado * Math.Round(((Impuesto / 100) + 1), 2);
             var oEstado = client_prod.ObtenerEstado(cmbEstado.Items[cmbEstado.SelectedIndex].ToString());
-            DtoProducto prod = new DtoProducto
+            DtoProducto prod = new()
             {
                 Codigo = Codigo,
                 Descripcion = Descripcion,
-                oGeneroProducto = oGeneroProducto,
-                Rubro = Rubro,
-                oMarca = Marca,
+                OGeneroProducto = oGeneroProducto,
+                ORubroProducto = Rubro,
+                OMarca = Marca,
                 Impuesto = Impuesto,
                 Costo = Costo,
                 MargenGanancia = MargenGanancia,
                 NetoGravado = NetoGravado,
                 PrecioVenta = PrecioVenta,
-                oEstado = oEstado
+                OEstado = oEstado
             };
-            bool Respuesta = false;
-            string msgSuccess = "";
-            string msgError = "";
+            bool Respuesta;
+            string msgSuccess;
+            string msgError;
             if (modoEditar)
             {
-                Respuesta = client_prod.ActualizarProducto(prod);
+                Respuesta = client_prod.ModificarProducto(prod);
                 msgSuccess = "Producto Modificado \n¿Desea modificar otro Producto ahora?";
                 msgError = "No se pudo modificar el Producto, \nes posible que ya se encuentre registrado";
             }
@@ -193,32 +224,6 @@ namespace CapaPresentacion
             }
             client_prod.Close();
             client_imp.Close();
-        }
-
-        private void txtUtilidad_KeyPress(object sender, KeyPressEventArgs e)
-        {
-          
-        }
-        private void btnCancelar_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
-        
-        private void cmbImpuesto_SelectedIndexChanged_1(object sender, EventArgs e)
-        {
-            ServiceImpuestoClient client_imp = new ServiceImpuestoClient();
-            List<DtoImpuesto> imp = client_imp.ListaImpuesto();
-            var Impuesto = 0.00;
-            foreach (var item in imp)
-            {
-                if (item.Descripcion.Equals(cmbImpuesto.Items[cmbImpuesto.SelectedIndex].ToString())) Impuesto = item.Alicuota;
-            }
-            double Costo = Math.Round(Convert.ToDouble(txtCosto.Text.Trim()), 2);
-            double MargenGanancia = Math.Round(Convert.ToDouble(txtUtilidad.Text.Trim()), 2);
-            var NetoGravado = Math.Round(Costo * Math.Round(((MargenGanancia / 100) + 1), 2), 2);
-            var PrecioVenta = Math.Round(NetoGravado * ((Impuesto / 100) + 1), 2);
-            txtNetoGravado.Text = NetoGravado.ToString();
-            txtPrecioVenta.Text = PrecioVenta.ToString();
 
         }
     }   

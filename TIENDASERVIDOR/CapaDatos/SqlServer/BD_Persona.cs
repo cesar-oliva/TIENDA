@@ -158,25 +158,12 @@ namespace CapaDatos
         //}
         public static Persona BuscarPersona(int oPersona)
         {
-            List<Persona> lista = new List<Persona>();
-            lista = MostrarPersona();
+            List<Persona> lista = MostrarPersona();
             foreach (var item in lista)
             {
                 if (item.IdPersona.Equals(oPersona)) return item;
             }
             return null;
         }
-        private static Estado BuscarEstado(string valor)
-        {
-            if (valor.Equals("Activo"))
-            {
-                return Estado.Activo;
-            }
-            else
-            {
-                return Estado.Inactivo;
-            }
-        }
-
     }
 }

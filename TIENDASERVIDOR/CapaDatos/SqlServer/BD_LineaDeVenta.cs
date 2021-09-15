@@ -104,16 +104,9 @@ namespace CapaDatos
                         {
                             var marc = new LineaDeVenta
                             {
-
-                                //public int IdLineaDeVenta { get; set; }
-                                //public Venta oVenta { get; set; }
-                                //public Producto oProducto { get; set; }
-                                //public int cantidad { get; set; }
-                                //public double PrecioUnitario { get; set; }
-                                //public double ImporteSubtotal { get; set; }
                                 IdLineaDeVenta = Convert.ToInt32(data.Rows[i]["IdComprobante"]),
-                                oVenta = BD_Venta.BuscarVenta(Convert.ToInt32(data.Rows[i]["IdVenta"].ToString())),
-                                oProducto = BD_Producto.BuscarProducto(Convert.ToInt32(data.Rows[i]["IdProducto"].ToString())),
+                                OVenta = BD_Venta.BuscarVenta(Convert.ToInt32(data.Rows[i]["IdVenta"].ToString())),
+                                OProducto = BD_Producto.BuscarProducto(Convert.ToInt32(data.Rows[i]["IdProducto"].ToString())),
                                 Cantidad = Convert.ToInt32(data.Rows[i]["Cantidad"].ToString()),
                                 PrecioUnitario = Convert.ToDouble(data.Rows[i]["PrecioUnitario"].ToString()),
                                 ImporteSubtotal = Convert.ToDouble(data.Rows[i]["ImporteSubTotal"].ToString()),
@@ -134,8 +127,7 @@ namespace CapaDatos
         }
         public static LineaDeVenta BuscarLineaDeVenta(LineaDeVenta oLineaDeVenta)
         {
-            List<LineaDeVenta> lista = new List<LineaDeVenta>();
-            lista = MostrarLineaDeVenta();
+            List<LineaDeVenta> lista = MostrarLineaDeVenta();
             foreach (var item in lista)
             {
                 if (oLineaDeVenta.IdLineaDeVenta.Equals(item.IdLineaDeVenta)) return item;
@@ -144,18 +136,16 @@ namespace CapaDatos
         }
         public static LineaDeVenta BuscarLineaDeVenta(string oLineaDeVenta)
         {
-            List<LineaDeVenta> lista = new List<LineaDeVenta>();
-            lista = MostrarLineaDeVenta();
+            List<LineaDeVenta> lista = MostrarLineaDeVenta();
             foreach (var item in lista)
             {
-                if (item.oVenta.IdVenta.Equals(oLineaDeVenta)) return item;
+                if (item.OVenta.IdVenta.Equals(oLineaDeVenta)) return item;
             }
             return null;
         }
         public static LineaDeVenta BuscarLineaDeVenta(int oLineaDeVenta)
         {
-            List<LineaDeVenta> lista = new List<LineaDeVenta>();
-            lista = MostrarLineaDeVenta();
+            List<LineaDeVenta> lista = MostrarLineaDeVenta();
             foreach (var item in lista)
             {
                 if (item.IdLineaDeVenta.Equals(oLineaDeVenta)) return item;
@@ -164,9 +154,8 @@ namespace CapaDatos
         }
         public static List<LineaDeVenta> BuscarListaLineaDeVenta(int oLineaDeVenta)
         {
-            List<LineaDeVenta> lista = new List<LineaDeVenta>();
+            List<LineaDeVenta> lista = MostrarLineaDeVenta();
             List<LineaDeVenta> listaresultado = new List<LineaDeVenta>();
-            lista = MostrarLineaDeVenta();
             foreach (var item in lista)
             {
                 if (item.IdLineaDeVenta.Equals(oLineaDeVenta)) listaresultado.Add(item);

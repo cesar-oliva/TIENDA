@@ -18,7 +18,7 @@ namespace CapaServicioServidor
             var nuevo = new Marca
             {
                 Descripcion = oMarca.Descripcion,
-                oEstado = oMarca.oEstado
+                OEstado = oMarca.OEstado
             };
             int i = CapaDatos.BD_Marca.RegistrarMarca(nuevo);
             if (i != 0)
@@ -39,7 +39,7 @@ namespace CapaServicioServidor
             var nuevo = new Marca
             {
                 Descripcion = oMarca.Descripcion,
-                oEstado = oMarca.oEstado,
+                OEstado = oMarca.OEstado,
             };
 
             return CapaDatos.BD_Marca.ActualizarMarca(nuevo, IdMarca);
@@ -55,7 +55,7 @@ namespace CapaServicioServidor
                 {
                     IdMarca = item.IdMarca,
                     Descripcion = item.Descripcion,
-                    oEstado = item.oEstado,
+                    OEstado = item.OEstado,
                 };
                 marc.Add(marca);
             }

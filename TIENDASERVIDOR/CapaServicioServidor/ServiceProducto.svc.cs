@@ -14,23 +14,23 @@ namespace CapaServicioServidor
     // NOTE: para iniciar el Cliente de prueba WCF para probar este servicio, seleccione Service1.svc o Service1.svc.cs en el Explorador de soluciones e inicie la depuración.
     public class ServiceProducto : IServiceProducto
     {
-        public bool ActualizarProducto(DtoProducto oProducto)
+        public bool ModificarProducto(DtoProducto oProducto)
         {
             int IdProducto = oProducto.IdProducto;
             string Codigo = oProducto.Codigo;
             string Descripcion = oProducto.Descripcion;
-            GeneroProducto oGeneroProducto = oProducto.oGeneroProducto;
-            RubroProducto Rubro = oProducto.Rubro;
-            Marca oMarca = oProducto.oMarca;
+            GeneroProducto oGeneroProducto = oProducto.OGeneroProducto;
+            RubroProducto Rubro = oProducto.ORubroProducto;
+            Marca oMarca = oProducto.OMarca;
             double Impuesto = oProducto.Impuesto;
             double Costo = oProducto.Costo;
             double MargenGanancia = oProducto.MargenGanancia;
             double NetoGravado = oProducto.NetoGravado;
             double PrecioVenta = oProducto.PrecioVenta;
-            Estado oEstado = oProducto.oEstado;
+            Estado oEstado = oProducto.OEstado;
             var nuevo = new Producto(IdProducto,Codigo, Descripcion, oGeneroProducto, Rubro, oMarca, Impuesto, Costo, MargenGanancia, NetoGravado, PrecioVenta, oEstado);
             
-            if (BD_Producto.ActualizarProducto(nuevo))
+            if (BD_Producto.ModificarProducto(nuevo))
             {
                 return true;
             }
@@ -50,15 +50,15 @@ namespace CapaServicioServidor
         {
             string Codigo = oProducto.Codigo;
             string Descripcion = oProducto.Descripcion;
-            GeneroProducto oGeneroProducto = oProducto.oGeneroProducto;
-            RubroProducto Rubro = oProducto.Rubro;
-            Marca oMarca = oProducto.oMarca;
+            GeneroProducto oGeneroProducto = oProducto.OGeneroProducto;
+            RubroProducto Rubro = oProducto.ORubroProducto;
+            Marca oMarca = oProducto.OMarca;
             double Impuesto = oProducto.Impuesto;
             double Costo = oProducto.Costo;
             double MargenGanancia = oProducto.MargenGanancia;
             double NetoGravado = oProducto.NetoGravado;
             double PrecioVenta = oProducto.PrecioVenta;
-            Estado oEstado = oProducto.oEstado;
+            Estado oEstado = oProducto.OEstado;
             var nuevo = new Producto(Codigo, Descripcion,oGeneroProducto, Rubro,oMarca,Impuesto, Costo,MargenGanancia,NetoGravado,PrecioVenta,oEstado);
             if (BD_Producto.RegistrarProducto(nuevo) > 0)
             {
@@ -81,15 +81,15 @@ namespace CapaServicioServidor
                     IdProducto = item.IdProducto,
                     Codigo = item.Codigo,
                     Descripcion = item.Descripcion,
-                    oGeneroProducto = item.OGeneroProducto,
-                    Rubro = item.Rubro,
-                    oMarca = item.OMarca,
+                    OGeneroProducto = item.OGeneroProducto,
+                    ORubroProducto = item.ORubroProducto,
+                    OMarca = item.OMarca,
                     Impuesto = item.Impuesto,
                     Costo = item.Costo,
                     MargenGanancia = item.MargenGanancia,
                     NetoGravado = item.NetoGravado,
                     PrecioVenta = item.PrecioVenta,
-                    oEstado = item.OEstado,
+                    OEstado = item.OEstado,
                     FechaRegistro = item.FechaRegistro
                 };
                 lista.Add(prod);

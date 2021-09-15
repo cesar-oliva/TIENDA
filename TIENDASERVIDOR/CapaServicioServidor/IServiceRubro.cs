@@ -32,7 +32,7 @@ namespace CapaServicioServidor
         [DataMember]
         public string Descripcion { get; set; }
         [DataMember]
-        public Estado oEstado { get; set; }
+        public Estado OEstado { get; set; }
         [DataMember]
         public DateTime FechaRegistro { get; set; }
     }

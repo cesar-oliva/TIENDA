@@ -23,7 +23,6 @@ namespace CapaNegocio
         public int Antiguedad { get => antiguedad; set => antiguedad = value; }
         public Estado OEstado { get => oEstado; set => oEstado = value; }
         public DateTime FechaRegistro { get => fechaRegistro; set => fechaRegistro = value; }
-        
 
         public Empleado(int idEmpleado, Persona oPersona, string cuil, DateTime fechaAlta, int antiguedad, Estado oEstado, DateTime fechaRegistro)
         {
@@ -32,6 +31,7 @@ namespace CapaNegocio
             Cuil = cuil;
             FechaAlta = fechaAlta;
             Antiguedad = antiguedad;
+            OEstado = oEstado;
             FechaRegistro = fechaRegistro;
         }
 
