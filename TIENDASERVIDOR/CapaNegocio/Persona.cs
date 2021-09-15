@@ -8,17 +8,30 @@ namespace CapaNegocio
 {
     public class Persona
     {
-        public int IdPersona { get; set; }
-        public string TipoDocumento { get; set; }
-        public string NumeroDocumento { get; set; }
-        public string Nombres { get; set; }
-        public string Apellidos { get; set; }
-        public Sexo oSexo { get; set; }
-        public DateTime FechaNacimiento { get; set; }
-        public int Edad { get; set; }
-        public string Domicilio { get; set; }
-        public string Telefono { get; set; }
-        public Estado oEstado { get; set; }
-        public DateTime FechaRegistro { get; set; }
+        private int idPersona;
+        private string tipoDocumento;
+        private string numeroDocumento;
+        private string nombres;
+        private string apellidos;
+        private Sexo oSexo;
+        private DateTime fechaNacimiento;
+        private int edad;
+        private string domicilio;
+        private string telefono;
+
+        public int IdPersona { get => idPersona; set => idPersona = value; }
+        public string TipoDocumento { get => tipoDocumento; set => tipoDocumento = value; }
+        public string NumeroDocumento { get => numeroDocumento; set => numeroDocumento = value; }
+        public string Nombres { get => nombres; set => nombres = value; }
+        public string Apellidos { get => apellidos; set => apellidos = value; }
+        public Sexo OSexo { get => oSexo; set => oSexo = value; }
+        public DateTime FechaNacimiento { get => fechaNacimiento; set => fechaNacimiento = value; }
+        public int Edad { get => edad; set => edad = value; }
+        public string Domicilio { get => domicilio; set => domicilio = value; }
+        public string Telefono { get => telefono; set => telefono = value; }
+
+        public Persona()
+        {
+        }
     }
 }

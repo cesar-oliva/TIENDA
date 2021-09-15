@@ -10,23 +10,20 @@ using System.Windows;
 
 namespace CapaDatos.SqlServer
 {
-    public class BD_Talle
+    public class BD_Rol
     {
-
-        public static int RegistrarTalle(Talle oTalle)
+        public static int RegistrarRol(Rol oRol)
         {
             int respuesta;
             using (SqlConnection oConexion = new SqlConnection(Conexion.conexion))
             {
                 try
                 {
-                    string SqlQuery = "INSERT INTO Talle(IdRubro,SiglaInternacional,Descripcion,Estado)" +
-                                      "VALUES(@IdRubro,@SiglaInternacional,@Descripcion,@Estado)";
+                    string SqlQuery = "INSERT INTO Rol(Descripcion,Estado)" +
+                                      "VALUES(@Descripcion,@Estado)";
                     SqlCommand cmd = new SqlCommand(SqlQuery, oConexion);
-                    cmd.Parameters.AddWithValue("IdRubro", oTalle.ORubroProducto.IdRubroProducto);
-                    cmd.Parameters.AddWithValue("SglaInternacional", oTalle.SiglaInternacional);
-                    cmd.Parameters.AddWithValue("Descripcion", oTalle.Descripcion);
-                    cmd.Parameters.AddWithValue("Estado", oTalle.OEstado);
+                    cmd.Parameters.AddWithValue("Descripcion", oRol.Descripcion);
+                    cmd.Parameters.AddWithValue("Estado", oRol.OEstado);
                     oConexion.Open();
                     respuesta = cmd.ExecuteNonQuery();
 
@@ -40,19 +37,17 @@ namespace CapaDatos.SqlServer
             }
             return respuesta;
         }
-        public static bool ActualizarTalle(Talle oTalle, int IdTalle)
+        public static bool ActualizarRol(Rol oRol, int IdRol)
         {
             int respuesta;
             using (SqlConnection oConexion = new SqlConnection(Conexion.conexion))
             {
                 try
                 {
-                    String SqlQuery = "UPDATE Talle SET IdRubro = @IdRubro, Descripcion = @Descripcion, Estado = @Estado  WHERE IdTalle = @IdTalle";
+                    String SqlQuery = "UPDATE ROL SET Descripcion = @Descripcion, Estado = @Estado  WHERE IdRol = @IdRol";
                     SqlCommand cmd = new SqlCommand(SqlQuery, oConexion);
-                    cmd.Parameters.AddWithValue("IdRubro", oTalle.ORubroProducto.IdRubroProducto);
-                    cmd.Parameters.AddWithValue("SglaInternacional", oTalle.SiglaInternacional);
-                    cmd.Parameters.AddWithValue("Descripcion", oTalle.Descripcion);
-                    cmd.Parameters.AddWithValue("Estado", oTalle.OEstado);
+                    cmd.Parameters.AddWithValue("Descripcion", oRol.Descripcion);
+                    cmd.Parameters.AddWithValue("Estado", oRol.OEstado);
                     oConexion.Open();
                     respuesta = cmd.ExecuteNonQuery();
                     return true;
@@ -64,16 +59,16 @@ namespace CapaDatos.SqlServer
                 }
             }
         }
-        public static bool EliminarTalle(int IdTalle)
+        public static bool EliminarRol(int IdRol)
         {
             int respuesta;
             using (SqlConnection oConexion = new SqlConnection(Conexion.conexion))
             {
                 try
                 {
-                    String SqlQuery = "DELETE FROM Talle WHERE IdTalle = @IdTalle";
+                    String SqlQuery = "DELETE FROM Rol WHERE IdRol = @IdRol";
                     SqlCommand cmd = new SqlCommand(SqlQuery, oConexion);
-                    cmd.Parameters.AddWithValue("IdTalle", IdTalle);
+                    cmd.Parameters.AddWithValue("IdRol", IdRol);
                     oConexion.Open();
                     respuesta = cmd.ExecuteNonQuery();
                     return true;
@@ -86,73 +81,72 @@ namespace CapaDatos.SqlServer
                 }
             }
         }
-        public static List<Talle> MostrarTalle()
+        public static List<Rol> MostrarRol()
         {
-            List<Talle> talleTabla = new List<Talle>();
+            List<Rol> rolTabla = new List<Rol>();
             DataTable data = new DataTable();
             using (SqlConnection oConexion = new SqlConnection(Conexion.conexion))
             {
                 try
                 {
-                    String SqlQuery = "SELECT * FROM TALLE";
+                    String SqlQuery = "SELECT * FROM ROL";
                     SqlDataAdapter adapter = new SqlDataAdapter(SqlQuery, oConexion);
                     using (adapter)
                     {
                         adapter.Fill(data);
                         for (int i = 0; i < data.Rows.Count; i++)
                         {
-                            var talle = new Talle
+                            var rol = new Rol
                             {
-                                IdTalle = Convert.ToInt32(data.Rows[i]["IdMarca"]),
-                                ORubroProducto = BD_RubroProducto.BuscarRubroProducto(Convert.ToInt32(data.Rows[i]["IdRubroProducto"])),
-                                Descripcion = data.Rows[i]["Descripcion"].ToString(),
+                                IdRol = Convert.ToInt32(data.Rows[i]["IdRol"]),
+                                Descripcion = Convert.ToString(data.Rows[i]["Descripcion"]),
                                 OEstado = Operaciones.BuscarEstado(data.Rows[i]["Estado"].ToString()),
+                                FechaRegistro = Convert.ToDateTime(data.Rows[i]["FechaRegistro"].ToString())
                             };
-                            talleTabla.Add(talle);
+                            rolTabla.Add(rol);
                         }
 
-                        return talleTabla;
+                        return rolTabla;
                     }
                 }
                 catch (Exception ex)
                 {
                     MessageBox.Show("Error en Capa Datos: " + ex.Message);
-                    return talleTabla;
+                    return rolTabla;
                 }
 
             }
         }
-        public static Talle BuscarTalle(Talle oTalle)
+        public static Rol BuscarRol(Rol oRol)
         {
-            List<Talle> lista = new List<Talle>();
-            lista = BD_Talle.MostrarTalle();
+            List<Rol> lista = new List<Rol>();
+            lista = BD_Rol.MostrarRol();
             foreach (var item in lista)
             {
-                if (oTalle.IdTalle.Equals(item.IdTalle)) return item;
+                if (oRol.IdRol.Equals(item.IdRol)) return item;
             }
             return null;
         }
-        public static Talle BuscarTalle(string Descripcion)
+        public static Rol BuscarRol(string descripcion)
         {
-            List<Talle> lista = new List<Talle>();
-            lista = BD_Talle.MostrarTalle();
+            List<Rol> lista = new List<Rol>();
+            lista = BD_Rol.MostrarRol();
             foreach (var item in lista)
             {
-                if (item.Descripcion.Equals(Descripcion)) return item;
+                if (item.Descripcion.Equals(descripcion)) return item;
             }
             return null;
         }
-        public static Talle BuscarTalle(int IdTalle)
+        public static Rol BuscarRol(int idRol)
         {
-            List<Talle> lista = new List<Talle>();
-            lista = BD_Talle.MostrarTalle();
+            List<Rol> lista = new List<Rol>();
+            lista = BD_Rol.MostrarRol();
             foreach (var item in lista)
             {
-                if (item.IdTalle.Equals(IdTalle)) return item;
+                if (item.IdRol.Equals(idRol)) return item;
             }
             return null;
         }
     }
-
 }
 

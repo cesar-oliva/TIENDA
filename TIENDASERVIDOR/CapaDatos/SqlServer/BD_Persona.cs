@@ -109,8 +109,6 @@ namespace CapaDatos
                                 Edad = Convert.ToInt32(data.Rows[i]["Edad"].ToString()),
                                 Domicilio = data.Rows[i]["Domicilio"].ToString(),
                                 Telefono = data.Rows[i]["Telefono"].ToString(),
-                                oEstado = BuscarEstado(data.Rows[i]["Estado"].ToString()),
-                                FechaRegistro = Convert.ToDateTime(data.Rows[i]["FechaRegistro"])
                             };
                             personaTabla.Add(pers);
                         }

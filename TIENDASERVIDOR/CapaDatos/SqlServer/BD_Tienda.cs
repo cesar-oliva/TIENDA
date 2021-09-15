@@ -10,23 +10,23 @@ using System.Windows;
 
 namespace CapaDatos.SqlServer
 {
-    public class BD_Talle
+    public class BD_Tienda
     {
-
-        public static int RegistrarTalle(Talle oTalle)
+        public static int RegistrarTienda(Tienda oTienda)
         {
             int respuesta;
             using (SqlConnection oConexion = new SqlConnection(Conexion.conexion))
             {
                 try
                 {
-                    string SqlQuery = "INSERT INTO Talle(IdRubro,SiglaInternacional,Descripcion,Estado)" +
-                                      "VALUES(@IdRubro,@SiglaInternacional,@Descripcion,@Estado)";
+                    string SqlQuery = "INSERT INTO Tienda(RazonSocial,CuitTienda,Direccion,Telefono,Estado)" +
+                                      "VALUES(@RazonSocial,@CuitTienda,@Direccion,@Telefono,@Estado)";
                     SqlCommand cmd = new SqlCommand(SqlQuery, oConexion);
-                    cmd.Parameters.AddWithValue("IdRubro", oTalle.ORubroProducto.IdRubroProducto);
-                    cmd.Parameters.AddWithValue("SglaInternacional", oTalle.SiglaInternacional);
-                    cmd.Parameters.AddWithValue("Descripcion", oTalle.Descripcion);
-                    cmd.Parameters.AddWithValue("Estado", oTalle.OEstado);
+                    cmd.Parameters.AddWithValue("RazonSocial", oTienda.RazonSocial);
+                    cmd.Parameters.AddWithValue("CuitTienda", oTienda.CuitTienda);
+                    cmd.Parameters.AddWithValue("Direccion", oTienda.Direccion);
+                    cmd.Parameters.AddWithValue("Telefono", oTienda.Telefono);
+                    cmd.Parameters.AddWithValue("Estado", oTienda.OEstado);
                     oConexion.Open();
                     respuesta = cmd.ExecuteNonQuery();
 
@@ -40,19 +40,20 @@ namespace CapaDatos.SqlServer
             }
             return respuesta;
         }
-        public static bool ActualizarTalle(Talle oTalle, int IdTalle)
+        public static bool ActualizarTienda(Tienda oTienda, int IdTienda)
         {
             int respuesta;
             using (SqlConnection oConexion = new SqlConnection(Conexion.conexion))
             {
                 try
                 {
-                    String SqlQuery = "UPDATE Talle SET IdRubro = @IdRubro, Descripcion = @Descripcion, Estado = @Estado  WHERE IdTalle = @IdTalle";
+                    String SqlQuery = "UPDATE Tienda SET RazonSocial = @RazonSocial, CuitTienda = @CuitTienda, Direccion = @Direccion,Telefono = @Telefono, Estado = @Estado  WHERE IdTalle = @IdTalle";
                     SqlCommand cmd = new SqlCommand(SqlQuery, oConexion);
-                    cmd.Parameters.AddWithValue("IdRubro", oTalle.ORubroProducto.IdRubroProducto);
-                    cmd.Parameters.AddWithValue("SglaInternacional", oTalle.SiglaInternacional);
-                    cmd.Parameters.AddWithValue("Descripcion", oTalle.Descripcion);
-                    cmd.Parameters.AddWithValue("Estado", oTalle.OEstado);
+                    cmd.Parameters.AddWithValue("RazonSocial", oTienda.RazonSocial);
+                    cmd.Parameters.AddWithValue("CuitTienda", oTienda.CuitTienda);
+                    cmd.Parameters.AddWithValue("Direccion", oTienda.Direccion);
+                    cmd.Parameters.AddWithValue("Telefono", oTienda.Telefono);
+                    cmd.Parameters.AddWithValue("Estado", oTienda.OEstado);
                     oConexion.Open();
                     respuesta = cmd.ExecuteNonQuery();
                     return true;
@@ -64,16 +65,16 @@ namespace CapaDatos.SqlServer
                 }
             }
         }
-        public static bool EliminarTalle(int IdTalle)
+        public static bool EliminarTienda(int IdTienda)
         {
             int respuesta;
             using (SqlConnection oConexion = new SqlConnection(Conexion.conexion))
             {
                 try
                 {
-                    String SqlQuery = "DELETE FROM Talle WHERE IdTalle = @IdTalle";
+                    String SqlQuery = "DELETE FROM Tienda WHERE IdTienda = @IdTienda";
                     SqlCommand cmd = new SqlCommand(SqlQuery, oConexion);
-                    cmd.Parameters.AddWithValue("IdTalle", IdTalle);
+                    cmd.Parameters.AddWithValue("IdTienda", IdTienda);
                     oConexion.Open();
                     respuesta = cmd.ExecuteNonQuery();
                     return true;
@@ -86,73 +87,73 @@ namespace CapaDatos.SqlServer
                 }
             }
         }
-        public static List<Talle> MostrarTalle()
+        public static List<Tienda> MostrarTienda()
         {
-            List<Talle> talleTabla = new List<Talle>();
+            List<Tienda> tiendaTabla = new List<Tienda>();
             DataTable data = new DataTable();
             using (SqlConnection oConexion = new SqlConnection(Conexion.conexion))
             {
                 try
                 {
-                    String SqlQuery = "SELECT * FROM TALLE";
+                    String SqlQuery = "SELECT * FROM TIENDA";
                     SqlDataAdapter adapter = new SqlDataAdapter(SqlQuery, oConexion);
                     using (adapter)
                     {
                         adapter.Fill(data);
                         for (int i = 0; i < data.Rows.Count; i++)
                         {
-                            var talle = new Talle
+                            var tienda = new Tienda
                             {
-                                IdTalle = Convert.ToInt32(data.Rows[i]["IdMarca"]),
-                                ORubroProducto = BD_RubroProducto.BuscarRubroProducto(Convert.ToInt32(data.Rows[i]["IdRubroProducto"])),
-                                Descripcion = data.Rows[i]["Descripcion"].ToString(),
+                                IdTienda = Convert.ToInt32(data.Rows[i]["IdTienda"]),
+                                RazonSocial = Convert.ToString(data.Rows[i]["RazonSocial"]),
+                                CuitTienda = Convert.ToString(data.Rows[i]["CuitTienda"]),
+                                Direccion = Convert.ToString(data.Rows[i]["Direccion"]),
+                                Telefono = Convert.ToString(data.Rows[i]["Telefono"]),
                                 OEstado = Operaciones.BuscarEstado(data.Rows[i]["Estado"].ToString()),
                             };
-                            talleTabla.Add(talle);
+                            tiendaTabla.Add(tienda);
                         }
 
-                        return talleTabla;
+                        return tiendaTabla;
                     }
                 }
                 catch (Exception ex)
                 {
                     MessageBox.Show("Error en Capa Datos: " + ex.Message);
-                    return talleTabla;
+                    return tiendaTabla;
                 }
 
             }
         }
-        public static Talle BuscarTalle(Talle oTalle)
+        public static Tienda BuscarTienda(Tienda oTienda)
         {
-            List<Talle> lista = new List<Talle>();
-            lista = BD_Talle.MostrarTalle();
+            List<Tienda> lista = new List<Tienda>();
+            lista = BD_Tienda.MostrarTienda();
             foreach (var item in lista)
             {
-                if (oTalle.IdTalle.Equals(item.IdTalle)) return item;
+                if (oTienda.IdTienda.Equals(item.IdTienda)) return item;
             }
             return null;
         }
-        public static Talle BuscarTalle(string Descripcion)
+        public static Tienda BuscarTienda(string RazonSocial)
         {
-            List<Talle> lista = new List<Talle>();
-            lista = BD_Talle.MostrarTalle();
+            List<Tienda> lista = new List<Tienda>();
+            lista = BD_Tienda.MostrarTienda();
             foreach (var item in lista)
             {
-                if (item.Descripcion.Equals(Descripcion)) return item;
+                if (item.RazonSocial.Equals(RazonSocial)) return item;
             }
             return null;
         }
-        public static Talle BuscarTalle(int IdTalle)
+        public static Tienda BuscarTienda(int IdTienda)
         {
-            List<Talle> lista = new List<Talle>();
-            lista = BD_Talle.MostrarTalle();
+            List<Tienda> lista = new List<Tienda>();
+            lista = BD_Tienda.MostrarTienda();
             foreach (var item in lista)
             {
-                if (item.IdTalle.Equals(IdTalle)) return item;
+                if (item.IdTienda.Equals(IdTienda)) return item;
             }
             return null;
         }
     }
-
 }
-

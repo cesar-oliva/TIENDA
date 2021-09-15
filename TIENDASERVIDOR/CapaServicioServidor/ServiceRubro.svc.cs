@@ -18,7 +18,7 @@ namespace CapaServicioServidor
             var nuevo = new RubroProducto
             {
                 Descripcion = oRubro.Descripcion,
-                oEstado = oRubro.oEstado
+                OEstado = oRubro.oEstado
             };
             //MessageBox.Show("Usuario cargadado");
             int i = CapaDatos.BD_RubroProducto.RegistrarRubro(nuevo);
@@ -40,7 +40,7 @@ namespace CapaServicioServidor
             var nuevo = new RubroProducto
             {
                 Descripcion = oRubro.Descripcion,
-                oEstado = oRubro.oEstado,
+                OEstado = oRubro.oEstado,
             };
 
             return CapaDatos.BD_RubroProducto.ActualizarRubro(nuevo, IdRubro);
@@ -50,9 +50,9 @@ namespace CapaServicioServidor
         {
             var rub = new DtoRubro
             {
-                IdRubro = Convert.ToInt32(rubro.IdRubro),
+                IdRubro = Convert.ToInt32(rubro.IdRubroProducto),
                 Descripcion = rubro.Descripcion,
-                oEstado = rubro.oEstado,
+                oEstado = rubro.OEstado,
                 FechaRegistro = Convert.ToDateTime(rubro.FechaRegistro)
             };
             return rub;
@@ -66,9 +66,9 @@ namespace CapaServicioServidor
             {
                 DtoRubro rubro = new DtoRubro
                 {
-                    IdRubro = item.IdRubro,
+                    IdRubro = item.IdRubroProducto,
                     Descripcion = item.Descripcion,
-                    oEstado = item.oEstado,
+                    oEstado = item.OEstado,
                     FechaRegistro = item.FechaRegistro
                 };
                 rub.Add(rubro);

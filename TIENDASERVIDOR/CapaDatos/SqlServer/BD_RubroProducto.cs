@@ -23,7 +23,7 @@ namespace CapaDatos
                                       "VALUES(@Descripcion,@Estado)";
                     SqlCommand cmd = new SqlCommand(SqlQuery, oConexion);
                     cmd.Parameters.AddWithValue("Descripcion", oRubro.Descripcion);
-                    cmd.Parameters.AddWithValue("Estado", oRubro.oEstado);
+                    cmd.Parameters.AddWithValue("Estado", oRubro.OEstado);
                     oConexion.Open();
                     respuesta = cmd.ExecuteNonQuery();
 
@@ -37,7 +37,7 @@ namespace CapaDatos
             }
             return respuesta;
         }
-        public static bool ActualizarRubro(RubroProducto oRubro, int IdRubro)
+        public static bool ActualizarRubro(RubroProducto oRubro, int IdRubroProducto)
         {
             int respuesta;
             using (SqlConnection oConexion = new SqlConnection(Conexion.conexion))
@@ -47,7 +47,8 @@ namespace CapaDatos
                     String SqlQuery = "UPDATE RubroProducto SET Descripcion = @Descripcion, Estado = @Estado  WHERE IdRubroProducto = @IdRubroProducto";
                     SqlCommand cmd = new SqlCommand(SqlQuery, oConexion);
                     cmd.Parameters.AddWithValue("Descripcion", oRubro.Descripcion);
-                    cmd.Parameters.AddWithValue("Estado", oRubro.oEstado);
+                    cmd.Parameters.AddWithValue("Estado", oRubro.OEstado);
+                    cmd.Parameters.AddWithValue("IdRubroProducto", oRubro.IdRubroProducto);
                     oConexion.Open();
                     respuesta = cmd.ExecuteNonQuery();
                     return true;
@@ -98,9 +99,9 @@ namespace CapaDatos
                         {
                             var rub = new RubroProducto
                             {
-                                IdRubro = Convert.ToInt32(data.Rows[i]["IdRubroProducto"]),
+                                IdRubroProducto = Convert.ToInt32(data.Rows[i]["IdRubroProducto"]),
                                 Descripcion = data.Rows[i]["Descripcion"].ToString(),
-                                oEstado = Operaciones.BuscarEstado(data.Rows[i]["Estado"].ToString()),
+                                OEstado = Operaciones.BuscarEstado(data.Rows[i]["Estado"].ToString()),
                                 FechaRegistro = Convert.ToDateTime(data.Rows[i]["FechaRegistro"])
                             };
                             rubroTabla.Add(rub);
@@ -123,7 +124,7 @@ namespace CapaDatos
             lista = BD_RubroProducto.MostrarRubro();
             foreach (var item in lista)
             {
-                if (oRubro.IdRubro.Equals(item.IdRubro)) return item;
+                if (oRubro.IdRubroProducto.Equals(item.IdRubroProducto)) return item;
             }
             return null;
         }
@@ -143,7 +144,7 @@ namespace CapaDatos
             lista = BD_RubroProducto.MostrarRubro();
             foreach (var item in lista)
             {
-                if (item.IdRubro.Equals(oRubro)) return item;
+                if (item.IdRubroProducto.Equals(oRubro)) return item;
             }
             return null;
         }

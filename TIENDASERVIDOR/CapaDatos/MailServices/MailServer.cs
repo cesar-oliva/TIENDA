@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Net.Mail;
 using System.Net;
+using System.Windows;
 
 namespace CapaDatos.MailServices
 {
@@ -40,7 +41,10 @@ namespace CapaDatos.MailServices
                 mailMessage.Priority = MailPriority.Normal;
                 smtpClient.Send(mailMessage);
             }
-            catch (Exception ex) { }
+            catch (Exception ex) 
+            {
+                MessageBox.Show("Error al enviar el email: " + ex.Message);
+            }
             finally
             {
                 mailMessage.Dispose();

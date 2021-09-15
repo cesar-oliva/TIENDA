@@ -8,34 +8,43 @@ namespace CapaNegocio
 {
     public class Tienda
     {
+
         private int idTienda;
         private string razonSocial;
-        private string cuit;
-        private string domicilio;
+        private string cuitTienda;
+        private string direccion;
         private string telefono;
-        private List<PuntoDeVenta> oPuntoDeVenta;
-        private List<Sucursal> oSucursal;
+        private Estado oEstado;
+        private DateTime fechaRegistro;
 
         public int IdTienda { get => idTienda; set => idTienda = value; }
         public string RazonSocial { get => razonSocial; set => razonSocial = value; }
-        public string Cuit { get => cuit; set => cuit = value; }
-        public string Domicilio { get => domicilio; set => domicilio = value; }
+        public string CuitTienda { get => cuitTienda; set => cuitTienda = value; }
+        public string Direccion { get => direccion; set => direccion = value; }
         public string Telefono { get => telefono; set => telefono = value; }
-        public List<PuntoDeVenta> OPuntoDeVenta { get => oPuntoDeVenta; set => oPuntoDeVenta = value; }
-        public List<Sucursal> OSucursal { get => oSucursal; set => oSucursal = value; }
-        
-
+        public Estado OEstado { get => oEstado; set => oEstado = value; }
+        public DateTime FechaRegistro { get => fechaRegistro; set => fechaRegistro = value; }
         public Tienda()
         {
         }
-        public Tienda(string razonSocial, string cuit, string domicilio, string telefono, List<PuntoDeVenta> oPuntoDeVenta, List<Sucursal> oSucursal)
+        public Tienda(string razonSocial, string cuitTienda, string direccion, string telefono, Estado oEstado)
         {
             RazonSocial = razonSocial;
-            Cuit = cuit;
-            Domicilio = domicilio;
+            CuitTienda = cuitTienda;
+            Direccion = direccion;
             Telefono = telefono;
-            OPuntoDeVenta = oPuntoDeVenta;
-            OSucursal = oSucursal;
+            OEstado = oEstado;
         }
+        public Tienda(int idTienda, string razonSocial, string cuitTienda, string direccion, string telefono, Estado oEstado, DateTime fechaRegistro)
+        {
+            IdTienda = idTienda;
+            RazonSocial = razonSocial;
+            CuitTienda = cuitTienda;
+            Direccion = direccion;
+            Telefono = telefono;
+            OEstado = oEstado;
+            FechaRegistro = fechaRegistro;
+        }
+
     }
 }

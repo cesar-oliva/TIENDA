@@ -25,7 +25,7 @@ namespace CapaDatos
                     cmd.Parameters.AddWithValue("Codigo", oProducto.Codigo);
                     cmd.Parameters.AddWithValue("Descripcion", oProducto.Descripcion);
                     cmd.Parameters.AddWithValue("GeneroProducto", Operaciones.BuscarGenero(oProducto.OGeneroProducto));
-                    cmd.Parameters.AddWithValue("IdRubroProducto", BD_RubroProducto.BuscarRubroProducto(oProducto.Rubro).IdRubro);
+                    cmd.Parameters.AddWithValue("IdRubroProducto", BD_RubroProducto.BuscarRubroProducto(oProducto.Rubro).IdRubroProducto);
                     cmd.Parameters.AddWithValue("IdMarca", BD_Marca.BuscarMarca(oProducto.OMarca).IdMarca);
                     cmd.Parameters.AddWithValue("IdImpuesto", oProducto.Impuesto);
                     cmd.Parameters.AddWithValue("Costo", oProducto.Costo);
@@ -73,7 +73,7 @@ namespace CapaDatos
                     cmd.Parameters.AddWithValue("@Codigo", oProducto.Codigo);
                     cmd.Parameters.AddWithValue("@Descripcion", oProducto.Descripcion);
                     cmd.Parameters.AddWithValue("@GeneroProducto", Operaciones.BuscarGenero(oProducto.OGeneroProducto));
-                    cmd.Parameters.AddWithValue("@IdRubroProducto", BD_RubroProducto.BuscarRubroProducto(oProducto.Rubro).IdRubro);
+                    cmd.Parameters.AddWithValue("@IdRubroProducto", BD_RubroProducto.BuscarRubroProducto(oProducto.Rubro).IdRubroProducto);
                     cmd.Parameters.AddWithValue("@IdMarca", BD_Marca.BuscarMarca(oProducto.OMarca).IdMarca);
                     cmd.Parameters.AddWithValue("@IDImpuesto", oProducto.Impuesto);
                     cmd.Parameters.AddWithValue("@Costo", oProducto.Costo);

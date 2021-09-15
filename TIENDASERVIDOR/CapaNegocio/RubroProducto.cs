@@ -8,9 +8,18 @@ namespace CapaNegocio
 {
     public class RubroProducto
     {
-        public int IdRubro { get; set; }
-        public string Descripcion { get; set; }
-        public Estado oEstado { get; set; }
-        public DateTime FechaRegistro { get; set; }
+        private int idRubroProducto;
+        private string descripcion;
+        private Estado oEstado;
+        private DateTime fechaRegistro;
+
+        public int IdRubroProducto { get => idRubroProducto; set => idRubroProducto = value; }
+        public string Descripcion { get => descripcion; set => descripcion = value; }
+        public Estado OEstado { get => oEstado; set => oEstado = value; }
+        public DateTime FechaRegistro { get => fechaRegistro; set => fechaRegistro = value; }
+
+        public RubroProducto()
+        {
+        }
     }
 }

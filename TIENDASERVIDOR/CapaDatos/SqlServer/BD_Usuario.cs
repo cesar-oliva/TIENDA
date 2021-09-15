@@ -1,4 +1,5 @@
-﻿using CapaNegocio;
+﻿using CapaDatos.SqlServer;
+using CapaNegocio;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -59,11 +60,11 @@ namespace CapaDatos
                             var user = new Usuario
                             {
                                 IdUsuario = Convert.ToInt32(data.Rows[i]["IdUsuario"]),
-                                //OEmpleado = BuscarEmpleado(Convert.ToInt32(data.Rows[i]["IdEmpleado"])),
+                                OEmpleado = BD_Empleado.BuscarEmpleado(Convert.ToInt32(data.Rows[i]["IdEmpleado"])),
                                 NombreUsuario = data.Rows[i]["NombreUsuario"].ToString(),
                                 Contraseña = data.Rows[i]["Contraseña"].ToString(),
-                                //OTienda = BuscarTienda(Convert.ToInt32(data.Rows[i]["IdTienda"])),
-                                //ORol = BuscarRol(Convert.ToInt32(data.Rows[i]["IdRol"])),
+                                OTienda = BD_Tienda.BuscarTienda(Convert.ToInt32(data.Rows[i]["IdTienda"])),
+                                ORol = BD_Rol.BuscarRol(Convert.ToInt32(data.Rows[i]["IdRol"])),
                                 Email = data.Rows[i]["Email"].ToString(),
                                 OEstado = BuscarEstado(data.Rows[i]["Estado"].ToString()),
                                 FechaRegistro = Convert.ToDateTime(data.Rows[i]["FechaRegistro"])
