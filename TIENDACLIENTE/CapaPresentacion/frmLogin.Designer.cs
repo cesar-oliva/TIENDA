@@ -67,7 +67,7 @@ namespace CapaPresentacion
             this.btnCancelar.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.UseVisualStyleBackColor = false;
-            //this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
+            this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click_1);
             // 
             // btnAceptar
             // 
@@ -77,7 +77,7 @@ namespace CapaPresentacion
             this.btnAceptar.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.btnAceptar.Name = "btnAceptar";
             this.btnAceptar.UseVisualStyleBackColor = false;
-            //this.btnAceptar.Click += new System.EventHandler(this.btnAceptar_Click);
+            this.btnAceptar.Click += new System.EventHandler(this.btnAceptar_Click_1);
             // 
             // txtNombreUsuario
             // 
@@ -129,7 +129,7 @@ namespace CapaPresentacion
             this.lblUsuario.ForeColor = System.Drawing.Color.Red;
             this.lblUsuario.Name = "lblUsuario";
             // 
-            // frmLogin
+            // FrmLogin
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -144,7 +144,7 @@ namespace CapaPresentacion
             this.Controls.Add(this.txtNombreUsuario);
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Name = "frmLogin";
+            this.Name = "FrmLogin";
             this.Opacity = 0.9D;
             this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();

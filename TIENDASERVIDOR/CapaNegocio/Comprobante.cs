@@ -10,9 +10,9 @@ namespace CapaNegocio
     {
         public int IdComprobante { get; set; }
         public string Descripcion { get; set; }
-        public PuntoDeVenta oPuntoDeVenta{ get; set; }
+        public PuntoDeVenta OPuntoDeVenta{ get; set; }
         public int ContadorNumero { get; set; }
-        public Estado oEstado { get; set; }
+        public Estado OEstado { get; set; }
         public DateTime FechaRegistro { get; set; }
     }
 }

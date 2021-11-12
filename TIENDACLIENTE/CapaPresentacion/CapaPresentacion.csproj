@@ -23,7 +23,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="CircularProgressBar" Version="2.8.0.16" />
+    <PackageReference Include="SpecFlow" Version="3.9.22" />
+    <PackageReference Include="SpecFlow.NUnit" Version="3.9.22" />
     <PackageReference Include="System.ServiceModel.Duplex" Version="4.9.0-preview1.21220.1" />
     <PackageReference Include="System.ServiceModel.Http" Version="4.9.0-preview1.21220.1" />
     <PackageReference Include="System.ServiceModel.NetTcp" Version="4.9.0-preview1.21220.1" />

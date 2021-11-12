@@ -29,6 +29,8 @@ namespace CapaServicioServidor
         RubroProducto ObtenerRubroProducto(string oRubroProducto);
         [OperationContract]
         Marca ObtenerMarca(string oMarca);
+        [OperationContract]
+        Producto BuscarProductoById(int idProducto);
     }
 
 

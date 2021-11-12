@@ -16,14 +16,32 @@ namespace CapaPresentacion
         {
             InitializeComponent();
         }
-
-        private void BtnCancelar_Click(object sender, EventArgs e)
+        private void Btn_Recuperar_Click(object sender, EventArgs e)
         {
-            Application.Exit();
+            while (true)
+            {
+                if (txtNombreUsuario.Text.Trim() == "")
+                {
+                    lblUsuario.Text="Debe ingresar el nombre del usuario";
+                    lblUsuario.Visible = true;
+                    break;
+                }
+                using ServiceUsuario.ServiceUsuarioClient client = new();
+                string NombreUsuario = txtNombreUsuario.Text.Trim(); ;
+                client.RecuperarContraseña(NombreUsuario);
+                break;
+            }
         }
 
-        private void BtnAceptar_Click(object sender, EventArgs e)
+        private void Txt_NombreUsuario_TextChanged(object sender, EventArgs e)
         {
+            lblMensajeLogin.ResetText();
+            lblUsuario.ResetText();
+        }
+
+        private void btnAceptar_Click_1(object sender, EventArgs e)
+        {
+
             while (true)
             {
                 if (txtNombreUsuario.Text.Trim() == "")
@@ -65,27 +83,9 @@ namespace CapaPresentacion
             }
         }
 
-        private void Btn_Recuperar_Click(object sender, EventArgs e)
+        private void btnCancelar_Click_1(object sender, EventArgs e)
         {
-            while (true)
-            {
-                if (txtNombreUsuario.Text.Trim() == "")
-                {
-                    lblUsuario.Text="Debe ingresar el nombre del usuario";
-                    lblUsuario.Visible = true;
-                    break;
-                }
-                using ServiceUsuario.ServiceUsuarioClient client = new();
-                string NombreUsuario = txtNombreUsuario.Text.Trim(); ;
-                client.RecuperarContraseña(NombreUsuario);
-                break;
-            }
-        }
-
-        private void Txt_NombreUsuario_TextChanged(object sender, EventArgs e)
-        {
-            lblMensajeLogin.ResetText();
-            lblUsuario.ResetText();
+            Application.Exit();
         }
     }
 }

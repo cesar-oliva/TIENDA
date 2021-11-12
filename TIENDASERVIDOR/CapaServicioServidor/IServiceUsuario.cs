@@ -24,6 +24,8 @@ namespace CapaServicioServidor
         [OperationContract] //metodos expuestos atraves del webservice
         List<DtoUsuario> ObtenerUsuario();
         [OperationContract] //metodos expuestos atraves del webservice
+        DtoUsuario ObtenerUsuarioByNombre(string usuario);
+        [OperationContract] //metodos expuestos atraves del webservice
         bool RecuperarContraseña(string usuario);
 
     }

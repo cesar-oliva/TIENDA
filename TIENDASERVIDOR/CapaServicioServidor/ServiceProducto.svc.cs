@@ -1,12 +1,6 @@
 ﻿using CapaDatos;
 using CapaNegocio;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.Serialization;
-using System.ServiceModel;
-using System.ServiceModel.Web;
-using System.Text;
 
 namespace CapaServicioServidor
 {
@@ -118,6 +112,11 @@ namespace CapaServicioServidor
         public RubroProducto ObtenerRubroProducto(string oRubroProducto)
         {
             return BD_RubroProducto.BuscarRubroProducto(oRubroProducto);
+        }
+
+        public Producto BuscarProductoById(int idProducto)
+        {
+            return BD_Producto.BuscarProducto(idProducto);
         }
     }
 }

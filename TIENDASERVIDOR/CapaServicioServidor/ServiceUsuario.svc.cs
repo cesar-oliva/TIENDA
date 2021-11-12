@@ -83,6 +83,26 @@ namespace CapaServicioServidor
             }
             return user;
         }
+
+        public DtoUsuario ObtenerUsuarioByNombre(string usuario)
+        {
+            var item = CapaDatos.BD_Usuario.BuscarUsuario(usuario);
+
+            var user = new DtoUsuario
+            {
+                IdUsuario = item.IdUsuario,
+                OEmpleado = item.OEmpleado,
+                NombreUsuario = item.NombreUsuario,
+                Contraseña = item.Contraseña,
+                OTienda = item.OTienda,
+                ORol = item.ORol,
+                Email = item.Email,
+                OEstado = item.OEstado,
+                FechaRegistro = item.FechaRegistro
+            };
+            return user;
+        }
+
         public bool RecuperarContraseña(string usuario)
         {
             return CapaDatos.BD_Usuario.RecoverPassword(usuario);

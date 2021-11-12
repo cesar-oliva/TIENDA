@@ -56,8 +56,10 @@ namespace CapaDatos
                         {
                             var user = new Cliente
                             {
-                                IdCliente = Convert.ToInt32(data.Rows[i]["IdUsuario"]),
+                                IdCliente = Convert.ToInt32(data.Rows[i]["IdCliente"]),
+                                Cuit = data.Rows[i]["Cuit"].ToString(),
                                 RazonSocial = data.Rows[i]["RazonSocial"].ToString(),
+                                DomicilioFiscal = data.Rows[i]["DomicilioFiscal"].ToString(),
                                 OCondicionTributaria = BD_CondicionTributaria.BuscarCondicionTributaria(Convert.ToInt32(data.Rows[i]["IdCondicionTributaria"])),
                                 OEstado = Operaciones.BuscarEstado(data.Rows[i]["Estado"].ToString()),
                                 FechaRegistro = Convert.ToDateTime(data.Rows[i]["FechaRegistro"])
@@ -76,65 +78,64 @@ namespace CapaDatos
 
             }
         }
-        //public static bool ActualizarUsuario(Usuario oUsuario, int IdUsuario)
-        //{
-        //    int respuesta;
-        //    using (SqlConnection oConexion = new SqlConnection(Conexion.conexion))
-        //    {
-        //        try
-        //        {
-        //            String SqlQuery = "UPDATE Usuario SET NombreUsuario = @NombreUsuario,Contraseña = @Contraseña,IdTienda = @IdTienda, IdRol = @IdRol,Estado = @Estado WHERE idUsuario = @IdUsuario";
-        //            SqlCommand cmd = new SqlCommand(SqlQuery, oConexion);
-        //            cmd.Parameters.AddWithValue("IdUsuario", IdUsuario);
-        //            cmd.Parameters.AddWithValue("NombreUsuario", oUsuario.NombreUsuario);
-        //            cmd.Parameters.AddWithValue("Contraseña", oUsuario.Contraseña);
-        //            cmd.Parameters.AddWithValue("Tienda", oUsuario.Tienda);
-        //            cmd.Parameters.AddWithValue("Rol", oUsuario.Rol);
-        //            cmd.Parameters.AddWithValue("Estado", oUsuario.oEstado);
-        //            oConexion.Open();
-        //            respuesta = cmd.ExecuteNonQuery();
-        //            return true;
-        //        }
-        //        catch (Exception ex)
-        //        {
-        //            MessageBox.Show(ex.Message);
-        //            return false;
-        //        }
-        //    }
-        //}
-        //public static bool EliminarUsuario(int IdUsuario)
-        //{
-        //    int respuesta;
-        //    using (SqlConnection oConexion = new SqlConnection(Conexion.conexion))
-        //    {
-        //        try
-        //        {
-        //            String SqlQuery = "DELETE FROM Usuario WHERE IdUsuario = @IdUsuario";
-        //            SqlCommand cmd = new SqlCommand(SqlQuery, oConexion);
-        //            cmd.Parameters.AddWithValue("IdUsuario", IdUsuario);
-        //            oConexion.Open();
-        //            respuesta = cmd.ExecuteNonQuery();
-        //            return true;
-        //        }
-        //        catch (Exception ex)
-        //        {
-        //            MessageBox.Show(ex.Message);
-        //            return false;
+        public static bool ActualizarCliente(Cliente oCliente, int IdCliente)
+        {
+            int respuesta;
+            using (SqlConnection oConexion = new SqlConnection(Conexion.conexion))
+            {
+                try
+                {
+                    String SqlQuery = "UPDATE Cliente SET Cuit = @Cuit,RazonSocial = @RazonSocial,IdCondicionTributaria = @IdCondicionTributaria, DomicilioFiscal = @DomiciilioFiscal,Estado = @Estado WHERE idCliente = @IdCliente";
+                    SqlCommand cmd = new SqlCommand(SqlQuery, oConexion);
+                    cmd.Parameters.AddWithValue("IdCliente", IdCliente);
+                    cmd.Parameters.AddWithValue("Cuit", oCliente.Cuit);
+                    cmd.Parameters.AddWithValue("RazonSocial", oCliente.RazonSocial);
+                    cmd.Parameters.AddWithValue("IdCondicionTributaria", oCliente.OCondicionTributaria.IdCondicionTributaria);
+                    cmd.Parameters.AddWithValue("Estado", oCliente.OEstado);
+                    oConexion.Open();
+                    respuesta = cmd.ExecuteNonQuery();
+                    return true;
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                    return false;
+                }
+            }
+        }
+        public static bool EliminarCliente(int IdCliente)
+        {
+            int respuesta;
+            using (SqlConnection oConexion = new SqlConnection(Conexion.conexion))
+            {
+                try
+                {
+                    String SqlQuery = "DELETE FROM Cliente WHERE IdCliente = @IdCliente";
+                    SqlCommand cmd = new SqlCommand(SqlQuery, oConexion);
+                    cmd.Parameters.AddWithValue("IdCliente", IdCliente);
+                    oConexion.Open();
+                    respuesta = cmd.ExecuteNonQuery();
+                    return true;
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                    return false;
 
-        //        }
-        //    }
-        //}
+                }
+            }
+        }
 
-        //public static Usuario BuscarUsuario(Usuario oUsuario)
-        //{
-        //    List<Usuario> lista = new List<Usuario>();
-        //    lista = MostrarUsuario();
-        //    foreach (var item in lista)
-        //    {
-        //        if (oUsuario.IdUsuario.Equals(item.IdUsuario)) return item;
-        //    }
-        //    return null;
-        //}
+        public static Cliente BuscarCliente(Cliente oCliente)
+        {
+            _ = new List<Cliente>();
+            List<Cliente> lista = MostrarCliente();
+            foreach (var item in lista)
+            {
+                if (oCliente.IdCliente.Equals(item.IdCliente)) return item;
+            }
+            return null;
+        }
         public static Cliente BuscarCliente(string razonSocial)
         {
             List<Cliente> lista = MostrarCliente();

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ServiceCliente;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -15,8 +16,53 @@ namespace CapaPresentacion
         public frmVenta()
         {
             InitializeComponent();
+            using ServiceCliente.ServiceClienteClient client = new();
+            List<DtoCliente> oListaCliente = client.ListaCliente();
+            mtxtCuit.Text = "00-00000000-0";
+            foreach (var item in oListaCliente)
+            {
+                if (mtxtCuit.Text.Trim().ToString().Equals(item.Cuit.ToString()))
+                {
+                    txtRazonSocial.Text = item.RazonSocial.ToString();
+                    txtDomicilio.Text = item.DomicilioFiscal.ToString();
+                    txtCondicion.Text = item.OCondicionTributaria.Codigo.ToString();
+                }
+            }
         }
-
+        private void MtxtCuit_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            using ServiceCliente.ServiceClienteClient client = new();
+            List<DtoCliente> oListaCliente = client.ListaCliente();
+            bool bandera = false;
+            if ((int)e.KeyChar == (int)Keys.Enter)
+            {
+                foreach (var item in oListaCliente)
+                {
+                    if (mtxtCuit.Text.Trim().ToString().Equals(item.Cuit.ToString()))
+                    {
+                        txtRazonSocial.Text = item.RazonSocial.ToString();
+                        txtDomicilio.Text = item.DomicilioFiscal.ToString();
+                        txtCondicion.Text = item.OCondicionTributaria.Codigo.ToString();
+                        bandera = true;
+                    }
+                }
+                if (bandera == false)
+                {
+                    MessageBox.Show("El Cuit ingresado no corresponde a un Cliente activo");
+                    mtxtCuit.Text = "00-00000000-0";
+                    foreach (var item in oListaCliente)
+                    {
+                        if (mtxtCuit.Text.Trim().ToString().Equals(item.Cuit.ToString()))
+                        {
+                            txtRazonSocial.Text = item.RazonSocial.ToString();
+                            txtDomicilio.Text = item.DomicilioFiscal.ToString();
+                            txtCondicion.Text = item.OCondicionTributaria.Codigo.ToString();
+                            bandera = true;
+                        }
+                    }
+                }
+            }
+        }
     }
 
 }

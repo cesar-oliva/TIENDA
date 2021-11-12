@@ -12,6 +12,32 @@ namespace CapaDatos
 {
     public class BD_CondicionTributaria
     {
+        public static int RegistrarCondicionTributaria(CondicionTributaria oCondicionTributaria)
+        {
+            int respuesta;
+            using (SqlConnection oConexion = new SqlConnection(Conexion.conexion))
+            {
+                try
+                {
+                    string SqlQuery = "INSERT INTO CONDICIONTRIBUTARIA(Codigo,Descripcion,Estado)"+
+                                      "VALUES(@Codigo,@Descripcion,@Estado)";
+                    SqlCommand cmd = new SqlCommand(SqlQuery, oConexion);
+                    cmd.Parameters.AddWithValue("Codigo", oCondicionTributaria.Codigo);
+                    cmd.Parameters.AddWithValue("Descripcion", oCondicionTributaria.Descripcion);
+                    cmd.Parameters.AddWithValue("Estado", oCondicionTributaria.OEstado);
+                    oConexion.Open();
+                    respuesta = cmd.ExecuteNonQuery();
+
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                    return 0;
+                }
+            }
+            return respuesta;
+        }
+
         public static List<CondicionTributaria> MostrarCondicionTributaria()
         {
             List<CondicionTributaria> condicionTributariaTabla = new List<CondicionTributaria>();
@@ -30,9 +56,9 @@ namespace CapaDatos
                         {
                             var user = new CondicionTributaria
                             {
-                                IdCondicionTributaria = Convert.ToInt32(data.Rows[i]["IdUsuario"]),
-                                Codigo = data.Rows[i]["NombreUsuario"].ToString(),
-                                Descripcion = data.Rows[i]["Contraseña"].ToString(),
+                                IdCondicionTributaria = Convert.ToInt32(data.Rows[i]["IdCondicionTributaria"]),
+                                Codigo = data.Rows[i]["Codigo"].ToString(),
+                                Descripcion = data.Rows[i]["Descripcion"].ToString(),
                                 OEstado = Operaciones.BuscarEstado(data.Rows[i]["Estado"].ToString()),
                                 FechaRegistro = Convert.ToDateTime(data.Rows[i]["FechaRegistro"])
                             };

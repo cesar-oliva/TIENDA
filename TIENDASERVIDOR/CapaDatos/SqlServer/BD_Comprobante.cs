@@ -106,9 +106,9 @@ namespace CapaDatos
                             {
                                 IdComprobante = Convert.ToInt32(data.Rows[i]["IdComprobante"]),
                                 Descripcion = data.Rows[i]["Descripcion"].ToString(),
-                                oPuntoDeVenta = BD_PuntoDeVenta.BuscarPuntoDeVenta(Convert.ToInt32(data.Rows[i]["IdPuntoDeVenta"].ToString())),
+                                OPuntoDeVenta = BD_PuntoDeVenta.BuscarPuntoDeVenta(Convert.ToInt32(data.Rows[i]["IdPuntoDeVenta"].ToString())),
                                 ContadorNumero = Convert.ToInt32(data.Rows[i]["ContadorNumero"].ToString()),
-                                oEstado = Operaciones.BuscarEstado(data.Rows[i]["Estado"].ToString()),
+                                OEstado = Operaciones.BuscarEstado(data.Rows[i]["Estado"].ToString()),
                                 FechaRegistro = Convert.ToDateTime(data.Rows[i]["FechaRegistro"].ToString())
                             };
                             marcaTabla.Add(marc);
