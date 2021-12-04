@@ -18,10 +18,10 @@ namespace CapaPresentacion
             InitializeComponent();
             using ServiceCliente.ServiceClienteClient client = new();
             List<DtoCliente> oListaCliente = client.ListaCliente();
-            mtxtCuit.Text = "00-00000000-0";
+            txtCuit.Text = "00-00000000-0";
             foreach (var item in oListaCliente)
             {
-                if (mtxtCuit.Text.Trim().ToString().Equals(item.Cuit.ToString()))
+                if (txtCuit.Text.Trim().ToString().Equals(item.Cuit.ToString()))
                 {
                     txtRazonSocial.Text = item.RazonSocial.ToString();
                     txtDomicilio.Text = item.DomicilioFiscal.ToString();
@@ -38,7 +38,7 @@ namespace CapaPresentacion
             {
                 foreach (var item in oListaCliente)
                 {
-                    if (mtxtCuit.Text.Trim().ToString().Equals(item.Cuit.ToString()))
+                    if (txtCuit.Text.Trim().ToString().Equals(item.Cuit.ToString()))
                     {
                         txtRazonSocial.Text = item.RazonSocial.ToString();
                         txtDomicilio.Text = item.DomicilioFiscal.ToString();
@@ -49,10 +49,10 @@ namespace CapaPresentacion
                 if (bandera == false)
                 {
                     MessageBox.Show("El Cuit ingresado no corresponde a un Cliente activo");
-                    mtxtCuit.Text = "00-00000000-0";
+                    txtCuit.Text = "00-00000000-0";
                     foreach (var item in oListaCliente)
                     {
-                        if (mtxtCuit.Text.Trim().ToString().Equals(item.Cuit.ToString()))
+                        if (txtCuit.Text.Trim().ToString().Equals(item.Cuit.ToString()))
                         {
                             txtRazonSocial.Text = item.RazonSocial.ToString();
                             txtDomicilio.Text = item.DomicilioFiscal.ToString();
@@ -62,6 +62,16 @@ namespace CapaPresentacion
                     }
                 }
             }
+        }
+        private void txtCuit_Click(object sender, EventArgs e)
+        {
+            txtCuit.Text = "";
+        }
+
+        private void pictureBox4_Click(object sender, EventArgs e)
+        {
+            frmDetalleProducto fdp = new();
+            fdp.ShowDialog();   
         }
     }
 

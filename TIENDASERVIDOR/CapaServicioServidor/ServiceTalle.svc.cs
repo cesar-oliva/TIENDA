@@ -17,9 +17,8 @@ namespace CapaServicioServidor
         {
             var nuevo = new Talle
             {
-                ORubroProducto = oTalle.ORubroProducto,
-                SiglaInternacional = oTalle.SiglaInternacional,
-                Descripcion = oTalle.Descripcion,
+                CodigoTalle = oTalle.CodigoTalle,
+                DescripcionTalle = oTalle.DescripcionTalle,
                 OEstado = oTalle.OEstado
             };
             int i = BD_Talle.RegistrarTalle(nuevo);
@@ -47,9 +46,8 @@ namespace CapaServicioServidor
                 DtoTalle talle = new DtoTalle
                 {
                     IdTalle = item.IdTalle,
-                    ORubroProducto = item.ORubroProducto,
-                    SiglaInternacional = item.SiglaInternacional,
-                    Descripcion = item.Descripcion,
+                    CodigoTalle = item.CodigoTalle,
+                    DescripcionTalle = item.DescripcionTalle,
                     OEstado = item.OEstado,
                 };
                 tal.Add(talle);
@@ -62,9 +60,8 @@ namespace CapaServicioServidor
             var nuevo = new Talle
             {
                 IdTalle = oTalle.IdTalle,
-                ORubroProducto = oTalle.ORubroProducto,
-                SiglaInternacional = oTalle.SiglaInternacional,
-                Descripcion = oTalle.Descripcion,
+                CodigoTalle= oTalle.CodigoTalle,
+                DescripcionTalle = oTalle.DescripcionTalle,
                 OEstado = oTalle.OEstado,
             };
 

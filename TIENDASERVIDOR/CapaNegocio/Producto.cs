@@ -14,11 +14,9 @@ namespace CapaNegocio
         private GeneroProducto oGeneroProducto;
         private RubroProducto oRubroProducto;
         private Marca oMarca;
-        private double impuesto;
+        private Color oColor;
+        private Talle oTalle;
         private double costo;
-        private double margenGanancia;
-        private double netoGravado;
-        private double precioVenta;
         private Estado oEstado;
         private DateTime fechaRegistro;
 
@@ -28,44 +26,37 @@ namespace CapaNegocio
         public GeneroProducto OGeneroProducto { get => oGeneroProducto; set => oGeneroProducto = value; }
         public RubroProducto ORubroProducto { get => oRubroProducto; set => oRubroProducto = value; }
         public Marca OMarca { get => oMarca; set => oMarca = value; }
-        public double Impuesto { get => impuesto; set => impuesto = value; }
+        public Color OColor { get => oColor; set => oColor = value; }
+        public Talle OTalle { get => oTalle; set => oTalle = value; }
         public double Costo { get => costo; set => costo = value; }
-        public double MargenGanancia { get => margenGanancia; set => margenGanancia = value; }
-        public double NetoGravado { get => netoGravado; set => netoGravado = value; }
-        public double PrecioVenta { get => precioVenta; set => precioVenta = value; }
         public Estado OEstado { get => oEstado; set => oEstado = value; }
         public DateTime FechaRegistro { get => fechaRegistro; set => fechaRegistro = value; }
 
-
-        public Producto(string codigo, string descripcion, GeneroProducto oGeneroProducto, RubroProducto oRubroProducto, Marca marca, double impuesto, double costo, double margenGanancia, double netoGravado, double precioVenta, Estado oEstado)
-        {
-            Codigo = codigo;
-            Descripcion = descripcion;
-            this.OGeneroProducto = oGeneroProducto;
-            this.ORubroProducto = oRubroProducto;
-            this.OMarca = marca;
-            Impuesto = impuesto;
-            Costo = costo;
-            MargenGanancia = margenGanancia;
-            NetoGravado = netoGravado;
-            PrecioVenta = precioVenta;
-            this.OEstado = oEstado;
-        }
-
-        public Producto(int idProducto, string codigo, string descripcion, GeneroProducto oGeneroProducto, RubroProducto oRubroProducto, Marca marca, double impuesto, double costo, double margenGanancia, double netoGravado, double precioVenta, Estado oEstado)
+        public Producto(int idProducto, string codigo, string descripcion, GeneroProducto oGeneroProducto, RubroProducto oRubroProducto, Marca oMarca, Color oColor, Talle oTalle, double costo, Estado oEstado)
         {
             IdProducto = idProducto;
             Codigo = codigo;
             Descripcion = descripcion;
-            this.OGeneroProducto = oGeneroProducto;
-            this.ORubroProducto = oRubroProducto;
-            this.OMarca = marca;
-            Impuesto = impuesto;
+            OGeneroProducto = oGeneroProducto;
+            ORubroProducto = oRubroProducto;
+            OMarca = oMarca;
+            OColor = oColor;
+            OTalle = oTalle;
             Costo = costo;
-            MargenGanancia = margenGanancia;
-            NetoGravado = netoGravado;
-            PrecioVenta = precioVenta;
-            this.OEstado = oEstado;
+            OEstado = oEstado;
+        }
+
+        public Producto(string codigo, string descripcion, GeneroProducto oGeneroProducto, RubroProducto oRubroProducto, Marca oMarca, Color oColor, Talle oTalle, double costo, Estado oEstado)
+        {
+            Codigo = codigo;
+            Descripcion = descripcion;
+            OGeneroProducto = oGeneroProducto;
+            ORubroProducto = oRubroProducto;
+            OMarca = oMarca;
+            OColor = oColor;
+            OTalle = oTalle;
+            Costo = costo;
+            OEstado = oEstado;
         }
 
         public Producto()

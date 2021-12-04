@@ -63,11 +63,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="ServiceCliente.svc" />
+    <Content Include="ServiceColor.svc" />
     <Content Include="ServiceDetalleDeVenta.svc" />
     <Content Include="ServiceImpuesto.svc" />
     <Content Include="ServiceMarca.svc" />
     <Content Include="ServiceProducto.svc" />
-    <Content Include="ServiceRubro.svc" />
+    <Content Include="ServiceRubroProducto.svc" />
     <Content Include="ServiceTalle.svc" />
     <Content Include="ServiceUsuario.svc" />
     <Content Include="ServiceVenta.svc" />
@@ -75,15 +76,19 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IServiceCliente.cs" />
+    <Compile Include="IServiceColor.cs" />
     <Compile Include="IServiceDetalleDeVenta.cs" />
     <Compile Include="IServiceImpuesto.cs" />
     <Compile Include="IServiceMarca.cs" />
-    <Compile Include="IServiceRubro.cs" />
+    <Compile Include="IServiceRubroProducto.cs" />
     <Compile Include="IServiceTalle.cs" />
     <Compile Include="IServiceUsuario.cs" />
     <Compile Include="IServiceVenta.cs" />
     <Compile Include="ServiceCliente.svc.cs">
       <DependentUpon>ServiceCliente.svc</DependentUpon>
+    </Compile>
+    <Compile Include="ServiceColor.svc.cs">
+      <DependentUpon>ServiceColor.svc</DependentUpon>
     </Compile>
     <Compile Include="ServiceDetalleDeVenta.svc.cs">
       <DependentUpon>ServiceDetalleDeVenta.svc</DependentUpon>
@@ -99,8 +104,8 @@
     </Compile>
     <Compile Include="IServiceProducto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ServiceRubro.svc.cs">
-      <DependentUpon>ServiceRubro.svc</DependentUpon>
+    <Compile Include="ServiceRubroProducto.svc.cs">
+      <DependentUpon>ServiceRubroProducto.svc</DependentUpon>
     </Compile>
     <Compile Include="ServiceTalle.svc.cs">
       <DependentUpon>ServiceTalle.svc</DependentUpon>

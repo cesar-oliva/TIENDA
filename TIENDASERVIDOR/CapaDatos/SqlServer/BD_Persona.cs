@@ -12,76 +12,6 @@ namespace CapaDatos
 {
     public class BD_Persona
     {
-        //public static int RegistrarPuntoDeVenta(PuntoDeVenta oPuntoDeVenta)
-        //{
-        //    int respuesta;
-        //    using (SqlConnection oConexion = new SqlConnection(Conexion.conexion))
-        //    {
-        //        try
-        //        {
-        //            string SqlQuery = "INSERT INTO PuntoDeVenta(Descripcion,Estado)" +
-        //                              "VALUES(@Descripcion,@Estado)";
-        //            SqlCommand cmd = new SqlCommand(SqlQuery, oConexion);
-        //            cmd.Parameters.AddWithValue("Descripcion", oMarca.Descripcion);
-        //            cmd.Parameters.AddWithValue("Estado", oMarca.oEstado);
-        //            oConexion.Open();
-        //            respuesta = cmd.ExecuteNonQuery();
-
-        //        }
-        //        catch (Exception ex)
-        //        {
-        //            MessageBox.Show(ex.Message);
-        //            return 0;
-        //        }
-
-        //    }
-        //    return respuesta;
-        //}
-        //public static bool ActualizarMarca(Marca oMarca, int IdMarca)
-        //{
-        //    int respuesta;
-        //    using (SqlConnection oConexion = new SqlConnection(Conexion.conexion))
-        //    {
-        //        try
-        //        {
-        //            String SqlQuery = "UPDATE Marca SET Descripcion = @Descripcion, Estado = @Estado  WHERE IdMarca =
-        //            @IdMarca";
-        //            SqlCommand cmd = new SqlCommand(SqlQuery, oConexion);
-        //            cmd.Parameters.AddWithValue("Descripcion", oMarca.Descripcion);
-        //            cmd.Parameters.AddWithValue("Estado", oMarca.oEstado);
-        //            oConexion.Open();
-        //            respuesta = cmd.ExecuteNonQuery();
-        //            return true;
-        //        }
-        //        catch (Exception ex)
-        //        {
-        //            MessageBox.Show(ex.Message);
-        //            return false;
-        //        }
-        //    }
-        //}
-        //public static bool EliminarMarca(int IdMarca)
-        //{
-        //    int respuesta;
-        //    using (SqlConnection oConexion = new SqlConnection(Conexion.conexion))
-        //    {
-        //        try
-        //        {
-        //            String SqlQuery = "DELETE FROM Marca WHERE IdMarca = @IdMarca";
-        //            SqlCommand cmd = new SqlCommand(SqlQuery, oConexion);
-        //            cmd.Parameters.AddWithValue("IdMarca", IdMarca);
-        //            oConexion.Open();
-        //            respuesta = cmd.ExecuteNonQuery();
-        //            return true;
-        //        }
-        //        catch (Exception ex)
-        //        {
-        //            MessageBox.Show(ex.Message);
-        //            return false;
-
-        //        }
-        //    }
-        //}
         public static List<Persona> MostrarPersona()
         {
             List<Persona> personaTabla = new List<Persona>();
@@ -125,37 +55,7 @@ namespace CapaDatos
             }
         }
 
-        //            return personaTabla;
-        //         }
 
-
-        //        catch (Exception ex)
-        //        {
-        //            MessageBox.Show("Error en Capa Datos: " + ex.Message);
-        //            return personaTabla;
-        //}
-        //     }      
-        //}
-        //public static Comprobante BuscarComprobante(Comprobante oComprobante)
-        //{
-        //    List<Comprobante> lista = new List<Comprobante>();
-        //    lista = MostrarComprobante();
-        //    foreach (var item in lista)
-        //    {
-        //        if (oComprobante.IdComprobante.Equals(item.IdComprobante)) return item;
-        //    }
-        //    return null;
-        //}
-        //public static Comprobante BuscarComprobante(string oComprobante)
-        //{
-        //    List<Comprobante> lista = new List<Comprobante>();
-        //    lista = MostrarComprobante();
-        //    foreach (var item in lista)
-        //    {
-        //        if (item.Descripcion.Equals(oComprobante)) return item;
-        //    }
-        //    return null;
-        //}
         public static Persona BuscarPersona(int oPersona)
         {
             List<Persona> lista = MostrarPersona();

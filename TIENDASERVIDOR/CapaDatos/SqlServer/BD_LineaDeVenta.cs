@@ -109,7 +109,6 @@ namespace CapaDatos
                                 OProducto = BD_Producto.BuscarProducto(Convert.ToInt32(data.Rows[i]["IdProducto"].ToString())),
                                 Cantidad = Convert.ToInt32(data.Rows[i]["Cantidad"].ToString()),
                                 PrecioUnitario = Convert.ToDouble(data.Rows[i]["PrecioUnitario"].ToString()),
-                                ImporteSubtotal = Convert.ToDouble(data.Rows[i]["ImporteSubTotal"].ToString()),
                             };
                             marcaTabla.Add(marc);
                         }

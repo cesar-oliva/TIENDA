@@ -65,6 +65,7 @@
     <Compile Include="MailServices\MailServer.cs" />
     <Compile Include="MailServices\MailSupport.cs" />
     <Compile Include="SqlServer\BD_Cliente.cs" />
+    <Compile Include="SqlServer\BD_Color.cs" />
     <Compile Include="SqlServer\BD_Comprobante.cs" />
     <Compile Include="SqlServer\BD_CondicionTributaria.cs" />
     <Compile Include="SqlServer\BD_Empleado.cs" />

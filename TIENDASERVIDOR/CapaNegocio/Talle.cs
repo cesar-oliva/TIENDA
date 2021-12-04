@@ -9,26 +9,23 @@ namespace CapaNegocio
     public class Talle
     {
         private int idTalle;
-        private RubroProducto oRubroProducto;
-        private string siglaInternacional;
-        private string descripcion;
+        private string codigoTalle;
+        private string descripcionTalle;
         private Estado oEstado;
 
         public int IdTalle { get => idTalle; set => idTalle = value; }
-        public RubroProducto ORubroProducto { get => oRubroProducto; set => oRubroProducto = value; }
-        public string SiglaInternacional { get => siglaInternacional; set => siglaInternacional = value; }
-        public string Descripcion { get => descripcion; set => descripcion = value; }
+        public string CodigoTalle { get => codigoTalle; set => codigoTalle = value; }
+        public string DescripcionTalle { get => descripcionTalle; set => descripcionTalle = value; }
         public Estado OEstado { get => oEstado; set => oEstado = value; }
 
         public Talle()
         {
         }
 
-        public Talle(RubroProducto oRubroProducto, string siglaInternacional, string descripcion, Estado oEstado)
+        public Talle(string codigoTalle, string descripcion, Estado oEstado)
         {
-            ORubroProducto = oRubroProducto;
-            SiglaInternacional = siglaInternacional;
-            Descripcion = descripcion;
+            CodigoTalle = codigoTalle;
+            DescripcionTalle = descripcion;
             OEstado = oEstado;
         }
     }

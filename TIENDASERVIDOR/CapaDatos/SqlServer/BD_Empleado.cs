@@ -38,53 +38,7 @@ namespace CapaDatos.SqlServer
             }
             return respuesta;
         }
-        //public static bool ActualizarTienda(Tienda oTienda, int IdTienda)
-        //{
-        //    int respuesta;
-        //    using (SqlConnection oConexion = new SqlConnection(Conexion.conexion))
-        //    {
-        //        try
-        //        {
-        //            String SqlQuery = "UPDATE Tienda SET RazonSocial = @RazonSocial, CuitTienda = @CuitTienda, Direccion = @Direccion,Telefono = @Telefono, Estado = @Estado  WHERE IdTalle = @IdTalle";
-        //            SqlCommand cmd = new SqlCommand(SqlQuery, oConexion);
-        //            cmd.Parameters.AddWithValue("RazonSocial", oTienda.RazonSocial);
-        //            cmd.Parameters.AddWithValue("CuitTienda", oTienda.CuitTienda);
-        //            cmd.Parameters.AddWithValue("Direccion", oTienda.Direccion);
-        //            cmd.Parameters.AddWithValue("Telefono", oTienda.Telefono);
-        //            cmd.Parameters.AddWithValue("Estado", oTienda.OEstado);
-        //            oConexion.Open();
-        //            respuesta = cmd.ExecuteNonQuery();
-        //            return true;
-        //        }
-        //        catch (Exception ex)
-        //        {
-        //            MessageBox.Show(ex.Message);
-        //            return false;
-        //        }
-        //    }
-        //}
-        //public static bool EliminarTienda(int IdTienda)
-        //{
-        //    int respuesta;
-        //    using (SqlConnection oConexion = new SqlConnection(Conexion.conexion))
-        //    {
-        //        try
-        //        {
-        //            String SqlQuery = "DELETE FROM Tienda WHERE IdTienda = @IdTienda";
-        //            SqlCommand cmd = new SqlCommand(SqlQuery, oConexion);
-        //            cmd.Parameters.AddWithValue("IdTienda", IdTienda);
-        //            oConexion.Open();
-        //            respuesta = cmd.ExecuteNonQuery();
-        //            return true;
-        //        }
-        //        catch (Exception ex)
-        //        {
-        //            MessageBox.Show(ex.Message);
-        //            return false;
-
-        //        }
-        //    }
-        //}
+       
         public static List<Empleado> MostrarEmpleado()
         {
             List<Empleado> empleadoTabla = new List<Empleado>();

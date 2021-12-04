@@ -1,4 +1,5 @@
 ﻿using CapaDatos;
+using CapaDatos.SqlServer;
 using CapaNegocio;
 using System.Collections.Generic;
 
@@ -16,13 +17,11 @@ namespace CapaServicioServidor
             GeneroProducto oGeneroProducto = oProducto.OGeneroProducto;
             RubroProducto Rubro = oProducto.ORubroProducto;
             Marca oMarca = oProducto.OMarca;
-            double Impuesto = oProducto.Impuesto;
+            Color oColor = oProducto.OColor;
+            Talle oTalle = oProducto.OTalle;
             double Costo = oProducto.Costo;
-            double MargenGanancia = oProducto.MargenGanancia;
-            double NetoGravado = oProducto.NetoGravado;
-            double PrecioVenta = oProducto.PrecioVenta;
             Estado oEstado = oProducto.OEstado;
-            var nuevo = new Producto(IdProducto,Codigo, Descripcion, oGeneroProducto, Rubro, oMarca, Impuesto, Costo, MargenGanancia, NetoGravado, PrecioVenta, oEstado);
+            var nuevo = new Producto(IdProducto,Codigo, Descripcion, oGeneroProducto, Rubro,oMarca,oColor,oTalle,Costo,oEstado);
             
             if (BD_Producto.ModificarProducto(nuevo))
             {
@@ -47,13 +46,11 @@ namespace CapaServicioServidor
             GeneroProducto oGeneroProducto = oProducto.OGeneroProducto;
             RubroProducto Rubro = oProducto.ORubroProducto;
             Marca oMarca = oProducto.OMarca;
-            double Impuesto = oProducto.Impuesto;
+            Color oColor = oProducto.OColor;
+            Talle oTalle = oProducto.OTalle;
             double Costo = oProducto.Costo;
-            double MargenGanancia = oProducto.MargenGanancia;
-            double NetoGravado = oProducto.NetoGravado;
-            double PrecioVenta = oProducto.PrecioVenta;
             Estado oEstado = oProducto.OEstado;
-            var nuevo = new Producto(Codigo, Descripcion,oGeneroProducto, Rubro,oMarca,Impuesto, Costo,MargenGanancia,NetoGravado,PrecioVenta,oEstado);
+            var nuevo = new Producto(Codigo, Descripcion,oGeneroProducto,Rubro,oMarca,oColor,oTalle,Costo,oEstado);
             if (BD_Producto.RegistrarProducto(nuevo) > 0)
             {
                 return true;
@@ -78,11 +75,9 @@ namespace CapaServicioServidor
                     OGeneroProducto = item.OGeneroProducto,
                     ORubroProducto = item.ORubroProducto,
                     OMarca = item.OMarca,
-                    Impuesto = item.Impuesto,
-                    Costo = item.Costo,
-                    MargenGanancia = item.MargenGanancia,
-                    NetoGravado = item.NetoGravado,
-                    PrecioVenta = item.PrecioVenta,
+                    OColor = item.OColor, 
+                    OTalle = item.OTalle,   
+                    Costo = item.Costo,   
                     OEstado = item.OEstado,
                     FechaRegistro = item.FechaRegistro
                 };
@@ -111,12 +106,22 @@ namespace CapaServicioServidor
 
         public RubroProducto ObtenerRubroProducto(string oRubroProducto)
         {
-            return BD_RubroProducto.BuscarRubroProducto(oRubroProducto);
+            return BD_RubroProducto.BuscarRubroProductoByDescripcion(oRubroProducto);
         }
 
         public Producto BuscarProductoById(int idProducto)
         {
             return BD_Producto.BuscarProducto(idProducto);
+        }
+
+        public Color ObtenerColor(string oColor)
+        {
+            return BD_Color.BuscarColor(oColor);
+        }
+
+        public Talle ObtenerTalle(string oTalle)
+        {
+            return BD_Talle.BuscarTalle(oTalle);
         }
     }
 }

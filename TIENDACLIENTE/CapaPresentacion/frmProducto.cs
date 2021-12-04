@@ -1,5 +1,7 @@
-﻿using ServiceImpuesto;
+﻿using ServiceColor;
+using ServiceImpuesto;
 using ServiceProducto;
+using ServiceTalle;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -32,10 +34,10 @@ namespace CapaPresentacion
         private void CargarDatosProductos()
         {
             using ServiceProducto.ServiceProductoClient client = new();
-            List<DtoProducto> oListaProducto = client.ListaProducto();
-            if (oListaProducto.Count > 0 && oListaProducto != null)
+            var oListaProducto = client.ListaProducto();
+            if (oListaProducto.Count() > 0 && oListaProducto != null)
             {
-                lblTotalRegistros.Text = oListaProducto.Count.ToString();
+                lblTotalRegistros.Text = oListaProducto.Count().ToString();
                 TablaProducto = new DataTable();
                 TablaProducto.Columns.Clear();
                 TablaProducto.Rows.Clear();
@@ -46,29 +48,30 @@ namespace CapaPresentacion
                 TablaProducto.Columns.Add("GeneroProducto", typeof(string));
                 TablaProducto.Columns.Add("RubroProducto", typeof(string));
                 TablaProducto.Columns.Add("Marca", typeof(string));
-                TablaProducto.Columns.Add("Impuesto", typeof(double));
+                TablaProducto.Columns.Add("Color", typeof(string));
+                TablaProducto.Columns.Add("Talle", typeof(string));
                 TablaProducto.Columns.Add("Costo", typeof(double));
-                TablaProducto.Columns.Add("MargenGanancia", typeof(double));
-                TablaProducto.Columns.Add("NetoGravado", typeof(double));
-                TablaProducto.Columns.Add("PrecioVenta", typeof(double));
                 TablaProducto.Columns.Add("Estado", typeof(string));
                 TablaProducto.Columns.Add("FechaRegistro", typeof(DateTime));
                 foreach (DtoProducto row in oListaProducto)
                 {
-                    TablaProducto.Rows.Add(row.IdProducto, row.Codigo, row.Descripcion, row.OGeneroProducto, row.ORubroProducto.Descripcion, row.OMarca.Descripcion, row.Impuesto, row.Costo, row.MargenGanancia, row.NetoGravado, row.PrecioVenta, row.OEstado, row.FechaRegistro);
+                    if (row.OEstado.Equals(ServiceProducto.Estado.Activo))
+                    {
+                        TablaProducto.Rows.Add(row.IdProducto, row.Codigo, row.Descripcion, row.OGeneroProducto.ToString(), row.ORubroProducto.Descripcion, row.OMarca.Descripcion, row.OColor.DescripcionColor, row.OTalle.DescripcionTalle, row.Costo, row.OEstado, row.FechaRegistro);
+                    }    
                 }
                 dataGridProducto.DataSource = TablaProducto;
+                dataGridProducto.AutoResizeColumns();
+                dataGridProducto.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
                 dataGridProducto.Columns["IdProducto"].Visible = false;
                 dataGridProducto.Columns["Codigo"].Visible = true;
                 dataGridProducto.Columns["Descripcion"].Visible = true;
                 dataGridProducto.Columns["GeneroProducto"].Visible = true;
                 dataGridProducto.Columns["RubroProducto"].Visible = true;
                 dataGridProducto.Columns["Marca"].Visible = true;
-                dataGridProducto.Columns["Impuesto"].Visible = true;
-                dataGridProducto.Columns["Costo"].Visible = false;
-                dataGridProducto.Columns["MargenGanancia"].Visible = false;
-                dataGridProducto.Columns["NetoGravado"].Visible = true;
-                dataGridProducto.Columns["PrecioVenta"].Visible = true;
+                dataGridProducto.Columns["Color"].Visible = true;
+                dataGridProducto.Columns["Talle"].Visible = true;
+                dataGridProducto.Columns["Costo"].Visible = true;
                 dataGridProducto.Columns["Estado"].Visible = true;
                 dataGridProducto.Columns["FechaRegistro"].Visible = true;
                 foreach (DataGridViewColumn cl in dataGridProducto.Columns)
@@ -80,6 +83,7 @@ namespace CapaPresentacion
                 }
                 cmbFiltro.SelectedIndex = 0;
             }
+            lblTotalRegistros.Text = Convert.ToString(dataGridProducto.Rows.Count-1);
         }
         private void Txt_Filtro_TextChanged(object sender, EventArgs e)
         {
@@ -98,17 +102,12 @@ namespace CapaPresentacion
         private void Btn_Modificar_Click(object sender, EventArgs e)
         {
             using ServiceProducto.ServiceProductoClient client = new();
-            ServiceImpuestoClient client_imp = new();
-            List<DtoImpuesto> imp = client_imp.ListaImpuesto();
+            ServiceColorClient client_color = new();
+            ServiceTalleClient client_talle = new();
             if (dataGridProducto.SelectedRows.Count > 0)
             {
                 DataGridViewRow currentRow = dataGridProducto.SelectedRows[0];
                 int index = currentRow.Index;
-                double Impuesto = 0.00;
-                foreach (var item in imp)
-                {
-                    if (item.Descripcion.Equals(Convert.ToString(dataGridProducto.Rows[index].Cells["Impuesto"].Value))) Impuesto = item.Alicuota;
-                }
                 DtoProducto oProducto = new()
                 {
                     IdProducto = Convert.ToInt32(dataGridProducto.Rows[index].Cells["IdProducto"].Value),
@@ -116,11 +115,10 @@ namespace CapaPresentacion
                     Descripcion = Convert.ToString(dataGridProducto.Rows[index].Cells["Descripcion"].Value),
                     OGeneroProducto = client.ObtenerGeneroProducto(Convert.ToString(dataGridProducto.Rows[index].Cells["GeneroProducto"].Value)),
                     ORubroProducto = client.ObtenerRubroProducto(Convert.ToString(dataGridProducto.Rows[index].Cells["RubroProducto"].Value)),
-                    Costo = Convert.ToDouble(dataGridProducto.Rows[index].Cells["Costo"].Value),
                     OMarca = client.ObtenerMarca(Convert.ToString(dataGridProducto.Rows[index].Cells["Marca"].Value)),
-                    Impuesto = Impuesto,
-                    NetoGravado = Convert.ToDouble(dataGridProducto.Rows[index].Cells["NetoGravado"].Value),
-                    PrecioVenta = Convert.ToDouble(dataGridProducto.Rows[index].Cells["PrecioVenta"].Value),
+                    OColor = client.ObtenerColor(Convert.ToString(dataGridProducto.Rows[index].Cells["Color"].Value)),
+                    OTalle = client.ObtenerTalle(Convert.ToString(dataGridProducto.Rows[index].Cells["Talle"].Value)),
+                    Costo = Convert.ToDouble(dataGridProducto.Rows[index].Cells["Costo"].Value),
                     OEstado = client.ObtenerEstado(Convert.ToString(dataGridProducto.Rows[index].Cells["Estado"].Value))
                 };
                 MtnProducto form = new(oProducto);

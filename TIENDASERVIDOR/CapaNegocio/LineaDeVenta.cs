@@ -20,7 +20,7 @@ namespace CapaNegocio
         public Producto OProducto { get => oProducto; set => oProducto = value; }
         public int Cantidad { get => cantidad; set => cantidad = value; }
         public double PrecioUnitario { get => precioUnitario; set => precioUnitario = value; }
-        public double ImporteSubtotal { get => importeSubtotal; set => importeSubtotal = value; }
+        //public double ImporteSubtotal { get => importeSubtotal; set => importeSubtotal = value; }
 
         public LineaDeVenta()
         {

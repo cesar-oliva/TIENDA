@@ -124,12 +124,21 @@ namespace CapaDatos
 
             }
         }
-        public static Impuesto BuscarImpuesto(int idImpuesto)
+        public static Impuesto BuscarImpuestoById(int idImpuesto)
         {
             List<Impuesto> lista = MostrarImpuesto();
             foreach (var item in lista)
             {
                 if (idImpuesto.Equals(item.IdImpuesto)) return item;
+            }
+            return null;
+        }
+        public static Impuesto BuscarImpuestoByDescripcion(string oImpuesto)
+        {
+            var lista = MostrarImpuesto();
+            foreach (var item in lista)
+            {
+                if (item.Descripcion.Equals(oImpuesto)) return item;
             }
             return null;
         }

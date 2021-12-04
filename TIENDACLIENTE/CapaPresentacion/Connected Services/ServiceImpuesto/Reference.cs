@@ -13,7 +13,7 @@ namespace ServiceImpuesto
     
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.3-preview3.21351.2")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.3")]
     [System.Runtime.Serialization.DataContractAttribute(Name="DtoImpuesto", Namespace="http://schemas.datacontract.org/2004/07/CapaServicioServidor")]
     public partial class DtoImpuesto : object
     {
@@ -94,7 +94,7 @@ namespace ServiceImpuesto
         }
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.3-preview3.21351.2")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.3")]
     [System.Runtime.Serialization.DataContractAttribute(Name="Estado", Namespace="http://schemas.datacontract.org/2004/07/CapaNegocio")]
     public enum Estado : int
     {
@@ -106,7 +106,7 @@ namespace ServiceImpuesto
         Inactivo = 1,
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.3-preview3.21351.2")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.3")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServiceImpuesto.IServiceImpuesto")]
     public interface IServiceImpuesto
     {
@@ -129,6 +129,12 @@ namespace ServiceImpuesto
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceImpuesto/EliminarImpuesto", ReplyAction="http://tempuri.org/IServiceImpuesto/EliminarImpuestoResponse")]
         System.Threading.Tasks.Task<bool> EliminarImpuestoAsync(int IdImpuesto);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceImpuesto/BuscarImpuestoById", ReplyAction="http://tempuri.org/IServiceImpuesto/BuscarImpuestoByIdResponse")]
+        bool BuscarImpuestoById(int IdImpuesto);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceImpuesto/BuscarImpuestoById", ReplyAction="http://tempuri.org/IServiceImpuesto/BuscarImpuestoByIdResponse")]
+        System.Threading.Tasks.Task<bool> BuscarImpuestoByIdAsync(int IdImpuesto);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceImpuesto/ListaImpuesto", ReplyAction="http://tempuri.org/IServiceImpuesto/ListaImpuestoResponse")]
         System.Collections.Generic.List<ServiceImpuesto.DtoImpuesto> ListaImpuesto();
         
@@ -136,13 +142,13 @@ namespace ServiceImpuesto
         System.Threading.Tasks.Task<System.Collections.Generic.List<ServiceImpuesto.DtoImpuesto>> ListaImpuestoAsync();
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.3-preview3.21351.2")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.3")]
     public interface IServiceImpuestoChannel : ServiceImpuesto.IServiceImpuesto, System.ServiceModel.IClientChannel
     {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.3-preview3.21351.2")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.3")]
     public partial class ServiceImpuestoClient : System.ServiceModel.ClientBase<ServiceImpuesto.IServiceImpuesto>, ServiceImpuesto.IServiceImpuesto
     {
         
@@ -214,6 +220,16 @@ namespace ServiceImpuesto
         public System.Threading.Tasks.Task<bool> EliminarImpuestoAsync(int IdImpuesto)
         {
             return base.Channel.EliminarImpuestoAsync(IdImpuesto);
+        }
+        
+        public bool BuscarImpuestoById(int IdImpuesto)
+        {
+            return base.Channel.BuscarImpuestoById(IdImpuesto);
+        }
+        
+        public System.Threading.Tasks.Task<bool> BuscarImpuestoByIdAsync(int IdImpuesto)
+        {
+            return base.Channel.BuscarImpuestoByIdAsync(IdImpuesto);
         }
         
         public System.Collections.Generic.List<ServiceImpuesto.DtoImpuesto> ListaImpuesto()

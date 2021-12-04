@@ -29,11 +29,9 @@ namespace CapaServicioServidor
         [DataMember]
         public int IdTalle { get; set; }
         [DataMember]
-        public RubroProducto ORubroProducto { get; set; }
+        public string CodigoTalle { get; set; }
         [DataMember]
-        public string SiglaInternacional { get; set; }
-        [DataMember]
-        public string Descripcion { get; set; }
+        public string DescripcionTalle { get; set; }
         [DataMember]
         public Estado OEstado { get; set; }
     }

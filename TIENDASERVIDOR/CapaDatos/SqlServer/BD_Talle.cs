@@ -20,12 +20,12 @@ namespace CapaDatos.SqlServer
             {
                 try
                 {
-                    string SqlQuery = "INSERT INTO Talle(IdRubro,SiglaInternacional,Descripcion,Estado)" +
-                                      "VALUES(@IdRubro,@SiglaInternacional,@Descripcion,@Estado)";
+                    string SqlQuery = "INSERT INTO Talle(IdTalle,CodigoTalle,DescripcionTalle,Estado)" +
+                                      "VALUES(@IdTalle,@CodigoTalle,@DescripcionTalle,@Estado)";
                     SqlCommand cmd = new SqlCommand(SqlQuery, oConexion);
-                    cmd.Parameters.AddWithValue("IdRubro", oTalle.ORubroProducto.IdRubroProducto);
-                    cmd.Parameters.AddWithValue("SglaInternacional", oTalle.SiglaInternacional);
-                    cmd.Parameters.AddWithValue("Descripcion", oTalle.Descripcion);
+                    cmd.Parameters.AddWithValue("IdTalle", oTalle.IdTalle);
+                    cmd.Parameters.AddWithValue("CodigoTalle", oTalle.CodigoTalle);
+                    cmd.Parameters.AddWithValue("DescripcionTalle", oTalle.DescripcionTalle);
                     cmd.Parameters.AddWithValue("Estado", oTalle.OEstado);
                     oConexion.Open();
                     respuesta = cmd.ExecuteNonQuery();
@@ -47,11 +47,10 @@ namespace CapaDatos.SqlServer
             {
                 try
                 {
-                    String SqlQuery = "UPDATE Talle SET IdRubro = @IdRubro, Descripcion = @Descripcion, Estado = @Estado  WHERE IdTalle = @IdTalle";
+                    String SqlQuery = "UPDATE Talle SET CodigoTalle = @CodigoTalle, DescripcionTalle = @DescripcionTalle, Estado = @Estado  WHERE IdTalle = @IdTalle";
                     SqlCommand cmd = new SqlCommand(SqlQuery, oConexion);
-                    cmd.Parameters.AddWithValue("IdRubro", oTalle.ORubroProducto.IdRubroProducto);
-                    cmd.Parameters.AddWithValue("SglaInternacional", oTalle.SiglaInternacional);
-                    cmd.Parameters.AddWithValue("Descripcion", oTalle.Descripcion);
+                    cmd.Parameters.AddWithValue("CodigoTalle", oTalle.CodigoTalle);
+                    cmd.Parameters.AddWithValue("DescripcionTalle", oTalle.DescripcionTalle);                  
                     cmd.Parameters.AddWithValue("Estado", oTalle.OEstado);
                     cmd.Parameters.AddWithValue("IdTalle", IdTalle);
                     oConexion.Open();
@@ -104,9 +103,9 @@ namespace CapaDatos.SqlServer
                         {
                             var talle = new Talle
                             {
-                                IdTalle = Convert.ToInt32(data.Rows[i]["IdMarca"]),
-                                ORubroProducto = BD_RubroProducto.BuscarRubroProducto(Convert.ToInt32(data.Rows[i]["IdRubroProducto"])),
-                                Descripcion = data.Rows[i]["Descripcion"].ToString(),
+                                IdTalle = Convert.ToInt32(data.Rows[i]["IdTalle"]),
+                                CodigoTalle = data.Rows[i]["CodigoTalle"].ToString(),
+                                DescripcionTalle = data.Rows[i]["DescripcionTalle"].ToString(),
                                 OEstado = Operaciones.BuscarEstado(data.Rows[i]["Estado"].ToString()),
                             };
                             talleTabla.Add(talle);
@@ -137,7 +136,7 @@ namespace CapaDatos.SqlServer
             List<Talle> lista = MostrarTalle();
             foreach (var item in lista)
             {
-                if (item.Descripcion.Equals(Descripcion)) return item;
+                if (item.DescripcionTalle.Equals(Descripcion)) return item;
             }
             return null;
         }

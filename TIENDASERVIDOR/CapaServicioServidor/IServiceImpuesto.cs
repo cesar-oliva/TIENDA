@@ -19,6 +19,8 @@ namespace CapaServicioServidor
         [OperationContract]
         bool EliminarImpuesto(int IdImpuesto);
         [OperationContract]
+        bool BuscarImpuestoById(int IdImpuesto);
+        [OperationContract]
         List<DtoImpuesto> ListaImpuesto();
     }
 

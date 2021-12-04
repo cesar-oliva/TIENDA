@@ -13,7 +13,7 @@ namespace ServiceProducto
     
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.3-preview3.21351.2")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.3")]
     [System.Runtime.Serialization.DataContractAttribute(Name="DtoProducto", Namespace="http://schemas.datacontract.org/2004/07/CapaServicioServidor")]
     public partial class DtoProducto : object
     {
@@ -28,11 +28,7 @@ namespace ServiceProducto
         
         private int IdProductoField;
         
-        private double ImpuestoField;
-        
-        private double MargenGananciaField;
-        
-        private double NetoGravadoField;
+        private ServiceProducto.Color OColorField;
         
         private ServiceProducto.Estado OEstadoField;
         
@@ -42,7 +38,7 @@ namespace ServiceProducto
         
         private ServiceProducto.RubroProducto ORubroProductoField;
         
-        private double PrecioVentaField;
+        private ServiceProducto.Talle OTalleField;
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         public string Codigo
@@ -110,41 +106,15 @@ namespace ServiceProducto
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public double Impuesto
+        public ServiceProducto.Color OColor
         {
             get
             {
-                return this.ImpuestoField;
+                return this.OColorField;
             }
             set
             {
-                this.ImpuestoField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public double MargenGanancia
-        {
-            get
-            {
-                return this.MargenGananciaField;
-            }
-            set
-            {
-                this.MargenGananciaField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public double NetoGravado
-        {
-            get
-            {
-                return this.NetoGravadoField;
-            }
-            set
-            {
-                this.NetoGravadoField = value;
+                this.OColorField = value;
             }
         }
         
@@ -201,21 +171,88 @@ namespace ServiceProducto
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public double PrecioVenta
+        public ServiceProducto.Talle OTalle
         {
             get
             {
-                return this.PrecioVentaField;
+                return this.OTalleField;
             }
             set
             {
-                this.PrecioVentaField = value;
+                this.OTalleField = value;
             }
         }
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.3-preview3.21351.2")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.3")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Color", Namespace="http://schemas.datacontract.org/2004/07/CapaNegocio")]
+    public partial class Color : object
+    {
+        
+        private string CodigoColorField;
+        
+        private string DescripcionColorField;
+        
+        private int IdColorField;
+        
+        private ServiceProducto.Estado OEstadoField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string CodigoColor
+        {
+            get
+            {
+                return this.CodigoColorField;
+            }
+            set
+            {
+                this.CodigoColorField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string DescripcionColor
+        {
+            get
+            {
+                return this.DescripcionColorField;
+            }
+            set
+            {
+                this.DescripcionColorField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int IdColor
+        {
+            get
+            {
+                return this.IdColorField;
+            }
+            set
+            {
+                this.IdColorField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public ServiceProducto.Estado OEstado
+        {
+            get
+            {
+                return this.OEstadoField;
+            }
+            set
+            {
+                this.OEstadoField = value;
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.3")]
     [System.Runtime.Serialization.DataContractAttribute(Name="Marca", Namespace="http://schemas.datacontract.org/2004/07/CapaNegocio")]
     public partial class Marca : object
     {
@@ -267,7 +304,7 @@ namespace ServiceProducto
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.3-preview3.21351.2")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.3")]
     [System.Runtime.Serialization.DataContractAttribute(Name="RubroProducto", Namespace="http://schemas.datacontract.org/2004/07/CapaNegocio")]
     public partial class RubroProducto : object
     {
@@ -333,7 +370,74 @@ namespace ServiceProducto
         }
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.3-preview3.21351.2")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.3")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Talle", Namespace="http://schemas.datacontract.org/2004/07/CapaNegocio")]
+    public partial class Talle : object
+    {
+        
+        private string CodigoTalleField;
+        
+        private string DescripcionTalleField;
+        
+        private int IdTalleField;
+        
+        private ServiceProducto.Estado OEstadoField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string CodigoTalle
+        {
+            get
+            {
+                return this.CodigoTalleField;
+            }
+            set
+            {
+                this.CodigoTalleField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string DescripcionTalle
+        {
+            get
+            {
+                return this.DescripcionTalleField;
+            }
+            set
+            {
+                this.DescripcionTalleField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int IdTalle
+        {
+            get
+            {
+                return this.IdTalleField;
+            }
+            set
+            {
+                this.IdTalleField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public ServiceProducto.Estado OEstado
+        {
+            get
+            {
+                return this.OEstadoField;
+            }
+            set
+            {
+                this.OEstadoField = value;
+            }
+        }
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.3")]
     [System.Runtime.Serialization.DataContractAttribute(Name="Estado", Namespace="http://schemas.datacontract.org/2004/07/CapaNegocio")]
     public enum Estado : int
     {
@@ -345,7 +449,7 @@ namespace ServiceProducto
         Inactivo = 1,
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.3-preview3.21351.2")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.3")]
     [System.Runtime.Serialization.DataContractAttribute(Name="GeneroProducto", Namespace="http://schemas.datacontract.org/2004/07/CapaNegocio")]
     public enum GeneroProducto : int
     {
@@ -360,7 +464,179 @@ namespace ServiceProducto
         Femenino = 2,
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.3-preview3.21351.2")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.3")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Producto", Namespace="http://schemas.datacontract.org/2004/07/CapaNegocio")]
+    public partial class Producto : object
+    {
+        
+        private string CodigoField;
+        
+        private double CostoField;
+        
+        private string DescripcionField;
+        
+        private System.DateTime FechaRegistroField;
+        
+        private int IdProductoField;
+        
+        private ServiceProducto.Color OColorField;
+        
+        private ServiceProducto.Estado OEstadoField;
+        
+        private ServiceProducto.GeneroProducto OGeneroProductoField;
+        
+        private ServiceProducto.Marca OMarcaField;
+        
+        private ServiceProducto.RubroProducto ORubroProductoField;
+        
+        private ServiceProducto.Talle OTalleField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Codigo
+        {
+            get
+            {
+                return this.CodigoField;
+            }
+            set
+            {
+                this.CodigoField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public double Costo
+        {
+            get
+            {
+                return this.CostoField;
+            }
+            set
+            {
+                this.CostoField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Descripcion
+        {
+            get
+            {
+                return this.DescripcionField;
+            }
+            set
+            {
+                this.DescripcionField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime FechaRegistro
+        {
+            get
+            {
+                return this.FechaRegistroField;
+            }
+            set
+            {
+                this.FechaRegistroField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int IdProducto
+        {
+            get
+            {
+                return this.IdProductoField;
+            }
+            set
+            {
+                this.IdProductoField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public ServiceProducto.Color OColor
+        {
+            get
+            {
+                return this.OColorField;
+            }
+            set
+            {
+                this.OColorField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public ServiceProducto.Estado OEstado
+        {
+            get
+            {
+                return this.OEstadoField;
+            }
+            set
+            {
+                this.OEstadoField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public ServiceProducto.GeneroProducto OGeneroProducto
+        {
+            get
+            {
+                return this.OGeneroProductoField;
+            }
+            set
+            {
+                this.OGeneroProductoField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public ServiceProducto.Marca OMarca
+        {
+            get
+            {
+                return this.OMarcaField;
+            }
+            set
+            {
+                this.OMarcaField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public ServiceProducto.RubroProducto ORubroProducto
+        {
+            get
+            {
+                return this.ORubroProductoField;
+            }
+            set
+            {
+                this.ORubroProductoField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public ServiceProducto.Talle OTalle
+        {
+            get
+            {
+                return this.OTalleField;
+            }
+            set
+            {
+                this.OTalleField = value;
+            }
+        }
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.3")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServiceProducto.IServiceProducto")]
     public interface IServiceProducto
     {
@@ -384,10 +660,10 @@ namespace ServiceProducto
         System.Threading.Tasks.Task<bool> EliminarProductoAsync(int IdProducto);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceProducto/ListaProducto", ReplyAction="http://tempuri.org/IServiceProducto/ListaProductoResponse")]
-        System.Collections.Generic.List<ServiceProducto.DtoProducto> ListaProducto();
+        ServiceProducto.DtoProducto[] ListaProducto();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceProducto/ListaProducto", ReplyAction="http://tempuri.org/IServiceProducto/ListaProductoResponse")]
-        System.Threading.Tasks.Task<System.Collections.Generic.List<ServiceProducto.DtoProducto>> ListaProductoAsync();
+        System.Threading.Tasks.Task<ServiceProducto.DtoProducto[]> ListaProductoAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceProducto/ObtenerGeneroProducto", ReplyAction="http://tempuri.org/IServiceProducto/ObtenerGeneroProductoResponse")]
         ServiceProducto.GeneroProducto ObtenerGeneroProducto(string oGeneroProducto);
@@ -412,15 +688,33 @@ namespace ServiceProducto
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceProducto/ObtenerMarca", ReplyAction="http://tempuri.org/IServiceProducto/ObtenerMarcaResponse")]
         System.Threading.Tasks.Task<ServiceProducto.Marca> ObtenerMarcaAsync(string oMarca);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceProducto/ObtenerColor", ReplyAction="http://tempuri.org/IServiceProducto/ObtenerColorResponse")]
+        ServiceProducto.Color ObtenerColor(string oColor);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceProducto/ObtenerColor", ReplyAction="http://tempuri.org/IServiceProducto/ObtenerColorResponse")]
+        System.Threading.Tasks.Task<ServiceProducto.Color> ObtenerColorAsync(string oColor);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceProducto/ObtenerTalle", ReplyAction="http://tempuri.org/IServiceProducto/ObtenerTalleResponse")]
+        ServiceProducto.Talle ObtenerTalle(string oTalle);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceProducto/ObtenerTalle", ReplyAction="http://tempuri.org/IServiceProducto/ObtenerTalleResponse")]
+        System.Threading.Tasks.Task<ServiceProducto.Talle> ObtenerTalleAsync(string oTalle);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceProducto/BuscarProductoById", ReplyAction="http://tempuri.org/IServiceProducto/BuscarProductoByIdResponse")]
+        ServiceProducto.Producto BuscarProductoById(int idProducto);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceProducto/BuscarProductoById", ReplyAction="http://tempuri.org/IServiceProducto/BuscarProductoByIdResponse")]
+        System.Threading.Tasks.Task<ServiceProducto.Producto> BuscarProductoByIdAsync(int idProducto);
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.3-preview3.21351.2")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.3")]
     public interface IServiceProductoChannel : ServiceProducto.IServiceProducto, System.ServiceModel.IClientChannel
     {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.3-preview3.21351.2")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.3")]
     public partial class ServiceProductoClient : System.ServiceModel.ClientBase<ServiceProducto.IServiceProducto>, ServiceProducto.IServiceProducto
     {
         
@@ -494,12 +788,12 @@ namespace ServiceProducto
             return base.Channel.EliminarProductoAsync(IdProducto);
         }
         
-        public System.Collections.Generic.List<ServiceProducto.DtoProducto> ListaProducto()
+        public ServiceProducto.DtoProducto[] ListaProducto()
         {
             return base.Channel.ListaProducto();
         }
         
-        public System.Threading.Tasks.Task<System.Collections.Generic.List<ServiceProducto.DtoProducto>> ListaProductoAsync()
+        public System.Threading.Tasks.Task<ServiceProducto.DtoProducto[]> ListaProductoAsync()
         {
             return base.Channel.ListaProductoAsync();
         }
@@ -542,6 +836,36 @@ namespace ServiceProducto
         public System.Threading.Tasks.Task<ServiceProducto.Marca> ObtenerMarcaAsync(string oMarca)
         {
             return base.Channel.ObtenerMarcaAsync(oMarca);
+        }
+        
+        public ServiceProducto.Color ObtenerColor(string oColor)
+        {
+            return base.Channel.ObtenerColor(oColor);
+        }
+        
+        public System.Threading.Tasks.Task<ServiceProducto.Color> ObtenerColorAsync(string oColor)
+        {
+            return base.Channel.ObtenerColorAsync(oColor);
+        }
+        
+        public ServiceProducto.Talle ObtenerTalle(string oTalle)
+        {
+            return base.Channel.ObtenerTalle(oTalle);
+        }
+        
+        public System.Threading.Tasks.Task<ServiceProducto.Talle> ObtenerTalleAsync(string oTalle)
+        {
+            return base.Channel.ObtenerTalleAsync(oTalle);
+        }
+        
+        public ServiceProducto.Producto BuscarProductoById(int idProducto)
+        {
+            return base.Channel.BuscarProductoById(idProducto);
+        }
+        
+        public System.Threading.Tasks.Task<ServiceProducto.Producto> BuscarProductoByIdAsync(int idProducto)
+        {
+            return base.Channel.BuscarProductoByIdAsync(idProducto);
         }
         
         public virtual System.Threading.Tasks.Task OpenAsync()

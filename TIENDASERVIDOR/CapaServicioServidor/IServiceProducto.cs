@@ -30,6 +30,10 @@ namespace CapaServicioServidor
         [OperationContract]
         Marca ObtenerMarca(string oMarca);
         [OperationContract]
+        Color ObtenerColor(string oColor);
+        [OperationContract]
+        Talle ObtenerTalle(string oTalle);
+        [OperationContract]
         Producto BuscarProductoById(int idProducto);
     }
 
@@ -51,15 +55,11 @@ namespace CapaServicioServidor
         [DataMember]
         public Marca OMarca { get; set; }
         [DataMember]
-        public double Impuesto { get; set; }
+        public Color OColor { get; set; }
+        [DataMember]
+        public Talle OTalle { get; set; }
         [DataMember]
         public double Costo { get; set; }
-        [DataMember]
-        public double MargenGanancia { get; set; }
-        [DataMember]
-        public double NetoGravado { get; set; }
-        [DataMember]
-        public double PrecioVenta { get; set; }
         [DataMember]
         public Estado OEstado { get; set; } //activo o inactivo
         [DataMember]

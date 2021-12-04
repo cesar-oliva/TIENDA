@@ -1,4 +1,5 @@
-﻿using CapaNegocio;
+﻿using CapaDatos.SqlServer;
+using CapaNegocio;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -19,19 +20,17 @@ namespace CapaDatos
             {
                 try
                 {
-                    string SqlQuery = "INSERT INTO Producto(Codigo,Descripcion,GeneroProducto,IdRubroProducto,IdMarca,IdImpuesto,Costo,MargenGanancia,NetoGravado,PrecioVenta,Estado)" +
-                                     "VALUES(@codigo,@Descripcion,@GeneroProducto,@IdRubroProducto,@IdMarca,@IdImpuesto,@Costo,@MargenGanancia,@NetoGravado,@PrecioVenta,@Estado)";
+                    string SqlQuery = "INSERT INTO Producto(Codigo,Descripcion,GeneroProducto,IdRubroProducto,IdMarca,IdColor,IdTalle,Costo,Estado)" +
+                                     "VALUES(@codigo,@Descripcion,@GeneroProducto,@IdRubroProducto,@IdMarca,@IdColor,@IdTalle,@Costo,@Estado)";
                     SqlCommand cmd = new SqlCommand(SqlQuery, oConexion);
                     cmd.Parameters.AddWithValue("Codigo", oProducto.Codigo);
                     cmd.Parameters.AddWithValue("Descripcion", oProducto.Descripcion);
-                    cmd.Parameters.AddWithValue("GeneroProducto", Operaciones.BuscarGenero(oProducto.OGeneroProducto));
+                    cmd.Parameters.AddWithValue("GeneroProducto", oProducto.OGeneroProducto.ToString());
                     cmd.Parameters.AddWithValue("IdRubroProducto", BD_RubroProducto.BuscarRubroProducto(oProducto.ORubroProducto).IdRubroProducto);
                     cmd.Parameters.AddWithValue("IdMarca", BD_Marca.BuscarMarca(oProducto.OMarca).IdMarca);
-                    cmd.Parameters.AddWithValue("IdImpuesto", oProducto.Impuesto);
+                    cmd.Parameters.AddWithValue("IdColor", BD_Color.BuscarColor(oProducto.OColor).IdColor);
+                    cmd.Parameters.AddWithValue("IdTalle", BD_Talle.BuscarTalle(oProducto.OTalle).IdTalle);
                     cmd.Parameters.AddWithValue("Costo", oProducto.Costo);
-                    cmd.Parameters.AddWithValue("MargenGanancia", oProducto.MargenGanancia);
-                    cmd.Parameters.AddWithValue("NetoGravado", oProducto.NetoGravado);
-                    cmd.Parameters.AddWithValue("PrecioVenta", oProducto.PrecioVenta);
                     cmd.Parameters.AddWithValue("Estado", Operaciones.BuscarEstado(oProducto.OEstado));
                     oConexion.Open();
                     respuesta = cmd.ExecuteNonQuery();
@@ -55,18 +54,16 @@ namespace CapaDatos
                 try
                 {
                     string SqlQuery = "UPDATE PRODUCTO SET Codigo=@Codigo,Descripcion=@Descripcion,GeneroProducto=@GeneroProducto,IdRubroProducto=@IdRubroProducto,IdMarca=@IdMarca," +
-                                      "IdImpuesto=@IdImpuesto,Costo=@Costo,MargenGanancia=@MargenGanancia,NetoGravado=@NetoGravado,PrecioVenta=@PrecioVenta,Estado=@Estado WHERE IdProducto=@IdProducto";
+                                      "IdColor=@IdColor,IdTalle=@IdTalle,Costo=@Costo,Estado=@Estado WHERE IdProducto=@IdProducto";
                     SqlCommand cmd = new SqlCommand(SqlQuery, oConexion);
                     cmd.Parameters.AddWithValue("@Codigo", oProducto.Codigo);
                     cmd.Parameters.AddWithValue("@Descripcion", oProducto.Descripcion);
-                    cmd.Parameters.AddWithValue("@GeneroProducto", Operaciones.BuscarGenero(oProducto.OGeneroProducto));
+                    cmd.Parameters.AddWithValue("@GeneroProducto", oProducto.OGeneroProducto.ToString());
                     cmd.Parameters.AddWithValue("@IdRubroProducto", BD_RubroProducto.BuscarRubroProducto(oProducto.ORubroProducto).IdRubroProducto);
                     cmd.Parameters.AddWithValue("@IdMarca", BD_Marca.BuscarMarca(oProducto.OMarca).IdMarca);
-                    cmd.Parameters.AddWithValue("@IDImpuesto", oProducto.Impuesto);
+                    cmd.Parameters.AddWithValue("@IdColor", BD_Color.BuscarColor(oProducto.OColor).IdColor);
+                    cmd.Parameters.AddWithValue("@IdTalle", BD_Talle.BuscarTalle(oProducto.OTalle).IdTalle);
                     cmd.Parameters.AddWithValue("@Costo", oProducto.Costo);
-                    cmd.Parameters.AddWithValue("@MargenGanancia", oProducto.MargenGanancia);
-                    cmd.Parameters.AddWithValue("@NetoGravado", oProducto.NetoGravado);
-                    cmd.Parameters.AddWithValue("@PrecioVenta", oProducto.PrecioVenta);
                     cmd.Parameters.AddWithValue("@Estado", Operaciones.BuscarEstado(oProducto.OEstado));
                     cmd.Parameters.AddWithValue("@IdProducto", oProducto.IdProducto);
                     oConexion.Open();
@@ -98,9 +95,10 @@ namespace CapaDatos
             {
                 try
                 {
-                    String SqlQuery = "DELETE FROM Producto WHERE IdProducto = @IdProducto";
+                    String SqlQuery = "UPDATE Producto SET Estado = @Estado WHERE IdProducto = @IdProducto";
                     SqlCommand cmd = new SqlCommand(SqlQuery, oConexion);
                     cmd.Parameters.AddWithValue("IdProducto", IdProducto);
+                    cmd.Parameters.AddWithValue("Estado", Estado.Inactivo);
                     oConexion.Open();
                     respuesta = cmd.ExecuteNonQuery();
                     return true;
@@ -135,13 +133,11 @@ namespace CapaDatos
                                 Codigo = data.Rows[i]["Codigo"].ToString(),
                                 Descripcion = data.Rows[i]["Descripcion"].ToString(),
                                 OGeneroProducto = Operaciones.BuscarGenero(data.Rows[i]["GeneroProducto"].ToString()),
-                                ORubroProducto = BD_RubroProducto.BuscarRubroProducto(Convert.ToInt32(data.Rows[i]["IdRubroProducto"].ToString())),
+                                ORubroProducto = BD_RubroProducto.BuscarRubroProductoById(Convert.ToInt32(data.Rows[i]["IdRubroProducto"].ToString())),
                                 OMarca = BD_Marca.BuscarMarca(Convert.ToInt32(data.Rows[i]["IdMarca"].ToString())),
-                                Impuesto = Convert.ToDouble(data.Rows[i]["IdImpuesto"].ToString()),
+                                OColor = BD_Color.BuscarColor(Convert.ToInt32(data.Rows[i]["IdColor"].ToString())),
+                                OTalle = BD_Talle.BuscarTalle(Convert.ToInt32(data.Rows[i]["IdTalle"].ToString())),
                                 Costo = Convert.ToDouble(data.Rows[i]["Costo"].ToString()),
-                                MargenGanancia = Convert.ToDouble(data.Rows[i]["MargenGanancia"].ToString()),
-                                NetoGravado = Convert.ToDouble(data.Rows[i]["NetoGravado"].ToString()),
-                                PrecioVenta = Convert.ToDouble(data.Rows[i]["PrecioVenta"].ToString()),
                                 OEstado = Operaciones.BuscarEstado(data.Rows[i]["Estado"].ToString()),
                                 FechaRegistro = Convert.ToDateTime(data.Rows[i]["FechaRegistro"])
                             };

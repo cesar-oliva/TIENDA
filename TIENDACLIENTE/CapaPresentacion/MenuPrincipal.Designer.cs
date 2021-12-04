@@ -30,6 +30,7 @@ namespace CapaPresentacion
         private void InitializeComponent()
         {
             this.pnlMenuVertical = new System.Windows.Forms.Panel();
+            this.button1 = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.Btn_Venta = new System.Windows.Forms.Button();
             this.Btn_Producto = new System.Windows.Forms.Button();
@@ -47,6 +48,7 @@ namespace CapaPresentacion
             // pnlMenuVertical
             // 
             this.pnlMenuVertical.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(42)))), ((int)(((byte)(52)))), ((int)(((byte)(93)))));
+            this.pnlMenuVertical.Controls.Add(this.button1);
             this.pnlMenuVertical.Controls.Add(this.pictureBox1);
             this.pnlMenuVertical.Controls.Add(this.Btn_Venta);
             this.pnlMenuVertical.Controls.Add(this.Btn_Producto);
@@ -55,6 +57,20 @@ namespace CapaPresentacion
             this.pnlMenuVertical.Name = "pnlMenuVertical";
             this.pnlMenuVertical.Size = new System.Drawing.Size(220, 615);
             this.pnlMenuVertical.TabIndex = 1;
+            // 
+            // button1
+            // 
+            this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(188)))), ((int)(((byte)(101)))));
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.button1.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.button1.Location = new System.Drawing.Point(47, 187);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(112, 57);
+            this.button1.TabIndex = 2;
+            this.button1.Text = "Rubro";
+            this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // pictureBox1
             // 
@@ -69,9 +85,10 @@ namespace CapaPresentacion
             // Btn_Venta
             // 
             this.Btn_Venta.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(188)))), ((int)(((byte)(101)))));
+            this.Btn_Venta.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Btn_Venta.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.Btn_Venta.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.Btn_Venta.Location = new System.Drawing.Point(47, 219);
+            this.Btn_Venta.Location = new System.Drawing.Point(47, 322);
             this.Btn_Venta.Name = "Btn_Venta";
             this.Btn_Venta.Size = new System.Drawing.Size(112, 57);
             this.Btn_Venta.TabIndex = 1;
@@ -82,9 +99,10 @@ namespace CapaPresentacion
             // Btn_Producto
             // 
             this.Btn_Producto.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(188)))), ((int)(((byte)(101)))));
+            this.Btn_Producto.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Btn_Producto.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.Btn_Producto.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.Btn_Producto.Location = new System.Drawing.Point(47, 136);
+            this.Btn_Producto.Location = new System.Drawing.Point(47, 105);
             this.Btn_Producto.Name = "Btn_Producto";
             this.Btn_Producto.Size = new System.Drawing.Size(112, 57);
             this.Btn_Producto.TabIndex = 0;
@@ -171,6 +189,7 @@ namespace CapaPresentacion
         private System.Windows.Forms.PictureBox Btn_Cerrar;
         private System.Windows.Forms.PictureBox Btn_Minimizar;
         private System.Windows.Forms.Panel pnlBarraTitulo;
+        private System.Windows.Forms.Button button1;
     }
 }
 

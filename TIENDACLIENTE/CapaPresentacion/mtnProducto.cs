@@ -10,8 +10,10 @@ using System.Windows.Forms;
 using CapaPresentacion.Reutilizable;
 using ServiceProducto;
 using ServiceImpuesto;
-using ServiceRubro;
+using ServiceRubroProducto;
 using ServiceMarca;
+using ServiceColor;
+
 namespace CapaPresentacion
 {
     public partial class MtnProducto : Form
@@ -22,7 +24,7 @@ namespace CapaPresentacion
             InitializeComponent();
             CargarCombosSeleccion();
             ServiceProductoClient client_prod = new();
-            List<DtoProducto> producto = client_prod.ListaProducto();
+            var producto = client_prod.ListaProducto();
             var IdProducto = 0;
             foreach (var item in producto)
             {
@@ -30,29 +32,19 @@ namespace CapaPresentacion
             }
             if (pProducto != null)
             {
-                ServiceImpuestoClient client_imp = new();
-                List<DtoImpuesto> imp = client_imp.ListaImpuesto();
-                var Impuesto =0;
-                foreach (var item in imp)
-                {
-                    if (item.Alicuota.Equals(pProducto.Impuesto)) Impuesto = item.IdImpuesto;
-                }
                 modoEditar = true;
                 cmbEstado.Enabled = true;
+                txtId.Text = pProducto.IdProducto.ToString();
                 txtCodigo.Text = pProducto.Codigo;
                 txtDescripcion.Text = pProducto.Descripcion;
-                txtCosto.Text = pProducto.Costo.ToString();
                 cmbGenero.Text = pProducto.OGeneroProducto.ToString();
-                txtUtilidad.Text = pProducto.MargenGanancia.ToString();
-                txtPrecioVenta.Text = pProducto.PrecioVenta.ToString();
-                txtNetoGravado.Text = pProducto.NetoGravado.ToString();
-                txtUtilidad.Text = pProducto.MargenGanancia.ToString();
                 cmbRubro.Text = pProducto.ORubroProducto.Descripcion.ToString();
-                cmbEstado.Text = pProducto.OEstado.ToString();
-                cmbImpuesto.SelectedIndex = Impuesto;
                 cmbMarca.Text = pProducto.OMarca.Descripcion.ToString();
+                cmbColor.Text = pProducto.OColor.DescripcionColor.ToString();
+                cmbTalle.Text = pProducto.OTalle.DescripcionTalle.ToString();
+                txtCosto.Text = pProducto.Costo.ToString();
+                cmbEstado.Text = pProducto.OEstado.ToString();
             }
-
         }
         private void CargarCombosSeleccion()
         {
@@ -64,29 +56,52 @@ namespace CapaPresentacion
             cmbEstado.DisplayMember = "Text";
             cmbEstado.ValueMember = "Value";
             cmbEstado.SelectedIndex = 0;
-            using (ServiceRubro.ServiceRubroClient client = new ())
+
+            using (ServiceRubroProducto.ServiceRubroProductoClient client = new ())
             {
-                List<DtoRubro> oListaRubro = client.ListaRubro();
+                var oListaRubro = client.ListaRubroProducto();
                 foreach (var item in oListaRubro)
                 {
-                    if (item.OEstado.Equals(ServiceRubro.Estado.Activo)) cmbRubro.Items.Add(item.Descripcion);
+                    if (item.OEstado.Equals(ServiceRubroProducto.Estado.Activo)) cmbRubro.Items.Add(item.DescripcionRubroProducto);
                 }
                 cmbRubro.DisplayMember = "Text";
                 cmbRubro.ValueMember = "Value";
                 client.Close();
             }
-            using (ServiceImpuesto.ServiceImpuestoClient client = new())
+            using (ServiceColor.ServiceColorClient client = new())
             {
-                List<DtoImpuesto> oListaImpuesto = client.ListaImpuesto();
-                foreach (var item in oListaImpuesto)
+                var oListaColor = client.ListaColor();
+                foreach (var item in oListaColor)
                 {
-                    if (item.OEstado.Equals("Activo"))
+                    if (item.OEstado.Equals(ServiceColor.Estado.Activo)) cmbColor.Items.Add(item.DescripcionColor);
+                }
+                cmbColor.DisplayMember = "Text";
+                cmbColor.ValueMember = "Value";
+                client.Close();
+            }
+            using (ServiceTalle.ServiceTalleClient client = new())
+            {
+                var oListaTalle = client.ListaTalle();
+                foreach (var item in oListaTalle)
+                {
+                    if (item.OEstado.Equals(ServiceTalle.Estado.Activo)) cmbTalle.Items.Add(item.DescripcionTalle);
+                }
+                cmbTalle.DisplayMember = "Text";
+                cmbTalle.ValueMember = "Value";
+                client.Close();
+            }
+            using (ServiceColor.ServiceColorClient client = new())
+            {
+                var oListaColor = client.ListaColor();
+                foreach (var item in oListaColor)
+                {
+                    if (item.OEstado.Equals(ServiceImpuesto.Estado.Inactivo))
                     {
-                        cmbImpuesto.Items.Add(item.Descripcion);
+                        cmbColor.Items.Add(item.DescripcionColor);
                     }
                 }
-                cmbImpuesto.DisplayMember = "Text";
-                cmbImpuesto.ValueMember = "Value";
+                cmbColor.DisplayMember = "Text";
+                cmbColor.ValueMember = "Value";
                 client.Close();
             }
             using (ServiceMarca.ServiceMarcaClient client = new())
@@ -107,30 +122,6 @@ namespace CapaPresentacion
         {
             txtCodigo.Focus();
         }
-
-        private void Txt_Utilidad_KeyPress(object sender, KeyPressEventArgs e)
-        {
-          
-        }
-        
-        private void Cmb_Impuesto_SelectedIndexChanged_1(object sender, EventArgs e)
-        {
-            ServiceImpuestoClient client_imp = new();
-            List<DtoImpuesto> imp = client_imp.ListaImpuesto();
-            var Impuesto = 0.00;
-            foreach (var item in imp)
-            {
-                if (item.Descripcion.Equals(cmbImpuesto.Items[cmbImpuesto.SelectedIndex].ToString())) Impuesto = item.Alicuota;
-            }
-            double Costo = Math.Round(Convert.ToDouble(txtCosto.Text.Trim()), 2);
-            double MargenGanancia = Math.Round(Convert.ToDouble(txtUtilidad.Text.Trim()), 2);
-            var NetoGravado = Math.Round(Costo * Math.Round(((MargenGanancia / 100) + 1), 2), 2);
-            var PrecioVenta = Math.Round(NetoGravado * ((Impuesto / 100) + 1), 2);
-            txtNetoGravado.Text = NetoGravado.ToString();
-            txtPrecioVenta.Text = PrecioVenta.ToString();
-
-        }
-
         private void Btn_Cancelar_Click(object sender, EventArgs e)
         {
             this.Close();
@@ -143,26 +134,14 @@ namespace CapaPresentacion
             ServiceImpuestoClient client_imp = new();
             List<DtoImpuesto> imp = client_imp.ListaImpuesto();
             _ = client_prod.ListaProducto();
-
-            if (txtCodigo.Text.Trim() == "" && txtDescripcion.Text.Trim() == "" && txtCosto.Text.Trim() == "" && txtUtilidad.Text.Trim() == "")
-            {
-                MessageBox.Show("Debe completar todos los campos", "Mensaje");
-                return;
-            }
             var Codigo = txtCodigo.Text.Trim();
             var Descripcion = txtDescripcion.Text.Trim();
             var oGeneroProducto = client_prod.ObtenerGeneroProducto(cmbGenero.Items[cmbGenero.SelectedIndex].ToString());
             var Rubro = client_prod.ObtenerRubroProducto(cmbRubro.Items[cmbRubro.SelectedIndex].ToString());
             var Marca = client_prod.ObtenerMarca(cmbMarca.Items[cmbMarca.SelectedIndex].ToString());
-            var Impuesto = 0.00;
-            foreach (var item in imp)
-            {
-                if (item.Descripcion.Equals(cmbImpuesto.Items[cmbImpuesto.SelectedIndex].ToString())) Impuesto = item.Alicuota;
-            }
+            var Color = client_prod.ObtenerColor(cmbColor.Items[cmbColor.SelectedIndex].ToString());
+            var Talle = client_prod.ObtenerTalle(cmbTalle.Items[cmbTalle.SelectedIndex].ToString());
             var Costo = Math.Round(Convert.ToDouble(txtCosto.Text.Trim()), 2);
-            var MargenGanancia = Math.Round(Convert.ToDouble(txtUtilidad.Text.Trim()), 2);
-            var NetoGravado = Costo * Math.Round(((MargenGanancia / 100) + 1), 2);
-            var PrecioVenta = NetoGravado * Math.Round(((Impuesto / 100) + 1), 2);
             var oEstado = client_prod.ObtenerEstado(cmbEstado.Items[cmbEstado.SelectedIndex].ToString());
             DtoProducto prod = new()
             {
@@ -171,11 +150,9 @@ namespace CapaPresentacion
                 OGeneroProducto = oGeneroProducto,
                 ORubroProducto = Rubro,
                 OMarca = Marca,
-                Impuesto = Impuesto,
+                OColor = Color,
+                OTalle = Talle, 
                 Costo = Costo,
-                MargenGanancia = MargenGanancia,
-                NetoGravado = NetoGravado,
-                PrecioVenta = PrecioVenta,
                 OEstado = oEstado
             };
             bool Respuesta;
@@ -183,6 +160,7 @@ namespace CapaPresentacion
             string msgError;
             if (modoEditar)
             {
+                prod.IdProducto = Convert.ToInt32(txtId.Text.Trim());
                 Respuesta = client_prod.ModificarProducto(prod);
                 msgSuccess = "Producto Modificado \n¿Desea modificar otro Producto ahora?";
                 msgError = "No se pudo modificar el Producto, \nes posible que ya se encuentre registrado";
@@ -199,19 +177,19 @@ namespace CapaPresentacion
             {
                 if (MessageBox.Show(msgSuccess, "Mensaje", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
+                    txtId.Text = "";
                     txtCodigo.Text = "";
-                    txtCodigo.ForeColor = Color.Red;
                     txtDescripcion.Text = "";
                     cmbGenero.SelectedIndex = 0;
                     cmbRubro.SelectedIndex = 0;
                     cmbMarca.SelectedIndex = 0;
-                    cmbImpuesto.SelectedIndex = 0;
+                    cmbColor.SelectedIndex = 0;
+                    cmbTalle.SelectedIndex = 0;
                     txtCosto.Text = "";
-                    txtUtilidad.Text = "";
-                    txtPrecioVenta.Text = "";
                     cmbEstado.SelectedIndex = 0;
                     modoEditar = false;
                     txtCodigo.Focus();
+                    this.Close();   
                 }
                 else
                 {
@@ -226,6 +204,7 @@ namespace CapaPresentacion
             client_imp.Close();
 
         }
+
     }   
 }
     

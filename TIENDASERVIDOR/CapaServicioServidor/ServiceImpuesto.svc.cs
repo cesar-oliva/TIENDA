@@ -59,5 +59,10 @@ namespace CapaServicioServidor
             }
             return lista;
         }
+
+        public bool BuscarImpuestoById(int IdImpuesto)
+        {
+            return BuscarImpuestoById(IdImpuesto);
+        }
     }
 }
