@@ -1,14 +1,14 @@
 {
   "ExtendedData": {
     "inputs": [
-      "http://localhost:10524/ServiceCliente.svc"
+      "http://localhost:10524/ServiceCondicionTributaria.svc"
     ],
     "collectionTypes": [
       "System.Collections.ArrayList",
       "System.Collections.Generic.Dictionary`2"
     ],
     "namespaceMappings": [
-      "*, ServiceCliente"
+      "*, ServiceCondicionTributaria"
     ],
     "references": [
       "BoDi, {BoDi, 1.5.0}",

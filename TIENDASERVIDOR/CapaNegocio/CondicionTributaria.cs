@@ -9,28 +9,28 @@ namespace CapaNegocio
     public class CondicionTributaria
     {
         private int idCondicionTributaria;
-        private string codigo;
-        private string descripcion;
+        private string codigoCondicionTributaria;
+        private string descripcionCondicionTributaria;
         private Estado oEstado;
         private DateTime fechaRegistro;
 
         public int IdCondicionTributaria { get => idCondicionTributaria; set => idCondicionTributaria = value; }
-        public string Codigo { get => codigo; set => codigo = value; }
-        public string Descripcion { get => descripcion; set => descripcion = value; }
+        public string CodigoCondicionTributaria { get => codigoCondicionTributaria; set => codigoCondicionTributaria = value; }
+        public string DescripcionCondicionTributaria { get => descripcionCondicionTributaria; set => descripcionCondicionTributaria = value; }
         public Estado OEstado { get => oEstado; set => oEstado = value; }
         public DateTime FechaRegistro { get => fechaRegistro; set => fechaRegistro = value; }
 
-        public CondicionTributaria(string codigo, string descripcion, Estado oEstado)
+        public CondicionTributaria(string codigoCondicionTributaria, string descripcionCondicionTributaria, Estado oEstado)
         {
-            Codigo = codigo;
-            Descripcion = descripcion;
+            CodigoCondicionTributaria = codigoCondicionTributaria;
+            DescripcionCondicionTributaria = descripcionCondicionTributaria;
             OEstado = oEstado;
         }
-        public CondicionTributaria(int idCondicionTributaria, string codigo, string descripcion, Estado oEstado, DateTime FechaRegistro)
+        public CondicionTributaria(int idCondicionTributaria, string codigoCondicionTributaria, string descripcionCondicionTributaria, Estado oEstado, DateTime FechaRegistro)
         {
             IdCondicionTributaria = idCondicionTributaria;
-            Codigo = codigo;
-            Descripcion = descripcion;
+            CodigoCondicionTributaria = codigoCondicionTributaria;
+            DescripcionCondicionTributaria = descripcionCondicionTributaria;
             OEstado = oEstado;
             fechaRegistro = FechaRegistro;
         }

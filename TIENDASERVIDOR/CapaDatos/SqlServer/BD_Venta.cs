@@ -64,7 +64,7 @@ namespace CapaDatos
                                 OComprobante = BD_Comprobante.BuscarComprobante(Convert.ToInt32(data.Rows[i]["IdComprobante"].ToString())),
                                 OSucursal = BD_Sucursal.BuscarSucursal(Convert.ToInt32(data.Rows[i]["IdSucursal"].ToString())),
                                 OUsuario = BD_Usuario.BuscarUsuario(Convert.ToInt32(data.Rows[i]["IdUsuario"].ToString())),
-                                OCliente = BD_Cliente.BuscarCliente(Convert.ToInt32(data.Rows[i]["IdCCliente"].ToString())),
+                                OCliente = BD_Cliente.BuscarClienteById(Convert.ToInt32(data.Rows[i]["IdCCliente"].ToString())),
                                 OLineaDeVenta = BD_LineaDeVenta.BuscarListaLineaDeVenta(Convert.ToInt32(data.Rows[i]["IdLineaDeVenta"].ToString())),
                                 CantidadProducto = Convert.ToInt32(data.Rows[i]["CantidadDeProducto"].ToString()),
                                 ImporteTotalDeVenta = Convert.ToDouble(data.Rows[i]["ImporteTotalDeVEnta"].ToString()),

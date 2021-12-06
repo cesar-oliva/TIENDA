@@ -19,11 +19,11 @@ namespace CapaDatos
             {
                 try
                 {
-                    string SqlQuery = "INSERT INTO CONDICIONTRIBUTARIA(Codigo,Descripcion,Estado)"+
-                                      "VALUES(@Codigo,@Descripcion,@Estado)";
+                    string SqlQuery = "INSERT INTO CONDICIONTRIBUTARIA(CodigoCondicionTributaria,DescripcionCondicionTributaria,Estado)" +
+                                      "VALUES(@CodigoCondicionTributaria,@DescripcionCondicionTributaria,@Estado)";
                     SqlCommand cmd = new SqlCommand(SqlQuery, oConexion);
-                    cmd.Parameters.AddWithValue("Codigo", oCondicionTributaria.Codigo);
-                    cmd.Parameters.AddWithValue("Descripcion", oCondicionTributaria.Descripcion);
+                    cmd.Parameters.AddWithValue("CodigoCondicionTributaria", oCondicionTributaria.CodigoCondicionTributaria);
+                    cmd.Parameters.AddWithValue("DescripcionCondicionTributaria", oCondicionTributaria.DescripcionCondicionTributaria);
                     cmd.Parameters.AddWithValue("Estado", oCondicionTributaria.OEstado);
                     oConexion.Open();
                     respuesta = cmd.ExecuteNonQuery();
@@ -37,7 +37,53 @@ namespace CapaDatos
             }
             return respuesta;
         }
+        public static bool ActualizarCondicionTributaria(CondicionTributaria oCondicionTributaria, int IdCondicionTributaria)
+        {
+            int respuesta;
+            using (SqlConnection oConexion = new SqlConnection(Conexion.conexion))
+            {
+                try
+                {
+                    String SqlQuery = "UPDATE CondicionTributaria SET CodigoCondicionTributaria = @CodigoCondicionTributaria, DescripcionCondicionTributaria = @DescripcionCondicionTributaria,Estado = @Estado  WHERE IdCondicionTributaria = @IdCondicionTributaria";
+                    SqlCommand cmd = new SqlCommand(SqlQuery, oConexion);
+                    cmd.Parameters.AddWithValue("CodigoCondicionTributaria", oCondicionTributaria.CodigoCondicionTributaria);
+                    cmd.Parameters.AddWithValue("DescripcionCondicionTributaria", oCondicionTributaria.DescripcionCondicionTributaria);
+                    cmd.Parameters.AddWithValue("Estado", oCondicionTributaria.OEstado);
+                    cmd.Parameters.AddWithValue("IdCondicionTributaria", IdCondicionTributaria);
+                    oConexion.Open();
+                    respuesta = cmd.ExecuteNonQuery();
+                    return true;
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                    return false;
+                }
+            }
+        }
+        public static bool EliminarCondicionTributaria(int IdRubro)
+        {
+            int respuesta;
+            using (SqlConnection oConexion = new SqlConnection(Conexion.conexion))
+            {
+                try
+                {
+                    String SqlQuery = "UPDATE CondicionTributaria SET Estado = @Estado WHERE IdCondicionTributaria = @IdCondicionTributaria";
+                    SqlCommand cmd = new SqlCommand(SqlQuery, oConexion);
+                    cmd.Parameters.AddWithValue("IdCondicionTributaria", IdRubro);
+                    cmd.Parameters.AddWithValue("Estado", Estado.Inactivo);
+                    oConexion.Open();
+                    respuesta = cmd.ExecuteNonQuery();
+                    return true;
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                    return false;
 
+                }
+            }
+        }
         public static List<CondicionTributaria> MostrarCondicionTributaria()
         {
             List<CondicionTributaria> condicionTributariaTabla = new List<CondicionTributaria>();
@@ -57,8 +103,8 @@ namespace CapaDatos
                             var user = new CondicionTributaria
                             {
                                 IdCondicionTributaria = Convert.ToInt32(data.Rows[i]["IdCondicionTributaria"]),
-                                Codigo = data.Rows[i]["Codigo"].ToString(),
-                                Descripcion = data.Rows[i]["Descripcion"].ToString(),
+                                CodigoCondicionTributaria = data.Rows[i]["CodigoCondicionTributaria"].ToString(),
+                                DescripcionCondicionTributaria = data.Rows[i]["DescripcionCondicionTributaria"].ToString(),
                                 OEstado = Operaciones.BuscarEstado(data.Rows[i]["Estado"].ToString()),
                                 FechaRegistro = Convert.ToDateTime(data.Rows[i]["FechaRegistro"])
                             };
@@ -76,16 +122,16 @@ namespace CapaDatos
 
             }
         }
-        public static CondicionTributaria BuscarCondicionTributaria(string descripcion)
+        public static CondicionTributaria BuscarCondicionTributariaByDescripcion(string descripcionCondicionTributaria)
         {
             List<CondicionTributaria> lista = MostrarCondicionTributaria();
             foreach (var item in lista)
             {
-                if (item.Descripcion.Equals(descripcion)) return item;
+                if (item.DescripcionCondicionTributaria.Equals(descripcionCondicionTributaria)) return item;
             }
             return null;
         }
-        public static CondicionTributaria BuscarCondicionTributaria(int idCondicionTributaria)
+        public static CondicionTributaria BuscarCondicionTributariaById(int idCondicionTributaria)
         {
             List<CondicionTributaria> lista = MostrarCondicionTributaria();
             foreach (var item in lista)

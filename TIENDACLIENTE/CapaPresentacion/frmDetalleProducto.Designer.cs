@@ -64,6 +64,7 @@
             this.Btn_Agregar.TabIndex = 2;
             this.Btn_Agregar.Text = "Agregar";
             this.Btn_Agregar.UseVisualStyleBackColor = false;
+            this.Btn_Agregar.Click += new System.EventHandler(this.Btn_Agregar_Click);
             // 
             // lblTotalRegistros
             // 

@@ -38,7 +38,7 @@ namespace CapaPresentacion
             this.label6 = new System.Windows.Forms.Label();
             this.pictureBox6 = new System.Windows.Forms.PictureBox();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.txtCuit = new System.Windows.Forms.TextBox();
+            this.mtxtCuit = new System.Windows.Forms.MaskedTextBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.txtDomicilio = new System.Windows.Forms.TextBox();
@@ -59,13 +59,13 @@ namespace CapaPresentacion
             this.pictureBox5 = new System.Windows.Forms.PictureBox();
             this.pictureBox4 = new System.Windows.Forms.PictureBox();
             this.label27 = new System.Windows.Forms.Label();
-            this.textBox6 = new System.Windows.Forms.TextBox();
+            this.txtCantidad = new System.Windows.Forms.TextBox();
             this.label26 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
-            this.txtCantidad = new System.Windows.Forms.TextBox();
+            this.txtStock = new System.Windows.Forms.TextBox();
             this.label16 = new System.Windows.Forms.Label();
             this.txtCodigo = new System.Windows.Forms.TextBox();
-            this.txtPrecioUnitario = new System.Windows.Forms.TextBox();
+            this.txtPrecioVenta = new System.Windows.Forms.TextBox();
             this.label13 = new System.Windows.Forms.Label();
             this.txtDescripcion = new System.Windows.Forms.TextBox();
             this.btnAgregar = new System.Windows.Forms.Button();
@@ -73,14 +73,14 @@ namespace CapaPresentacion
             this.button3 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.label19 = new System.Windows.Forms.Label();
-            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.txtTotal = new System.Windows.Forms.TextBox();
             this.label18 = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.txtIVA = new System.Windows.Forms.TextBox();
             this.label17 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.txtSubtotal = new System.Windows.Forms.TextBox();
             this.label11 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
+            this.lblCantidad = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).BeginInit();
@@ -166,7 +166,7 @@ namespace CapaPresentacion
             // groupBox4
             // 
             this.groupBox4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(42)))), ((int)(((byte)(52)))), ((int)(((byte)(93)))));
-            this.groupBox4.Controls.Add(this.txtCuit);
+            this.groupBox4.Controls.Add(this.mtxtCuit);
             this.groupBox4.Controls.Add(this.pictureBox1);
             this.groupBox4.Controls.Add(this.pictureBox3);
             this.groupBox4.Controls.Add(this.txtDomicilio);
@@ -185,25 +185,29 @@ namespace CapaPresentacion
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Cliente";
             // 
-            // txtCuit
+            // mtxtCuit
             // 
-            this.txtCuit.Location = new System.Drawing.Point(58, 21);
-            this.txtCuit.Name = "txtCuit";
-            this.txtCuit.Size = new System.Drawing.Size(115, 23);
-            this.txtCuit.TabIndex = 58;
-            this.txtCuit.Text = "##-########-#";
-            this.txtCuit.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.txtCuit.Click += new System.EventHandler(this.txtCuit_Click);
+            this.mtxtCuit.Cursor = System.Windows.Forms.Cursors.Default;
+            this.mtxtCuit.Location = new System.Drawing.Point(58, 22);
+            this.mtxtCuit.Mask = "00-00000000-0";
+            this.mtxtCuit.Name = "mtxtCuit";
+            this.mtxtCuit.Size = new System.Drawing.Size(115, 23);
+            this.mtxtCuit.TabIndex = 0;
+            this.mtxtCuit.Text = "00000000000";
+            this.mtxtCuit.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.mtxtCuit.MouseClick += new System.Windows.Forms.MouseEventHandler(this.mtxtCuit_MouseClick);
+            this.mtxtCuit.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.mtxtCuit_KeyPress);
             // 
             // pictureBox1
             // 
             this.pictureBox1.Image = global::CapaPresentacion.Properties.Resources.lupa1;
-            this.pictureBox1.Location = new System.Drawing.Point(187, 18);
+            this.pictureBox1.Location = new System.Drawing.Point(187, 21);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(25, 25);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 56;
             this.pictureBox1.TabStop = false;
+            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
             // 
             // pictureBox3
             // 
@@ -342,13 +346,13 @@ namespace CapaPresentacion
             this.groupBox5.Controls.Add(this.pictureBox5);
             this.groupBox5.Controls.Add(this.pictureBox4);
             this.groupBox5.Controls.Add(this.label27);
-            this.groupBox5.Controls.Add(this.textBox6);
+            this.groupBox5.Controls.Add(this.txtCantidad);
             this.groupBox5.Controls.Add(this.label26);
             this.groupBox5.Controls.Add(this.label14);
-            this.groupBox5.Controls.Add(this.txtCantidad);
+            this.groupBox5.Controls.Add(this.txtStock);
             this.groupBox5.Controls.Add(this.label16);
             this.groupBox5.Controls.Add(this.txtCodigo);
-            this.groupBox5.Controls.Add(this.txtPrecioUnitario);
+            this.groupBox5.Controls.Add(this.txtPrecioVenta);
             this.groupBox5.Controls.Add(this.label13);
             this.groupBox5.Controls.Add(this.txtDescripcion);
             this.groupBox5.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
@@ -369,6 +373,7 @@ namespace CapaPresentacion
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox2.TabIndex = 57;
             this.pictureBox2.TabStop = false;
+            this.pictureBox2.Click += new System.EventHandler(this.pictureBox2_Click);
             // 
             // pictureBox5
             // 
@@ -379,6 +384,7 @@ namespace CapaPresentacion
             this.pictureBox5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox5.TabIndex = 55;
             this.pictureBox5.TabStop = false;
+            this.pictureBox5.Click += new System.EventHandler(this.pictureBox5_Click);
             // 
             // pictureBox4
             // 
@@ -400,13 +406,13 @@ namespace CapaPresentacion
             this.label27.TabIndex = 36;
             this.label27.Text = "Cantidad:";
             // 
-            // textBox6
+            // txtCantidad
             // 
-            this.textBox6.Enabled = false;
-            this.textBox6.Location = new System.Drawing.Point(900, 23);
-            this.textBox6.Name = "textBox6";
-            this.textBox6.Size = new System.Drawing.Size(51, 23);
-            this.textBox6.TabIndex = 35;
+            this.txtCantidad.Location = new System.Drawing.Point(900, 23);
+            this.txtCantidad.Name = "txtCantidad";
+            this.txtCantidad.Size = new System.Drawing.Size(51, 23);
+            this.txtCantidad.TabIndex = 35;
+            this.txtCantidad.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // label26
             // 
@@ -426,13 +432,14 @@ namespace CapaPresentacion
             this.label14.TabIndex = 18;
             this.label14.Text = "Descripcion:";
             // 
-            // txtCantidad
+            // txtStock
             // 
-            this.txtCantidad.Enabled = false;
-            this.txtCantidad.Location = new System.Drawing.Point(774, 23);
-            this.txtCantidad.Name = "txtCantidad";
-            this.txtCantidad.Size = new System.Drawing.Size(51, 23);
-            this.txtCantidad.TabIndex = 25;
+            this.txtStock.Enabled = false;
+            this.txtStock.Location = new System.Drawing.Point(774, 23);
+            this.txtStock.Name = "txtStock";
+            this.txtStock.Size = new System.Drawing.Size(51, 23);
+            this.txtStock.TabIndex = 25;
+            this.txtStock.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // label16
             // 
@@ -449,14 +456,15 @@ namespace CapaPresentacion
             this.txtCodigo.Name = "txtCodigo";
             this.txtCodigo.Size = new System.Drawing.Size(77, 23);
             this.txtCodigo.TabIndex = 15;
+            this.txtCodigo.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtCodigo_KeyPress);
             // 
-            // txtPrecioUnitario
+            // txtPrecioVenta
             // 
-            this.txtPrecioUnitario.Enabled = false;
-            this.txtPrecioUnitario.Location = new System.Drawing.Point(559, 25);
-            this.txtPrecioUnitario.Name = "txtPrecioUnitario";
-            this.txtPrecioUnitario.Size = new System.Drawing.Size(90, 23);
-            this.txtPrecioUnitario.TabIndex = 23;
+            this.txtPrecioVenta.Enabled = false;
+            this.txtPrecioVenta.Location = new System.Drawing.Point(559, 25);
+            this.txtPrecioVenta.Name = "txtPrecioVenta";
+            this.txtPrecioVenta.Size = new System.Drawing.Size(90, 23);
+            this.txtPrecioVenta.TabIndex = 23;
             // 
             // label13
             // 
@@ -551,13 +559,14 @@ namespace CapaPresentacion
             this.label19.TabIndex = 39;
             this.label19.Text = "Total:";
             // 
-            // textBox3
+            // txtTotal
             // 
-            this.textBox3.Enabled = false;
-            this.textBox3.Location = new System.Drawing.Point(950, 449);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(100, 23);
-            this.textBox3.TabIndex = 40;
+            this.txtTotal.Enabled = false;
+            this.txtTotal.Location = new System.Drawing.Point(950, 449);
+            this.txtTotal.Name = "txtTotal";
+            this.txtTotal.Size = new System.Drawing.Size(100, 23);
+            this.txtTotal.TabIndex = 40;
+            this.txtTotal.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // label18
             // 
@@ -570,13 +579,14 @@ namespace CapaPresentacion
             this.label18.TabIndex = 37;
             this.label18.Text = "IVA:";
             // 
-            // textBox2
+            // txtIVA
             // 
-            this.textBox2.Enabled = false;
-            this.textBox2.Location = new System.Drawing.Point(757, 447);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(100, 23);
-            this.textBox2.TabIndex = 38;
+            this.txtIVA.Enabled = false;
+            this.txtIVA.Location = new System.Drawing.Point(757, 447);
+            this.txtIVA.Name = "txtIVA";
+            this.txtIVA.Size = new System.Drawing.Size(100, 23);
+            this.txtIVA.TabIndex = 38;
+            this.txtIVA.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // label17
             // 
@@ -589,13 +599,14 @@ namespace CapaPresentacion
             this.label17.TabIndex = 35;
             this.label17.Text = "Subtotal:";
             // 
-            // textBox1
+            // txtSubtotal
             // 
-            this.textBox1.Enabled = false;
-            this.textBox1.Location = new System.Drawing.Point(564, 447);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 23);
-            this.textBox1.TabIndex = 36;
+            this.txtSubtotal.Enabled = false;
+            this.txtSubtotal.Location = new System.Drawing.Point(564, 447);
+            this.txtSubtotal.Name = "txtSubtotal";
+            this.txtSubtotal.Size = new System.Drawing.Size(100, 23);
+            this.txtSubtotal.TabIndex = 36;
+            this.txtSubtotal.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // label11
             // 
@@ -619,16 +630,16 @@ namespace CapaPresentacion
             this.label3.TabIndex = 58;
             this.label3.Text = "Cantidad de Productos:";
             // 
-            // label4
+            // lblCantidad
             // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label4.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.label4.Location = new System.Drawing.Point(185, 454);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(18, 20);
-            this.label4.TabIndex = 59;
-            this.label4.Text = "#";
+            this.lblCantidad.AutoSize = true;
+            this.lblCantidad.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lblCantidad.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.lblCantidad.Location = new System.Drawing.Point(185, 454);
+            this.lblCantidad.Name = "lblCantidad";
+            this.lblCantidad.Size = new System.Drawing.Size(18, 20);
+            this.lblCantidad.TabIndex = 59;
+            this.lblCantidad.Text = "#";
             // 
             // label5
             // 
@@ -648,21 +659,21 @@ namespace CapaPresentacion
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(29)))), ((int)(((byte)(38)))), ((int)(((byte)(69)))));
             this.ClientSize = new System.Drawing.Size(1064, 576);
             this.Controls.Add(this.label5);
-            this.Controls.Add(this.label4);
+            this.Controls.Add(this.lblCantidad);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label11);
             this.Controls.Add(this.label19);
             this.Controls.Add(this.dateTimePicker1);
             this.Controls.Add(this.button3);
-            this.Controls.Add(this.textBox3);
+            this.Controls.Add(this.txtTotal);
             this.Controls.Add(this.label18);
             this.Controls.Add(this.txtNumero);
             this.Controls.Add(this.txtTipo);
-            this.Controls.Add(this.textBox2);
+            this.Controls.Add(this.txtIVA);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.label17);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.txtSubtotal);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.btnCancelar);
             this.Controls.Add(this.dataGridLineaVenta);
@@ -710,39 +721,39 @@ namespace CapaPresentacion
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label14;
-        private System.Windows.Forms.TextBox txtCantidad;
+        private System.Windows.Forms.TextBox txtStock;
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.Button btnAgregar;
         private System.Windows.Forms.TextBox txtCodigo;
-        private System.Windows.Forms.TextBox txtPrecioUnitario;
+        private System.Windows.Forms.TextBox txtPrecioVenta;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.TextBox txtDescripcion;
         private System.Windows.Forms.DataGridView dataGridLineaVenta;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label label19;
-        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.TextBox txtTotal;
         private System.Windows.Forms.Label label18;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox txtIVA;
         private System.Windows.Forms.Label label17;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox txtSubtotal;
         private System.Windows.Forms.Label label26;
         private System.Windows.Forms.PictureBox pictureBox3;
         private System.Windows.Forms.PictureBox pictureBox4;
         private System.Windows.Forms.Label label27;
-        private System.Windows.Forms.TextBox textBox6;
+        private System.Windows.Forms.TextBox txtCantidad;
         private System.Windows.Forms.PictureBox pictureBox6;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.PictureBox pictureBox5;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label lblCantidad;
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.Label label20;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.TextBox txtCuit;
+        public System.Windows.Forms.MaskedTextBox mtxtCuit;
     }
 }

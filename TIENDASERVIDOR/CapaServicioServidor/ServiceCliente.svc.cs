@@ -1,4 +1,5 @@
-﻿using CapaNegocio;
+﻿using CapaDatos;
+using CapaNegocio;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -49,7 +50,8 @@ namespace CapaServicioServidor
                     RazonSocial = item.RazonSocial,
                     OCondicionTributaria = item.OCondicionTributaria,
                     DomicilioFiscal = item.DomicilioFiscal,
-                    OEstado = item.OEstado
+                    OEstado = item.OEstado,
+                    FechaRegistro = item.FechaRegistro, 
                 };
                 cli.Add(cliente);
             }
@@ -58,7 +60,30 @@ namespace CapaServicioServidor
 
         public bool ModificarCliente(DtoCliente oCliente)
         {
-            throw new NotImplementedException();
+            var nuevo = new Cliente
+            {
+                Cuit = oCliente.Cuit,
+                RazonSocial = oCliente.RazonSocial,
+                OCondicionTributaria = oCliente.OCondicionTributaria,
+                DomicilioFiscal = oCliente.DomicilioFiscal,
+                OEstado = oCliente.OEstado
+            };
+            return BD_Cliente.ActualizarCliente(nuevo,oCliente.IdCliente);
+        }
+
+        public CondicionTributaria ObtenerCondicionTributariaByDescripcion(string oCondicionTributaria)
+        {
+            return BD_CondicionTributaria.BuscarCondicionTributariaByDescripcion(oCondicionTributaria);
+        }
+
+        public CondicionTributaria ObtenerCondicionTributariaById(int oCondicionTributaria)
+        {
+            return BD_CondicionTributaria.BuscarCondicionTributariaById(oCondicionTributaria);
+        }
+        public Estado ObtenerEstadoByDescripcion(string oEstado)
+        {
+            if (oEstado.Equals("Activo")) return Estado.Activo;
+            return Estado.Inactivo;
         }
     }
 }

@@ -64,6 +64,7 @@
   <ItemGroup>
     <Content Include="ServiceCliente.svc" />
     <Content Include="ServiceColor.svc" />
+    <Content Include="ServiceCondicionTributaria.svc" />
     <Content Include="ServiceDetalleDeVenta.svc" />
     <Content Include="ServiceImpuesto.svc" />
     <Content Include="ServiceMarca.svc" />
@@ -77,6 +78,7 @@
   <ItemGroup>
     <Compile Include="IServiceCliente.cs" />
     <Compile Include="IServiceColor.cs" />
+    <Compile Include="IServiceCondicionTributaria.cs" />
     <Compile Include="IServiceDetalleDeVenta.cs" />
     <Compile Include="IServiceImpuesto.cs" />
     <Compile Include="IServiceMarca.cs" />
@@ -89,6 +91,9 @@
     </Compile>
     <Compile Include="ServiceColor.svc.cs">
       <DependentUpon>ServiceColor.svc</DependentUpon>
+    </Compile>
+    <Compile Include="ServiceCondicionTributaria.svc.cs">
+      <DependentUpon>ServiceCondicionTributaria.svc</DependentUpon>
     </Compile>
     <Compile Include="ServiceDetalleDeVenta.svc.cs">
       <DependentUpon>ServiceDetalleDeVenta.svc</DependentUpon>

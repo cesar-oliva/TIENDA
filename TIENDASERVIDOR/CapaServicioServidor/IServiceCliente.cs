@@ -20,6 +20,12 @@ namespace CapaServicioServidor
         bool EliminarCliente(int IdCliente);
         [OperationContract]
         List<DtoCliente> ListaCliente();
+        [OperationContract]
+        CondicionTributaria ObtenerCondicionTributariaByDescripcion(string oCondicionTributaria);
+        [OperationContract]
+        CondicionTributaria ObtenerCondicionTributariaById(int oCondicionTributaria);
+        [OperationContract]
+        Estado ObtenerEstadoByDescripcion(string oEstado);
     }
 
 
@@ -37,6 +43,7 @@ namespace CapaServicioServidor
         public CondicionTributaria OCondicionTributaria { get; set; }
         [DataMember]
         public string DomicilioFiscal{ get; set; }
+        [DataMember]
         public Estado OEstado { get; set; } //activo o inactivo
         [DataMember]
         public DateTime FechaRegistro { get; set; }

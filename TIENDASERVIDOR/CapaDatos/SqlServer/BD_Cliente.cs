@@ -20,11 +20,12 @@ namespace CapaDatos
             {
                 try
                 {
-                    String SqlQuery = "INSERT INTO Cliente(RazonSocial,Cuit,IdCondicionTributaria,DomicilioFiscal,Estado) VALUES(@RazonSocial,@Cuit,@IdCondicionTributaria,@Estado)";
+                    String SqlQuery = "INSERT INTO Cliente(RazonSocial,Cuit,IdCondicionTributaria,DomicilioFiscal,Estado) VALUES(@RazonSocial,@Cuit,@IdCondicionTributaria,@DomicilioFiscal,@Estado)";
                     SqlCommand cmd = new SqlCommand(SqlQuery, oConexion);
                     cmd.Parameters.AddWithValue("RazonSocial", oCliente.RazonSocial);
                     cmd.Parameters.AddWithValue("Cuit", oCliente.Cuit);
-                    cmd.Parameters.AddWithValue("IdCondicionTributaria", oCliente.OCondicionTributaria);
+                    cmd.Parameters.AddWithValue("IdCondicionTributaria", oCliente.OCondicionTributaria.IdCondicionTributaria);
+                    cmd.Parameters.AddWithValue("DomicilioFiscal", oCliente.DomicilioFiscal);
                     cmd.Parameters.AddWithValue("Estado", oCliente.OEstado);
                     oConexion.Open();
                     respuesta = cmd.ExecuteNonQuery();
@@ -60,7 +61,7 @@ namespace CapaDatos
                                 Cuit = data.Rows[i]["Cuit"].ToString(),
                                 RazonSocial = data.Rows[i]["RazonSocial"].ToString(),
                                 DomicilioFiscal = data.Rows[i]["DomicilioFiscal"].ToString(),
-                                OCondicionTributaria = BD_CondicionTributaria.BuscarCondicionTributaria(Convert.ToInt32(data.Rows[i]["IdCondicionTributaria"])),
+                                OCondicionTributaria = BD_CondicionTributaria.BuscarCondicionTributariaById(Convert.ToInt32(data.Rows[i]["IdCondicionTributaria"])),
                                 OEstado = Operaciones.BuscarEstado(data.Rows[i]["Estado"].ToString()),
                                 FechaRegistro = Convert.ToDateTime(data.Rows[i]["FechaRegistro"])
                             };
@@ -85,12 +86,13 @@ namespace CapaDatos
             {
                 try
                 {
-                    String SqlQuery = "UPDATE Cliente SET Cuit = @Cuit,RazonSocial = @RazonSocial,IdCondicionTributaria = @IdCondicionTributaria, DomicilioFiscal = @DomiciilioFiscal,Estado = @Estado WHERE idCliente = @IdCliente";
+                    String SqlQuery = "UPDATE Cliente SET Cuit = @Cuit,RazonSocial = @RazonSocial,IdCondicionTributaria = @IdCondicionTributaria, DomicilioFiscal = @DomicilioFiscal,Estado = @Estado WHERE idCliente = @IdCliente";
                     SqlCommand cmd = new SqlCommand(SqlQuery, oConexion);
                     cmd.Parameters.AddWithValue("IdCliente", IdCliente);
                     cmd.Parameters.AddWithValue("Cuit", oCliente.Cuit);
                     cmd.Parameters.AddWithValue("RazonSocial", oCliente.RazonSocial);
                     cmd.Parameters.AddWithValue("IdCondicionTributaria", oCliente.OCondicionTributaria.IdCondicionTributaria);
+                    cmd.Parameters.AddWithValue("DomicilioFiscal", oCliente.DomicilioFiscal);
                     cmd.Parameters.AddWithValue("Estado", oCliente.OEstado);
                     oConexion.Open();
                     respuesta = cmd.ExecuteNonQuery();
@@ -110,9 +112,10 @@ namespace CapaDatos
             {
                 try
                 {
-                    String SqlQuery = "DELETE FROM Cliente WHERE IdCliente = @IdCliente";
+                    String SqlQuery = "UPDATE Cliente SET Estado = @Estado WHERE IdCliente = @IdCliente";
                     SqlCommand cmd = new SqlCommand(SqlQuery, oConexion);
                     cmd.Parameters.AddWithValue("IdCliente", IdCliente);
+                    cmd.Parameters.AddWithValue("Estado", Estado.Inactivo);
                     oConexion.Open();
                     respuesta = cmd.ExecuteNonQuery();
                     return true;
@@ -136,7 +139,7 @@ namespace CapaDatos
             }
             return null;
         }
-        public static Cliente BuscarCliente(string razonSocial)
+        public static Cliente BuscarClienteByRazonSocial(string razonSocial)
         {
             List<Cliente> lista = MostrarCliente();
             foreach (var item in lista)
@@ -145,7 +148,7 @@ namespace CapaDatos
             }
             return null;
         }
-        public static Cliente BuscarCliente(int idCliente)
+        public static Cliente BuscarClienteById(int idCliente)
         {
             List<Cliente> lista = MostrarCliente();
             foreach (var item in lista)

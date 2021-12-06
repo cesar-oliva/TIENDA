@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -144,7 +145,7 @@ namespace CapaDatos
                     cmd.Parameters.AddWithValue("NombreUsuario", usuario);
                     oConexion.Open();
                     string dato = Convert.ToString(cmd.ExecuteScalar());
-                    if (dato.Equals(contraseña))
+                    if (dato.Equals(GenerarSHA1(contraseña)))
                     {
                         return true;
                     }
@@ -240,6 +241,27 @@ namespace CapaDatos
             {
                 return Estado.Inactivo;
             }
+        }
+        public static string GenerarSHA1(string cadena)
+        {
+            UTF8Encoding enc = new UTF8Encoding();
+            byte[] data = enc.GetBytes(cadena);
+            byte[] result;
+
+            SHA1CryptoServiceProvider sha = new SHA1CryptoServiceProvider();
+            result = sha.ComputeHash(data);
+
+            StringBuilder sb = new StringBuilder();
+
+            for (int i = 0; i < result.Length; i++)
+            {
+                if (result[i] < 16)
+                {
+                    sb.Append("0");
+                }
+                sb.Append(result[i].ToString("x"));
+            }
+            return sb.ToString();
         }
     }
 }

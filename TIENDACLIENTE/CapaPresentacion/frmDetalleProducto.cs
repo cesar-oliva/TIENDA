@@ -96,5 +96,10 @@ namespace CapaPresentacion
             (dataGridDetalleProducto.DataSource as DataTable).DefaultView.RowFilter = string.Format(columnaFiltro + " like '%{0}%'", txtFiltro.Text);
 
         }
+
+        private void Btn_Agregar_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

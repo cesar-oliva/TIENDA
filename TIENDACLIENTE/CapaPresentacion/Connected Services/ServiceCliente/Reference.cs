@@ -13,7 +13,7 @@ namespace ServiceCliente
     
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.3-preview3.21351.2")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.3")]
     [System.Runtime.Serialization.DataContractAttribute(Name="DtoCliente", Namespace="http://schemas.datacontract.org/2004/07/CapaServicioServidor")]
     public partial class DtoCliente : object
     {
@@ -27,6 +27,8 @@ namespace ServiceCliente
         private int IdClienteField;
         
         private ServiceCliente.CondicionTributaria OCondicionTributariaField;
+        
+        private ServiceCliente.Estado OEstadoField;
         
         private string RazonSocialField;
         
@@ -96,6 +98,19 @@ namespace ServiceCliente
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
+        public ServiceCliente.Estado OEstado
+        {
+            get
+            {
+                return this.OEstadoField;
+            }
+            set
+            {
+                this.OEstadoField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
         public string RazonSocial
         {
             get
@@ -110,14 +125,14 @@ namespace ServiceCliente
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.3-preview3.21351.2")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.3")]
     [System.Runtime.Serialization.DataContractAttribute(Name="CondicionTributaria", Namespace="http://schemas.datacontract.org/2004/07/CapaNegocio")]
     public partial class CondicionTributaria : object
     {
         
-        private string CodigoField;
+        private string CodigoCondicionTributariaField;
         
-        private string DescripcionField;
+        private string DescripcionCondicionTributariaField;
         
         private System.DateTime FechaRegistroField;
         
@@ -126,28 +141,28 @@ namespace ServiceCliente
         private ServiceCliente.Estado OEstadoField;
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Codigo
+        public string CodigoCondicionTributaria
         {
             get
             {
-                return this.CodigoField;
+                return this.CodigoCondicionTributariaField;
             }
             set
             {
-                this.CodigoField = value;
+                this.CodigoCondicionTributariaField = value;
             }
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Descripcion
+        public string DescripcionCondicionTributaria
         {
             get
             {
-                return this.DescripcionField;
+                return this.DescripcionCondicionTributariaField;
             }
             set
             {
-                this.DescripcionField = value;
+                this.DescripcionCondicionTributariaField = value;
             }
         }
         
@@ -191,7 +206,7 @@ namespace ServiceCliente
         }
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.3-preview3.21351.2")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.3")]
     [System.Runtime.Serialization.DataContractAttribute(Name="Estado", Namespace="http://schemas.datacontract.org/2004/07/CapaNegocio")]
     public enum Estado : int
     {
@@ -203,7 +218,7 @@ namespace ServiceCliente
         Inactivo = 1,
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.3-preview3.21351.2")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.3")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServiceCliente.IServiceCliente")]
     public interface IServiceCliente
     {
@@ -227,19 +242,39 @@ namespace ServiceCliente
         System.Threading.Tasks.Task<bool> EliminarClienteAsync(int IdCliente);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceCliente/ListaCliente", ReplyAction="http://tempuri.org/IServiceCliente/ListaClienteResponse")]
-        System.Collections.Generic.List<ServiceCliente.DtoCliente> ListaCliente();
+        ServiceCliente.DtoCliente[] ListaCliente();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceCliente/ListaCliente", ReplyAction="http://tempuri.org/IServiceCliente/ListaClienteResponse")]
-        System.Threading.Tasks.Task<System.Collections.Generic.List<ServiceCliente.DtoCliente>> ListaClienteAsync();
+        System.Threading.Tasks.Task<ServiceCliente.DtoCliente[]> ListaClienteAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceCliente/ObtenerCondicionTributariaByDescripcion", ReplyAction="http://tempuri.org/IServiceCliente/ObtenerCondicionTributariaByDescripcionRespons" +
+            "e")]
+        ServiceCliente.CondicionTributaria ObtenerCondicionTributariaByDescripcion(string oCondicionTributaria);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceCliente/ObtenerCondicionTributariaByDescripcion", ReplyAction="http://tempuri.org/IServiceCliente/ObtenerCondicionTributariaByDescripcionRespons" +
+            "e")]
+        System.Threading.Tasks.Task<ServiceCliente.CondicionTributaria> ObtenerCondicionTributariaByDescripcionAsync(string oCondicionTributaria);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceCliente/ObtenerCondicionTributariaById", ReplyAction="http://tempuri.org/IServiceCliente/ObtenerCondicionTributariaByIdResponse")]
+        ServiceCliente.CondicionTributaria ObtenerCondicionTributariaById(int oCondicionTributaria);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceCliente/ObtenerCondicionTributariaById", ReplyAction="http://tempuri.org/IServiceCliente/ObtenerCondicionTributariaByIdResponse")]
+        System.Threading.Tasks.Task<ServiceCliente.CondicionTributaria> ObtenerCondicionTributariaByIdAsync(int oCondicionTributaria);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceCliente/ObtenerEstadoByDescripcion", ReplyAction="http://tempuri.org/IServiceCliente/ObtenerEstadoByDescripcionResponse")]
+        ServiceCliente.Estado ObtenerEstadoByDescripcion(string oEstado);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceCliente/ObtenerEstadoByDescripcion", ReplyAction="http://tempuri.org/IServiceCliente/ObtenerEstadoByDescripcionResponse")]
+        System.Threading.Tasks.Task<ServiceCliente.Estado> ObtenerEstadoByDescripcionAsync(string oEstado);
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.3-preview3.21351.2")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.3")]
     public interface IServiceClienteChannel : ServiceCliente.IServiceCliente, System.ServiceModel.IClientChannel
     {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.3-preview3.21351.2")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.3")]
     public partial class ServiceClienteClient : System.ServiceModel.ClientBase<ServiceCliente.IServiceCliente>, ServiceCliente.IServiceCliente
     {
         
@@ -313,14 +348,44 @@ namespace ServiceCliente
             return base.Channel.EliminarClienteAsync(IdCliente);
         }
         
-        public System.Collections.Generic.List<ServiceCliente.DtoCliente> ListaCliente()
+        public ServiceCliente.DtoCliente[] ListaCliente()
         {
             return base.Channel.ListaCliente();
         }
         
-        public System.Threading.Tasks.Task<System.Collections.Generic.List<ServiceCliente.DtoCliente>> ListaClienteAsync()
+        public System.Threading.Tasks.Task<ServiceCliente.DtoCliente[]> ListaClienteAsync()
         {
             return base.Channel.ListaClienteAsync();
+        }
+        
+        public ServiceCliente.CondicionTributaria ObtenerCondicionTributariaByDescripcion(string oCondicionTributaria)
+        {
+            return base.Channel.ObtenerCondicionTributariaByDescripcion(oCondicionTributaria);
+        }
+        
+        public System.Threading.Tasks.Task<ServiceCliente.CondicionTributaria> ObtenerCondicionTributariaByDescripcionAsync(string oCondicionTributaria)
+        {
+            return base.Channel.ObtenerCondicionTributariaByDescripcionAsync(oCondicionTributaria);
+        }
+        
+        public ServiceCliente.CondicionTributaria ObtenerCondicionTributariaById(int oCondicionTributaria)
+        {
+            return base.Channel.ObtenerCondicionTributariaById(oCondicionTributaria);
+        }
+        
+        public System.Threading.Tasks.Task<ServiceCliente.CondicionTributaria> ObtenerCondicionTributariaByIdAsync(int oCondicionTributaria)
+        {
+            return base.Channel.ObtenerCondicionTributariaByIdAsync(oCondicionTributaria);
+        }
+        
+        public ServiceCliente.Estado ObtenerEstadoByDescripcion(string oEstado)
+        {
+            return base.Channel.ObtenerEstadoByDescripcion(oEstado);
+        }
+        
+        public System.Threading.Tasks.Task<ServiceCliente.Estado> ObtenerEstadoByDescripcionAsync(string oEstado)
+        {
+            return base.Channel.ObtenerEstadoByDescripcionAsync(oEstado);
         }
         
         public virtual System.Threading.Tasks.Task OpenAsync()
