@@ -57,7 +57,7 @@ namespace CapaPresentacion
                 {
                     if (row.OEstado.Equals(ServiceProducto.Estado.Activo))
                     {
-                        TablaProducto.Rows.Add(row.IdProducto, row.Codigo, row.Descripcion, row.OGeneroProducto.ToString(), row.ORubroProducto.Descripcion, row.OMarca.Descripcion, row.OColor.DescripcionColor, row.OTalle.DescripcionTalle, row.Costo, row.OEstado, row.FechaRegistro);
+                        TablaProducto.Rows.Add(row.IdProducto, row.Codigo, row.Descripcion, row.OGeneroProducto.ToString(), row.ORubroProducto.DescripcionRubroProducto, row.OMarca.Descripcion, row.OColor.DescripcionColor, row.OTalle.DescripcionTalle, row.Costo, row.OEstado, row.FechaRegistro);
                     }    
                 }
                 dataGridProducto.DataSource = TablaProducto;

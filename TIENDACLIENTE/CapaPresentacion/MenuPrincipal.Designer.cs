@@ -30,22 +30,10 @@ namespace CapaPresentacion
         private void InitializeComponent()
         {
             this.pnlMenuVertical = new System.Windows.Forms.Panel();
-            this.panelSubMenuVentas = new System.Windows.Forms.Panel();
-            this.button9 = new System.Windows.Forms.Button();
-            this.button10 = new System.Windows.Forms.Button();
-            this.button11 = new System.Windows.Forms.Button();
-            this.panelSubMenuClientes = new System.Windows.Forms.Panel();
-            this.button6 = new System.Windows.Forms.Button();
-            this.button7 = new System.Windows.Forms.Button();
-            this.button8 = new System.Windows.Forms.Button();
-            this.panelSubMenuRubros = new System.Windows.Forms.Panel();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button5 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
-            this.panelSubMenuProducto = new System.Windows.Forms.Panel();
-            this.Btn_Producto = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.btnVentas = new System.Windows.Forms.Button();
+            this.btnCliente = new System.Windows.Forms.Button();
+            this.btnRubroProducto = new System.Windows.Forms.Button();
+            this.btnProducto = new System.Windows.Forms.Button();
             this.panelLogo = new System.Windows.Forms.Panel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.pnlContenedor = new System.Windows.Forms.Panel();
@@ -53,10 +41,6 @@ namespace CapaPresentacion
             this.Btn_Minimizar = new System.Windows.Forms.PictureBox();
             this.pnlBarraTitulo = new System.Windows.Forms.Panel();
             this.pnlMenuVertical.SuspendLayout();
-            this.panelSubMenuVentas.SuspendLayout();
-            this.panelSubMenuClientes.SuspendLayout();
-            this.panelSubMenuRubros.SuspendLayout();
-            this.panelSubMenuProducto.SuspendLayout();
             this.panelLogo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Btn_Cerrar)).BeginInit();
@@ -68,14 +52,10 @@ namespace CapaPresentacion
             // 
             this.pnlMenuVertical.AutoScroll = true;
             this.pnlMenuVertical.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(42)))), ((int)(((byte)(52)))), ((int)(((byte)(93)))));
-            this.pnlMenuVertical.Controls.Add(this.panelSubMenuVentas);
-            this.pnlMenuVertical.Controls.Add(this.button11);
-            this.pnlMenuVertical.Controls.Add(this.panelSubMenuClientes);
-            this.pnlMenuVertical.Controls.Add(this.button8);
-            this.pnlMenuVertical.Controls.Add(this.panelSubMenuRubros);
-            this.pnlMenuVertical.Controls.Add(this.button4);
-            this.pnlMenuVertical.Controls.Add(this.panelSubMenuProducto);
-            this.pnlMenuVertical.Controls.Add(this.button2);
+            this.pnlMenuVertical.Controls.Add(this.btnVentas);
+            this.pnlMenuVertical.Controls.Add(this.btnCliente);
+            this.pnlMenuVertical.Controls.Add(this.btnRubroProducto);
+            this.pnlMenuVertical.Controls.Add(this.btnProducto);
             this.pnlMenuVertical.Controls.Add(this.panelLogo);
             this.pnlMenuVertical.Dock = System.Windows.Forms.DockStyle.Left;
             this.pnlMenuVertical.Location = new System.Drawing.Point(0, 35);
@@ -83,257 +63,73 @@ namespace CapaPresentacion
             this.pnlMenuVertical.Size = new System.Drawing.Size(220, 615);
             this.pnlMenuVertical.TabIndex = 1;
             // 
-            // panelSubMenuVentas
+            // btnVentas
             // 
-            this.panelSubMenuVentas.Controls.Add(this.button9);
-            this.panelSubMenuVentas.Controls.Add(this.button10);
-            this.panelSubMenuVentas.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panelSubMenuVentas.Location = new System.Drawing.Point(0, 450);
-            this.panelSubMenuVentas.Name = "panelSubMenuVentas";
-            this.panelSubMenuVentas.Size = new System.Drawing.Size(220, 70);
-            this.panelSubMenuVentas.TabIndex = 16;
+            this.btnVentas.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(188)))), ((int)(((byte)(101)))));
+            this.btnVentas.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnVentas.FlatAppearance.BorderSize = 0;
+            this.btnVentas.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnVentas.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btnVentas.Location = new System.Drawing.Point(0, 205);
+            this.btnVentas.Name = "btnVentas";
+            this.btnVentas.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
+            this.btnVentas.Size = new System.Drawing.Size(220, 35);
+            this.btnVentas.TabIndex = 15;
+            this.btnVentas.Text = "Ventas";
+            this.btnVentas.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnVentas.UseVisualStyleBackColor = false;
+            this.btnVentas.Click += new System.EventHandler(this.Btn_Venta_Click);
             // 
-            // button9
+            // btnCliente
             // 
-            this.button9.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(42)))), ((int)(((byte)(52)))), ((int)(((byte)(93)))));
-            this.button9.Dock = System.Windows.Forms.DockStyle.Top;
-            this.button9.FlatAppearance.BorderSize = 0;
-            this.button9.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button9.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.button9.ForeColor = System.Drawing.SystemColors.ActiveCaption;
-            this.button9.Location = new System.Drawing.Point(0, 35);
-            this.button9.Name = "button9";
-            this.button9.Padding = new System.Windows.Forms.Padding(35, 0, 0, 0);
-            this.button9.Size = new System.Drawing.Size(220, 35);
-            this.button9.TabIndex = 11;
-            this.button9.Text = "Listar Ventas";
-            this.button9.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button9.UseVisualStyleBackColor = false;
+            this.btnCliente.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(188)))), ((int)(((byte)(101)))));
+            this.btnCliente.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnCliente.FlatAppearance.BorderSize = 0;
+            this.btnCliente.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCliente.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btnCliente.Location = new System.Drawing.Point(0, 170);
+            this.btnCliente.Name = "btnCliente";
+            this.btnCliente.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
+            this.btnCliente.Size = new System.Drawing.Size(220, 35);
+            this.btnCliente.TabIndex = 13;
+            this.btnCliente.Text = "Clientes";
+            this.btnCliente.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnCliente.UseVisualStyleBackColor = false;
+            this.btnCliente.Click += new System.EventHandler(this.Btn_Cliente_Click);
             // 
-            // button10
+            // btnRubroProducto
             // 
-            this.button10.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(42)))), ((int)(((byte)(52)))), ((int)(((byte)(93)))));
-            this.button10.Dock = System.Windows.Forms.DockStyle.Top;
-            this.button10.FlatAppearance.BorderSize = 0;
-            this.button10.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button10.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.button10.ForeColor = System.Drawing.SystemColors.ActiveCaption;
-            this.button10.Location = new System.Drawing.Point(0, 0);
-            this.button10.Name = "button10";
-            this.button10.Padding = new System.Windows.Forms.Padding(35, 0, 0, 0);
-            this.button10.Size = new System.Drawing.Size(220, 35);
-            this.button10.TabIndex = 10;
-            this.button10.Text = "Nueva Venta";
-            this.button10.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button10.UseVisualStyleBackColor = false;
-            this.button10.Click += new System.EventHandler(this.button10_Click);
+            this.btnRubroProducto.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(188)))), ((int)(((byte)(101)))));
+            this.btnRubroProducto.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnRubroProducto.FlatAppearance.BorderSize = 0;
+            this.btnRubroProducto.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnRubroProducto.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btnRubroProducto.Location = new System.Drawing.Point(0, 135);
+            this.btnRubroProducto.Name = "btnRubroProducto";
+            this.btnRubroProducto.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
+            this.btnRubroProducto.Size = new System.Drawing.Size(220, 35);
+            this.btnRubroProducto.TabIndex = 10;
+            this.btnRubroProducto.Text = "Rubro Producto";
+            this.btnRubroProducto.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnRubroProducto.UseVisualStyleBackColor = false;
+            this.btnRubroProducto.Click += new System.EventHandler(this.Btn_RubroProducto_Click);
             // 
-            // button11
+            // btnProducto
             // 
-            this.button11.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(188)))), ((int)(((byte)(101)))));
-            this.button11.Dock = System.Windows.Forms.DockStyle.Top;
-            this.button11.FlatAppearance.BorderSize = 0;
-            this.button11.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button11.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.button11.Location = new System.Drawing.Point(0, 415);
-            this.button11.Name = "button11";
-            this.button11.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
-            this.button11.Size = new System.Drawing.Size(220, 35);
-            this.button11.TabIndex = 15;
-            this.button11.Text = "Ventas";
-            this.button11.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button11.UseVisualStyleBackColor = false;
-            this.button11.Click += new System.EventHandler(this.button11_Click);
-            // 
-            // panelSubMenuClientes
-            // 
-            this.panelSubMenuClientes.Controls.Add(this.button6);
-            this.panelSubMenuClientes.Controls.Add(this.button7);
-            this.panelSubMenuClientes.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panelSubMenuClientes.Location = new System.Drawing.Point(0, 345);
-            this.panelSubMenuClientes.Name = "panelSubMenuClientes";
-            this.panelSubMenuClientes.Size = new System.Drawing.Size(220, 70);
-            this.panelSubMenuClientes.TabIndex = 14;
-            // 
-            // button6
-            // 
-            this.button6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(42)))), ((int)(((byte)(52)))), ((int)(((byte)(93)))));
-            this.button6.Dock = System.Windows.Forms.DockStyle.Top;
-            this.button6.FlatAppearance.BorderSize = 0;
-            this.button6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button6.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.button6.ForeColor = System.Drawing.SystemColors.ActiveCaption;
-            this.button6.Location = new System.Drawing.Point(0, 35);
-            this.button6.Name = "button6";
-            this.button6.Padding = new System.Windows.Forms.Padding(35, 0, 0, 0);
-            this.button6.Size = new System.Drawing.Size(220, 35);
-            this.button6.TabIndex = 11;
-            this.button6.Text = "Listar Clientes";
-            this.button6.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button6.UseVisualStyleBackColor = false;
-            this.button6.Click += new System.EventHandler(this.button6_Click);
-            // 
-            // button7
-            // 
-            this.button7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(42)))), ((int)(((byte)(52)))), ((int)(((byte)(93)))));
-            this.button7.Dock = System.Windows.Forms.DockStyle.Top;
-            this.button7.FlatAppearance.BorderSize = 0;
-            this.button7.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button7.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.button7.ForeColor = System.Drawing.SystemColors.ActiveCaption;
-            this.button7.Location = new System.Drawing.Point(0, 0);
-            this.button7.Name = "button7";
-            this.button7.Padding = new System.Windows.Forms.Padding(35, 0, 0, 0);
-            this.button7.Size = new System.Drawing.Size(220, 35);
-            this.button7.TabIndex = 10;
-            this.button7.Text = "Alta Clientes";
-            this.button7.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button7.UseVisualStyleBackColor = false;
-            this.button7.Click += new System.EventHandler(this.button7_Click);
-            // 
-            // button8
-            // 
-            this.button8.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(188)))), ((int)(((byte)(101)))));
-            this.button8.Dock = System.Windows.Forms.DockStyle.Top;
-            this.button8.FlatAppearance.BorderSize = 0;
-            this.button8.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button8.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.button8.Location = new System.Drawing.Point(0, 310);
-            this.button8.Name = "button8";
-            this.button8.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
-            this.button8.Size = new System.Drawing.Size(220, 35);
-            this.button8.TabIndex = 13;
-            this.button8.Text = "Clientes";
-            this.button8.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button8.UseVisualStyleBackColor = false;
-            this.button8.Click += new System.EventHandler(this.button8_Click);
-            // 
-            // panelSubMenuRubros
-            // 
-            this.panelSubMenuRubros.Controls.Add(this.button1);
-            this.panelSubMenuRubros.Controls.Add(this.button5);
-            this.panelSubMenuRubros.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panelSubMenuRubros.Location = new System.Drawing.Point(0, 240);
-            this.panelSubMenuRubros.Name = "panelSubMenuRubros";
-            this.panelSubMenuRubros.Size = new System.Drawing.Size(220, 70);
-            this.panelSubMenuRubros.TabIndex = 11;
-            // 
-            // button1
-            // 
-            this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(42)))), ((int)(((byte)(52)))), ((int)(((byte)(93)))));
-            this.button1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.button1.FlatAppearance.BorderSize = 0;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.button1.ForeColor = System.Drawing.SystemColors.ActiveCaption;
-            this.button1.Location = new System.Drawing.Point(0, 35);
-            this.button1.Name = "button1";
-            this.button1.Padding = new System.Windows.Forms.Padding(35, 0, 0, 0);
-            this.button1.Size = new System.Drawing.Size(220, 35);
-            this.button1.TabIndex = 11;
-            this.button1.Text = "Listar Rubros";
-            this.button1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button1.UseVisualStyleBackColor = false;
-            this.button1.Click += new System.EventHandler(this.button1_Click_1);
-            // 
-            // button5
-            // 
-            this.button5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(42)))), ((int)(((byte)(52)))), ((int)(((byte)(93)))));
-            this.button5.Dock = System.Windows.Forms.DockStyle.Top;
-            this.button5.FlatAppearance.BorderSize = 0;
-            this.button5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button5.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.button5.ForeColor = System.Drawing.SystemColors.ActiveCaption;
-            this.button5.Location = new System.Drawing.Point(0, 0);
-            this.button5.Name = "button5";
-            this.button5.Padding = new System.Windows.Forms.Padding(35, 0, 0, 0);
-            this.button5.Size = new System.Drawing.Size(220, 35);
-            this.button5.TabIndex = 10;
-            this.button5.Text = "Alta Rubros";
-            this.button5.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button5.UseVisualStyleBackColor = false;
-            this.button5.Click += new System.EventHandler(this.button5_Click);
-            // 
-            // button4
-            // 
-            this.button4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(188)))), ((int)(((byte)(101)))));
-            this.button4.Dock = System.Windows.Forms.DockStyle.Top;
-            this.button4.FlatAppearance.BorderSize = 0;
-            this.button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button4.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.button4.Location = new System.Drawing.Point(0, 205);
-            this.button4.Name = "button4";
-            this.button4.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
-            this.button4.Size = new System.Drawing.Size(220, 35);
-            this.button4.TabIndex = 10;
-            this.button4.Text = "Rubros";
-            this.button4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button4.UseVisualStyleBackColor = false;
-            this.button4.Click += new System.EventHandler(this.button4_Click);
-            // 
-            // panelSubMenuProducto
-            // 
-            this.panelSubMenuProducto.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(29)))), ((int)(((byte)(38)))), ((int)(((byte)(69)))));
-            this.panelSubMenuProducto.Controls.Add(this.Btn_Producto);
-            this.panelSubMenuProducto.Controls.Add(this.button3);
-            this.panelSubMenuProducto.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panelSubMenuProducto.Location = new System.Drawing.Point(0, 135);
-            this.panelSubMenuProducto.Name = "panelSubMenuProducto";
-            this.panelSubMenuProducto.Size = new System.Drawing.Size(220, 70);
-            this.panelSubMenuProducto.TabIndex = 9;
-            // 
-            // Btn_Producto
-            // 
-            this.Btn_Producto.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(42)))), ((int)(((byte)(52)))), ((int)(((byte)(93)))));
-            this.Btn_Producto.Dock = System.Windows.Forms.DockStyle.Top;
-            this.Btn_Producto.FlatAppearance.BorderSize = 0;
-            this.Btn_Producto.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.Btn_Producto.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.Btn_Producto.ForeColor = System.Drawing.SystemColors.ActiveCaption;
-            this.Btn_Producto.Location = new System.Drawing.Point(0, 35);
-            this.Btn_Producto.Name = "Btn_Producto";
-            this.Btn_Producto.Padding = new System.Windows.Forms.Padding(35, 0, 0, 0);
-            this.Btn_Producto.Size = new System.Drawing.Size(220, 35);
-            this.Btn_Producto.TabIndex = 9;
-            this.Btn_Producto.Text = "Listar Productos";
-            this.Btn_Producto.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.Btn_Producto.UseVisualStyleBackColor = false;
-            this.Btn_Producto.Click += new System.EventHandler(this.Btn_Producto_Click_1);
-            // 
-            // button3
-            // 
-            this.button3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(42)))), ((int)(((byte)(52)))), ((int)(((byte)(93)))));
-            this.button3.Dock = System.Windows.Forms.DockStyle.Top;
-            this.button3.FlatAppearance.BorderSize = 0;
-            this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button3.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.button3.ForeColor = System.Drawing.SystemColors.ActiveCaption;
-            this.button3.Location = new System.Drawing.Point(0, 0);
-            this.button3.Name = "button3";
-            this.button3.Padding = new System.Windows.Forms.Padding(35, 0, 0, 0);
-            this.button3.Size = new System.Drawing.Size(220, 35);
-            this.button3.TabIndex = 1;
-            this.button3.Text = "Alta Productos";
-            this.button3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button3.UseVisualStyleBackColor = false;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
-            // 
-            // button2
-            // 
-            this.button2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(188)))), ((int)(((byte)(101)))));
-            this.button2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.button2.FlatAppearance.BorderSize = 0;
-            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button2.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.button2.Location = new System.Drawing.Point(0, 100);
-            this.button2.Name = "button2";
-            this.button2.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
-            this.button2.Size = new System.Drawing.Size(220, 35);
-            this.button2.TabIndex = 8;
-            this.button2.Text = "Producto";
-            this.button2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button2.UseVisualStyleBackColor = false;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.btnProducto.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(188)))), ((int)(((byte)(101)))));
+            this.btnProducto.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnProducto.FlatAppearance.BorderSize = 0;
+            this.btnProducto.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnProducto.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btnProducto.Location = new System.Drawing.Point(0, 100);
+            this.btnProducto.Name = "btnProducto";
+            this.btnProducto.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
+            this.btnProducto.Size = new System.Drawing.Size(220, 35);
+            this.btnProducto.TabIndex = 8;
+            this.btnProducto.Text = "Producto";
+            this.btnProducto.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnProducto.UseVisualStyleBackColor = false;
+            this.btnProducto.Click += new System.EventHandler(this.Btn_Producto_Click);
             // 
             // panelLogo
             // 
@@ -416,10 +212,6 @@ namespace CapaPresentacion
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "MENU";
             this.pnlMenuVertical.ResumeLayout(false);
-            this.panelSubMenuVentas.ResumeLayout(false);
-            this.panelSubMenuClientes.ResumeLayout(false);
-            this.panelSubMenuRubros.ResumeLayout(false);
-            this.panelSubMenuProducto.ResumeLayout(false);
             this.panelLogo.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Btn_Cerrar)).EndInit();
@@ -436,23 +228,11 @@ namespace CapaPresentacion
         private System.Windows.Forms.PictureBox Btn_Cerrar;
         private System.Windows.Forms.PictureBox Btn_Minimizar;
         private System.Windows.Forms.Panel pnlBarraTitulo;
-        private System.Windows.Forms.Panel panelSubMenuProducto;
-        private System.Windows.Forms.Button Btn_Producto;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button btnProducto;
         private System.Windows.Forms.Panel panelLogo;
-        private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.Panel panelSubMenuRubros;
-        public System.Windows.Forms.Button button8;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button5;
-        private System.Windows.Forms.Panel panelSubMenuVentas;
-        private System.Windows.Forms.Button button9;
-        private System.Windows.Forms.Button button10;
-        public System.Windows.Forms.Button button11;
-        private System.Windows.Forms.Panel panelSubMenuClientes;
-        private System.Windows.Forms.Button button6;
-        private System.Windows.Forms.Button button7;
+        private System.Windows.Forms.Button btnRubroProducto;
+        public System.Windows.Forms.Button btnCliente;
+        public System.Windows.Forms.Button btnVentas;
     }
 }
 

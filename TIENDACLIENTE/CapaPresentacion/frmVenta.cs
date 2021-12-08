@@ -167,6 +167,12 @@ namespace CapaPresentacion
             txtIVA.Text = IVA.ToString();
             txtTotal.Text = total.ToString();
         }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            frmMedioPago frm = new();
+            frm.ShowDialog();
+        }
     }
 
 }

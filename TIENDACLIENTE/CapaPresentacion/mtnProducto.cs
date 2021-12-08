@@ -38,7 +38,7 @@ namespace CapaPresentacion
                 txtCodigo.Text = pProducto.Codigo;
                 txtDescripcion.Text = pProducto.Descripcion;
                 cmbGenero.Text = pProducto.OGeneroProducto.ToString();
-                cmbRubro.Text = pProducto.ORubroProducto.Descripcion.ToString();
+                cmbRubro.Text = pProducto.ORubroProducto.DescripcionRubroProducto.ToString();
                 cmbMarca.Text = pProducto.OMarca.Descripcion.ToString();
                 cmbColor.Text = pProducto.OColor.DescripcionColor.ToString();
                 cmbTalle.Text = pProducto.OTalle.DescripcionTalle.ToString();
