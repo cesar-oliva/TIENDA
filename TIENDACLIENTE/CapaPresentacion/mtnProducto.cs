@@ -19,6 +19,7 @@ namespace CapaPresentacion
     public partial class MtnProducto : Form
     {
         private bool modoEditar = false;
+        frmMensaje msj = new();
         public MtnProducto(DtoProducto pProducto = null)
         {
             InitializeComponent();
@@ -162,20 +163,22 @@ namespace CapaPresentacion
             {
                 prod.IdProducto = Convert.ToInt32(txtId.Text.Trim());
                 Respuesta = client_prod.ModificarProducto(prod);
-                msgSuccess = "Producto Modificado \n¿Desea modificar otro Producto ahora?";
+                msgSuccess = "Producto Modificado exitosamente";
                 msgError = "No se pudo modificar el Producto, \nes posible que ya se encuentre registrado";
             }
             else
             {
 
                 Respuesta = client_prod.IngresarProducto(prod);
-                msgSuccess = "Producto Registrado \n¿Desea registrar un nuevo Producto ahora?";
+                msgSuccess = "Producto Registrado exitosamente";
                 msgError = "No se pudo registrar el Producto, \nes posible que ya se encuentre registrado";
 
             }
             if (Respuesta)
             {
-                if (MessageBox.Show(msgSuccess, "Mensaje", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                this.Close();
+                DialogResult resmsj = msj.MsjInformacion(msgSuccess, "MSG-INFORMACION", "ACEPTAR");
+                if (resmsj.Equals(DialogResult.OK))
                 {
                     txtId.Text = "";
                     txtCodigo.Text = "";
@@ -189,7 +192,7 @@ namespace CapaPresentacion
                     cmbEstado.SelectedIndex = 0;
                     modoEditar = false;
                     txtCodigo.Focus();
-                    this.Close();   
+                    msj.Close();
                 }
                 else
                 {
@@ -198,7 +201,7 @@ namespace CapaPresentacion
             }
             else
             {
-                MessageBox.Show(msgError, "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                DialogResult resmsj = msj.MsjExclamacion(msgError, "MSG-ATENCION", "ACEPTAR"); ;
             }
             client_prod.Close();
             client_imp.Close();

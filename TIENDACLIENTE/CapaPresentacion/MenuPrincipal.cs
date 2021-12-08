@@ -54,10 +54,9 @@ namespace CapaPresentacion
 
         private void Btn_Cerrar_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show("¿Estas Seguro de cerrar el programa?", "¡Alerta!", MessageBoxButtons.YesNo) == DialogResult.Yes)
-            {
-                Application.Exit();
-            }
+            frmMensaje msj = new();
+            DialogResult respuesta = msj.MsjInformacion("Desea cerrar la aplicación?","MSG-INFORMACION","CONFIRMAR","CANCELAR");
+            if (respuesta.Equals(DialogResult.OK)) Environment.Exit(0); 
         }
 
         private void Btn_RubroProducto_Click(object sender, EventArgs e)

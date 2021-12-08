@@ -17,6 +17,7 @@ namespace CapaPresentacion
     public partial class FrmProducto : Form
     {
         DataTable TablaProducto = new();
+        frmMensaje msj = new();
         public FrmProducto()
         {
             InitializeComponent();
@@ -127,7 +128,8 @@ namespace CapaPresentacion
             }
             else
             {
-                MessageBox.Show("Selecciona un registro de la lista");
+                DialogResult resmsj = msj.MsjInformacion("Debe Seleccionar un registro de la lista", "MSG-INFORMACION", "ACEPTAR");
+                if (resmsj.Equals(DialogResult.OK)) msj.Close();
             }
         }
 
@@ -142,23 +144,23 @@ namespace CapaPresentacion
                 int IdProducto = Convert.ToInt32(dataGridProducto.Rows[index].Cells["IdProducto"].Value);
                 string Descripcion = Convert.ToString(dataGridProducto.Rows[index].Cells["Descripcion"].Value);
 
-                if (MessageBox.Show(string.Format("{0} '{1}' {2}", "¿Desea eliminar el producto", Descripcion, "permanentemente?"), "Mensaje", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                DialogResult resmsj = msj.MsjConsulta("¿Desea eliminar el producto "+Descripcion+" ?", "MSG-CONSULTA", "SI","NO");
+                if (resmsj.Equals(DialogResult.OK))
                 {
 
                     bool Respuesta = client.EliminarProducto(IdProducto);
                     if (Respuesta)
                     {
-                        MessageBox.Show(string.Format("{0} {1} {2}", "El producto", Descripcion, "fue eliminado"), "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        DialogResult resmsj_2 = msj.MsjInformacion("El producto "+Descripcion+" fue eliminado", "MSG-INFORMACION", "ACEPTAR");
+                        if (resmsj.Equals(DialogResult.OK)) msj.Close();
                         CargarDatosProductos();
                     }
                     else
                     {
-                        MessageBox.Show(string.Format("{0} {1} {2} \n{3}", "El producto", Descripcion, "no fue eliminado.", "El producto se encuentra asignado a alguna venta actualmente"), "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                        DialogResult resmsj_2 = msj.MsjExclamacion("El producto " + Descripcion + " no fue eliminado", "MSG-INFORMACION", "ACEPTAR");
+                        if (resmsj.Equals(DialogResult.OK)) msj.Close();
                     }
-
                 }
-
-
             }
             else
             {

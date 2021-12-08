@@ -30,6 +30,8 @@ namespace CapaPresentacion
         private void InitializeComponent()
         {
             this.pnlMenuVertical = new System.Windows.Forms.Panel();
+            this.btnSalir = new System.Windows.Forms.Button();
+            this.btnUsuario = new System.Windows.Forms.Button();
             this.btnVentas = new System.Windows.Forms.Button();
             this.btnCliente = new System.Windows.Forms.Button();
             this.btnRubroProducto = new System.Windows.Forms.Button();
@@ -37,21 +39,18 @@ namespace CapaPresentacion
             this.panelLogo = new System.Windows.Forms.Panel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.pnlContenedor = new System.Windows.Forms.Panel();
-            this.Btn_Cerrar = new System.Windows.Forms.PictureBox();
-            this.Btn_Minimizar = new System.Windows.Forms.PictureBox();
             this.pnlBarraTitulo = new System.Windows.Forms.Panel();
             this.pnlMenuVertical.SuspendLayout();
             this.panelLogo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.Btn_Cerrar)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.Btn_Minimizar)).BeginInit();
-            this.pnlBarraTitulo.SuspendLayout();
             this.SuspendLayout();
             // 
             // pnlMenuVertical
             // 
             this.pnlMenuVertical.AutoScroll = true;
             this.pnlMenuVertical.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(42)))), ((int)(((byte)(52)))), ((int)(((byte)(93)))));
+            this.pnlMenuVertical.Controls.Add(this.btnSalir);
+            this.pnlMenuVertical.Controls.Add(this.btnUsuario);
             this.pnlMenuVertical.Controls.Add(this.btnVentas);
             this.pnlMenuVertical.Controls.Add(this.btnCliente);
             this.pnlMenuVertical.Controls.Add(this.btnRubroProducto);
@@ -62,6 +61,37 @@ namespace CapaPresentacion
             this.pnlMenuVertical.Name = "pnlMenuVertical";
             this.pnlMenuVertical.Size = new System.Drawing.Size(220, 615);
             this.pnlMenuVertical.TabIndex = 1;
+            // 
+            // btnSalir
+            // 
+            this.btnSalir.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(118)))), ((int)(((byte)(113)))));
+            this.btnSalir.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.btnSalir.FlatAppearance.BorderSize = 0;
+            this.btnSalir.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSalir.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btnSalir.Location = new System.Drawing.Point(0, 580);
+            this.btnSalir.Name = "btnSalir";
+            this.btnSalir.Size = new System.Drawing.Size(220, 35);
+            this.btnSalir.TabIndex = 17;
+            this.btnSalir.Text = "Salir";
+            this.btnSalir.UseVisualStyleBackColor = false;
+            this.btnSalir.Click += new System.EventHandler(this.Btn_Cerrar_Click);
+            // 
+            // btnUsuario
+            // 
+            this.btnUsuario.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(188)))), ((int)(((byte)(101)))));
+            this.btnUsuario.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnUsuario.FlatAppearance.BorderSize = 0;
+            this.btnUsuario.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnUsuario.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btnUsuario.Location = new System.Drawing.Point(0, 240);
+            this.btnUsuario.Name = "btnUsuario";
+            this.btnUsuario.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
+            this.btnUsuario.Size = new System.Drawing.Size(220, 35);
+            this.btnUsuario.TabIndex = 16;
+            this.btnUsuario.Text = "Usuario";
+            this.btnUsuario.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnUsuario.UseVisualStyleBackColor = false;
             // 
             // btnVentas
             // 
@@ -159,37 +189,9 @@ namespace CapaPresentacion
             this.pnlContenedor.Size = new System.Drawing.Size(1080, 615);
             this.pnlContenedor.TabIndex = 2;
             // 
-            // Btn_Cerrar
-            // 
-            this.Btn_Cerrar.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.Btn_Cerrar.Image = global::CapaPresentacion.Properties.Resources.cancel;
-            this.Btn_Cerrar.ImageLocation = "";
-            this.Btn_Cerrar.Location = new System.Drawing.Point(1263, 4);
-            this.Btn_Cerrar.Name = "Btn_Cerrar";
-            this.Btn_Cerrar.Size = new System.Drawing.Size(25, 25);
-            this.Btn_Cerrar.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
-            this.Btn_Cerrar.TabIndex = 0;
-            this.Btn_Cerrar.TabStop = false;
-            this.Btn_Cerrar.Click += new System.EventHandler(this.Btn_Cerrar_Click);
-            // 
-            // Btn_Minimizar
-            // 
-            this.Btn_Minimizar.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.Btn_Minimizar.Image = global::CapaPresentacion.Properties.Resources.minimize;
-            this.Btn_Minimizar.ImageLocation = "";
-            this.Btn_Minimizar.Location = new System.Drawing.Point(1226, 4);
-            this.Btn_Minimizar.Name = "Btn_Minimizar";
-            this.Btn_Minimizar.Size = new System.Drawing.Size(25, 25);
-            this.Btn_Minimizar.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
-            this.Btn_Minimizar.TabIndex = 2;
-            this.Btn_Minimizar.TabStop = false;
-            this.Btn_Minimizar.Click += new System.EventHandler(this.PictureBox2_Click);
-            // 
             // pnlBarraTitulo
             // 
             this.pnlBarraTitulo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(188)))), ((int)(((byte)(101)))));
-            this.pnlBarraTitulo.Controls.Add(this.Btn_Minimizar);
-            this.pnlBarraTitulo.Controls.Add(this.Btn_Cerrar);
             this.pnlBarraTitulo.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlBarraTitulo.Location = new System.Drawing.Point(0, 0);
             this.pnlBarraTitulo.Name = "pnlBarraTitulo";
@@ -214,9 +216,6 @@ namespace CapaPresentacion
             this.pnlMenuVertical.ResumeLayout(false);
             this.panelLogo.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.Btn_Cerrar)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.Btn_Minimizar)).EndInit();
-            this.pnlBarraTitulo.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -225,14 +224,14 @@ namespace CapaPresentacion
         private System.Windows.Forms.Panel pnlMenuVertical;
         private System.Windows.Forms.Panel pnlContenedor;
         private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.PictureBox Btn_Cerrar;
-        private System.Windows.Forms.PictureBox Btn_Minimizar;
         private System.Windows.Forms.Panel pnlBarraTitulo;
         private System.Windows.Forms.Button btnProducto;
         private System.Windows.Forms.Panel panelLogo;
         private System.Windows.Forms.Button btnRubroProducto;
         public System.Windows.Forms.Button btnCliente;
         public System.Windows.Forms.Button btnVentas;
+        public System.Windows.Forms.Button btnSalir;
+        public System.Windows.Forms.Button btnUsuario;
     }
 }
 

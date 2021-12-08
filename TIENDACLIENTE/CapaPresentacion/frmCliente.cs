@@ -72,7 +72,7 @@ namespace CapaPresentacion
                 }
                 cmbFiltro.SelectedIndex = 0;
             }
-            lblTotalRegistros.Text = Convert.ToString(dataGridCliente.Rows.Count - 1);
+            lblTotalRegistros.Text = Convert.ToString(dataGridCliente.Rows.Count);
         }
         private void txtFiltro_TextChanged(object sender, EventArgs e)
         {
