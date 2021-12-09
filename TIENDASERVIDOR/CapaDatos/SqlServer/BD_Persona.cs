@@ -34,11 +34,11 @@ namespace CapaDatos
                                 NumeroDocumento = data.Rows[i]["NumeroDocumento"].ToString(),
                                 Nombres = data.Rows[i]["Nombres"].ToString(),
                                 Apellidos = data.Rows[i]["Apellidos"].ToString(),
-                                //oSexo = data.Rows[i]["Sexo"].ToString(),
                                 FechaNacimiento = Convert.ToDateTime(data.Rows[i]["FechaNacimiento"].ToString()),
-                                Edad = Convert.ToInt32(data.Rows[i]["Edad"].ToString()),
                                 Domicilio = data.Rows[i]["Domicilio"].ToString(),
                                 Telefono = data.Rows[i]["Telefono"].ToString(),
+                                OEstado = Operaciones.BuscarEstado(data.Rows[i]["Estado"].ToString()),
+                                FechaRegistro = Convert.ToDateTime(data.Rows[i]["FechaRegistro"])
                             };
                             personaTabla.Add(pers);
                         }

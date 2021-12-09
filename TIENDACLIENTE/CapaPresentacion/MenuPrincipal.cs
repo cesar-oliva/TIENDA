@@ -38,7 +38,8 @@ namespace CapaPresentacion
         }
         private void Btn_Venta_Click(object sender, EventArgs e)
         {
-            Frm_Contenedor(new frmVenta());
+            frmVenta vta = new();
+            Frm_Contenedor(vta);
         }
         private void Frm_Contenedor(Object formulario)
         {

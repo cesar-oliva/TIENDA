@@ -15,9 +15,10 @@ namespace CapaNegocio
         private string apellidos;
         private Sexo oSexo;
         private DateTime fechaNacimiento;
-        private int edad;
         private string domicilio;
         private string telefono;
+        private Estado oEstado;
+        private DateTime fechaRegistro;
 
         public int IdPersona { get => idPersona; set => idPersona = value; }
         public string TipoDocumento { get => tipoDocumento; set => tipoDocumento = value; }
@@ -26,9 +27,10 @@ namespace CapaNegocio
         public string Apellidos { get => apellidos; set => apellidos = value; }
         public Sexo OSexo { get => oSexo; set => oSexo = value; }
         public DateTime FechaNacimiento { get => fechaNacimiento; set => fechaNacimiento = value; }
-        public int Edad { get => edad; set => edad = value; }
         public string Domicilio { get => domicilio; set => domicilio = value; }
         public string Telefono { get => telefono; set => telefono = value; }
+        public Estado OEstado { get => oEstado; set => oEstado=value; }
+        public DateTime FechaRegistro { get => fechaRegistro; set => fechaRegistro=value; }
 
         public Persona()
         {

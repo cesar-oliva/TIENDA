@@ -41,7 +41,24 @@ namespace CapaPresentacion
 
         private void btnAceptar_Click_1(object sender, EventArgs e)
         {
+            validarUsuario();
+        }
 
+        private void btnCancelar_Click_1(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void txtContraseña_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if ((int)e.KeyChar == (int)Keys.Enter)
+            {
+                validarUsuario();
+            }
+        }
+
+        private void validarUsuario()
+        {
             while (true)
             {
                 if (txtNombreUsuario.Text.Trim() == "")
@@ -65,11 +82,10 @@ namespace CapaPresentacion
                     respuesta = client.LoginUsuario(NombreUsuario, Clave);
                     if (respuesta == true)
                     {
-                        frmBienvenida frm = new();
+                        frmBienvenida frm = new(NombreUsuario);
                         frm.Show();
                         this.Visible = false;
                         break;
-
                     }
                     else
                     {
@@ -81,11 +97,6 @@ namespace CapaPresentacion
                     }
                 }
             }
-        }
-
-        private void btnCancelar_Click_1(object sender, EventArgs e)
-        {
-            Application.Exit();
         }
     }
 }

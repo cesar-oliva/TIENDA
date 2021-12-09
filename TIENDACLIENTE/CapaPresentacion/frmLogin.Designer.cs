@@ -61,7 +61,7 @@ namespace CapaPresentacion
             // 
             // btnCancelar
             // 
-            this.btnCancelar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(188)))), ((int)(((byte)(101)))));
+            this.btnCancelar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(118)))), ((int)(((byte)(113)))));
             this.btnCancelar.Cursor = System.Windows.Forms.Cursors.Hand;
             resources.ApplyResources(this.btnCancelar, "btnCancelar");
             this.btnCancelar.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
@@ -102,6 +102,7 @@ namespace CapaPresentacion
             resources.ApplyResources(this.txtContraseña, "txtContraseña");
             this.txtContraseña.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.txtContraseña.Name = "txtContraseña";
+            this.txtContraseña.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtContraseña_KeyPress);
             // 
             // btnRecuperar
             // 
@@ -120,13 +121,13 @@ namespace CapaPresentacion
             // lblMensajeLogin
             // 
             resources.ApplyResources(this.lblMensajeLogin, "lblMensajeLogin");
-            this.lblMensajeLogin.ForeColor = System.Drawing.Color.Red;
+            this.lblMensajeLogin.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(118)))), ((int)(((byte)(113)))));
             this.lblMensajeLogin.Name = "lblMensajeLogin";
             // 
             // lblUsuario
             // 
             resources.ApplyResources(this.lblUsuario, "lblUsuario");
-            this.lblUsuario.ForeColor = System.Drawing.Color.Red;
+            this.lblUsuario.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(118)))), ((int)(((byte)(113)))));
             this.lblUsuario.Name = "lblUsuario";
             // 
             // FrmLogin

@@ -225,13 +225,13 @@ namespace CapaPresentacion
         private System.Windows.Forms.Panel pnlContenedor;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Panel pnlBarraTitulo;
-        private System.Windows.Forms.Button btnProducto;
         private System.Windows.Forms.Panel panelLogo;
-        private System.Windows.Forms.Button btnRubroProducto;
         public System.Windows.Forms.Button btnCliente;
         public System.Windows.Forms.Button btnVentas;
         public System.Windows.Forms.Button btnSalir;
         public System.Windows.Forms.Button btnUsuario;
+        public System.Windows.Forms.Button btnProducto;
+        public System.Windows.Forms.Button btnRubroProducto;
     }
 }
 

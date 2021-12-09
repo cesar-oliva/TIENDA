@@ -144,7 +144,7 @@ namespace CapaPresentacion
                 int IdProducto = Convert.ToInt32(dataGridProducto.Rows[index].Cells["IdProducto"].Value);
                 string Descripcion = Convert.ToString(dataGridProducto.Rows[index].Cells["Descripcion"].Value);
 
-                DialogResult resmsj = msj.MsjConsulta("¿Desea eliminar el producto "+Descripcion+" ?", "MSG-CONSULTA", "SI","NO");
+                DialogResult resmsj = msj.MsjConsulta("¿Desea eliminar el producto\n "+Descripcion+" ?", "MSG-CONSULTA", "SI","NO");
                 if (resmsj.Equals(DialogResult.OK))
                 {
 

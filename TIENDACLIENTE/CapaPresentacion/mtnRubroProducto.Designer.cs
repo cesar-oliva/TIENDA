@@ -75,7 +75,7 @@
             // 
             // Btn_Cancelar
             // 
-            this.Btn_Cancelar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(188)))), ((int)(((byte)(101)))));
+            this.Btn_Cancelar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(118)))), ((int)(((byte)(113)))));
             this.Btn_Cancelar.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.Btn_Cancelar.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.Btn_Cancelar.Location = new System.Drawing.Point(544, 23);

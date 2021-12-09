@@ -98,8 +98,8 @@ namespace CapaPresentacion
         }
 
         private void Btn_Agregar_Click(object sender, EventArgs e)
-        {
-
+        {                
+            this.Close();
         }
     }
 }

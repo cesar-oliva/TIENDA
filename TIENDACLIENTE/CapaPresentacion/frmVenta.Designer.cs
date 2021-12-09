@@ -329,7 +329,7 @@ namespace CapaPresentacion
             // 
             // btnCancelar
             // 
-            this.btnCancelar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(188)))), ((int)(((byte)(101)))));
+            this.btnCancelar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(118)))), ((int)(((byte)(113)))));
             this.btnCancelar.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.btnCancelar.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.btnCancelar.Location = new System.Drawing.Point(931, 501);
@@ -725,7 +725,6 @@ namespace CapaPresentacion
         private System.Windows.Forms.TextBox txtStock;
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.Button btnAgregar;
-        private System.Windows.Forms.TextBox txtCodigo;
         private System.Windows.Forms.TextBox txtPrecioVenta;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.TextBox txtDescripcion;
@@ -756,5 +755,6 @@ namespace CapaPresentacion
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label5;
         public System.Windows.Forms.MaskedTextBox mtxtCuit;
+        public System.Windows.Forms.TextBox txtCodigo;
     }
 }
