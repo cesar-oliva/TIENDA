@@ -20,17 +20,15 @@ namespace CapaDatos
             {
                 try
                 {
-                    string SqlQuery = "INSERT INTO Producto(Codigo,Descripcion,GeneroProducto,IdRubroProducto,IdMarca,IdColor,IdTalle,Costo,Estado)" +
-                                     "VALUES(@codigo,@Descripcion,@GeneroProducto,@IdRubroProducto,@IdMarca,@IdColor,@IdTalle,@Costo,@Estado)";
+                    string SqlQuery = "INSERT INTO Producto(Codigo,Descripcion,GeneroProducto,IdRubroProducto,IdMarca,IdTipoTalle,Estado)" +
+                                     "VALUES(@codigo,@Descripcion,@GeneroProducto,@IdRubroProducto,@IdMarca,@IdTipoTalle,@Estado)";
                     SqlCommand cmd = new SqlCommand(SqlQuery, oConexion);
                     cmd.Parameters.AddWithValue("Codigo", oProducto.Codigo);
                     cmd.Parameters.AddWithValue("Descripcion", oProducto.Descripcion);
                     cmd.Parameters.AddWithValue("GeneroProducto", oProducto.OGeneroProducto.ToString());
                     cmd.Parameters.AddWithValue("IdRubroProducto", BD_RubroProducto.BuscarRubroProducto(oProducto.ORubroProducto).IdRubroProducto);
                     cmd.Parameters.AddWithValue("IdMarca", BD_Marca.BuscarMarca(oProducto.OMarca).IdMarca);
-                    cmd.Parameters.AddWithValue("IdColor", BD_Color.BuscarColor(oProducto.OColor).IdColor);
-                    cmd.Parameters.AddWithValue("IdTalle", BD_Talle.BuscarTalle(oProducto.OTalle).IdTalle);
-                    cmd.Parameters.AddWithValue("Costo", oProducto.Costo);
+                    cmd.Parameters.AddWithValue("IdTipoTalle", BD_TipoTalle.BuscarTipoTalle(oProducto.OTipoTalle).IdTipoTalle);
                     cmd.Parameters.AddWithValue("Estado", Operaciones.BuscarEstado(oProducto.OEstado));
                     oConexion.Open();
                     respuesta = cmd.ExecuteNonQuery();
@@ -54,16 +52,14 @@ namespace CapaDatos
                 try
                 {
                     string SqlQuery = "UPDATE PRODUCTO SET Codigo=@Codigo,Descripcion=@Descripcion,GeneroProducto=@GeneroProducto,IdRubroProducto=@IdRubroProducto,IdMarca=@IdMarca," +
-                                      "IdColor=@IdColor,IdTalle=@IdTalle,Costo=@Costo,Estado=@Estado WHERE IdProducto=@IdProducto";
+                                      "IdTipoTalle=@IdTipoTalle,Estado=@Estado WHERE IdProducto=@IdProducto";
                     SqlCommand cmd = new SqlCommand(SqlQuery, oConexion);
                     cmd.Parameters.AddWithValue("@Codigo", oProducto.Codigo);
                     cmd.Parameters.AddWithValue("@Descripcion", oProducto.Descripcion);
                     cmd.Parameters.AddWithValue("@GeneroProducto", oProducto.OGeneroProducto.ToString());
                     cmd.Parameters.AddWithValue("@IdRubroProducto", BD_RubroProducto.BuscarRubroProducto(oProducto.ORubroProducto).IdRubroProducto);
                     cmd.Parameters.AddWithValue("@IdMarca", BD_Marca.BuscarMarca(oProducto.OMarca).IdMarca);
-                    cmd.Parameters.AddWithValue("@IdColor", BD_Color.BuscarColor(oProducto.OColor).IdColor);
-                    cmd.Parameters.AddWithValue("@IdTalle", BD_Talle.BuscarTalle(oProducto.OTalle).IdTalle);
-                    cmd.Parameters.AddWithValue("@Costo", oProducto.Costo);
+                    cmd.Parameters.AddWithValue("@IdTipoTalle", BD_TipoTalle.BuscarTipoTalle(oProducto.OTipoTalle).IdTipoTalle);
                     cmd.Parameters.AddWithValue("@Estado", Operaciones.BuscarEstado(oProducto.OEstado));
                     cmd.Parameters.AddWithValue("@IdProducto", oProducto.IdProducto);
                     oConexion.Open();
@@ -119,7 +115,7 @@ namespace CapaDatos
             {
                 try
                 {
-                    String SqlQuery = "SELECT * FROM Producto";
+                    String SqlQuery = "Select * from producto";
                     SqlDataAdapter adapter = new SqlDataAdapter(SqlQuery, oConexion);
 
                     using (adapter)
@@ -135,17 +131,16 @@ namespace CapaDatos
                                 OGeneroProducto = Operaciones.BuscarGenero(data.Rows[i]["GeneroProducto"].ToString()),
                                 ORubroProducto = BD_RubroProducto.BuscarRubroProductoById(Convert.ToInt32(data.Rows[i]["IdRubroProducto"].ToString())),
                                 OMarca = BD_Marca.BuscarMarca(Convert.ToInt32(data.Rows[i]["IdMarca"].ToString())),
-                                OColor = BD_Color.BuscarColor(Convert.ToInt32(data.Rows[i]["IdColor"].ToString())),
-                                OTalle = BD_Talle.BuscarTalle(Convert.ToInt32(data.Rows[i]["IdTalle"].ToString())),
-                                Costo = Convert.ToDouble(data.Rows[i]["Costo"].ToString()),
+                                OTipoTalle = BD_TipoTalle.BuscarTipoTalle(Convert.ToInt32(data.Rows[i]["IdTipoTalle"].ToString())),
+                                OProductoVenta = new List<ProductoVenta>(),
                                 OEstado = Operaciones.BuscarEstado(data.Rows[i]["Estado"].ToString()),
                                 FechaRegistro = Convert.ToDateTime(data.Rows[i]["FechaRegistro"])
                             };
+                            prod = cargarProductosVenta(prod);
                             Tabla.Add(prod);
-                        }
-
-                        return Tabla;
+                        } 
                     }
+                    return Tabla;
                 }
                 catch (Exception ex)
                 {
@@ -181,6 +176,42 @@ namespace CapaDatos
                 if (item.IdProducto.Equals(oProducto)) return item;
             }
             return null;
+        }
+        public static Producto cargarProductosVenta(Producto prod)
+        {
+            DataTable data = new DataTable();
+            using (SqlConnection oConexion = new SqlConnection(Conexion.conexion))
+            try
+            {
+            String SqlQuery = "Select * from ProductoVenta";
+            SqlDataAdapter adapter = new SqlDataAdapter(SqlQuery, oConexion);
+            using (adapter)
+            {
+                adapter.Fill(data);
+                for (int i = 0; i < data.Rows.Count; i++)
+                {
+                    if (prod.IdProducto.Equals(Convert.ToInt32(data.Rows[i]["IdProducto"])))
+                    {
+                        var prodVenta = new ProductoVenta
+                        {
+                            OColor = BD_Color.BuscarColor(Convert.ToInt32(data.Rows[i]["IdColor"].ToString())),
+                            OTalle = BD_Talle.BuscarTalle(Convert.ToInt32(data.Rows[i]["IdTalle"].ToString())),
+                            Costo = Convert.ToDouble(data.Rows[i]["Costo"].ToString()),
+                            Cantidad = Convert.ToInt32(data.Rows[i]["Cantidad"].ToString()),
+                        };
+                        prod.OProductoVenta.Add(prodVenta);
+                    }
+                    
+                }
+            }
+            return prod;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return prod;
+            }
+
         }
     }
 }

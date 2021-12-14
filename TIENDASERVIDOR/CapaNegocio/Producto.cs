@@ -14,9 +14,8 @@ namespace CapaNegocio
         private GeneroProducto oGeneroProducto;
         private RubroProducto oRubroProducto;
         private Marca oMarca;
-        private Color oColor;
-        private Talle oTalle;
-        private double costo;
+        private TipoTalle oTipoTalle;
+        private List<ProductoVenta> oProductoVenta;
         private Estado oEstado;
         private DateTime fechaRegistro;
 
@@ -26,13 +25,12 @@ namespace CapaNegocio
         public GeneroProducto OGeneroProducto { get => oGeneroProducto; set => oGeneroProducto = value; }
         public RubroProducto ORubroProducto { get => oRubroProducto; set => oRubroProducto = value; }
         public Marca OMarca { get => oMarca; set => oMarca = value; }
-        public Color OColor { get => oColor; set => oColor = value; }
-        public Talle OTalle { get => oTalle; set => oTalle = value; }
-        public double Costo { get => costo; set => costo = value; }
+        public TipoTalle OTipoTalle { get => oTipoTalle; set => oTipoTalle = value; }
+        public List<ProductoVenta> OProductoVenta { get => oProductoVenta; set => oProductoVenta = value; }
         public Estado OEstado { get => oEstado; set => oEstado = value; }
         public DateTime FechaRegistro { get => fechaRegistro; set => fechaRegistro = value; }
 
-        public Producto(int idProducto, string codigo, string descripcion, GeneroProducto oGeneroProducto, RubroProducto oRubroProducto, Marca oMarca, Color oColor, Talle oTalle, double costo, Estado oEstado)
+        public Producto(int idProducto, string codigo, string descripcion, GeneroProducto oGeneroProducto, RubroProducto oRubroProducto, Marca oMarca, List<ProductoVenta> oProductoVenta, TipoTalle oTipoTalle,Estado oEstado)
         {
             IdProducto = idProducto;
             Codigo = codigo;
@@ -40,28 +38,27 @@ namespace CapaNegocio
             OGeneroProducto = oGeneroProducto;
             ORubroProducto = oRubroProducto;
             OMarca = oMarca;
-            OColor = oColor;
-            OTalle = oTalle;
-            Costo = costo;
+            OProductoVenta = oProductoVenta;
+            OTipoTalle = oTipoTalle;
             OEstado = oEstado;
         }
 
-        public Producto(string codigo, string descripcion, GeneroProducto oGeneroProducto, RubroProducto oRubroProducto, Marca oMarca, Color oColor, Talle oTalle, double costo, Estado oEstado)
+        public Producto(string codigo, string descripcion, GeneroProducto oGeneroProducto, RubroProducto oRubroProducto, Marca oMarca, List<ProductoVenta> oProductoVenta, TipoTalle oTipoTalle,Estado oEstado)
         {
             Codigo = codigo;
             Descripcion = descripcion;
             OGeneroProducto = oGeneroProducto;
             ORubroProducto = oRubroProducto;
             OMarca = oMarca;
-            OColor = oColor;
-            OTalle = oTalle;
-            Costo = costo;
+            OProductoVenta = oProductoVenta;
+            OTipoTalle = oTipoTalle;
             OEstado = oEstado;
         }
-
         public Producto()
         {
         }
 
     }
+    
+
 }

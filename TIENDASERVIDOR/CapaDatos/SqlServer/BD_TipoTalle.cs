@@ -10,24 +10,22 @@ using System.Windows;
 
 namespace CapaDatos.SqlServer
 {
-    public class BD_Talle
+    public class BD_TipoTalle
     {
 
-        public static int RegistrarTalle(Talle oTalle)
+        public static int RegistrarTipoTalle(TipoTalle oTipoTalle)
         {
             int respuesta;
             using (SqlConnection oConexion = new SqlConnection(Conexion.conexion))
             {
                 try
                 {
-                    string SqlQuery = "INSERT INTO Talle(IdTalle,IdTipoTalle,CodigoTalle,DescripcionTalle,Estado)" +
-                                      "VALUES(@IdTalle,@IdTipoTalle,@CodigoTalle,@DescripcionTalle,@Estado)";
+                    string SqlQuery = "INSERT INTO TipoTalle(IdTipoTalle,Descripcion,Estado)" +
+                                      "VALUES(@IdTipoTalle,@Descripcion,@Estado)";
                     SqlCommand cmd = new SqlCommand(SqlQuery, oConexion);
-                    cmd.Parameters.AddWithValue("IdTalle", oTalle.IdTalle);
-                    cmd.Parameters.AddWithValue("IdTipoTalle", oTalle.OTipoTalle.IdTipoTalle);
-                    cmd.Parameters.AddWithValue("CodigoTalle", oTalle.CodigoTalle);
-                    cmd.Parameters.AddWithValue("DescripcionTalle", oTalle.DescripcionTalle);
-                    cmd.Parameters.AddWithValue("Estado", oTalle.OEstado);
+                    cmd.Parameters.AddWithValue("IdTipoTalle", oTipoTalle.IdTipoTalle);
+                    cmd.Parameters.AddWithValue("Descripcion", oTipoTalle.Descripcion);
+                    cmd.Parameters.AddWithValue("Estado", oTipoTalle.OEstado);
                     oConexion.Open();
                     respuesta = cmd.ExecuteNonQuery();
 
@@ -41,20 +39,18 @@ namespace CapaDatos.SqlServer
             }
             return respuesta;
         }
-        public static bool ActualizarTalle(Talle oTalle, int IdTalle)
+        public static bool ActualizarTipoTalle(TipoTalle oTipoTalle, int IdTipoTalle)
         {
             int respuesta;
             using (SqlConnection oConexion = new SqlConnection(Conexion.conexion))
             {
                 try
                 {
-                    String SqlQuery = "UPDATE Talle SET IdTipooTalle = @IdTipoTalle, CodigoTalle = @CodigoTalle, DescripcionTalle = @DescripcionTalle, Estado = @Estado  WHERE IdTalle = @IdTalle";
+                    String SqlQuery = "UPDATE TipoTalle SET Descripcion = @Descripcion, Estado = @Estado  WHERE IdTipoTalle = @IdTipoTalle";
                     SqlCommand cmd = new SqlCommand(SqlQuery, oConexion);
-                    cmd.Parameters.AddWithValue("IdTipoTalle", oTalle.OTipoTalle.IdTipoTalle);
-                    cmd.Parameters.AddWithValue("CodigoTalle", oTalle.CodigoTalle);
-                    cmd.Parameters.AddWithValue("DescripcionTalle", oTalle.DescripcionTalle);                  
-                    cmd.Parameters.AddWithValue("Estado", oTalle.OEstado);
-                    cmd.Parameters.AddWithValue("IdTalle", IdTalle);
+                    cmd.Parameters.AddWithValue("Descripcion", oTipoTalle.Descripcion);                  
+                    cmd.Parameters.AddWithValue("Estado", oTipoTalle.OEstado);
+                    cmd.Parameters.AddWithValue("IdTipoTalle", IdTipoTalle);
                     oConexion.Open();
                     respuesta = cmd.ExecuteNonQuery();
                     return true;
@@ -66,16 +62,16 @@ namespace CapaDatos.SqlServer
                 }
             }
         }
-        public static bool EliminarTalle(int IdTalle)
+        public static bool EliminarTipoTalle(int IdTipoTalle)
         {
             int respuesta;
             using (SqlConnection oConexion = new SqlConnection(Conexion.conexion))
             {
                 try
                 {
-                    String SqlQuery = "DELETE FROM Talle WHERE IdTalle = @IdTalle";
+                    String SqlQuery = "DELETE FROM TipoTalle WHERE IdTipoTalle = @IdTipoTalle";
                     SqlCommand cmd = new SqlCommand(SqlQuery, oConexion);
-                    cmd.Parameters.AddWithValue("IdTalle", IdTalle);
+                    cmd.Parameters.AddWithValue("IdTipoTalle", IdTipoTalle);
                     oConexion.Open();
                     respuesta = cmd.ExecuteNonQuery();
                     return true;
@@ -88,67 +84,65 @@ namespace CapaDatos.SqlServer
                 }
             }
         }
-        public static List<Talle> MostrarTalle()
+        public static List<TipoTalle> MostrarTipoTalle()
         {
-            List<Talle> talleTabla = new List<Talle>();
+            List<TipoTalle> TipoTalleTabla = new List<TipoTalle>();
             DataTable data = new DataTable();
             using (SqlConnection oConexion = new SqlConnection(Conexion.conexion))
             {
                 try
                 {
-                    String SqlQuery = "SELECT * FROM TALLE";
+                    String SqlQuery = "SELECT * FROM TipoTalle";
                     SqlDataAdapter adapter = new SqlDataAdapter(SqlQuery, oConexion);
                     using (adapter)
                     {
                         adapter.Fill(data);
                         for (int i = 0; i < data.Rows.Count; i++)
                         {
-                            var talle = new Talle
+                            var TipoTalle = new TipoTalle
                             {
-                                IdTalle = Convert.ToInt32(data.Rows[i]["IdTalle"]),
-                                OTipoTalle = BD_TipoTalle.BuscarTipoTalle(Convert.ToInt32(data.Rows[i]["IdTipoTalle"])),
-                                CodigoTalle = data.Rows[i]["CodigoTalle"].ToString(),
-                                DescripcionTalle = data.Rows[i]["DescripcionTalle"].ToString(),
+                                IdTipoTalle = Convert.ToInt32(data.Rows[i]["IdTipoTalle"]),
+                                Descripcion = data.Rows[i]["Descripcion"].ToString(),
                                 OEstado = Operaciones.BuscarEstado(data.Rows[i]["Estado"].ToString()),
                             };
-                            talleTabla.Add(talle);
+                            TipoTalleTabla.Add(TipoTalle);
                         }
 
-                        return talleTabla;
+                        return TipoTalleTabla;
                     }
                 }
                 catch (Exception ex)
                 {
                     MessageBox.Show("Error en Capa Datos: " + ex.Message);
-                    return talleTabla;
+                    return TipoTalleTabla;
                 }
 
             }
         }
-        public static Talle BuscarTalle(Talle oTalle)
+        public static TipoTalle BuscarTipoTalle(TipoTalle oTipoTalle)
         {
-            List<Talle> lista = MostrarTalle();
+            List<TipoTalle> lista = MostrarTipoTalle();
             foreach (var item in lista)
             {
-                if (oTalle.IdTalle.Equals(item.IdTalle)) return item;
+                if (oTipoTalle.IdTipoTalle.Equals(item.IdTipoTalle)) return item;
             }
             return null;
         }
-        public static Talle BuscarTalle(string Descripcion)
+        public static TipoTalle BuscarTipoTalle(string Descripcion)
         {
-            List<Talle> lista = MostrarTalle();
+            List<TipoTalle> lista = MostrarTipoTalle();
             foreach (var item in lista)
             {
-                if (item.DescripcionTalle.Equals(Descripcion)) return item;
+                if (item.Descripcion.Equals(Descripcion)) return item;
             }
             return null;
         }
-        public static Talle BuscarTalle(int IdTalle)
+        public static TipoTalle BuscarTipoTalle(int IdTipoTalle)
         {
-            List<Talle> lista = MostrarTalle();
+            List<TipoTalle> lista = MostrarTipoTalle();
             foreach (var item in lista)
             {
-                if (item.IdTalle.Equals(IdTalle)) return item;
+                if (item.IdTipoTalle.Equals(IdTipoTalle)) return item;
             }
             return null;
         }

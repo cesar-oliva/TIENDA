@@ -29,6 +29,8 @@ namespace CapaServicioServidor
         [DataMember]
         public int IdTalle { get; set; }
         [DataMember]
+        public TipoTalle OTipoTalle { get; set; }
+        [DataMember]
         public string CodigoTalle { get; set; }
         [DataMember]
         public string DescripcionTalle { get; set; }

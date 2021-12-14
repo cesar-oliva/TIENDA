@@ -26,6 +26,8 @@ namespace ServiceTalle
         
         private ServiceTalle.Estado OEstadoField;
         
+        private ServiceTalle.TipoTalle OTipoTalleField;
+        
         [System.Runtime.Serialization.DataMemberAttribute()]
         public string CodigoTalle
         {
@@ -62,6 +64,71 @@ namespace ServiceTalle
             set
             {
                 this.IdTalleField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public ServiceTalle.Estado OEstado
+        {
+            get
+            {
+                return this.OEstadoField;
+            }
+            set
+            {
+                this.OEstadoField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public ServiceTalle.TipoTalle OTipoTalle
+        {
+            get
+            {
+                return this.OTipoTalleField;
+            }
+            set
+            {
+                this.OTipoTalleField = value;
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.3")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="TipoTalle", Namespace="http://schemas.datacontract.org/2004/07/CapaNegocio")]
+    public partial class TipoTalle : object
+    {
+        
+        private string DescripcionField;
+        
+        private int IdTipoTalleField;
+        
+        private ServiceTalle.Estado OEstadoField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Descripcion
+        {
+            get
+            {
+                return this.DescripcionField;
+            }
+            set
+            {
+                this.DescripcionField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int IdTipoTalle
+        {
+            get
+            {
+                return this.IdTipoTalleField;
+            }
+            set
+            {
+                this.IdTipoTalleField = value;
             }
         }
         
@@ -105,6 +172,8 @@ namespace ServiceTalle
         
         private ServiceTalle.Estado OEstadoField;
         
+        private ServiceTalle.TipoTalle OTipoTalleField;
+        
         [System.Runtime.Serialization.DataMemberAttribute()]
         public string CodigoTalle
         {
@@ -154,6 +223,19 @@ namespace ServiceTalle
             set
             {
                 this.OEstadoField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public ServiceTalle.TipoTalle OTipoTalle
+        {
+            get
+            {
+                return this.OTipoTalleField;
+            }
+            set
+            {
+                this.OTipoTalleField = value;
             }
         }
     }

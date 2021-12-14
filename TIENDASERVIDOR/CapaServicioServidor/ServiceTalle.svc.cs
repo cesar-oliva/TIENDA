@@ -17,6 +17,7 @@ namespace CapaServicioServidor
         {
             var nuevo = new Talle
             {
+                OTipoTalle = oTalle.OTipoTalle,
                 CodigoTalle = oTalle.CodigoTalle,
                 DescripcionTalle = oTalle.DescripcionTalle,
                 OEstado = oTalle.OEstado
@@ -46,6 +47,7 @@ namespace CapaServicioServidor
                 DtoTalle talle = new DtoTalle
                 {
                     IdTalle = item.IdTalle,
+                    OTipoTalle = item.OTipoTalle,
                     CodigoTalle = item.CodigoTalle,
                     DescripcionTalle = item.DescripcionTalle,
                     OEstado = item.OEstado,
@@ -60,6 +62,7 @@ namespace CapaServicioServidor
             var nuevo = new Talle
             {
                 IdTalle = oTalle.IdTalle,
+                OTipoTalle = oTalle.OTipoTalle,
                 CodigoTalle= oTalle.CodigoTalle,
                 DescripcionTalle = oTalle.DescripcionTalle,
                 OEstado = oTalle.OEstado,

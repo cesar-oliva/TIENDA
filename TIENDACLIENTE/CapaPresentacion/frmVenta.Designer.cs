@@ -82,6 +82,10 @@ namespace CapaPresentacion
             this.label3 = new System.Windows.Forms.Label();
             this.lblCantidad = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
+            this.cmbTalle = new System.Windows.Forms.ComboBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.cmbColor = new System.Windows.Forms.ComboBox();
+            this.label21 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).BeginInit();
             this.groupBox4.SuspendLayout();
@@ -342,6 +346,10 @@ namespace CapaPresentacion
             // groupBox5
             // 
             this.groupBox5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(42)))), ((int)(((byte)(52)))), ((int)(((byte)(93)))));
+            this.groupBox5.Controls.Add(this.cmbTalle);
+            this.groupBox5.Controls.Add(this.label4);
+            this.groupBox5.Controls.Add(this.cmbColor);
+            this.groupBox5.Controls.Add(this.label21);
             this.groupBox5.Controls.Add(this.pictureBox2);
             this.groupBox5.Controls.Add(this.pictureBox5);
             this.groupBox5.Controls.Add(this.pictureBox4);
@@ -359,7 +367,7 @@ namespace CapaPresentacion
             this.groupBox5.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.groupBox5.Location = new System.Drawing.Point(13, 159);
             this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(1039, 70);
+            this.groupBox5.Size = new System.Drawing.Size(1039, 85);
             this.groupBox5.TabIndex = 2;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Producto";
@@ -367,7 +375,7 @@ namespace CapaPresentacion
             // pictureBox2
             // 
             this.pictureBox2.Image = global::CapaPresentacion.Properties.Resources.agregar;
-            this.pictureBox2.Location = new System.Drawing.Point(964, 23);
+            this.pictureBox2.Location = new System.Drawing.Point(956, 38);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(25, 25);
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -378,7 +386,7 @@ namespace CapaPresentacion
             // pictureBox5
             // 
             this.pictureBox5.Image = global::CapaPresentacion.Properties.Resources.image_icon_delete_pic_512x512;
-            this.pictureBox5.Location = new System.Drawing.Point(1002, 23);
+            this.pictureBox5.Location = new System.Drawing.Point(994, 38);
             this.pictureBox5.Name = "pictureBox5";
             this.pictureBox5.Size = new System.Drawing.Size(25, 25);
             this.pictureBox5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -389,7 +397,7 @@ namespace CapaPresentacion
             // pictureBox4
             // 
             this.pictureBox4.Image = global::CapaPresentacion.Properties.Resources.lupa1;
-            this.pictureBox4.Location = new System.Drawing.Point(154, 25);
+            this.pictureBox4.Location = new System.Drawing.Point(109, 40);
             this.pictureBox4.Name = "pictureBox4";
             this.pictureBox4.Size = new System.Drawing.Size(25, 25);
             this.pictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -400,7 +408,7 @@ namespace CapaPresentacion
             // label27
             // 
             this.label27.AutoSize = true;
-            this.label27.Location = new System.Drawing.Point(836, 28);
+            this.label27.Location = new System.Drawing.Point(879, 22);
             this.label27.Name = "label27";
             this.label27.Size = new System.Drawing.Size(58, 15);
             this.label27.TabIndex = 36;
@@ -408,25 +416,25 @@ namespace CapaPresentacion
             // 
             // txtCantidad
             // 
-            this.txtCantidad.Location = new System.Drawing.Point(900, 23);
+            this.txtCantidad.Location = new System.Drawing.Point(879, 40);
             this.txtCantidad.Name = "txtCantidad";
-            this.txtCantidad.Size = new System.Drawing.Size(51, 23);
+            this.txtCantidad.Size = new System.Drawing.Size(58, 23);
             this.txtCantidad.TabIndex = 35;
             this.txtCantidad.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // label26
             // 
             this.label26.AutoSize = true;
-            this.label26.Location = new System.Drawing.Point(665, 28);
+            this.label26.Location = new System.Drawing.Point(795, 22);
             this.label26.Name = "label26";
-            this.label26.Size = new System.Drawing.Size(103, 15);
+            this.label26.Size = new System.Drawing.Size(42, 15);
             this.label26.TabIndex = 34;
-            this.label26.Text = "Stock Disponible:";
+            this.label26.Text = "Stock:";
             // 
             // label14
             // 
             this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(185, 31);
+            this.label14.Location = new System.Drawing.Point(157, 20);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(75, 15);
             this.label14.TabIndex = 18;
@@ -435,7 +443,7 @@ namespace CapaPresentacion
             // txtStock
             // 
             this.txtStock.Enabled = false;
-            this.txtStock.Location = new System.Drawing.Point(774, 23);
+            this.txtStock.Location = new System.Drawing.Point(795, 40);
             this.txtStock.Name = "txtStock";
             this.txtStock.Size = new System.Drawing.Size(51, 23);
             this.txtStock.TabIndex = 25;
@@ -444,7 +452,7 @@ namespace CapaPresentacion
             // label16
             // 
             this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(15, 31);
+            this.label16.Location = new System.Drawing.Point(18, 22);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(48, 15);
             this.label16.TabIndex = 14;
@@ -452,7 +460,7 @@ namespace CapaPresentacion
             // 
             // txtCodigo
             // 
-            this.txtCodigo.Location = new System.Drawing.Point(66, 25);
+            this.txtCodigo.Location = new System.Drawing.Point(18, 40);
             this.txtCodigo.Name = "txtCodigo";
             this.txtCodigo.Size = new System.Drawing.Size(77, 23);
             this.txtCodigo.TabIndex = 15;
@@ -461,24 +469,24 @@ namespace CapaPresentacion
             // txtPrecioVenta
             // 
             this.txtPrecioVenta.Enabled = false;
-            this.txtPrecioVenta.Location = new System.Drawing.Point(559, 25);
+            this.txtPrecioVenta.Location = new System.Drawing.Point(684, 38);
             this.txtPrecioVenta.Name = "txtPrecioVenta";
-            this.txtPrecioVenta.Size = new System.Drawing.Size(90, 23);
+            this.txtPrecioVenta.Size = new System.Drawing.Size(68, 23);
             this.txtPrecioVenta.TabIndex = 23;
             // 
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(476, 31);
+            this.label13.Location = new System.Drawing.Point(684, 20);
             this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(80, 15);
+            this.label13.Size = new System.Drawing.Size(45, 15);
             this.label13.TabIndex = 22;
-            this.label13.Text = "Precio Venta:";
+            this.label13.Text = "Precio:";
             // 
             // txtDescripcion
             // 
             this.txtDescripcion.Enabled = false;
-            this.txtDescripcion.Location = new System.Drawing.Point(262, 25);
+            this.txtDescripcion.Location = new System.Drawing.Point(157, 38);
             this.txtDescripcion.Name = "txtDescripcion";
             this.txtDescripcion.Size = new System.Drawing.Size(203, 23);
             this.txtDescripcion.TabIndex = 20;
@@ -512,7 +520,7 @@ namespace CapaPresentacion
             this.dataGridLineaVenta.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridLineaVenta.EnableHeadersVisualStyles = false;
             this.dataGridLineaVenta.GridColor = System.Drawing.Color.SteelBlue;
-            this.dataGridLineaVenta.Location = new System.Drawing.Point(13, 235);
+            this.dataGridLineaVenta.Location = new System.Drawing.Point(13, 250);
             this.dataGridLineaVenta.Name = "dataGridLineaVenta";
             dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(66)))), ((int)(((byte)(91)))));
             dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
@@ -521,7 +529,7 @@ namespace CapaPresentacion
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.White;
             this.dataGridLineaVenta.RowsDefaultCellStyle = dataGridViewCellStyle2;
             this.dataGridLineaVenta.RowTemplate.Height = 25;
-            this.dataGridLineaVenta.Size = new System.Drawing.Size(1039, 206);
+            this.dataGridLineaVenta.Size = new System.Drawing.Size(1039, 191);
             this.dataGridLineaVenta.TabIndex = 33;
             // 
             // button3
@@ -653,6 +661,48 @@ namespace CapaPresentacion
             this.label5.TabIndex = 60;
             this.label5.Text = "FACT:";
             // 
+            // cmbTalle
+            // 
+            this.cmbTalle.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.cmbTalle.FormattingEnabled = true;
+            this.cmbTalle.Location = new System.Drawing.Point(536, 36);
+            this.cmbTalle.Name = "cmbTalle";
+            this.cmbTalle.Size = new System.Drawing.Size(115, 25);
+            this.cmbTalle.TabIndex = 67;
+            this.cmbTalle.Text = "Talle";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label4.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.label4.Location = new System.Drawing.Point(536, 19);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(35, 15);
+            this.label4.TabIndex = 68;
+            this.label4.Text = "Talle:";
+            // 
+            // cmbColor
+            // 
+            this.cmbColor.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.cmbColor.FormattingEnabled = true;
+            this.cmbColor.Location = new System.Drawing.Point(386, 36);
+            this.cmbColor.Name = "cmbColor";
+            this.cmbColor.Size = new System.Drawing.Size(126, 25);
+            this.cmbColor.TabIndex = 65;
+            this.cmbColor.Text = "Color";
+            // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label21.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.label21.Location = new System.Drawing.Point(386, 18);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(39, 15);
+            this.label21.TabIndex = 66;
+            this.label21.Text = "Color:";
+            // 
             // frmVenta
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -756,5 +806,9 @@ namespace CapaPresentacion
         private System.Windows.Forms.Label label5;
         public System.Windows.Forms.MaskedTextBox mtxtCuit;
         public System.Windows.Forms.TextBox txtCodigo;
+        private System.Windows.Forms.ComboBox cmbTalle;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.ComboBox cmbColor;
+        private System.Windows.Forms.Label label21;
     }
 }

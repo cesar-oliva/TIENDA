@@ -17,11 +17,10 @@ namespace CapaServicioServidor
             GeneroProducto oGeneroProducto = oProducto.OGeneroProducto;
             RubroProducto Rubro = oProducto.ORubroProducto;
             Marca oMarca = oProducto.OMarca;
-            Color oColor = oProducto.OColor;
-            Talle oTalle = oProducto.OTalle;
-            double Costo = oProducto.Costo;
+            TipoTalle oTipoTalle = oProducto.OTipoTalle;
+            List<ProductoVenta> oProductoVenta = oProducto.OProductoVenta;
             Estado oEstado = oProducto.OEstado;
-            var nuevo = new Producto(IdProducto,Codigo, Descripcion, oGeneroProducto, Rubro,oMarca,oColor,oTalle,Costo,oEstado);
+            var nuevo = new Producto(IdProducto,Codigo, Descripcion, oGeneroProducto, Rubro,oMarca,oProductoVenta,oTipoTalle,oEstado);
             
             if (BD_Producto.ModificarProducto(nuevo))
             {
@@ -46,11 +45,10 @@ namespace CapaServicioServidor
             GeneroProducto oGeneroProducto = oProducto.OGeneroProducto;
             RubroProducto Rubro = oProducto.ORubroProducto;
             Marca oMarca = oProducto.OMarca;
-            Color oColor = oProducto.OColor;
-            Talle oTalle = oProducto.OTalle;
-            double Costo = oProducto.Costo;
+            TipoTalle oTipoTalle = oProducto.OTipoTalle;
+            List<ProductoVenta> oProductoVenta = oProducto.OProductoVenta;
             Estado oEstado = oProducto.OEstado;
-            var nuevo = new Producto(Codigo, Descripcion,oGeneroProducto,Rubro,oMarca,oColor,oTalle,Costo,oEstado);
+            var nuevo = new Producto(Codigo, Descripcion,oGeneroProducto,Rubro,oMarca,oProductoVenta,oTipoTalle,oEstado);
             if (BD_Producto.RegistrarProducto(nuevo) > 0)
             {
                 return true;
@@ -75,9 +73,8 @@ namespace CapaServicioServidor
                     OGeneroProducto = item.OGeneroProducto,
                     ORubroProducto = item.ORubroProducto,
                     OMarca = item.OMarca,
-                    OColor = item.OColor, 
-                    OTalle = item.OTalle,   
-                    Costo = item.Costo,   
+                    OProductoVenta = item.OProductoVenta, 
+                    OTipoTalle = item.OTipoTalle,     
                     OEstado = item.OEstado,
                     FechaRegistro = item.FechaRegistro
                 };
@@ -119,9 +116,9 @@ namespace CapaServicioServidor
             return BD_Color.BuscarColor(oColor);
         }
 
-        public Talle ObtenerTalle(string oTalle)
+        public TipoTalle ObtenerTipoTalle(string oTalle)
         {
-            return BD_Talle.BuscarTalle(oTalle);
+            return BD_TipoTalle.BuscarTipoTalle(oTalle);
         }
     }
 }

@@ -32,7 +32,7 @@ namespace CapaServicioServidor
         [OperationContract]
         Color ObtenerColor(string oColor);
         [OperationContract]
-        Talle ObtenerTalle(string oTalle);
+        TipoTalle ObtenerTipoTalle(string oTipoTalle);
         [OperationContract]
         Producto BuscarProductoById(int idProducto);
     }
@@ -55,11 +55,9 @@ namespace CapaServicioServidor
         [DataMember]
         public Marca OMarca { get; set; }
         [DataMember]
-        public Color OColor { get; set; }
+        public TipoTalle OTipoTalle { get; set; }
         [DataMember]
-        public Talle OTalle { get; set; }
-        [DataMember]
-        public double Costo { get; set; }
+        public List<ProductoVenta> OProductoVenta { get; set; }
         [DataMember]
         public Estado OEstado { get; set; } //activo o inactivo
         [DataMember]

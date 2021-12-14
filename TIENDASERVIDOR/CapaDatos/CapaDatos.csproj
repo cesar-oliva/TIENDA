@@ -78,6 +78,7 @@
     <Compile Include="SqlServer\BD_Rol.cs" />
     <Compile Include="SqlServer\BD_RubroProducto.cs" />
     <Compile Include="SqlServer\BD_Sucursal.cs" />
+    <Compile Include="SqlServer\BD_TipoTalle.cs" />
     <Compile Include="SqlServer\BD_Talle.cs" />
     <Compile Include="SqlServer\BD_Tienda.cs" />
     <Compile Include="SqlServer\BD_Usuario.cs" />

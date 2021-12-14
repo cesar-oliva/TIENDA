@@ -116,14 +116,17 @@ namespace CapaPresentacion
             {
                 foreach (var item in oListaProducto)
                 {
-                    if (txtCodigo.Text.Trim().ToString().Equals(item.Codigo.ToString()))
+                    foreach (var pv in item.OProductoVenta)
                     {
-                        txtDescripcion.Text = item.Descripcion.ToString();
-                        txtPrecioVenta.Text = Convert.ToString((item.Costo * (((client_rub.ObtenerRubroProductoById(item.ORubroProducto.IdRubroProducto).MargenGanancia) / 100) + 1)));
-                        txtStock.Text = "25";
-                        bandera = true;
-                        txtCantidad.Focus();
-                        id = client_rub.ObtenerRubroProductoById(item.ORubroProducto.IdRubroProducto).OImpuesto.IdImpuesto;
+                        if (txtCodigo.Text.Trim().ToString().Equals(item.Codigo.ToString()))
+                        {
+                            txtDescripcion.Text = item.Descripcion.ToString();
+                            txtPrecioVenta.Text = Convert.ToString((pv.Costo * (((client_rub.ObtenerRubroProductoById(item.ORubroProducto.IdRubroProducto).MargenGanancia) / 100) + 1)));
+                            txtStock.Text = "25";
+                            bandera = true;
+                            txtCantidad.Focus();
+                            id = client_rub.ObtenerRubroProductoById(item.ORubroProducto.IdRubroProducto).OImpuesto.IdImpuesto;
+                        }
                     }
                 }
                 if (bandera == false)

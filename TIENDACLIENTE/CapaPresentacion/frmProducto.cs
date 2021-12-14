@@ -50,15 +50,21 @@ namespace CapaPresentacion
                 TablaProducto.Columns.Add("RubroProducto", typeof(string));
                 TablaProducto.Columns.Add("Marca", typeof(string));
                 TablaProducto.Columns.Add("Color", typeof(string));
+                TablaProducto.Columns.Add("TipoTalle", typeof(string));
                 TablaProducto.Columns.Add("Talle", typeof(string));
                 TablaProducto.Columns.Add("Costo", typeof(double));
+                TablaProducto.Columns.Add("Stock", typeof(double));
                 TablaProducto.Columns.Add("Estado", typeof(string));
                 TablaProducto.Columns.Add("FechaRegistro", typeof(DateTime));
                 foreach (DtoProducto row in oListaProducto)
                 {
                     if (row.OEstado.Equals(ServiceProducto.Estado.Activo))
                     {
-                        TablaProducto.Rows.Add(row.IdProducto, row.Codigo, row.Descripcion, row.OGeneroProducto.ToString(), row.ORubroProducto.DescripcionRubroProducto, row.OMarca.Descripcion, row.OColor.DescripcionColor, row.OTalle.DescripcionTalle, row.Costo, row.OEstado, row.FechaRegistro);
+                        foreach (var item in row.OProductoVenta)
+                        {
+                            TablaProducto.Rows.Add(row.IdProducto, row.Codigo, row.Descripcion, row.OGeneroProducto.ToString(), row.ORubroProducto.DescripcionRubroProducto, row.OMarca.Descripcion,item.OColor.DescripcionColor, row.OTipoTalle.Descripcion,item.OTalle.CodigoTalle, item.Costo,item.Cantidad,row.OEstado, row.FechaRegistro);
+                        }
+                        
                     }    
                 }
                 dataGridProducto.DataSource = TablaProducto;
@@ -71,8 +77,10 @@ namespace CapaPresentacion
                 dataGridProducto.Columns["RubroProducto"].Visible = true;
                 dataGridProducto.Columns["Marca"].Visible = true;
                 dataGridProducto.Columns["Color"].Visible = true;
+                dataGridProducto.Columns["TipoTalle"].Visible = true;
                 dataGridProducto.Columns["Talle"].Visible = true;
                 dataGridProducto.Columns["Costo"].Visible = true;
+                dataGridProducto.Columns["Stock"].Visible = true;
                 dataGridProducto.Columns["Estado"].Visible = true;
                 dataGridProducto.Columns["FechaRegistro"].Visible = true;
                 foreach (DataGridViewColumn cl in dataGridProducto.Columns)
@@ -117,9 +125,9 @@ namespace CapaPresentacion
                     OGeneroProducto = client.ObtenerGeneroProducto(Convert.ToString(dataGridProducto.Rows[index].Cells["GeneroProducto"].Value)),
                     ORubroProducto = client.ObtenerRubroProducto(Convert.ToString(dataGridProducto.Rows[index].Cells["RubroProducto"].Value)),
                     OMarca = client.ObtenerMarca(Convert.ToString(dataGridProducto.Rows[index].Cells["Marca"].Value)),
-                    OColor = client.ObtenerColor(Convert.ToString(dataGridProducto.Rows[index].Cells["Color"].Value)),
-                    OTalle = client.ObtenerTalle(Convert.ToString(dataGridProducto.Rows[index].Cells["Talle"].Value)),
-                    Costo = Convert.ToDouble(dataGridProducto.Rows[index].Cells["Costo"].Value),
+                    //OColor = client.ObtenerColor(Convert.ToString(dataGridProducto.Rows[index].Cells["Color"].Value)),
+                    OTipoTalle = client.ObtenerTipoTalle(Convert.ToString(dataGridProducto.Rows[index].Cells["TipoTalle"].Value)),
+                    //Costo = Convert.ToDouble(dataGridProducto.Rows[index].Cells["Costo"].Value),
                     OEstado = client.ObtenerEstado(Convert.ToString(dataGridProducto.Rows[index].Cells["Estado"].Value))
                 };
                 MtnProducto form = new(oProducto);
