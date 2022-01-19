@@ -9,27 +9,27 @@ namespace CapaNegocio
     public class Marca
     {
         private int idMarca;
-        private string descripcion;
+        private string descripcionMarca;
         private Estado oEstado;
 
         public int IdMarca { get => idMarca; set => idMarca = value; }
-        public string Descripcion { get => descripcion; set => descripcion = value; }
+        public string DescripcionMarca { get => descripcionMarca; set => descripcionMarca = value; }
         public Estado OEstado { get => oEstado; set => oEstado = value; }
 
         public Marca()
         {
         }
 
-        public Marca(int idMarca, string descripcion, Estado oEstado)
+        public Marca(int idMarca, string descripcionMarca, Estado oEstado)
         {
             IdMarca = idMarca;
-            Descripcion = descripcion;
+            DescripcionMarca = descripcionMarca;
             OEstado = oEstado;
         }
 
-        public Marca(string descripcion, Estado oEstado)
+        public Marca(string descripcionMarca, Estado oEstado)
         {
-            Descripcion = descripcion;
+            DescripcionMarca = descripcionMarca;
             OEstado = oEstado;
         }
     }

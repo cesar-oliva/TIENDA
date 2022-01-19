@@ -16,29 +16,29 @@ namespace CapaDatos
         public static int RegistrarProducto(Producto oProducto)
         {
             int respuesta;
+            DataTable data = new DataTable();
             using (SqlConnection oConexion = new SqlConnection(Conexion.conexion))
             {
                 try
                 {
-                    string SqlQuery = "INSERT INTO Producto(Codigo,Descripcion,GeneroProducto,IdRubroProducto,IdMarca,IdTipoTalle,Estado)" +
-                                     "VALUES(@codigo,@Descripcion,@GeneroProducto,@IdRubroProducto,@IdMarca,@IdTipoTalle,@Estado)";
+                    string SqlQuery = "INSERT INTO Producto(CodigoProducto,DescripcionProducto,IdGeneroProducto,IdRubroProducto,IdMarca,IdTipoTalle)" +
+                                     "VALUES(@codigoProducto,@DescripcionProducto,@IdGeneroProducto,@IdRubroProducto,@IdMarca,@IdTipoTalle)";
                     SqlCommand cmd = new SqlCommand(SqlQuery, oConexion);
-                    cmd.Parameters.AddWithValue("Codigo", oProducto.Codigo);
-                    cmd.Parameters.AddWithValue("Descripcion", oProducto.Descripcion);
-                    cmd.Parameters.AddWithValue("GeneroProducto", oProducto.OGeneroProducto.ToString());
+                    cmd.Parameters.AddWithValue("CodigoProducto", oProducto.CodigoProducto);
+                    cmd.Parameters.AddWithValue("DescripcionProducto", oProducto.DescripcionProducto);
+                    cmd.Parameters.AddWithValue("IdGeneroProducto", BD_GeneroProducto.BuscarGeneroProducto(oProducto.OGeneroProducto).IdGeneroProducto);
                     cmd.Parameters.AddWithValue("IdRubroProducto", BD_RubroProducto.BuscarRubroProducto(oProducto.ORubroProducto).IdRubroProducto);
                     cmd.Parameters.AddWithValue("IdMarca", BD_Marca.BuscarMarca(oProducto.OMarca).IdMarca);
                     cmd.Parameters.AddWithValue("IdTipoTalle", BD_TipoTalle.BuscarTipoTalle(oProducto.OTipoTalle).IdTipoTalle);
-                    cmd.Parameters.AddWithValue("Estado", Operaciones.BuscarEstado(oProducto.OEstado));
                     oConexion.Open();
                     respuesta = cmd.ExecuteNonQuery();
+
                 }
                 catch (Exception ex)
                 {
                     MessageBox.Show("Error al cargar el producto: "+ex.Message);
                     return 0;
                 }
-
             }
             return respuesta;
         }
@@ -51,11 +51,11 @@ namespace CapaDatos
             {
                 try
                 {
-                    string SqlQuery = "UPDATE PRODUCTO SET Codigo=@Codigo,Descripcion=@Descripcion,GeneroProducto=@GeneroProducto,IdRubroProducto=@IdRubroProducto,IdMarca=@IdMarca," +
+                    string SqlQuery = "UPDATE PRODUCTO SET CodigoProducto=@CodigoProducto,DescripcionProducto=@DescripcionProducto,GeneroProducto=@GeneroProducto,IdRubroProducto=@IdRubroProducto,IdMarca=@IdMarca," +
                                       "IdTipoTalle=@IdTipoTalle,Estado=@Estado WHERE IdProducto=@IdProducto";
                     SqlCommand cmd = new SqlCommand(SqlQuery, oConexion);
-                    cmd.Parameters.AddWithValue("@Codigo", oProducto.Codigo);
-                    cmd.Parameters.AddWithValue("@Descripcion", oProducto.Descripcion);
+                    cmd.Parameters.AddWithValue("@CodigoProducto", oProducto.CodigoProducto);
+                    cmd.Parameters.AddWithValue("@DescripcionProducto", oProducto.DescripcionProducto);
                     cmd.Parameters.AddWithValue("@GeneroProducto", oProducto.OGeneroProducto.ToString());
                     cmd.Parameters.AddWithValue("@IdRubroProducto", BD_RubroProducto.BuscarRubroProducto(oProducto.ORubroProducto).IdRubroProducto);
                     cmd.Parameters.AddWithValue("@IdMarca", BD_Marca.BuscarMarca(oProducto.OMarca).IdMarca);
@@ -125,18 +125,18 @@ namespace CapaDatos
                         {
                             var prod = new Producto
                             {
-                                IdProducto = Convert.ToInt32(data.Rows[i]["IdProducto"]),
-                                Codigo = data.Rows[i]["Codigo"].ToString(),
-                                Descripcion = data.Rows[i]["Descripcion"].ToString(),
-                                OGeneroProducto = Operaciones.BuscarGenero(data.Rows[i]["GeneroProducto"].ToString()),
+                                IdProducto = Convert.ToInt32(data.Rows[i]["IdProducto"].ToString()),
+                                CodigoProducto = data.Rows[i]["CodigoProducto"].ToString(),
+                                DescripcionProducto = data.Rows[i]["DescripcionProducto"].ToString(),
+                                OGeneroProducto = BD_GeneroProducto.BuscarGeneroProductoById(Convert.ToInt32(data.Rows[i]["IdGeneroProducto"].ToString())),
                                 ORubroProducto = BD_RubroProducto.BuscarRubroProductoById(Convert.ToInt32(data.Rows[i]["IdRubroProducto"].ToString())),
-                                OMarca = BD_Marca.BuscarMarca(Convert.ToInt32(data.Rows[i]["IdMarca"].ToString())),
-                                OTipoTalle = BD_TipoTalle.BuscarTipoTalle(Convert.ToInt32(data.Rows[i]["IdTipoTalle"].ToString())),
-                                OProductoVenta = new List<ProductoVenta>(),
+                                OMarca = BD_Marca.BuscarMarcaById(Convert.ToInt32(data.Rows[i]["IdMarca"].ToString())),
+                                OTipoTalle = BD_TipoTalle.BuscarTipoTalleById(Convert.ToInt32(data.Rows[i]["IdTipoTalle"].ToString())),
+                                //OProductoVenta = new List<ProductoVenta>(),
                                 OEstado = Operaciones.BuscarEstado(data.Rows[i]["Estado"].ToString()),
-                                FechaRegistro = Convert.ToDateTime(data.Rows[i]["FechaRegistro"])
+                                FechaRegistro = Convert.ToDateTime(data.Rows[i]["FechaRegistro"].ToString())
                             };
-                            prod = cargarProductosVenta(prod);
+                            //prod = cargarProductosVenta(prod);
                             Tabla.Add(prod);
                         } 
                     }
@@ -164,7 +164,7 @@ namespace CapaDatos
             List<Producto> lista = MostrarProducto();
             foreach (var item in lista)
             {
-                if (item.Descripcion.Equals(oProducto)) return item;
+                if (item.DescripcionProducto.Equals(oProducto)) return item;
             }
             return null;
         }

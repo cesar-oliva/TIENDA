@@ -20,56 +20,41 @@ namespace CapaPresentacion
     {
         private bool modoEditar = false;
         DataTable TablaProductoVenta = new();
-        List<string> TablaColor = new();
         frmMensaje msj = new();
         public MtnProducto(DtoProducto pProducto = null)
         {
             InitializeComponent();
             CargarCombosSeleccion();
+            groupBoxVariante.Enabled = false;
             ServiceProductoClient client_prod = new();
             var producto = client_prod.ListaProducto();
-            var IdProducto = 0;
-            foreach (var item in producto)
-            {
-                if (item.IdProducto >= IdProducto) IdProducto = item.IdProducto + 1;
-            }
+            int IdProducto = producto.Count()+1;
+            txtId.Text = IdProducto.ToString();
             if (pProducto != null)
             {
                 modoEditar = true;
-                cmbEstado.Enabled = true;
                 txtId.Text = pProducto.IdProducto.ToString();
-                txtCodigo.Text = pProducto.Codigo;
-                txtDescripcion.Text = pProducto.Descripcion;
+                txtCodigo.Text = pProducto.CodigoProducto;
+                txtDescripcion.Text = pProducto.DescripcionProducto;
                 cmbGenero.Text = pProducto.OGeneroProducto.ToString();
                 cmbRubro.Text = pProducto.ORubroProducto.DescripcionRubroProducto.ToString();
-                cmbMarca.Text = pProducto.OMarca.Descripcion.ToString();
+                cmbMarca.Text = pProducto.OMarca.DescripcionMarca.ToString();
                 //cmbColor.Text = pProducto.OColor.DescripcionColor.ToString();
-                cmbTipoTalle.Text = pProducto.OTipoTalle.Descripcion.ToString();
+                cmbTipoTalle.Text = pProducto.OTipoTalle.DescripcionTipoTalle.ToString();
                 //txtCosto.Text = pProducto.Costo.ToString();
-                cmbEstado.Text = pProducto.OEstado.ToString();
-            }
-            ServiceColorClient client_color = new();
-            foreach (var item in client_color.ListaColor())
-            {
-                TablaColor.Add(item.DescripcionColor);
             }
         }
         private void CargarCombosSeleccion()
         {
-            cmbEstado.Items.Add("Activo");
-            cmbEstado.Items.Add("Inactivo");
-            cmbGenero.Items.Add("Unisex");
-            cmbGenero.Items.Add("Masculino");
-            cmbGenero.Items.Add("Femenino");
-            cmbEstado.DisplayMember = "Text";
-            cmbEstado.ValueMember = "Value";
-            cmbEstado.SelectedIndex = 1;
-            groupBoxVariante.Enabled = false;   
+            cmbEstadoVariante.Items.Add("Activo");
+            cmbEstadoVariante.Items.Add("Inactivo");
+            groupBoxVariante.Enabled = false;
 
+           
             using (ServiceRubroProducto.ServiceRubroProductoClient client = new ())
             {
-                var oListaRubro = client.ListaRubroProducto();
-                foreach (var item in oListaRubro)
+                var oListaRubroProducto = client.ListaRubroProducto();
+                foreach (var item in oListaRubroProducto)
                 {
                     if (item.OEstado.Equals(ServiceRubroProducto.Estado.Activo)) cmbRubro.Items.Add(item.DescripcionRubroProducto);
                 }
@@ -77,15 +62,26 @@ namespace CapaPresentacion
                 cmbRubro.ValueMember = "Value";
                 client.Close();
             }
-            using (ServiceColor.ServiceColorClient client = new())
+            using (ServiceGeneroProducto.ServiceGeneroProductoClient client = new())
             {
-                var oListaColor = client.ListaColor();
-                foreach (var item in oListaColor)
+                var oListaGeneroProducto = client.ListaGeneroProducto();
+                foreach (var item in oListaGeneroProducto)
                 {
-                    if (item.OEstado.Equals(ServiceColor.Estado.Activo)) cmbColor.Items.Add(item.DescripcionColor);
+                    if (item.OEstado.Equals(ServiceGeneroProducto.Estado.Activo)) cmbGenero.Items.Add(item.DescripcionGeneroProducto);
                 }
-                cmbColor.DisplayMember = "Text";
-                cmbColor.ValueMember = "Value";
+                cmbGenero.DisplayMember = "Text";
+                cmbGenero.ValueMember = "Value";
+                client.Close();
+            }
+            using (ServiceTalle.ServiceTalleClient client = new())
+            {
+                var oListaTalle = client.ListaTalle();
+                foreach (var item in oListaTalle)
+                {
+                    if (item.OEstado.Equals(ServiceTalle.Estado.Activo)) cmbTalle.Items.Add(item.DescripcionTalle);
+                }
+                cmbTalle.DisplayMember = "Text";
+                cmbTalle.ValueMember = "Value";
                 client.Close();
             }
             using (ServiceTipoTalle.ServiceTipoTalleClient client = new())
@@ -93,7 +89,7 @@ namespace CapaPresentacion
                 var oListaTipoTalle = client.ListaTipoTalle();
                 foreach (var item in oListaTipoTalle)
                 {
-                    if (item.OEstado.Equals(ServiceTipoTalle.Estado.Activo)) cmbTipoTalle.Items.Add(item.Descripcion);
+                    if (item.OEstado.Equals(ServiceTipoTalle.Estado.Activo)) cmbTipoTalle.Items.Add(item.DescripcionTipoTalle);
                 }
                 cmbTipoTalle.DisplayMember = "Text";
                 cmbTipoTalle.ValueMember = "Value";
@@ -104,7 +100,7 @@ namespace CapaPresentacion
                 var oListaColor = client.ListaColor();
                 foreach (var item in oListaColor)
                 {
-                    if (item.OEstado.Equals(ServiceImpuesto.Estado.Inactivo))
+                    if (item.OEstado.Equals(ServiceColor.Estado.Activo))
                     {
                         cmbColor.Items.Add(item.DescripcionColor);
                     }
@@ -116,7 +112,7 @@ namespace CapaPresentacion
             using (ServiceMarca.ServiceMarcaClient client = new())
             {
 
-                List<DtoMarca> oListaMarca = client.ListaMarca();
+                var oListaMarca = client.ListaMarca();
                 foreach (var item in oListaMarca)
                 {
                     if (item.OEstado.ToString().Equals("Activo")) cmbMarca.Items.Add(item.Descripcion);
@@ -142,38 +138,17 @@ namespace CapaPresentacion
             this.Close();
 
         }
-
         private void Btn_Guardar_Click(object sender, EventArgs e)
         {
             ServiceProductoClient client_prod = new();
             _ = client_prod.ListaProducto();
-            var Codigo = txtCodigo.Text.Trim();
-            var Descripcion = txtDescripcion.Text.Trim();
-            var oGeneroProducto = client_prod.ObtenerGeneroProducto(cmbGenero.Items[cmbGenero.SelectedIndex].ToString());
-            var Rubro = client_prod.ObtenerRubroProducto(cmbRubro.Items[cmbRubro.SelectedIndex].ToString());
-            var Marca = client_prod.ObtenerMarca(cmbMarca.Items[cmbMarca.SelectedIndex].ToString());
-            var TipoTalle = client_prod.ObtenerTipoTalle(cmbTipoTalle.Items[cmbTipoTalle.SelectedIndex].ToString());
-            var oEstado = client_prod.ObtenerEstado(cmbEstado.Items[cmbEstado.SelectedIndex].ToString());
-            List<ProductoVenta> prodventa = new();
-            DtoProducto prod = new()
-            {
-                Codigo = Codigo,
-                Descripcion = Descripcion,
-                OGeneroProducto = oGeneroProducto,
-                ORubroProducto = Rubro,
-                OMarca = Marca,
-                OTipoTalle = TipoTalle, 
-                OEstado = oEstado
-            };
-
-            //for (int i = 0; i < dataGridProductoVenta.RowCount; i++)
-            //{
-            //    Producto oProducto = prod;
-            //    Color oColor = client_prod.ObtenerColor(dataGridProductoVenta.Rows[i].Cells[1].Value.ToString());
-            //    prodventa[i] = dataGridProductoVenta.Rows[i].Cells[0].Value.ToString();
-            //}
-
-
+            DtoProducto prod = new DtoProducto();
+            prod.CodigoProducto = txtCodigo.Text.Trim();
+            prod.DescripcionProducto = txtDescripcion.Text.Trim();
+            prod.OGeneroProducto = client_prod.ObtenerGeneroProducto(cmbGenero.Items[cmbGenero.SelectedIndex].ToString());
+            prod.ORubroProducto = client_prod.ObtenerRubroProducto(cmbRubro.Items[cmbRubro.SelectedIndex].ToString());
+            prod.OMarca = client_prod.ObtenerMarca(cmbMarca.Items[cmbMarca.SelectedIndex].ToString());
+            prod.OTipoTalle = client_prod.ObtenerTipoTalle(cmbTipoTalle.Items[cmbTipoTalle.SelectedIndex].ToString());
             bool Respuesta;
             string msgSuccess;
             string msgError;
@@ -194,9 +169,9 @@ namespace CapaPresentacion
             }
             if (Respuesta)
             {
-                this.Close();
-                DialogResult resmsj = msj.MsjInformacion(msgSuccess, "MSG-INFORMACION", "ACEPTAR");
-                if (resmsj.Equals(DialogResult.OK))
+                //this.Close();
+                DialogResult respuesta = msj.MsjInformacion(msgSuccess+"\n Desea cargar una variante del producto?", "MSG-CONSULTA", "CONFIRMAR", "CANCELAR");
+                if (respuesta.Equals(DialogResult.OK))
                 {
                     txtId.Text = "";
                     txtCodigo.Text = "";
@@ -207,10 +182,12 @@ namespace CapaPresentacion
                     cmbColor.SelectedIndex = 0;
                     cmbTipoTalle.SelectedIndex = 0;
                     txtCosto.Text = "";
-                    cmbEstado.SelectedIndex = 0;
                     modoEditar = false;
                     txtCodigo.Focus();
                     msj.Close();
+                    groupBoxVariante.Enabled = true;
+                    groupBoxProducto.Enabled = false;    
+
                 }
                 else
                 {
@@ -230,13 +207,7 @@ namespace CapaPresentacion
             using ServiceColor.ServiceColorClient client = new();
             using ServiceTalle.ServiceTalleClient client_t = new();
             string Color = client.ObtenerColor(cmbColor.Items[cmbColor.SelectedIndex].ToString()).DescripcionColor;
-            dataGridProductoVenta.Rows.Add(txtCodigo.Text.Trim(), Color , client_t.ObtenerTalle(cmbTalle.Items[cmbTalle.SelectedIndex].ToString()).CodigoTalle,txtCosto.Text.Trim(),txtCantidad.Text.Trim());
-            cmbColor.Items.Clear();
-            TablaColor.Remove(Color);
-            foreach (var item in TablaColor)
-            {
-                cmbColor.Items.Add(item);
-            }         
+            dataGridProductoVenta.Rows.Add(txtCodigo.Text.Trim(), Color, client_t.ObtenerTalle(cmbTalle.Items[cmbTalle.SelectedIndex].ToString()).DescripcionTalle, txtCosto.Text.Trim(), txtCantidad.Text.Trim(), cmbEstadoVariante.SelectedItem.ToString());        
             cmbColor.DisplayMember = "Text";
             cmbColor.ValueMember = "Value";
             cmbColor.SelectedIndex = -1;
@@ -244,33 +215,22 @@ namespace CapaPresentacion
             txtCosto.Text = "";
             cmbColor.Text = "Color";
             cmbTalle.Text = "Talle";
-            
+            cmbColor.Focus();
+            lblCantidadColores.Text = dataGridProductoVenta.Rows.Count.ToString();
+
+
         }
         private void CargarDatosColor()
         {
             dataGridProductoVenta.AutoResizeColumns();
             dataGridProductoVenta.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
-
             dataGridProductoVenta.Columns.Add("Codigo", "Codigo");
             dataGridProductoVenta.Columns.Add("Color", "Color");
             dataGridProductoVenta.Columns.Add("Talle", "Talle");
             dataGridProductoVenta.Columns.Add("Costo", "Costo");
             dataGridProductoVenta.Columns.Add("Cantidad", "Cantidad");
+            dataGridProductoVenta.Columns.Add("Estado", "Estado");
         }
-
-        private void cmbEstado_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if(cmbEstado.SelectedIndex == 0)
-            {
-                groupBoxVariante.Enabled = true;
-            }
-            else
-            {
-                groupBoxVariante.Enabled = false;
-            }
-            
-        }
-
         private void cmbTipoTalle_SelectedIndexChanged(object sender, EventArgs e)
         {
             cmbTalle.Items.Clear();
@@ -279,7 +239,7 @@ namespace CapaPresentacion
                 var oListaTalle = client.ListaTalle();
                 foreach (var item in oListaTalle)
                 {
-                    if (item.OEstado.Equals(ServiceTalle.Estado.Activo) && item.OTipoTalle.Descripcion.Equals(cmbTipoTalle.SelectedItem.ToString())) cmbTalle.Items.Add(item.CodigoTalle);
+                    if (item.OEstado.Equals(ServiceTalle.Estado.Activo) && item.OTipoTalle.DescripcionTipoTalle.Equals(cmbTipoTalle.SelectedItem.ToString())) cmbTalle.Items.Add(item.DescripcionTalle);
                 }
                 cmbTipoTalle.DisplayMember = "Text";
                 cmbTipoTalle.ValueMember = "Value";
@@ -308,7 +268,7 @@ namespace CapaPresentacion
                     {
                         foreach (var item in row.OProductoVenta)
                         {
-                            TablaProductoVenta.Rows.Add(row.IdProducto, item.OColor.DescripcionColor, item.OTalle.CodigoTalle, item.Costo, item.Cantidad);
+                            TablaProductoVenta.Rows.Add(row.IdProducto, item.OColor.DescripcionColor, item.OTalle.DescripcionTalle, item.Costo, item.Cantidad);
                         }
                     }
                 }
@@ -324,9 +284,10 @@ namespace CapaPresentacion
             }
         }
 
-        private void groupBoxVariante_Enter(object sender, EventArgs e)
+        private void pictureBox5_Click(object sender, EventArgs e)
         {
-            groupBoxProducto.Enabled = false;
+            dataGridProductoVenta.Rows.RemoveAt(dataGridProductoVenta.CurrentRow.Index);
+            //cargarSubtotales();
         }
     }
 }

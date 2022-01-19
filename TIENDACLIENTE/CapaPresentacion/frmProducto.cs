@@ -11,6 +11,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Estado = ServiceProducto.Estado;
 
 namespace CapaPresentacion
 {
@@ -32,6 +33,7 @@ namespace CapaPresentacion
             dataGridProducto.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridProducto.AllowUserToAddRows = false;
         }
+        #region TABLAS FORMULARIO
         private void CargarDatosProductos()
         {
             using ServiceProducto.ServiceProductoClient client = new();
@@ -44,43 +46,31 @@ namespace CapaPresentacion
                 TablaProducto.Rows.Clear();
                 cmbFiltro.Items.Clear();
                 TablaProducto.Columns.Add("IdProducto", typeof(int));
-                TablaProducto.Columns.Add("Codigo", typeof(string));
-                TablaProducto.Columns.Add("Descripcion", typeof(string));
+                TablaProducto.Columns.Add("CodigoProducto", typeof(string));
+                TablaProducto.Columns.Add("DescripcionProducto", typeof(string));
                 TablaProducto.Columns.Add("GeneroProducto", typeof(string));
                 TablaProducto.Columns.Add("RubroProducto", typeof(string));
                 TablaProducto.Columns.Add("Marca", typeof(string));
-                TablaProducto.Columns.Add("Color", typeof(string));
                 TablaProducto.Columns.Add("TipoTalle", typeof(string));
-                TablaProducto.Columns.Add("Talle", typeof(string));
-                TablaProducto.Columns.Add("Costo", typeof(double));
-                TablaProducto.Columns.Add("Stock", typeof(double));
                 TablaProducto.Columns.Add("Estado", typeof(string));
                 TablaProducto.Columns.Add("FechaRegistro", typeof(DateTime));
                 foreach (DtoProducto row in oListaProducto)
                 {
                     if (row.OEstado.Equals(ServiceProducto.Estado.Activo))
-                    {
-                        foreach (var item in row.OProductoVenta)
-                        {
-                            TablaProducto.Rows.Add(row.IdProducto, row.Codigo, row.Descripcion, row.OGeneroProducto.ToString(), row.ORubroProducto.DescripcionRubroProducto, row.OMarca.Descripcion,item.OColor.DescripcionColor, row.OTipoTalle.Descripcion,item.OTalle.CodigoTalle, item.Costo,item.Cantidad,row.OEstado, row.FechaRegistro);
-                        }
-                        
+                    {        
+                            TablaProducto.Rows.Add(row.IdProducto, row.CodigoProducto, row.DescripcionProducto, row.OGeneroProducto.DescripcionGeneroProducto, row.ORubroProducto.DescripcionRubroProducto, row.OMarca.DescripcionMarca, row.OTipoTalle.DescripcionTipoTalle,  row.OEstado, row.FechaRegistro);    
                     }    
                 }
                 dataGridProducto.DataSource = TablaProducto;
                 dataGridProducto.AutoResizeColumns();
                 dataGridProducto.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
                 dataGridProducto.Columns["IdProducto"].Visible = false;
-                dataGridProducto.Columns["Codigo"].Visible = true;
-                dataGridProducto.Columns["Descripcion"].Visible = true;
+                dataGridProducto.Columns["CodigoProducto"].Visible = true;
+                dataGridProducto.Columns["DescripcionProducto"].Visible = true;
                 dataGridProducto.Columns["GeneroProducto"].Visible = true;
                 dataGridProducto.Columns["RubroProducto"].Visible = true;
                 dataGridProducto.Columns["Marca"].Visible = true;
-                dataGridProducto.Columns["Color"].Visible = true;
                 dataGridProducto.Columns["TipoTalle"].Visible = true;
-                dataGridProducto.Columns["Talle"].Visible = true;
-                dataGridProducto.Columns["Costo"].Visible = true;
-                dataGridProducto.Columns["Stock"].Visible = true;
                 dataGridProducto.Columns["Estado"].Visible = true;
                 dataGridProducto.Columns["FechaRegistro"].Visible = true;
                 foreach (DataGridViewColumn cl in dataGridProducto.Columns)
@@ -94,12 +84,15 @@ namespace CapaPresentacion
             }
             lblTotalRegistros.Text = Convert.ToString(dataGridProducto.Rows.Count-1);
         }
+        #endregion
+        #region FILTRO DE BUSQUEDA
         private void Txt_Filtro_TextChanged(object sender, EventArgs e)
         {
             string columnaFiltro = cmbFiltro.SelectedItem.ToString();
             (dataGridProducto.DataSource as DataTable).DefaultView.RowFilter = string.Format(columnaFiltro + " like '%{0}%'", txtFiltro.Text);
         }
-      
+        #endregion
+        #region FUNCIONALIDADES
         private void Btn_Nuevo_Click(object sender, EventArgs e)
         {
             MtnProducto mtn = new();
@@ -108,7 +101,7 @@ namespace CapaPresentacion
 
         }
 
-        private void Btn_Modificar_Click(object sender, EventArgs e)
+        private void Btn_ModificarProducto_Click(object sender, EventArgs e)
         {
             using ServiceProducto.ServiceProductoClient client = new();
             ServiceColorClient client_color = new();
@@ -120,8 +113,8 @@ namespace CapaPresentacion
                 DtoProducto oProducto = new()
                 {
                     IdProducto = Convert.ToInt32(dataGridProducto.Rows[index].Cells["IdProducto"].Value),
-                    Codigo = Convert.ToString(dataGridProducto.Rows[index].Cells["Codigo"].Value),
-                    Descripcion = Convert.ToString(dataGridProducto.Rows[index].Cells["Descripcion"].Value),
+                    CodigoProducto = Convert.ToString(dataGridProducto.Rows[index].Cells["Codigo"].Value),
+                    DescripcionProducto = Convert.ToString(dataGridProducto.Rows[index].Cells["Descripcion"].Value),
                     OGeneroProducto = client.ObtenerGeneroProducto(Convert.ToString(dataGridProducto.Rows[index].Cells["GeneroProducto"].Value)),
                     ORubroProducto = client.ObtenerRubroProducto(Convert.ToString(dataGridProducto.Rows[index].Cells["RubroProducto"].Value)),
                     OMarca = client.ObtenerMarca(Convert.ToString(dataGridProducto.Rows[index].Cells["Marca"].Value)),
@@ -141,7 +134,7 @@ namespace CapaPresentacion
             }
         }
 
-        private void Btn_Eliminar_Click(object sender, EventArgs e)
+        private void Btn_EliminarProducto_Click(object sender, EventArgs e)
         {
             using ServiceProducto.ServiceProductoClient client = new();
             if (dataGridProducto.SelectedRows.Count > 0)
@@ -175,5 +168,6 @@ namespace CapaPresentacion
                 MessageBox.Show("Selecciona un registro de la lista");
             }
         }
+        #endregion
     }
 }

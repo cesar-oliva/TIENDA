@@ -9,12 +9,14 @@ namespace CapaNegocio
     public class TipoTalle
     {
         private int idTipoTalle;
-        private string descripcion;
+        private string descripcionTipoTalle;
         private Estado oEstado;
+        private DateTime fechaRegistro;
 
         public int IdTipoTalle { get => idTipoTalle; set => idTipoTalle = value; }
-        public string Descripcion { get => descripcion; set => descripcion = value; }
+        public string DescripcionTipoTalle { get => descripcionTipoTalle; set => descripcionTipoTalle = value; }
         public Estado OEstado { get => oEstado; set => oEstado = value; }
+        public DateTime FechaRegistro { get => fechaRegistro; set => fechaRegistro = value; }
 
         public TipoTalle()
         {

@@ -8,8 +8,8 @@ namespace CapaNegocio
 {
     public enum Estado
     {
-        Activo = 0,
-        Inactivo = 1,
+        Inactivo = 0,
+        Activo = 1,
     }
 }
 

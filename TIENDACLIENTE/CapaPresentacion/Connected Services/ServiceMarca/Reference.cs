@@ -13,7 +13,7 @@ namespace ServiceMarca
     
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.3-preview3.21351.2")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.3")]
     [System.Runtime.Serialization.DataContractAttribute(Name="DtoMarca", Namespace="http://schemas.datacontract.org/2004/07/CapaServicioServidor")]
     public partial class DtoMarca : object
     {
@@ -64,40 +64,40 @@ namespace ServiceMarca
         }
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.3-preview3.21351.2")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.3")]
     [System.Runtime.Serialization.DataContractAttribute(Name="Estado", Namespace="http://schemas.datacontract.org/2004/07/CapaNegocio")]
     public enum Estado : int
     {
         
         [System.Runtime.Serialization.EnumMemberAttribute()]
-        Activo = 0,
+        Inactivo = 0,
         
         [System.Runtime.Serialization.EnumMemberAttribute()]
-        Inactivo = 1,
+        Activo = 1,
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.3-preview3.21351.2")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.3")]
     [System.Runtime.Serialization.DataContractAttribute(Name="Marca", Namespace="http://schemas.datacontract.org/2004/07/CapaNegocio")]
     public partial class Marca : object
     {
         
-        private string DescripcionField;
+        private string DescripcionMarcaField;
         
         private int IdMarcaField;
         
         private ServiceMarca.Estado OEstadoField;
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Descripcion
+        public string DescripcionMarca
         {
             get
             {
-                return this.DescripcionField;
+                return this.DescripcionMarcaField;
             }
             set
             {
-                this.DescripcionField = value;
+                this.DescripcionMarcaField = value;
             }
         }
         
@@ -128,7 +128,7 @@ namespace ServiceMarca
         }
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.3-preview3.21351.2")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.3")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServiceMarca.IServiceMarca")]
     public interface IServiceMarca
     {
@@ -152,10 +152,10 @@ namespace ServiceMarca
         System.Threading.Tasks.Task<bool> EliminarMarcaAsync(int IdMarca);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceMarca/ListaMarca", ReplyAction="http://tempuri.org/IServiceMarca/ListaMarcaResponse")]
-        System.Collections.Generic.List<ServiceMarca.DtoMarca> ListaMarca();
+        ServiceMarca.DtoMarca[] ListaMarca();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceMarca/ListaMarca", ReplyAction="http://tempuri.org/IServiceMarca/ListaMarcaResponse")]
-        System.Threading.Tasks.Task<System.Collections.Generic.List<ServiceMarca.DtoMarca>> ListaMarcaAsync();
+        System.Threading.Tasks.Task<ServiceMarca.DtoMarca[]> ListaMarcaAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceMarca/ObtenerMarca", ReplyAction="http://tempuri.org/IServiceMarca/ObtenerMarcaResponse")]
         ServiceMarca.Marca ObtenerMarca(string oMarca);
@@ -164,13 +164,13 @@ namespace ServiceMarca
         System.Threading.Tasks.Task<ServiceMarca.Marca> ObtenerMarcaAsync(string oMarca);
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.3-preview3.21351.2")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.3")]
     public interface IServiceMarcaChannel : ServiceMarca.IServiceMarca, System.ServiceModel.IClientChannel
     {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.3-preview3.21351.2")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.3")]
     public partial class ServiceMarcaClient : System.ServiceModel.ClientBase<ServiceMarca.IServiceMarca>, ServiceMarca.IServiceMarca
     {
         
@@ -244,12 +244,12 @@ namespace ServiceMarca
             return base.Channel.EliminarMarcaAsync(IdMarca);
         }
         
-        public System.Collections.Generic.List<ServiceMarca.DtoMarca> ListaMarca()
+        public ServiceMarca.DtoMarca[] ListaMarca()
         {
             return base.Channel.ListaMarca();
         }
         
-        public System.Threading.Tasks.Task<System.Collections.Generic.List<ServiceMarca.DtoMarca>> ListaMarcaAsync()
+        public System.Threading.Tasks.Task<ServiceMarca.DtoMarca[]> ListaMarcaAsync()
         {
             return base.Channel.ListaMarcaAsync();
         }

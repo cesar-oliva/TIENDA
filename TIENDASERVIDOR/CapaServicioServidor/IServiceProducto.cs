@@ -32,12 +32,14 @@ namespace CapaServicioServidor
         [OperationContract]
         Color ObtenerColor(string oColor);
         [OperationContract]
+        ProductoVenta ObtenerProductoVenta(Color oColor,Talle oTalle, double costo,int cantidad, Estado oEstado);
+        [OperationContract]
         TipoTalle ObtenerTipoTalle(string oTipoTalle);
+        [OperationContract]
+        Talle ObtenerTalle(string oTalle);
         [OperationContract]
         Producto BuscarProductoById(int idProducto);
     }
-
-
     // Utilice un contrato de datos, como se ilustra en el ejemplo siguiente, para agregar tipos compuestos a las operaciones de servicio.
     [DataContract]
     public class DtoProducto
@@ -45,9 +47,9 @@ namespace CapaServicioServidor
         [DataMember]
         public int IdProducto { get; set; } //id de carga
         [DataMember]
-        public string Codigo { get; set; } //codigo espercifico (eje: barra)
+        public string CodigoProducto { get; set; } //codigo espercifico (eje: barra)
         [DataMember]
-        public string Descripcion { get; set; }
+        public string DescripcionProducto { get; set; }
         [DataMember]
         public GeneroProducto OGeneroProducto { get; set; }
         [DataMember]
@@ -63,5 +65,5 @@ namespace CapaServicioServidor
         [DataMember]
         public DateTime FechaRegistro { get; set; }
     }
+    
 }
-

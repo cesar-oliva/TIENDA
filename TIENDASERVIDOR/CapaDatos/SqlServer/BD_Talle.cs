@@ -20,12 +20,13 @@ namespace CapaDatos.SqlServer
             {
                 try
                 {
-                    string SqlQuery = "INSERT INTO Talle(IdTalle,IdTipoTalle,CodigoTalle,DescripcionTalle,Estado)" +
-                                      "VALUES(@IdTalle,@IdTipoTalle,@CodigoTalle,@DescripcionTalle,@Estado)";
+                    string SqlQuery = "INSERT INTO Talle(IdTalle,IdTipoTalle,IdRubroProducto,IdGeneroProducto,DescripcionTalle)" +
+                                      "VALUES(@IdTalle,@IdTipoTalle,@IdRubroProducto,@IdGeneroProducto,@DescripcionTalle)";
                     SqlCommand cmd = new SqlCommand(SqlQuery, oConexion);
                     cmd.Parameters.AddWithValue("IdTalle", oTalle.IdTalle);
                     cmd.Parameters.AddWithValue("IdTipoTalle", oTalle.OTipoTalle.IdTipoTalle);
-                    cmd.Parameters.AddWithValue("CodigoTalle", oTalle.CodigoTalle);
+                    cmd.Parameters.AddWithValue("IdRubroProducto", oTalle.ORubroProducto.IdRubroProducto);
+                    cmd.Parameters.AddWithValue("IdGeneroProducto", oTalle.OGeneroProducto.IdGeneroProducto);
                     cmd.Parameters.AddWithValue("DescripcionTalle", oTalle.DescripcionTalle);
                     cmd.Parameters.AddWithValue("Estado", oTalle.OEstado);
                     oConexion.Open();
@@ -48,13 +49,14 @@ namespace CapaDatos.SqlServer
             {
                 try
                 {
-                    String SqlQuery = "UPDATE Talle SET IdTipooTalle = @IdTipoTalle, CodigoTalle = @CodigoTalle, DescripcionTalle = @DescripcionTalle, Estado = @Estado  WHERE IdTalle = @IdTalle";
+                    String SqlQuery = "UPDATE Talle SET IdTipooTalle = @IdTipoTalle, IdRubroProducto = @IdRubroProducto,IdGeneroProducto = @IdGeneroProducto, DescripcionTalle = @DescripcionTalle, Estado = @Estado  WHERE IdTalle = @IdTalle";
                     SqlCommand cmd = new SqlCommand(SqlQuery, oConexion);
+                    cmd.Parameters.AddWithValue("IdTalle", IdTalle);
                     cmd.Parameters.AddWithValue("IdTipoTalle", oTalle.OTipoTalle.IdTipoTalle);
-                    cmd.Parameters.AddWithValue("CodigoTalle", oTalle.CodigoTalle);
+                    cmd.Parameters.AddWithValue("IdRubroProducto", oTalle.ORubroProducto.IdRubroProducto);
+                    cmd.Parameters.AddWithValue("IdGeneroProducto", oTalle.OGeneroProducto.IdGeneroProducto);
                     cmd.Parameters.AddWithValue("DescripcionTalle", oTalle.DescripcionTalle);                  
                     cmd.Parameters.AddWithValue("Estado", oTalle.OEstado);
-                    cmd.Parameters.AddWithValue("IdTalle", IdTalle);
                     oConexion.Open();
                     respuesta = cmd.ExecuteNonQuery();
                     return true;
@@ -73,9 +75,10 @@ namespace CapaDatos.SqlServer
             {
                 try
                 {
-                    String SqlQuery = "DELETE FROM Talle WHERE IdTalle = @IdTalle";
+                    String SqlQuery = "UPDATE Talle SET Estado = @Estado WHERE IdTalle = @IdTalle";
                     SqlCommand cmd = new SqlCommand(SqlQuery, oConexion);
                     cmd.Parameters.AddWithValue("IdTalle", IdTalle);
+                    cmd.Parameters.AddWithValue("Estado", Estado.Inactivo);
                     oConexion.Open();
                     respuesta = cmd.ExecuteNonQuery();
                     return true;
@@ -106,8 +109,9 @@ namespace CapaDatos.SqlServer
                             var talle = new Talle
                             {
                                 IdTalle = Convert.ToInt32(data.Rows[i]["IdTalle"]),
-                                OTipoTalle = BD_TipoTalle.BuscarTipoTalle(Convert.ToInt32(data.Rows[i]["IdTipoTalle"])),
-                                CodigoTalle = data.Rows[i]["CodigoTalle"].ToString(),
+                                OTipoTalle = BD_TipoTalle.BuscarTipoTalleById(Convert.ToInt32(data.Rows[i]["IdTipoTalle"])),
+                                ORubroProducto = BD_RubroProducto.BuscarRubroProductoById(Convert.ToInt32(data.Rows[i]["IdRubroProducto"])),
+                                OGeneroProducto = BD_GeneroProducto.BuscarGeneroProductoById(Convert.ToInt32(data.Rows[i]["IdGeneroProducto"])),
                                 DescripcionTalle = data.Rows[i]["DescripcionTalle"].ToString(),
                                 OEstado = Operaciones.BuscarEstado(data.Rows[i]["Estado"].ToString()),
                             };

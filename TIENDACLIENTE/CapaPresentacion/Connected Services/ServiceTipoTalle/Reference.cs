@@ -18,22 +18,37 @@ namespace ServiceTipoTalle
     public partial class TipoTalle : object
     {
         
-        private string DescripcionField;
+        private string DescripcionTipoTalleField;
+        
+        private System.DateTime FechaRegistroField;
         
         private int IdTipoTalleField;
         
         private ServiceTipoTalle.Estado OEstadoField;
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Descripcion
+        public string DescripcionTipoTalle
         {
             get
             {
-                return this.DescripcionField;
+                return this.DescripcionTipoTalleField;
             }
             set
             {
-                this.DescripcionField = value;
+                this.DescripcionTipoTalleField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime FechaRegistro
+        {
+            get
+            {
+                return this.FechaRegistroField;
+            }
+            set
+            {
+                this.FechaRegistroField = value;
             }
         }
         
@@ -70,10 +85,10 @@ namespace ServiceTipoTalle
     {
         
         [System.Runtime.Serialization.EnumMemberAttribute()]
-        Activo = 0,
+        Inactivo = 0,
         
         [System.Runtime.Serialization.EnumMemberAttribute()]
-        Inactivo = 1,
+        Activo = 1,
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -82,22 +97,22 @@ namespace ServiceTipoTalle
     public partial class DtoTipoTalle : object
     {
         
-        private string DescripcionField;
+        private string DescripcionTipoTalleField;
         
         private int IdTipoTalleField;
         
         private ServiceTipoTalle.Estado OEstadoField;
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Descripcion
+        public string DescripcionTipoTalle
         {
             get
             {
-                return this.DescripcionField;
+                return this.DescripcionTipoTalleField;
             }
             set
             {
-                this.DescripcionField = value;
+                this.DescripcionTipoTalleField = value;
             }
         }
         
@@ -157,11 +172,11 @@ namespace ServiceTipoTalle
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceTipoTalle/ListaTipoTalle", ReplyAction="http://tempuri.org/IServiceTipoTalle/ListaTipoTalleResponse")]
         System.Threading.Tasks.Task<ServiceTipoTalle.DtoTipoTalle[]> ListaTipoTalleAsync();
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceTipoTalle/ObtenerTipoTalle", ReplyAction="http://tempuri.org/IServiceTipoTalle/ObtenerTipoTalleResponse")]
-        ServiceTipoTalle.TipoTalle ObtenerTipoTalle(string Rubro);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceTipoTalle/ObtenerTipoTalleByDescripcion", ReplyAction="http://tempuri.org/IServiceTipoTalle/ObtenerTipoTalleByDescripcionResponse")]
+        ServiceTipoTalle.TipoTalle ObtenerTipoTalleByDescripcion(string oTipoTalle);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceTipoTalle/ObtenerTipoTalle", ReplyAction="http://tempuri.org/IServiceTipoTalle/ObtenerTipoTalleResponse")]
-        System.Threading.Tasks.Task<ServiceTipoTalle.TipoTalle> ObtenerTipoTalleAsync(string Rubro);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceTipoTalle/ObtenerTipoTalleByDescripcion", ReplyAction="http://tempuri.org/IServiceTipoTalle/ObtenerTipoTalleByDescripcionResponse")]
+        System.Threading.Tasks.Task<ServiceTipoTalle.TipoTalle> ObtenerTipoTalleByDescripcionAsync(string oTipoTalle);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.3")]
@@ -254,14 +269,14 @@ namespace ServiceTipoTalle
             return base.Channel.ListaTipoTalleAsync();
         }
         
-        public ServiceTipoTalle.TipoTalle ObtenerTipoTalle(string Rubro)
+        public ServiceTipoTalle.TipoTalle ObtenerTipoTalleByDescripcion(string oTipoTalle)
         {
-            return base.Channel.ObtenerTipoTalle(Rubro);
+            return base.Channel.ObtenerTipoTalleByDescripcion(oTipoTalle);
         }
         
-        public System.Threading.Tasks.Task<ServiceTipoTalle.TipoTalle> ObtenerTipoTalleAsync(string Rubro)
+        public System.Threading.Tasks.Task<ServiceTipoTalle.TipoTalle> ObtenerTipoTalleByDescripcionAsync(string oTipoTalle)
         {
-            return base.Channel.ObtenerTipoTalleAsync(Rubro);
+            return base.Channel.ObtenerTipoTalleByDescripcionAsync(oTipoTalle);
         }
         
         public virtual System.Threading.Tasks.Task OpenAsync()

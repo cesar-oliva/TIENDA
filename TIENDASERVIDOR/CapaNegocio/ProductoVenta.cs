@@ -8,17 +8,19 @@ namespace CapaNegocio
 {
     public class ProductoVenta
     {
-        private Producto oProducto;
         private Color oColor;
         private Talle oTalle;
         private double costo;
         private int cantidad;
+        private Estado oEstado;
+        private DateTime fechaRegistro;
 
-        public Producto producto { get => oProducto; set => oProducto = value; }
         public Color OColor{ get => oColor; set => oColor = value; }
         public Talle OTalle { get => oTalle; set => oTalle = value; }
         public double Costo { get => costo; set => costo = value; }
         public int Cantidad { get => cantidad; set => cantidad = value; }
+        public Estado OEstado { get => oEstado; set => oEstado = value; }
+        public DateTime FechaRegistro { get => fechaRegistro; set => fechaRegistro = value; }
 
         public ProductoVenta()
         {

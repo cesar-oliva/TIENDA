@@ -1,14 +1,14 @@
 {
   "ExtendedData": {
     "inputs": [
-      "http://localhost:10524/ServiceRubroProducto.svc"
+      "https://wswhomo.afip.gov.ar/wsfev1/service.asmx?WSDL"
     ],
     "collectionTypes": [
       "System.Collections.ArrayList",
       "System.Collections.Generic.Dictionary`2"
     ],
     "namespaceMappings": [
-      "*, ServiceRubroProducto"
+      "*, ServiceHomologacionAfip"
     ],
     "references": [
       "BoDi, {BoDi, 1.5.0}",

@@ -8,21 +8,20 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace CapaDatos.SqlServer
+namespace CapaDatos
 {
-    public class BD_TipoTalle
+    public class BD_GeneroProducto
     {
-
-        public static int RegistrarTipoTalle(TipoTalle oTipoTalle)
+        public static int RegistrarGeneroProducto(GeneroProducto oGeneroProducto)
         {
             int respuesta;
             using (SqlConnection oConexion = new SqlConnection(Conexion.conexion))
             {
                 try
                 {
-                    string SqlQuery = "INSERT INTO TipoTalle(DescripcionTipoTalle)VALUES(@DescripcionTipoTalle)";
+                    string SqlQuery = "INSERT INTO GeneroProducto(DescripcionGeneroProducto)VALUES(@DescripcionGeneroProducto)";
                     SqlCommand cmd = new SqlCommand(SqlQuery, oConexion);
-                    cmd.Parameters.AddWithValue("Descripcion", oTipoTalle.DescripcionTipoTalle);
+                    cmd.Parameters.AddWithValue("DescripcionGeneroProducto", oGeneroProducto.DescripcionGeneroProducto);
                     oConexion.Open();
                     respuesta = cmd.ExecuteNonQuery();
 
@@ -36,18 +35,18 @@ namespace CapaDatos.SqlServer
             }
             return respuesta;
         }
-        public static bool ActualizarTipoTalle(TipoTalle oTipoTalle, int IdTipoTalle)
+        public static bool ActualizarGeneroProducto(GeneroProducto oGeneroProducto, int IdGeneroProducto)
         {
             int respuesta;
             using (SqlConnection oConexion = new SqlConnection(Conexion.conexion))
             {
                 try
                 {
-                    String SqlQuery = "UPDATE TipoTalle SET DescripcionTipotalle = @DescripcionTipoTalle, Estado = @Estado  WHERE IdTipoTalle = @IdTipoTalle";
+                    String SqlQuery = "UPDATE GeneroProducto SET DescripcionGeneroProducto = @DescripcionGeneroProducto, Estado = @Estado  WHERE IdGeneroProducto = @IdGeneroProducto";
                     SqlCommand cmd = new SqlCommand(SqlQuery, oConexion);
-                    cmd.Parameters.AddWithValue("IdTipoTalle", IdTipoTalle);
-                    cmd.Parameters.AddWithValue("DescripcionTipoTalle", oTipoTalle.DescripcionTipoTalle);                  
-                    cmd.Parameters.AddWithValue("Estado", oTipoTalle.OEstado);
+                    cmd.Parameters.AddWithValue("IdGeneroProducto", IdGeneroProducto);
+                    cmd.Parameters.AddWithValue("DescripcionGeneroProducto", oGeneroProducto.DescripcionGeneroProducto);
+                    cmd.Parameters.AddWithValue("Estado", oGeneroProducto.OEstado);
                     oConexion.Open();
                     respuesta = cmd.ExecuteNonQuery();
                     return true;
@@ -59,16 +58,16 @@ namespace CapaDatos.SqlServer
                 }
             }
         }
-        public static bool EliminarTipoTalle(int IdTipoTalle)
+        public static bool EliminarGeneroProducto(int IdGeneroProducto)
         {
             int respuesta;
             using (SqlConnection oConexion = new SqlConnection(Conexion.conexion))
             {
                 try
                 {
-                    String SqlQuery = "UPDATE TipoTalle SET Estado = @Estado WHERE IdTipoTalle = @IdTipoTalle";
+                    String SqlQuery = "UPDATE GeneroProducto SET Estado = @Estado WHERE IdGeneroProducto = @IdGeneroProducto";
                     SqlCommand cmd = new SqlCommand(SqlQuery, oConexion);
-                    cmd.Parameters.AddWithValue("IdTipoTalle", IdTipoTalle);
+                    cmd.Parameters.AddWithValue("IdGeneroProducto", IdGeneroProducto);
                     cmd.Parameters.AddWithValue("Estado", Estado.Inactivo);
                     oConexion.Open();
                     respuesta = cmd.ExecuteNonQuery();
@@ -82,70 +81,68 @@ namespace CapaDatos.SqlServer
                 }
             }
         }
-        public static List<TipoTalle> MostrarTipoTalle()
+        public static List<GeneroProducto> MostrarGeneroProducto()
         {
-            List<TipoTalle> TipoTalleTabla = new List<TipoTalle>();
+            List<GeneroProducto> GeneroProductoTabla = new List<GeneroProducto>();
             DataTable data = new DataTable();
             using (SqlConnection oConexion = new SqlConnection(Conexion.conexion))
             {
                 try
                 {
-                    String SqlQuery = "SELECT * FROM TipoTalle";
+                    String SqlQuery = "SELECT * FROM GeneroProducto";
                     SqlDataAdapter adapter = new SqlDataAdapter(SqlQuery, oConexion);
                     using (adapter)
                     {
                         adapter.Fill(data);
                         for (int i = 0; i < data.Rows.Count; i++)
                         {
-                            var TipoTalle = new TipoTalle
+                            var marc = new GeneroProducto
                             {
-                                IdTipoTalle = Convert.ToInt32(data.Rows[i]["IdTipoTalle"]),
-                                DescripcionTipoTalle = data.Rows[i]["DescripcionTipoTalle"].ToString(),
+                                IdGeneroProducto = Convert.ToInt32(data.Rows[i]["IdGeneroProducto"]),
+                                DescripcionGeneroProducto = data.Rows[i]["DescripcionGeneroProducto"].ToString(),
                                 OEstado = Operaciones.BuscarEstado(data.Rows[i]["Estado"].ToString()),
-                                FechaRegistro = Convert.ToDateTime(data.Rows[i]["FechaRegistro"].ToString()),
+                                FechaRegistro = Convert.ToDateTime(data.Rows[i]["FechaRegistro"])
                             };
-                            TipoTalleTabla.Add(TipoTalle);
+                            GeneroProductoTabla.Add(marc);
                         }
 
-                        return TipoTalleTabla;
+                        return GeneroProductoTabla;
                     }
                 }
                 catch (Exception ex)
                 {
                     MessageBox.Show("Error en Capa Datos: " + ex.Message);
-                    return TipoTalleTabla;
+                    return GeneroProductoTabla;
                 }
 
             }
         }
-        public static TipoTalle BuscarTipoTalle(TipoTalle oTipoTalle)
+        public static GeneroProducto BuscarGeneroProducto(GeneroProducto oGeneroProducto)
         {
-            List<TipoTalle> lista = MostrarTipoTalle();
+            List<GeneroProducto> lista = MostrarGeneroProducto();
             foreach (var item in lista)
             {
-                if (oTipoTalle.IdTipoTalle.Equals(item.IdTipoTalle)) return item;
+                if (oGeneroProducto.IdGeneroProducto.Equals(item.IdGeneroProducto)) return item;
             }
             return null;
         }
-        public static TipoTalle BuscarTipoTalleByDescripcion(string Descripcion)
+        public static GeneroProducto BuscarGeneroProductoByDescripcion(string oGeneroProducto)
         {
-            List<TipoTalle> lista = MostrarTipoTalle();
+            List<GeneroProducto> lista = MostrarGeneroProducto();
             foreach (var item in lista)
             {
-                if (item.DescripcionTipoTalle.Equals(Descripcion)) return item;
+                if (item.DescripcionGeneroProducto.Equals(oGeneroProducto)) return item;
             }
             return null;
         }
-        public static TipoTalle BuscarTipoTalleById(int IdTipoTalle)
+        public static GeneroProducto BuscarGeneroProductoById(int oGeneroProducto)
         {
-            List<TipoTalle> lista = MostrarTipoTalle();
+            List<GeneroProducto> lista = MostrarGeneroProducto();
             foreach (var item in lista)
             {
-                if (item.IdTipoTalle.Equals(IdTipoTalle)) return item;
+                if (item.IdGeneroProducto.Equals(oGeneroProducto)) return item;
             }
             return null;
         }
     }
-
 }
-

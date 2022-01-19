@@ -9,8 +9,8 @@ namespace CapaNegocio
     public class Producto
     {
         private int idProducto;
-        private string codigo;
-        private string descripcion;
+        private string codigoProducto;
+        private string descripcionProducto;
         private GeneroProducto oGeneroProducto;
         private RubroProducto oRubroProducto;
         private Marca oMarca;
@@ -20,8 +20,8 @@ namespace CapaNegocio
         private DateTime fechaRegistro;
 
         public int IdProducto { get => idProducto; set => idProducto = value; }
-        public string Codigo { get => codigo; set => codigo = value; }
-        public string Descripcion { get => descripcion; set => descripcion = value; }
+        public string CodigoProducto { get => codigoProducto; set => codigoProducto = value; }
+        public string DescripcionProducto { get => descripcionProducto; set => descripcionProducto = value; }
         public GeneroProducto OGeneroProducto { get => oGeneroProducto; set => oGeneroProducto = value; }
         public RubroProducto ORubroProducto { get => oRubroProducto; set => oRubroProducto = value; }
         public Marca OMarca { get => oMarca; set => oMarca = value; }
@@ -30,11 +30,11 @@ namespace CapaNegocio
         public Estado OEstado { get => oEstado; set => oEstado = value; }
         public DateTime FechaRegistro { get => fechaRegistro; set => fechaRegistro = value; }
 
-        public Producto(int idProducto, string codigo, string descripcion, GeneroProducto oGeneroProducto, RubroProducto oRubroProducto, Marca oMarca, List<ProductoVenta> oProductoVenta, TipoTalle oTipoTalle,Estado oEstado)
+        public Producto(int idProducto, string codigoProducto, string descripcionProducto, GeneroProducto oGeneroProducto, RubroProducto oRubroProducto, Marca oMarca, List<ProductoVenta> oProductoVenta, TipoTalle oTipoTalle,Estado oEstado)
         {
             IdProducto = idProducto;
-            Codigo = codigo;
-            Descripcion = descripcion;
+            CodigoProducto = codigoProducto;
+            DescripcionProducto = descripcionProducto;
             OGeneroProducto = oGeneroProducto;
             ORubroProducto = oRubroProducto;
             OMarca = oMarca;
@@ -43,10 +43,10 @@ namespace CapaNegocio
             OEstado = oEstado;
         }
 
-        public Producto(string codigo, string descripcion, GeneroProducto oGeneroProducto, RubroProducto oRubroProducto, Marca oMarca, List<ProductoVenta> oProductoVenta, TipoTalle oTipoTalle,Estado oEstado)
+        public Producto(string codigoProducto, string descripcionProducto, GeneroProducto oGeneroProducto, RubroProducto oRubroProducto, Marca oMarca, List<ProductoVenta> oProductoVenta, TipoTalle oTipoTalle,Estado oEstado)
         {
-            Codigo = codigo;
-            Descripcion = descripcion;
+            CodigoProducto = codigoProducto;
+            DescripcionProducto = descripcionProducto;
             OGeneroProducto = oGeneroProducto;
             ORubroProducto = oRubroProducto;
             OMarca = oMarca;

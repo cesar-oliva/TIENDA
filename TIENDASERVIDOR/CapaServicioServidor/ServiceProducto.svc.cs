@@ -12,15 +12,15 @@ namespace CapaServicioServidor
         public bool ModificarProducto(DtoProducto oProducto)
         {
             int IdProducto = oProducto.IdProducto;
-            string Codigo = oProducto.Codigo;
-            string Descripcion = oProducto.Descripcion;
+            string CodigoProducto = oProducto.CodigoProducto;
+            string DescripcionProducto = oProducto.DescripcionProducto;
             GeneroProducto oGeneroProducto = oProducto.OGeneroProducto;
             RubroProducto Rubro = oProducto.ORubroProducto;
             Marca oMarca = oProducto.OMarca;
             TipoTalle oTipoTalle = oProducto.OTipoTalle;
             List<ProductoVenta> oProductoVenta = oProducto.OProductoVenta;
             Estado oEstado = oProducto.OEstado;
-            var nuevo = new Producto(IdProducto,Codigo, Descripcion, oGeneroProducto, Rubro,oMarca,oProductoVenta,oTipoTalle,oEstado);
+            var nuevo = new Producto(IdProducto,CodigoProducto, DescripcionProducto, oGeneroProducto, Rubro,oMarca,oProductoVenta,oTipoTalle,oEstado);
             
             if (BD_Producto.ModificarProducto(nuevo))
             {
@@ -40,15 +40,15 @@ namespace CapaServicioServidor
 
         public bool IngresarProducto(DtoProducto oProducto)
         {
-            string Codigo = oProducto.Codigo;
-            string Descripcion = oProducto.Descripcion;
+            string CodigoProducto = oProducto.CodigoProducto;
+            string DescripcionProducto = oProducto.DescripcionProducto;
             GeneroProducto oGeneroProducto = oProducto.OGeneroProducto;
             RubroProducto Rubro = oProducto.ORubroProducto;
             Marca oMarca = oProducto.OMarca;
             TipoTalle oTipoTalle = oProducto.OTipoTalle;
             List<ProductoVenta> oProductoVenta = oProducto.OProductoVenta;
             Estado oEstado = oProducto.OEstado;
-            var nuevo = new Producto(Codigo, Descripcion,oGeneroProducto,Rubro,oMarca,oProductoVenta,oTipoTalle,oEstado);
+            var nuevo = new Producto(CodigoProducto, DescripcionProducto,oGeneroProducto,Rubro,oMarca,oProductoVenta,oTipoTalle,oEstado);
             if (BD_Producto.RegistrarProducto(nuevo) > 0)
             {
                 return true;
@@ -68,8 +68,8 @@ namespace CapaServicioServidor
                 DtoProducto prod = new DtoProducto
                 {
                     IdProducto = item.IdProducto,
-                    Codigo = item.Codigo,
-                    Descripcion = item.Descripcion,
+                    CodigoProducto = item.CodigoProducto,
+                    DescripcionProducto = item.DescripcionProducto,
                     OGeneroProducto = item.OGeneroProducto,
                     ORubroProducto = item.ORubroProducto,
                     OMarca = item.OMarca,
@@ -91,14 +91,12 @@ namespace CapaServicioServidor
 
         public GeneroProducto ObtenerGeneroProducto(string oGeneroProducto)
         {
-            if (oGeneroProducto.Equals("Unisex")) return GeneroProducto.Unisex;
-            if (oGeneroProducto.Equals("Masculino")) return GeneroProducto.Masculino;
-            return GeneroProducto.Femenino;
+            return BD_GeneroProducto.BuscarGeneroProductoByDescripcion(oGeneroProducto);
         }
 
         public Marca ObtenerMarca(string oMarca)
         {
-            return BD_Marca.BuscarMarca(oMarca);
+            return BD_Marca.BuscarMarcaByDescripcion(oMarca);
         }
 
         public RubroProducto ObtenerRubroProducto(string oRubroProducto)
@@ -116,9 +114,26 @@ namespace CapaServicioServidor
             return BD_Color.BuscarColor(oColor);
         }
 
-        public TipoTalle ObtenerTipoTalle(string oTalle)
+        public TipoTalle ObtenerTipoTalle(string oTipoTalle)
         {
-            return BD_TipoTalle.BuscarTipoTalle(oTalle);
+            return BD_TipoTalle.BuscarTipoTalleByDescripcion(oTipoTalle);
+        }
+        public Talle ObtenerTalle(string oTalle)
+        {
+            return BD_Talle.BuscarTalle(oTalle);
+        }
+
+        public ProductoVenta ObtenerProductoVenta(Color oColor, Talle oTalle, double costo, int cantidad, Estado oEstado)
+        {
+            ProductoVenta p = new ProductoVenta()
+            {
+                OColor = oColor,
+                OTalle = oTalle,
+                Costo = costo,
+                Cantidad = cantidad,
+                OEstado = oEstado
+            };
+            return p;
         }
     }
 }

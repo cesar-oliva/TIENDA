@@ -61,7 +61,7 @@ namespace CapaPresentacion
                     {
                         foreach (var item in row.OProductoVenta)
                         {
-                            TablaProducto.Rows.Add(row.IdProducto, row.Codigo, row.Descripcion, row.OGeneroProducto.ToString(), client_rub.ObtenerRubroProductoById(row.ORubroProducto.IdRubroProducto).DescripcionRubroProducto, row.OMarca.Descripcion, row.OProductoVenta.Count(), row.OTipoTalle.Descripcion, item.OColor.DescripcionColor, client_rub.ObtenerRubroProductoById(row.ORubroProducto.IdRubroProducto).MargenGanancia, client_rub.ObtenerRubroProductoById(row.ORubroProducto.IdRubroProducto).OImpuesto.Alicuota, item.Costo * (((client_rub.ObtenerRubroProductoById(row.ORubroProducto.IdRubroProducto).OImpuesto.Alicuota) / 100) + 1) * (((client_rub.ObtenerRubroProductoById(row.ORubroProducto.IdRubroProducto).MargenGanancia) / 100) + 1), 15, row.OEstado);
+                            TablaProducto.Rows.Add(row.IdProducto, row.CodigoProducto, row.DescripcionProducto, row.OGeneroProducto.ToString(), client_rub.ObtenerRubroProductoById(row.ORubroProducto.IdRubroProducto).DescripcionRubroProducto, row.OMarca.DescripcionMarca, row.OProductoVenta.Count(), row.OTipoTalle.DescripcionTipoTalle, item.OColor.DescripcionColor, client_rub.ObtenerRubroProductoById(row.ORubroProducto.IdRubroProducto).MargenGanancia, client_rub.ObtenerRubroProductoById(row.ORubroProducto.IdRubroProducto).OImpuesto.Alicuota, item.Costo * (((client_rub.ObtenerRubroProductoById(row.ORubroProducto.IdRubroProducto).OImpuesto.Alicuota) / 100) + 1) * (((client_rub.ObtenerRubroProductoById(row.ORubroProducto.IdRubroProducto).MargenGanancia) / 100) + 1), 15, row.OEstado);
                         }
                     }
                 }

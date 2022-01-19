@@ -1,4 +1,5 @@
 ﻿using ServiceCliente;
+using ServiceHomologacionAfip;
 using ServiceProducto;
 using System;
 using System.Collections.Generic;
@@ -118,9 +119,9 @@ namespace CapaPresentacion
                 {
                     foreach (var pv in item.OProductoVenta)
                     {
-                        if (txtCodigo.Text.Trim().ToString().Equals(item.Codigo.ToString()))
+                        if (txtCodigo.Text.Trim().ToString().Equals(item.CodigoProducto.ToString()))
                         {
-                            txtDescripcion.Text = item.Descripcion.ToString();
+                            txtDescripcion.Text = item.DescripcionProducto.ToString();
                             txtPrecioVenta.Text = Convert.ToString((pv.Costo * (((client_rub.ObtenerRubroProductoById(item.ORubroProducto.IdRubroProducto).MargenGanancia) / 100) + 1)));
                             txtStock.Text = "25";
                             bandera = true;
@@ -173,8 +174,87 @@ namespace CapaPresentacion
 
         private void button3_Click(object sender, EventArgs e)
         {
-            frmMedioPago frm = new();
-            frm.ShowDialog();
+           
+        }
+
+        private void label22_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            using ServiceWrapper.LoginServiceClient client = new();
+            var autorizacion = client.SolicitarAutorizacionAsync("EE6477E1-4BB2-4667-B3D0-C71F67AFED36").Result;
+            using ServiceSoapClient clientAfip = new(ServiceSoapClient.EndpointConfiguration.ServiceSoap);
+
+            //Autorización WSAA, firma y token
+            var authRequest = new FEAuthRequest()
+            {
+                Cuit = autorizacion.Cuit,
+                Token = autorizacion.Token,
+                Sign = autorizacion.Sign
+            };
+
+            //Cabecera
+            var cabecera = new FECAECabRequest()
+            {
+                CantReg = 1, // cantidad de registros del detalle del comprobante de ingreso
+                CbteTipo = 1, //Factura A
+                PtoVta = 6 //Punto de venta del comprobante que se está informando
+            };
+
+            //Alicuotas
+            var alicuota = new AlicIva()
+            {
+                Id = 5, //código de tipo de iva. 5 -> 21%
+                BaseImp = Convert.ToDouble(100),//base imponible para la determinación de la alícuota
+                Importe = Convert.ToDouble(21),//importe
+            };
+
+            //Detalle
+            int lastRes = clientAfip.FECompUltimoAutorizadoAsync(authRequest, cabecera.PtoVta, 1).Result.Body.FECompUltimoAutorizadoResult.CbteNro;
+            var detalle = new FECAEDetRequest()
+            {
+                Concepto = 1, //Concepto del comprobante. 1 -> Productos
+                DocTipo = 80, //Código de documento identificatorio del comprador. 80 -> CUIT
+                DocNro = 20331441112, // nro de identificacion del comprador
+                CbteDesde = lastRes + 1, // nro de comprobante desde. Rango: 1-99999999
+                CbteHasta = lastRes + 1, // nro de comprobante hasta. Rango: 1-99999999
+                CbteFch = DateTime.Now.ToString("yyyyMMdd"), //"20220111"; 
+                ImpTotal = Convert.ToDouble(121), // Importe total del comprobante
+                ImpTotConc = 0, // importe neto no gravado
+                ImpNeto = Convert.ToDouble(100), // importe neto gravado
+                ImpOpEx = 0, // importe exento
+                ImpIVA = Convert.ToDouble(21), //suma de los importes del array de IVA 
+                ImpTrib = Convert.ToDouble(0), //suma de los importes del array de tributos 
+                FchServDesde = "",
+                FchServHasta = "",
+                FchVtoPago = "",
+                MonId = "PES", // código de moneda del comprobante
+                MonCotiz = 1, // cotización de la moneda
+                Iva = new AlicIva[] { alicuota }
+            };
+
+            //Definición de la factura
+            var caeRequest = new FECAERequest()
+            {
+                FeDetReq = new FECAEDetRequest[] { detalle },
+                FeCabReq = cabecera //Asigno a la cabecera de la factura
+            };
+
+            var response = clientAfip.FECAESolicitarAsync(authRequest, caeRequest).Result;
+            if (response.Body.FECAESolicitarResult.FeCabResp.Resultado.Equals("A"))
+            {
+                MessageBox.Show("factura de venta aprobada");
+                frmMedioPago frm = new();
+                frm.ShowDialog();
+            }
+            else
+            {
+                MessageBox.Show("la factura de venta no fue aprobada");
+            }
+            
         }
     }
 

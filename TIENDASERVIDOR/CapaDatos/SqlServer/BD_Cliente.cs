@@ -20,13 +20,12 @@ namespace CapaDatos
             {
                 try
                 {
-                    String SqlQuery = "INSERT INTO Cliente(RazonSocial,Cuit,IdCondicionTributaria,DomicilioFiscal,Estado) VALUES(@RazonSocial,@Cuit,@IdCondicionTributaria,@DomicilioFiscal,@Estado)";
+                    String SqlQuery = "INSERT INTO Cliente(Cuit,RazonSocial,IdCondicionTributaria,DomicilioFiscal) VALUES(@Cuit,@RazonSocial,@IdCondicionTributaria,@DomicilioFiscal)";
                     SqlCommand cmd = new SqlCommand(SqlQuery, oConexion);
-                    cmd.Parameters.AddWithValue("RazonSocial", oCliente.RazonSocial);
                     cmd.Parameters.AddWithValue("Cuit", oCliente.Cuit);
+                    cmd.Parameters.AddWithValue("RazonSocial", oCliente.RazonSocial);
                     cmd.Parameters.AddWithValue("IdCondicionTributaria", oCliente.OCondicionTributaria.IdCondicionTributaria);
                     cmd.Parameters.AddWithValue("DomicilioFiscal", oCliente.DomicilioFiscal);
-                    cmd.Parameters.AddWithValue("Estado", oCliente.OEstado);
                     oConexion.Open();
                     respuesta = cmd.ExecuteNonQuery();
                 }
@@ -60,8 +59,8 @@ namespace CapaDatos
                                 IdCliente = Convert.ToInt32(data.Rows[i]["IdCliente"]),
                                 Cuit = data.Rows[i]["Cuit"].ToString(),
                                 RazonSocial = data.Rows[i]["RazonSocial"].ToString(),
-                                DomicilioFiscal = data.Rows[i]["DomicilioFiscal"].ToString(),
                                 OCondicionTributaria = BD_CondicionTributaria.BuscarCondicionTributariaById(Convert.ToInt32(data.Rows[i]["IdCondicionTributaria"])),
+                                DomicilioFiscal = data.Rows[i]["DomicilioFiscal"].ToString(),
                                 OEstado = Operaciones.BuscarEstado(data.Rows[i]["Estado"].ToString()),
                                 FechaRegistro = Convert.ToDateTime(data.Rows[i]["FechaRegistro"])
                             };

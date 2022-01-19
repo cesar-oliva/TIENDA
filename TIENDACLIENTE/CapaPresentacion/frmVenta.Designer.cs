@@ -29,8 +29,8 @@ namespace CapaPresentacion
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
             this.label15 = new System.Windows.Forms.Label();
             this.label20 = new System.Windows.Forms.Label();
@@ -55,6 +55,10 @@ namespace CapaPresentacion
             this.label1 = new System.Windows.Forms.Label();
             this.btnCancelar = new System.Windows.Forms.Button();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.cmbTalle = new System.Windows.Forms.ComboBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.cmbColor = new System.Windows.Forms.ComboBox();
+            this.label21 = new System.Windows.Forms.Label();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.pictureBox5 = new System.Windows.Forms.PictureBox();
             this.pictureBox4 = new System.Windows.Forms.PictureBox();
@@ -70,7 +74,6 @@ namespace CapaPresentacion
             this.txtDescripcion = new System.Windows.Forms.TextBox();
             this.btnAgregar = new System.Windows.Forms.Button();
             this.dataGridLineaVenta = new System.Windows.Forms.DataGridView();
-            this.button3 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.label19 = new System.Windows.Forms.Label();
             this.txtTotal = new System.Windows.Forms.TextBox();
@@ -82,10 +85,8 @@ namespace CapaPresentacion
             this.label3 = new System.Windows.Forms.Label();
             this.lblCantidad = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.cmbTalle = new System.Windows.Forms.ComboBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.cmbColor = new System.Windows.Forms.ComboBox();
-            this.label21 = new System.Windows.Forms.Label();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.label22 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).BeginInit();
             this.groupBox4.SuspendLayout();
@@ -300,6 +301,7 @@ namespace CapaPresentacion
             this.txtNumero.Name = "txtNumero";
             this.txtNumero.Size = new System.Drawing.Size(95, 23);
             this.txtNumero.TabIndex = 3;
+            this.txtNumero.Text = "0000205";
             // 
             // label2
             // 
@@ -315,17 +317,18 @@ namespace CapaPresentacion
             // txtTipo
             // 
             this.txtTipo.Enabled = false;
-            this.txtTipo.Location = new System.Drawing.Point(803, 119);
+            this.txtTipo.Location = new System.Drawing.Point(765, 119);
             this.txtTipo.Name = "txtTipo";
             this.txtTipo.Size = new System.Drawing.Size(55, 23);
             this.txtTipo.TabIndex = 1;
+            this.txtTipo.Text = "A";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.label1.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.label1.Location = new System.Drawing.Point(808, 101);
+            this.label1.Location = new System.Drawing.Point(770, 101);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(31, 15);
             this.label1.TabIndex = 0;
@@ -371,6 +374,48 @@ namespace CapaPresentacion
             this.groupBox5.TabIndex = 2;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Producto";
+            // 
+            // cmbTalle
+            // 
+            this.cmbTalle.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.cmbTalle.FormattingEnabled = true;
+            this.cmbTalle.Location = new System.Drawing.Point(536, 36);
+            this.cmbTalle.Name = "cmbTalle";
+            this.cmbTalle.Size = new System.Drawing.Size(115, 25);
+            this.cmbTalle.TabIndex = 67;
+            this.cmbTalle.Text = "Talle";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label4.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.label4.Location = new System.Drawing.Point(536, 19);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(35, 15);
+            this.label4.TabIndex = 68;
+            this.label4.Text = "Talle:";
+            // 
+            // cmbColor
+            // 
+            this.cmbColor.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.cmbColor.FormattingEnabled = true;
+            this.cmbColor.Location = new System.Drawing.Point(386, 36);
+            this.cmbColor.Name = "cmbColor";
+            this.cmbColor.Size = new System.Drawing.Size(126, 25);
+            this.cmbColor.TabIndex = 65;
+            this.cmbColor.Text = "Color";
+            // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label21.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.label21.Location = new System.Drawing.Point(386, 18);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(39, 15);
+            this.label21.TabIndex = 66;
+            this.label21.Text = "Color:";
             // 
             // pictureBox2
             // 
@@ -509,41 +554,28 @@ namespace CapaPresentacion
             // 
             this.dataGridLineaVenta.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(66)))), ((int)(((byte)(91)))));
             this.dataGridLineaVenta.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.HotTrack;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridLineaVenta.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.HotTrack;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridLineaVenta.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
             this.dataGridLineaVenta.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridLineaVenta.EnableHeadersVisualStyles = false;
             this.dataGridLineaVenta.GridColor = System.Drawing.Color.SteelBlue;
             this.dataGridLineaVenta.Location = new System.Drawing.Point(13, 250);
             this.dataGridLineaVenta.Name = "dataGridLineaVenta";
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(66)))), ((int)(((byte)(91)))));
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.SteelBlue;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.White;
-            this.dataGridLineaVenta.RowsDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(66)))), ((int)(((byte)(91)))));
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            dataGridViewCellStyle6.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.SteelBlue;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.White;
+            this.dataGridLineaVenta.RowsDefaultCellStyle = dataGridViewCellStyle6;
             this.dataGridLineaVenta.RowTemplate.Height = 25;
             this.dataGridLineaVenta.Size = new System.Drawing.Size(1039, 191);
             this.dataGridLineaVenta.TabIndex = 33;
-            // 
-            // button3
-            // 
-            this.button3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(188)))), ((int)(((byte)(101)))));
-            this.button3.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.button3.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.button3.Location = new System.Drawing.Point(697, 501);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(90, 54);
-            this.button3.TabIndex = 19;
-            this.button3.Text = "Pago";
-            this.button3.UseVisualStyleBackColor = false;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // button1
             // 
@@ -554,8 +586,9 @@ namespace CapaPresentacion
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(90, 54);
             this.button1.TabIndex = 34;
-            this.button1.Text = "Guardar";
+            this.button1.Text = "Generar";
             this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // label19
             // 
@@ -655,53 +688,32 @@ namespace CapaPresentacion
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.label5.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.label5.Location = new System.Drawing.Point(766, 125);
+            this.label5.Location = new System.Drawing.Point(728, 125);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(37, 15);
             this.label5.TabIndex = 60;
             this.label5.Text = "FACT:";
             // 
-            // cmbTalle
+            // textBox1
             // 
-            this.cmbTalle.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.cmbTalle.FormattingEnabled = true;
-            this.cmbTalle.Location = new System.Drawing.Point(536, 36);
-            this.cmbTalle.Name = "cmbTalle";
-            this.cmbTalle.Size = new System.Drawing.Size(115, 25);
-            this.cmbTalle.TabIndex = 67;
-            this.cmbTalle.Text = "Talle";
+            this.textBox1.Enabled = false;
+            this.textBox1.Location = new System.Drawing.Point(830, 119);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(29, 23);
+            this.textBox1.TabIndex = 61;
+            this.textBox1.Text = "1";
             // 
-            // label4
+            // label22
             // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label4.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.label4.Location = new System.Drawing.Point(536, 19);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(35, 15);
-            this.label4.TabIndex = 68;
-            this.label4.Text = "Talle:";
-            // 
-            // cmbColor
-            // 
-            this.cmbColor.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.cmbColor.FormattingEnabled = true;
-            this.cmbColor.Location = new System.Drawing.Point(386, 36);
-            this.cmbColor.Name = "cmbColor";
-            this.cmbColor.Size = new System.Drawing.Size(126, 25);
-            this.cmbColor.TabIndex = 65;
-            this.cmbColor.Text = "Color";
-            // 
-            // label21
-            // 
-            this.label21.AutoSize = true;
-            this.label21.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label21.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.label21.Location = new System.Drawing.Point(386, 18);
-            this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(39, 15);
-            this.label21.TabIndex = 66;
-            this.label21.Text = "Color:";
+            this.label22.AutoSize = true;
+            this.label22.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label22.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.label22.Location = new System.Drawing.Point(835, 102);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(22, 15);
+            this.label22.TabIndex = 62;
+            this.label22.Text = "PV";
+            this.label22.Click += new System.EventHandler(this.label22_Click);
             // 
             // frmVenta
             // 
@@ -709,13 +721,14 @@ namespace CapaPresentacion
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(29)))), ((int)(((byte)(38)))), ((int)(((byte)(69)))));
             this.ClientSize = new System.Drawing.Size(1064, 576);
+            this.Controls.Add(this.label22);
+            this.Controls.Add(this.textBox1);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.lblCantidad);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label11);
             this.Controls.Add(this.label19);
             this.Controls.Add(this.dateTimePicker1);
-            this.Controls.Add(this.button3);
             this.Controls.Add(this.txtTotal);
             this.Controls.Add(this.label18);
             this.Controls.Add(this.txtNumero);
@@ -810,5 +823,7 @@ namespace CapaPresentacion
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.ComboBox cmbColor;
         private System.Windows.Forms.Label label21;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Label label22;
     }
 }

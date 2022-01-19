@@ -21,7 +21,7 @@ namespace CapaServicioServidor
         [OperationContract] //metodos expuestos atraves del webservice
         List<DtoTipoTalle> ListaTipoTalle();
         [OperationContract]
-        TipoTalle ObtenerTipoTalle(string Rubro);
+        TipoTalle ObtenerTipoTalleByDescripcion(string oTipoTalle);
     }
     [DataContract]
     public class DtoTipoTalle
@@ -29,7 +29,7 @@ namespace CapaServicioServidor
         [DataMember]
         public int IdTipoTalle { get; set; }
         [DataMember]
-        public string Descripcion { get; set; }
+        public string DescripcionTipoTalle { get; set; }
         [DataMember]
         public Estado OEstado { get; set; }
     }

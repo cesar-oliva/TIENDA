@@ -19,12 +19,11 @@ namespace CapaDatos.SqlServer
             {
                 try
                 {
-                    string SqlQuery = "INSERT INTO Color(CodigoColor,DescripcionColor,Estado)" +
-                                      "VALUES(@CodigoColor@DescripcionColor,@Estado)";
+                    string SqlQuery = "INSERT INTO Color(CodigoColor,DescripcionColor)" +
+                                      "VALUES(@CodigoColor@DescripcionColor)";
                     SqlCommand cmd = new SqlCommand(SqlQuery, oConexion);
                     cmd.Parameters.AddWithValue("CodigoColor", oColor.CodigoColor);
                     cmd.Parameters.AddWithValue("DescripcionColor", oColor.DescripcionColor);
-                    cmd.Parameters.AddWithValue("Estado", oColor.OEstado);
                     oConexion.Open();
                     respuesta = cmd.ExecuteNonQuery();
 
@@ -47,10 +46,10 @@ namespace CapaDatos.SqlServer
                 {
                     String SqlQuery = "UPDATE Color SET CodigoColor = @CodigoColor,DescripcionColor = @DescripcionColor, Estado = @Estado  WHERE IdColor = @IdColor";
                     SqlCommand cmd = new SqlCommand(SqlQuery, oConexion);
+                    cmd.Parameters.AddWithValue("IdColor", oColor.IdColor);
                     cmd.Parameters.AddWithValue("CodigoColor", oColor.CodigoColor);
                     cmd.Parameters.AddWithValue("DescripcionColor", oColor.DescripcionColor);
                     cmd.Parameters.AddWithValue("Estado", oColor.OEstado);
-                    cmd.Parameters.AddWithValue("IdColor", oColor.IdColor);
                     oConexion.Open();
                     respuesta = cmd.ExecuteNonQuery();
                     return true;
@@ -69,9 +68,10 @@ namespace CapaDatos.SqlServer
             {
                 try
                 {
-                    String SqlQuery = "DELETE FROM Color WHERE IdColor = @IdColor";
+                    String SqlQuery = "UPDATE Color SET Estado = @Estado WHERE IdColor = @IdColor";
                     SqlCommand cmd = new SqlCommand(SqlQuery, oConexion);
                     cmd.Parameters.AddWithValue("IdColor", IdColor);
+                    cmd.Parameters.AddWithValue("Estado", Estado.Inactivo);
                     oConexion.Open();
                     respuesta = cmd.ExecuteNonQuery();
                     return true;
@@ -105,6 +105,7 @@ namespace CapaDatos.SqlServer
                                 CodigoColor = data.Rows[i]["CodigoColor"].ToString(),
                                 DescripcionColor = data.Rows[i]["DescripcionColor"].ToString(),
                                 OEstado = Operaciones.BuscarEstado(data.Rows[i]["Estado"].ToString()),
+                                FechaRegistro = Convert.ToDateTime(data.Rows[i]["FechaRegistro"])
                             };
                             colorTabla.Add(color);
                         }

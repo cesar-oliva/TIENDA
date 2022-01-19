@@ -1,14 +1,14 @@
 {
   "ExtendedData": {
     "inputs": [
-      "http://localhost:10524/ServiceRubroProducto.svc"
+      "http://istp1service.azurewebsites.net/LoginService.svc?wsdl"
     ],
     "collectionTypes": [
       "System.Collections.ArrayList",
       "System.Collections.Generic.Dictionary`2"
     ],
     "namespaceMappings": [
-      "*, ServiceRubroProducto"
+      "*, ServiceWrapper"
     ],
     "references": [
       "BoDi, {BoDi, 1.5.0}",

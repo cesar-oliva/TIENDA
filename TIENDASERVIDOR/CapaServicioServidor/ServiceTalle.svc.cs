@@ -18,7 +18,8 @@ namespace CapaServicioServidor
             var nuevo = new Talle
             {
                 OTipoTalle = oTalle.OTipoTalle,
-                CodigoTalle = oTalle.CodigoTalle,
+                ORubroProducto = oTalle.ORubroProducto,
+                OGeneroProducto = oTalle.OGeneroProducto,   
                 DescripcionTalle = oTalle.DescripcionTalle,
                 OEstado = oTalle.OEstado
             };
@@ -48,7 +49,8 @@ namespace CapaServicioServidor
                 {
                     IdTalle = item.IdTalle,
                     OTipoTalle = item.OTipoTalle,
-                    CodigoTalle = item.CodigoTalle,
+                    ORubroProducto = item.ORubroProducto,
+                    OGeneroProducto = item.OGeneroProducto,
                     DescripcionTalle = item.DescripcionTalle,
                     OEstado = item.OEstado,
                 };
@@ -63,7 +65,8 @@ namespace CapaServicioServidor
             {
                 IdTalle = oTalle.IdTalle,
                 OTipoTalle = oTalle.OTipoTalle,
-                CodigoTalle= oTalle.CodigoTalle,
+                ORubroProducto = oTalle.ORubroProducto,
+                OGeneroProducto= oTalle.OGeneroProducto,
                 DescripcionTalle = oTalle.DescripcionTalle,
                 OEstado = oTalle.OEstado,
             };

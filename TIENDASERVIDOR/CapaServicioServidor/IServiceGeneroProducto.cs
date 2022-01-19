@@ -8,33 +8,34 @@ using System.Text;
 
 namespace CapaServicioServidor
 {
-    // NOTA: puede usar el comando "Rename" del menú "Refactorizar" para cambiar el nombre de interfaz "IServiceMarca" en el código y en el archivo de configuración a la vez.
+    // NOTA: puede usar el comando "Rename" del menú "Refactorizar" para cambiar el nombre de interfaz "IServiceGeneroProducto" en el código y en el archivo de configuración a la vez.
     [ServiceContract]
-    public interface IServiceMarca
+    public interface IServiceGeneroProducto
     {
+
         [OperationContract] //metodos expuestos atraves del webservice
         ///DtoUsuario crearDtoUsuario(string nombres, string apellidos, string correo, string nombreUsuario, string clave);
-        bool AgregarMarca(DtoMarca oMarca);
+        bool AgregarGeneroProducto(DtoGeneroProducto oGeneroProducto);
         [OperationContract] //metodos expuestos atraves del webservice
-        bool ModificarMarca(DtoMarca oMarca, int IdMarca);
+        bool ModificarGeneroProducto(DtoGeneroProducto oGeneroProducto, int IdGeneroProducto);
         [OperationContract] //metodos expuestos atraves del webservice
-        bool EliminarMarca(int IdMarca);
+        bool EliminarGeneroProducto(int IdGeneroProducto);
         [OperationContract] //metodos expuestos atraves del webservice
-        List<DtoMarca> ListaMarca();
+        List<DtoGeneroProducto> ListaGeneroProducto();
         [OperationContract]
-        Marca ObtenerMarca(string oMarca);
+        GeneroProducto ObtenerGeneroProducto(string oGeneroProducto);
     }
     [DataContract]
-    public class DtoMarca
+    public class DtoGeneroProducto
     {
         [DataMember]
-        public int IdMarca { get; set; }
+        public int IdGeneroProducto { get; set; }
         [DataMember]
-        public string Descripcion { get; set; }
+        public string DescripcionGeneroProducto { get; set; }
         [DataMember]
         public Estado OEstado { get; set; }
         [DataMember]
         public DateTime FechaRegistro { get; set; }
     }
-}
 
+}

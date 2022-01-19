@@ -212,10 +212,10 @@ namespace ServiceRubroProducto
     {
         
         [System.Runtime.Serialization.EnumMemberAttribute()]
-        Activo = 0,
+        Inactivo = 0,
         
         [System.Runtime.Serialization.EnumMemberAttribute()]
-        Inactivo = 1,
+        Activo = 1,
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]

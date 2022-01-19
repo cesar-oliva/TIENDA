@@ -17,7 +17,7 @@ namespace CapaServicioServidor
         {
             var nuevo = new Marca
             {
-                Descripcion = oMarca.Descripcion,
+                DescripcionMarca = oMarca.Descripcion,
                 OEstado = oMarca.OEstado
             };
             int i = CapaDatos.BD_Marca.RegistrarMarca(nuevo);
@@ -38,7 +38,7 @@ namespace CapaServicioServidor
         {
             var nuevo = new Marca
             {
-                Descripcion = oMarca.Descripcion,
+                DescripcionMarca = oMarca.Descripcion,
                 OEstado = oMarca.OEstado,
             };
 
@@ -54,7 +54,7 @@ namespace CapaServicioServidor
                 DtoMarca marca = new DtoMarca
                 {
                     IdMarca = item.IdMarca,
-                    Descripcion = item.Descripcion,
+                    Descripcion = item.DescripcionMarca,
                     OEstado = item.OEstado,
                 };
                 marc.Add(marca);
@@ -64,7 +64,7 @@ namespace CapaServicioServidor
         }
         public Marca ObtenerMarca(string oMarca)
         {
-            return BD_Marca.BuscarMarca(oMarca);
+            return BD_Marca.BuscarMarcaByDescripcion(oMarca);
         }
     }
 }

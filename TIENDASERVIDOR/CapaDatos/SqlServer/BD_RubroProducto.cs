@@ -19,8 +19,8 @@ namespace CapaDatos
             {
                 try
                 {
-                    string SqlQuery = "INSERT INTO RubroProducto(CodigoRubroProducto,DescripcionRubroProducto,MargenGanancia,IdImpuesto,Estado)" +
-                                      "VALUES(@CodigoRubroProducto,@DescripcionRubroProducto,@MargenGanancia,@IdImpuesto,@Estado)";
+                    string SqlQuery = "INSERT INTO RubroProducto(CodigoRubroProducto,DescripcionRubroProducto,MargenGanancia,IdImpuesto)" +
+                                      "VALUES(@CodigoRubroProducto,@DescripcionRubroProducto,@MargenGanancia,@IdImpuesto)";
                     SqlCommand cmd = new SqlCommand(SqlQuery, oConexion);
                     cmd.Parameters.AddWithValue("CodigoRubroProducto", oRubro.CodigoRubroProducto);
                     cmd.Parameters.AddWithValue("DescripcionRubroProducto", oRubro.DescripcionRubroProducto);

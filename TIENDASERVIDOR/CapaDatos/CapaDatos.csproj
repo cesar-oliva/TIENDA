@@ -62,6 +62,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="SqlServer\BD_GeneroProducto.cs" />
     <Compile Include="MailServices\MailServer.cs" />
     <Compile Include="MailServices\MailSupport.cs" />
     <Compile Include="SqlServer\BD_Cliente.cs" />

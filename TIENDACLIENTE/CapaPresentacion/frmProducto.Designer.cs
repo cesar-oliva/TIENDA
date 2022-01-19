@@ -70,7 +70,7 @@ namespace CapaPresentacion
             this.Btn_Modificar.TabIndex = 2;
             this.Btn_Modificar.Text = "Modificar";
             this.Btn_Modificar.UseVisualStyleBackColor = false;
-            this.Btn_Modificar.Click += new System.EventHandler(this.Btn_Modificar_Click);
+            this.Btn_Modificar.Click += new System.EventHandler(this.Btn_ModificarProducto_Click);
             // 
             // Btn_Nuevo
             // 
@@ -98,7 +98,7 @@ namespace CapaPresentacion
             this.Btn_Eliminar.TabIndex = 0;
             this.Btn_Eliminar.Text = "Eliminar";
             this.Btn_Eliminar.UseVisualStyleBackColor = false;
-            this.Btn_Eliminar.Click += new System.EventHandler(this.Btn_Eliminar_Click);
+            this.Btn_Eliminar.Click += new System.EventHandler(this.Btn_EliminarProducto_Click);
             // 
             // label1
             // 

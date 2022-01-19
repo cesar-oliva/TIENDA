@@ -18,28 +18,19 @@ namespace ServiceTalle
     public partial class Talle : object
     {
         
-        private string CodigoTalleField;
-        
         private string DescripcionTalleField;
+        
+        private System.DateTime FechaRegistroField;
         
         private int IdTalleField;
         
         private ServiceTalle.Estado OEstadoField;
         
-        private ServiceTalle.TipoTalle OTipoTalleField;
+        private ServiceTalle.GeneroProducto OGeneroProductoField;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CodigoTalle
-        {
-            get
-            {
-                return this.CodigoTalleField;
-            }
-            set
-            {
-                this.CodigoTalleField = value;
-            }
-        }
+        private ServiceTalle.RubroProducto ORubroProductoField;
+        
+        private ServiceTalle.TipoTalle OTipoTalleField;
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         public string DescripcionTalle
@@ -51,6 +42,19 @@ namespace ServiceTalle
             set
             {
                 this.DescripcionTalleField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime FechaRegistro
+        {
+            get
+            {
+                return this.FechaRegistroField;
+            }
+            set
+            {
+                this.FechaRegistroField = value;
             }
         }
         
@@ -81,6 +85,32 @@ namespace ServiceTalle
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
+        public ServiceTalle.GeneroProducto OGeneroProducto
+        {
+            get
+            {
+                return this.OGeneroProductoField;
+            }
+            set
+            {
+                this.OGeneroProductoField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public ServiceTalle.RubroProducto ORubroProducto
+        {
+            get
+            {
+                return this.ORubroProductoField;
+            }
+            set
+            {
+                this.ORubroProductoField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
         public ServiceTalle.TipoTalle OTipoTalle
         {
             get
@@ -96,26 +126,220 @@ namespace ServiceTalle
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.3")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="GeneroProducto", Namespace="http://schemas.datacontract.org/2004/07/CapaNegocio")]
+    public partial class GeneroProducto : object
+    {
+        
+        private string DescripcionGeneroProductoField;
+        
+        private System.DateTime FechaRegistroField;
+        
+        private int IdGeneroProductoField;
+        
+        private ServiceTalle.Estado OEstadoField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string DescripcionGeneroProducto
+        {
+            get
+            {
+                return this.DescripcionGeneroProductoField;
+            }
+            set
+            {
+                this.DescripcionGeneroProductoField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime FechaRegistro
+        {
+            get
+            {
+                return this.FechaRegistroField;
+            }
+            set
+            {
+                this.FechaRegistroField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int IdGeneroProducto
+        {
+            get
+            {
+                return this.IdGeneroProductoField;
+            }
+            set
+            {
+                this.IdGeneroProductoField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public ServiceTalle.Estado OEstado
+        {
+            get
+            {
+                return this.OEstadoField;
+            }
+            set
+            {
+                this.OEstadoField = value;
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.3")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="RubroProducto", Namespace="http://schemas.datacontract.org/2004/07/CapaNegocio")]
+    public partial class RubroProducto : object
+    {
+        
+        private string CodigoRubroProductoField;
+        
+        private string DescripcionRubroProductoField;
+        
+        private System.DateTime FechaRegistroField;
+        
+        private int IdRubroProductoField;
+        
+        private double MargenGananciaField;
+        
+        private ServiceTalle.Estado OEstadoField;
+        
+        private ServiceTalle.Impuesto OImpuestoField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string CodigoRubroProducto
+        {
+            get
+            {
+                return this.CodigoRubroProductoField;
+            }
+            set
+            {
+                this.CodigoRubroProductoField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string DescripcionRubroProducto
+        {
+            get
+            {
+                return this.DescripcionRubroProductoField;
+            }
+            set
+            {
+                this.DescripcionRubroProductoField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime FechaRegistro
+        {
+            get
+            {
+                return this.FechaRegistroField;
+            }
+            set
+            {
+                this.FechaRegistroField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int IdRubroProducto
+        {
+            get
+            {
+                return this.IdRubroProductoField;
+            }
+            set
+            {
+                this.IdRubroProductoField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public double MargenGanancia
+        {
+            get
+            {
+                return this.MargenGananciaField;
+            }
+            set
+            {
+                this.MargenGananciaField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public ServiceTalle.Estado OEstado
+        {
+            get
+            {
+                return this.OEstadoField;
+            }
+            set
+            {
+                this.OEstadoField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public ServiceTalle.Impuesto OImpuesto
+        {
+            get
+            {
+                return this.OImpuestoField;
+            }
+            set
+            {
+                this.OImpuestoField = value;
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.3")]
     [System.Runtime.Serialization.DataContractAttribute(Name="TipoTalle", Namespace="http://schemas.datacontract.org/2004/07/CapaNegocio")]
     public partial class TipoTalle : object
     {
         
-        private string DescripcionField;
+        private string DescripcionTipoTalleField;
+        
+        private System.DateTime FechaRegistroField;
         
         private int IdTipoTalleField;
         
         private ServiceTalle.Estado OEstadoField;
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Descripcion
+        public string DescripcionTipoTalle
         {
             get
             {
-                return this.DescripcionField;
+                return this.DescripcionTipoTalleField;
             }
             set
             {
-                this.DescripcionField = value;
+                this.DescripcionTipoTalleField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime FechaRegistro
+        {
+            get
+            {
+                return this.FechaRegistroField;
+            }
+            set
+            {
+                this.FechaRegistroField = value;
             }
         }
         
@@ -152,10 +376,92 @@ namespace ServiceTalle
     {
         
         [System.Runtime.Serialization.EnumMemberAttribute()]
-        Activo = 0,
+        Inactivo = 0,
         
         [System.Runtime.Serialization.EnumMemberAttribute()]
-        Inactivo = 1,
+        Activo = 1,
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.3")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Impuesto", Namespace="http://schemas.datacontract.org/2004/07/CapaNegocio")]
+    public partial class Impuesto : object
+    {
+        
+        private double AlicuotaField;
+        
+        private string DescripcionField;
+        
+        private System.DateTime FechaRegistroField;
+        
+        private int IdImpuestoField;
+        
+        private ServiceTalle.Estado OEstadoField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public double Alicuota
+        {
+            get
+            {
+                return this.AlicuotaField;
+            }
+            set
+            {
+                this.AlicuotaField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Descripcion
+        {
+            get
+            {
+                return this.DescripcionField;
+            }
+            set
+            {
+                this.DescripcionField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime FechaRegistro
+        {
+            get
+            {
+                return this.FechaRegistroField;
+            }
+            set
+            {
+                this.FechaRegistroField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int IdImpuesto
+        {
+            get
+            {
+                return this.IdImpuestoField;
+            }
+            set
+            {
+                this.IdImpuestoField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public ServiceTalle.Estado OEstado
+        {
+            get
+            {
+                return this.OEstadoField;
+            }
+            set
+            {
+                this.OEstadoField = value;
+            }
+        }
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -164,28 +470,17 @@ namespace ServiceTalle
     public partial class DtoTalle : object
     {
         
-        private string CodigoTalleField;
-        
         private string DescripcionTalleField;
         
         private int IdTalleField;
         
         private ServiceTalle.Estado OEstadoField;
         
-        private ServiceTalle.TipoTalle OTipoTalleField;
+        private ServiceTalle.GeneroProducto OGeneroProductoField;
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CodigoTalle
-        {
-            get
-            {
-                return this.CodigoTalleField;
-            }
-            set
-            {
-                this.CodigoTalleField = value;
-            }
-        }
+        private ServiceTalle.RubroProducto ORubroProductoField;
+        
+        private ServiceTalle.TipoTalle OTipoTalleField;
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         public string DescripcionTalle
@@ -223,6 +518,32 @@ namespace ServiceTalle
             set
             {
                 this.OEstadoField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public ServiceTalle.GeneroProducto OGeneroProducto
+        {
+            get
+            {
+                return this.OGeneroProductoField;
+            }
+            set
+            {
+                this.OGeneroProductoField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public ServiceTalle.RubroProducto ORubroProducto
+        {
+            get
+            {
+                return this.ORubroProductoField;
+            }
+            set
+            {
+                this.ORubroProductoField = value;
             }
         }
         

@@ -17,7 +17,7 @@ namespace CapaServicioServidor
         {
             var nuevo = new TipoTalle
             {
-                Descripcion = oTipoTalle.Descripcion,
+                DescripcionTipoTalle = oTipoTalle.DescripcionTipoTalle,
                 OEstado = oTipoTalle.OEstado
             };
             int i = BD_TipoTalle.RegistrarTipoTalle(nuevo);
@@ -45,7 +45,7 @@ namespace CapaServicioServidor
                 DtoTipoTalle TipoTalle = new DtoTipoTalle
                 {
                     IdTipoTalle = item.IdTipoTalle,
-                    Descripcion = item.Descripcion,
+                    DescripcionTipoTalle = item.DescripcionTipoTalle,
                     OEstado = item.OEstado,
                 };
                 tal.Add(TipoTalle);
@@ -58,16 +58,16 @@ namespace CapaServicioServidor
             var nuevo = new TipoTalle
             {
                 IdTipoTalle = oTipoTalle.IdTipoTalle,
-                Descripcion = oTipoTalle.Descripcion,
+                DescripcionTipoTalle = oTipoTalle.DescripcionTipoTalle,
                 OEstado = oTipoTalle.OEstado,
             };
 
             return BD_TipoTalle.ActualizarTipoTalle(nuevo, IdTipoTalle);
         }
 
-        public TipoTalle ObtenerTipoTalle(string Descripcion)
+        public TipoTalle ObtenerTipoTalleByDescripcion(string Descripcion)
         {
-            return BD_TipoTalle.BuscarTipoTalle(Descripcion);
+            return BD_TipoTalle.BuscarTipoTalleByDescripcion(Descripcion);
         }
     }
 

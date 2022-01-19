@@ -20,12 +20,11 @@ namespace CapaDatos
             {
                 try
                 {
-                    string SqlQuery = "INSERT INTO Impuesto(Descripcion,Alicuota,Estado)" +
+                    string SqlQuery = "INSERT INTO Impuesto(DescripcionImpusto,Alicuota)" +
                                      "VALUES(@Descripcion,@Alicuota,@Estado)";
                     SqlCommand cmd = new SqlCommand(SqlQuery, oConexion);
-                    cmd.Parameters.AddWithValue("Descripcion", oImpuesto.Descripcion);
+                    cmd.Parameters.AddWithValue("DescripcionImpuesto", oImpuesto.Descripcion);
                     cmd.Parameters.AddWithValue("Alicuota", oImpuesto.Alicuota);
-                    cmd.Parameters.AddWithValue("Estado", Operaciones.BuscarEstado(oImpuesto.OEstado));
                     oConexion.Open();
                     if(cmd.ExecuteNonQuery()>0) respuesta = true;
                     MessageBox.Show("El producto de dio de alta con exito");
@@ -46,9 +45,9 @@ namespace CapaDatos
             {
                 try
                 {
-                    string SqlQuery = "UPDATE IMPUESTO SET Descripcion = @Descripcion, Alicuota = @Alicuota, Estado = @Estado WHERE idImpuesto = @IdImpuesto";
+                    string SqlQuery = "UPDATE IMPUESTO SET DescripcionImpuesto = @DescripcionImpuesto, Alicuota = @Alicuota, Estado = @Estado WHERE idImpuesto = @IdImpuesto";
                     SqlCommand cmd = new SqlCommand(SqlQuery, oConexion);
-                    cmd.Parameters.AddWithValue("Descripcion", oImpuesto.Descripcion);
+                    cmd.Parameters.AddWithValue("DescripcionImpuesto", oImpuesto.Descripcion);
                     cmd.Parameters.AddWithValue("Alicuota", oImpuesto.Alicuota);
                     cmd.Parameters.AddWithValue("Estado", Operaciones.BuscarEstado(oImpuesto.OEstado));
                     cmd.Parameters.AddWithValue("IdImpuesto",IdImpuesto);
@@ -105,7 +104,7 @@ namespace CapaDatos
                             var imp = new Impuesto
                             {
                                 IdImpuesto = Convert.ToInt32(data.Rows[i]["IdImpuesto"]),
-                                Descripcion = data.Rows[i]["Descripcion"].ToString(),
+                                Descripcion = data.Rows[i]["DescripcionImpuesto"].ToString(),
                                 Alicuota = Convert.ToDouble(data.Rows[i]["Alicuota"].ToString()),
                                 OEstado = Operaciones.BuscarEstado(data.Rows[i]["Estado"].ToString()),
                                 FechaRegistro = Convert.ToDateTime(data.Rows[i]["FechaRegistro"])

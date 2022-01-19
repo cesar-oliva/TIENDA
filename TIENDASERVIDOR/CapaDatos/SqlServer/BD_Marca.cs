@@ -19,11 +19,9 @@ namespace CapaDatos
             {
                 try
                 {
-                    string SqlQuery = "INSERT INTO Marca(Descripcion,Estado)" +
-                                      "VALUES(@Descripcion,@Estado)";
+                    string SqlQuery = "INSERT INTO Marca(DescripcionMarca)VALUES(@DescripcionMarca)";
                     SqlCommand cmd = new SqlCommand(SqlQuery, oConexion);
-                    cmd.Parameters.AddWithValue("Descripcion", oMarca.Descripcion);
-                    cmd.Parameters.AddWithValue("Estado", oMarca.OEstado);
+                    cmd.Parameters.AddWithValue("DescripcionMarca", oMarca.DescripcionMarca);
                     oConexion.Open();
                     respuesta = cmd.ExecuteNonQuery();
 
@@ -44,11 +42,11 @@ namespace CapaDatos
             {
                 try
                 {
-                    String SqlQuery = "UPDATE Marca SET Descripcion = @Descripcion, Estado = @Estado  WHERE IdMarca = @IdMarca";
+                    String SqlQuery = "UPDATE Marca SET DescripcionMarca = @DescripcionMarca, Estado = @Estado  WHERE IdMarca = @IdMarca";
                     SqlCommand cmd = new SqlCommand(SqlQuery, oConexion);
-                    cmd.Parameters.AddWithValue("Descripcion", oMarca.Descripcion);
-                    cmd.Parameters.AddWithValue("Estado", oMarca.OEstado);
                     cmd.Parameters.AddWithValue("IdMarca", IdMarca);
+                    cmd.Parameters.AddWithValue("DescripcionMarca", oMarca.DescripcionMarca);
+                    cmd.Parameters.AddWithValue("Estado", oMarca.OEstado);
                     oConexion.Open();
                     respuesta = cmd.ExecuteNonQuery();
                     return true;
@@ -67,9 +65,10 @@ namespace CapaDatos
             {
                 try
                 {
-                    String SqlQuery = "DELETE FROM Marca WHERE IdMarca = @IdMarca";
+                    String SqlQuery = "UPDATE marca SET Estado = @Estado WHERE IdMarca = @IdMarca";
                     SqlCommand cmd = new SqlCommand(SqlQuery, oConexion);
                     cmd.Parameters.AddWithValue("IdMarca", IdMarca);
+                    cmd.Parameters.AddWithValue("Estado", Estado.Inactivo);
                     oConexion.Open();
                     respuesta = cmd.ExecuteNonQuery();
                     return true;
@@ -100,7 +99,7 @@ namespace CapaDatos
                             var marc = new Marca
                             {
                                 IdMarca = Convert.ToInt32(data.Rows[i]["IdMarca"]),
-                                Descripcion = data.Rows[i]["Descripcion"].ToString(),
+                                DescripcionMarca = data.Rows[i]["DescripcionMarca"].ToString(),
                                 OEstado = Operaciones.BuscarEstado(data.Rows[i]["Estado"].ToString()),
                             };
                             marcaTabla.Add(marc);
@@ -126,16 +125,16 @@ namespace CapaDatos
             }
             return null;
         }
-        public static Marca BuscarMarca(string oMarca)
+        public static Marca BuscarMarcaByDescripcion(string oMarca)
         {
             List<Marca> lista = MostrarMarca();
             foreach (var item in lista)
             {
-                if (item.Descripcion.Equals(oMarca)) return item;
+                if (item.DescripcionMarca.Equals(oMarca)) return item;
             }
             return null;
         }
-        public static Marca BuscarMarca(int oMarca)
+        public static Marca BuscarMarcaById(int oMarca)
         {
             List<Marca> lista = MostrarMarca();
             foreach (var item in lista)
