@@ -8,6 +8,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -20,7 +21,9 @@ namespace CapaPresentacion
         public frmVenta()
         {
             InitializeComponent();
-            //CargarDatosProductos();
+            this.Cursor = Cursors.Hand;
+            comboBox1.SelectedIndex = 0;
+            mtxtCuit.SelectionStart = 0;
             dataGridLineaVenta.AutoResizeColumns();
             dataGridLineaVenta.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
             dataGridLineaVenta.Columns.Add("NºdeLinea", "NºdeLinea");
@@ -64,7 +67,8 @@ namespace CapaPresentacion
                 if (bandera == false)
                 {
                     MessageBox.Show("El Cuit ingresado no corresponde a un Cliente activo");
-                    mtxtCuit.Text = "00-00000000-0";
+                    mtxtCuit.Text = "";
+                    comboBox1.SelectedIndex = 0;
                     foreach (var item in oListaCliente)
                     {
                         if (mtxtCuit.Text.Trim().ToString().Equals(item.Cuit.ToString()))
@@ -103,8 +107,8 @@ namespace CapaPresentacion
 
         private void pictureBox1_Click(object sender, EventArgs e)
         {
-            frmCliente fdc = new();
-            fdc.ShowDialog();   
+            frmListado list = new();
+            list.ShowDialog();   
         }
 
         private void txtCodigo_KeyPress(object sender, KeyPressEventArgs e)
@@ -172,22 +176,22 @@ namespace CapaPresentacion
             txtTotal.Text = total.ToString();
         }
 
-        private void button3_Click(object sender, EventArgs e)
-        {
-           
-        }
-
-        private void label22_Click(object sender, EventArgs e)
+        private void button2_Click(object sender, EventArgs e)
         {
 
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void btnGenerar_Click(object sender, EventArgs e)
         {
+            progressBar1.Value = 0;
+            lblEstado.Text = "procesando...";
+            Thread.Sleep(10);
             using ServiceWrapper.LoginServiceClient client = new();
             var autorizacion = client.SolicitarAutorizacionAsync("EE6477E1-4BB2-4667-B3D0-C71F67AFED36").Result;
             using ServiceSoapClient clientAfip = new(ServiceSoapClient.EndpointConfiguration.ServiceSoap);
-
+            progressBar1.Value = 10;
+            lblEstado.Text = "conexion establecida...";
+            Thread.Sleep(10);
             //Autorización WSAA, firma y token
             var authRequest = new FEAuthRequest()
             {
@@ -195,7 +199,9 @@ namespace CapaPresentacion
                 Token = autorizacion.Token,
                 Sign = autorizacion.Sign
             };
-
+            progressBar1.Value = 20;
+            lblEstado.Text = "token generado...";
+            Thread.Sleep(10);
             //Cabecera
             var cabecera = new FECAECabRequest()
             {
@@ -203,7 +209,9 @@ namespace CapaPresentacion
                 CbteTipo = 1, //Factura A
                 PtoVta = 6 //Punto de venta del comprobante que se está informando
             };
-
+            progressBar1.Value = 50;
+            lblEstado.Text = "enviando datos...";
+            Thread.Sleep(10);
             //Alicuotas
             var alicuota = new AlicIva()
             {
@@ -211,14 +219,16 @@ namespace CapaPresentacion
                 BaseImp = Convert.ToDouble(100),//base imponible para la determinación de la alícuota
                 Importe = Convert.ToDouble(21),//importe
             };
-
+            progressBar1.Value = 70;
+            lblEstado.Text = "solicitud de autorizacion...";
+            Thread.Sleep(10);
             //Detalle
             int lastRes = clientAfip.FECompUltimoAutorizadoAsync(authRequest, cabecera.PtoVta, 1).Result.Body.FECompUltimoAutorizadoResult.CbteNro;
             var detalle = new FECAEDetRequest()
             {
                 Concepto = 1, //Concepto del comprobante. 1 -> Productos
                 DocTipo = 80, //Código de documento identificatorio del comprador. 80 -> CUIT
-                DocNro = 20331441112, // nro de identificacion del comprador
+                DocNro = 22031441112, // nro de identificacion del comprador
                 CbteDesde = lastRes + 1, // nro de comprobante desde. Rango: 1-99999999
                 CbteHasta = lastRes + 1, // nro de comprobante hasta. Rango: 1-99999999
                 CbteFch = DateTime.Now.ToString("yyyyMMdd"), //"20220111"; 
@@ -242,20 +252,49 @@ namespace CapaPresentacion
                 FeDetReq = new FECAEDetRequest[] { detalle },
                 FeCabReq = cabecera //Asigno a la cabecera de la factura
             };
-
-            var response = clientAfip.FECAESolicitarAsync(authRequest, caeRequest).Result;
+            progressBar1.Value = 90;
+            lblEstado.Text = "evaluando...";
+            Thread.Sleep(10);
+            var response = clientAfip.FECAESolicitarAsync(authRequest, caeRequest).Result; 
+            progressBar1.Value = 100;
             if (response.Body.FECAESolicitarResult.FeCabResp.Resultado.Equals("A"))
             {
-                MessageBox.Show("factura de venta aprobada");
-                frmMedioPago frm = new();
-                frm.ShowDialog();
+                lblEstado.Text = "APROBADA";
+                lblEstado.ForeColor = System.Drawing.Color.Green;
+                txtCAE.Text = response.Body.FECAESolicitarResult.FeDetResp[0].CAE.ToString();
+                txtVencimiento.Text = response.Body.FECAESolicitarResult.FeDetResp[0].CAEFchVto.ToString();
+                btnPagar.Enabled = true;
             }
             else
             {
-                MessageBox.Show("la factura de venta no fue aprobada");
+                lblEstado.Text = "RECHAZADA";
+                lblEstado.ForeColor = System.Drawing.Color.Red;
             }
-            
+
+        }
+
+        private void btnPagar_Click(object sender, EventArgs e)
+        {
+            frmMedioPago frm = new();
+            frm.ShowDialog();
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if(comboBox1.SelectedIndex == 1)
+            {
+                mtxtCuit.Text = "";
+                mtxtCuit.Mask = "00-00000000-0";
+                mtxtCuit.Focus();
+                mtxtCuit.SelectionStart = 0;
+            }
+            else
+            {
+                mtxtCuit.Text = "";
+                mtxtCuit.Mask = "00000000";
+                mtxtCuit.Focus();
+                mtxtCuit.SelectionStart = 0;
+            }
         }
     }
-
 }

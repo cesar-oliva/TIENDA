@@ -10,6 +10,6 @@ namespace CapaDatos
 {
     public class Conexion
     {
-        public static string conexion = "server=CESAR-COREI5;database=DBTIENDA ; integrated security = true"; 
+        public static string conexion = "server=CESAR-COREI5;database=DB_TIENDA ; integrated security = true"; 
     }
 }

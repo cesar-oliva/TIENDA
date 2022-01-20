@@ -29,8 +29,8 @@ namespace CapaPresentacion
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
             this.label15 = new System.Windows.Forms.Label();
             this.label20 = new System.Windows.Forms.Label();
@@ -38,6 +38,7 @@ namespace CapaPresentacion
             this.label6 = new System.Windows.Forms.Label();
             this.pictureBox6 = new System.Windows.Forms.PictureBox();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.mtxtCuit = new System.Windows.Forms.MaskedTextBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
@@ -48,12 +49,6 @@ namespace CapaPresentacion
             this.txtCondicion = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
-            this.txtNumero = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.txtTipo = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.btnCancelar = new System.Windows.Forms.Button();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.cmbTalle = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
@@ -72,21 +67,27 @@ namespace CapaPresentacion
             this.txtPrecioVenta = new System.Windows.Forms.TextBox();
             this.label13 = new System.Windows.Forms.Label();
             this.txtDescripcion = new System.Windows.Forms.TextBox();
-            this.btnAgregar = new System.Windows.Forms.Button();
             this.dataGridLineaVenta = new System.Windows.Forms.DataGridView();
-            this.button1 = new System.Windows.Forms.Button();
             this.label19 = new System.Windows.Forms.Label();
             this.txtTotal = new System.Windows.Forms.TextBox();
             this.label18 = new System.Windows.Forms.Label();
             this.txtIVA = new System.Windows.Forms.TextBox();
             this.label17 = new System.Windows.Forms.Label();
             this.txtSubtotal = new System.Windows.Forms.TextBox();
-            this.label11 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.lblCantidad = new System.Windows.Forms.Label();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.progressBar1 = new System.Windows.Forms.ProgressBar();
+            this.btnPagar = new System.Windows.Forms.Button();
+            this.btnSalir = new System.Windows.Forms.Button();
+            this.btnGenerar = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.label22 = new System.Windows.Forms.Label();
+            this.txtVencimiento = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.lblEstado = new System.Windows.Forms.Label();
+            this.txtCAE = new System.Windows.Forms.TextBox();
+            this.pictureBox7 = new System.Windows.Forms.PictureBox();
+            this.lblEstadoAfip = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).BeginInit();
             this.groupBox4.SuspendLayout();
@@ -97,6 +98,8 @@ namespace CapaPresentacion
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridLineaVenta)).BeginInit();
+            this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -171,6 +174,7 @@ namespace CapaPresentacion
             // groupBox4
             // 
             this.groupBox4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(42)))), ((int)(((byte)(52)))), ((int)(((byte)(93)))));
+            this.groupBox4.Controls.Add(this.comboBox1);
             this.groupBox4.Controls.Add(this.mtxtCuit);
             this.groupBox4.Controls.Add(this.pictureBox1);
             this.groupBox4.Controls.Add(this.pictureBox3);
@@ -190,15 +194,25 @@ namespace CapaPresentacion
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Cliente";
             // 
+            // comboBox1
+            // 
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Items.AddRange(new object[] {
+            "DNI",
+            "CUIT"});
+            this.comboBox1.Location = new System.Drawing.Point(6, 23);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(60, 23);
+            this.comboBox1.TabIndex = 70;
+            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
+            // 
             // mtxtCuit
             // 
             this.mtxtCuit.Cursor = System.Windows.Forms.Cursors.Default;
-            this.mtxtCuit.Location = new System.Drawing.Point(58, 22);
-            this.mtxtCuit.Mask = "00-00000000-0";
+            this.mtxtCuit.Location = new System.Drawing.Point(74, 22);
             this.mtxtCuit.Name = "mtxtCuit";
-            this.mtxtCuit.Size = new System.Drawing.Size(115, 23);
+            this.mtxtCuit.Size = new System.Drawing.Size(101, 23);
             this.mtxtCuit.TabIndex = 0;
-            this.mtxtCuit.Text = "00000000000";
             this.mtxtCuit.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.mtxtCuit.MouseClick += new System.Windows.Forms.MouseEventHandler(this.mtxtCuit_MouseClick);
             this.mtxtCuit.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.mtxtCuit_KeyPress);
@@ -265,6 +279,7 @@ namespace CapaPresentacion
             this.txtCondicion.Name = "txtCondicion";
             this.txtCondicion.Size = new System.Drawing.Size(50, 23);
             this.txtCondicion.TabIndex = 7;
+            this.txtCondicion.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // label8
             // 
@@ -283,68 +298,6 @@ namespace CapaPresentacion
             this.label7.Size = new System.Drawing.Size(37, 15);
             this.label7.TabIndex = 4;
             this.label7.Text = "CUIT:";
-            // 
-            // dateTimePicker1
-            // 
-            this.dateTimePicker1.CalendarMonthBackground = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(160)))), ((int)(((byte)(133)))));
-            this.dateTimePicker1.Enabled = false;
-            this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dateTimePicker1.Location = new System.Drawing.Point(972, 119);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(78, 23);
-            this.dateTimePicker1.TabIndex = 8;
-            // 
-            // txtNumero
-            // 
-            this.txtNumero.Enabled = false;
-            this.txtNumero.Location = new System.Drawing.Point(868, 119);
-            this.txtNumero.Name = "txtNumero";
-            this.txtNumero.Size = new System.Drawing.Size(95, 23);
-            this.txtNumero.TabIndex = 3;
-            this.txtNumero.Text = "0000205";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label2.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.label2.Location = new System.Drawing.Point(868, 101);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(53, 15);
-            this.label2.TabIndex = 2;
-            this.label2.Text = "Numero";
-            // 
-            // txtTipo
-            // 
-            this.txtTipo.Enabled = false;
-            this.txtTipo.Location = new System.Drawing.Point(765, 119);
-            this.txtTipo.Name = "txtTipo";
-            this.txtTipo.Size = new System.Drawing.Size(55, 23);
-            this.txtTipo.TabIndex = 1;
-            this.txtTipo.Text = "A";
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label1.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.label1.Location = new System.Drawing.Point(770, 101);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(31, 15);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Tipo";
-            // 
-            // btnCancelar
-            // 
-            this.btnCancelar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(118)))), ((int)(((byte)(113)))));
-            this.btnCancelar.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.btnCancelar.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.btnCancelar.Location = new System.Drawing.Point(931, 501);
-            this.btnCancelar.Name = "btnCancelar";
-            this.btnCancelar.Size = new System.Drawing.Size(90, 54);
-            this.btnCancelar.TabIndex = 1;
-            this.btnCancelar.Text = "Cancelar";
-            this.btnCancelar.UseVisualStyleBackColor = false;
             // 
             // groupBox5
             // 
@@ -368,7 +321,7 @@ namespace CapaPresentacion
             this.groupBox5.Controls.Add(this.txtDescripcion);
             this.groupBox5.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.groupBox5.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.groupBox5.Location = new System.Drawing.Point(13, 159);
+            this.groupBox5.Location = new System.Drawing.Point(15, 97);
             this.groupBox5.Name = "groupBox5";
             this.groupBox5.Size = new System.Drawing.Size(1039, 85);
             this.groupBox5.TabIndex = 2;
@@ -536,66 +489,39 @@ namespace CapaPresentacion
             this.txtDescripcion.Size = new System.Drawing.Size(203, 23);
             this.txtDescripcion.TabIndex = 20;
             // 
-            // btnAgregar
-            // 
-            this.btnAgregar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(188)))), ((int)(((byte)(101)))));
-            this.btnAgregar.Cursor = System.Windows.Forms.Cursors.Default;
-            this.btnAgregar.Enabled = false;
-            this.btnAgregar.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.btnAgregar.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.btnAgregar.Location = new System.Drawing.Point(609, 346);
-            this.btnAgregar.Name = "btnAgregar";
-            this.btnAgregar.Size = new System.Drawing.Size(90, 54);
-            this.btnAgregar.TabIndex = 19;
-            this.btnAgregar.Text = "Agregar";
-            this.btnAgregar.UseVisualStyleBackColor = false;
-            // 
             // dataGridLineaVenta
             // 
             this.dataGridLineaVenta.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(66)))), ((int)(((byte)(91)))));
             this.dataGridLineaVenta.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.HotTrack;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridLineaVenta.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.HotTrack;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridLineaVenta.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridLineaVenta.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridLineaVenta.EnableHeadersVisualStyles = false;
             this.dataGridLineaVenta.GridColor = System.Drawing.Color.SteelBlue;
-            this.dataGridLineaVenta.Location = new System.Drawing.Point(13, 250);
+            this.dataGridLineaVenta.Location = new System.Drawing.Point(15, 188);
             this.dataGridLineaVenta.Name = "dataGridLineaVenta";
-            dataGridViewCellStyle6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(66)))), ((int)(((byte)(91)))));
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            dataGridViewCellStyle6.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.SteelBlue;
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.White;
-            this.dataGridLineaVenta.RowsDefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(66)))), ((int)(((byte)(91)))));
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.SteelBlue;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.White;
+            this.dataGridLineaVenta.RowsDefaultCellStyle = dataGridViewCellStyle2;
             this.dataGridLineaVenta.RowTemplate.Height = 25;
             this.dataGridLineaVenta.Size = new System.Drawing.Size(1039, 191);
             this.dataGridLineaVenta.TabIndex = 33;
-            // 
-            // button1
-            // 
-            this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(188)))), ((int)(((byte)(101)))));
-            this.button1.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.button1.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.button1.Location = new System.Drawing.Point(814, 501);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(90, 54);
-            this.button1.TabIndex = 34;
-            this.button1.Text = "Generar";
-            this.button1.UseVisualStyleBackColor = false;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // label19
             // 
             this.label19.AutoSize = true;
             this.label19.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.label19.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.label19.Location = new System.Drawing.Point(884, 450);
+            this.label19.Location = new System.Drawing.Point(884, 389);
             this.label19.Name = "label19";
             this.label19.Size = new System.Drawing.Size(48, 20);
             this.label19.TabIndex = 39;
@@ -604,7 +530,7 @@ namespace CapaPresentacion
             // txtTotal
             // 
             this.txtTotal.Enabled = false;
-            this.txtTotal.Location = new System.Drawing.Point(950, 449);
+            this.txtTotal.Location = new System.Drawing.Point(950, 388);
             this.txtTotal.Name = "txtTotal";
             this.txtTotal.Size = new System.Drawing.Size(100, 23);
             this.txtTotal.TabIndex = 40;
@@ -615,7 +541,7 @@ namespace CapaPresentacion
             this.label18.AutoSize = true;
             this.label18.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.label18.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.label18.Location = new System.Drawing.Point(708, 448);
+            this.label18.Location = new System.Drawing.Point(708, 387);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(38, 20);
             this.label18.TabIndex = 37;
@@ -624,7 +550,7 @@ namespace CapaPresentacion
             // txtIVA
             // 
             this.txtIVA.Enabled = false;
-            this.txtIVA.Location = new System.Drawing.Point(757, 447);
+            this.txtIVA.Location = new System.Drawing.Point(757, 386);
             this.txtIVA.Name = "txtIVA";
             this.txtIVA.Size = new System.Drawing.Size(100, 23);
             this.txtIVA.TabIndex = 38;
@@ -635,7 +561,7 @@ namespace CapaPresentacion
             this.label17.AutoSize = true;
             this.label17.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.label17.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.label17.Location = new System.Drawing.Point(488, 448);
+            this.label17.Location = new System.Drawing.Point(488, 387);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(72, 20);
             this.label17.TabIndex = 35;
@@ -644,29 +570,18 @@ namespace CapaPresentacion
             // txtSubtotal
             // 
             this.txtSubtotal.Enabled = false;
-            this.txtSubtotal.Location = new System.Drawing.Point(564, 447);
+            this.txtSubtotal.Location = new System.Drawing.Point(564, 386);
             this.txtSubtotal.Name = "txtSubtotal";
             this.txtSubtotal.Size = new System.Drawing.Size(100, 23);
             this.txtSubtotal.TabIndex = 36;
             this.txtSubtotal.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label11.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.label11.Location = new System.Drawing.Point(988, 101);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(39, 15);
-            this.label11.TabIndex = 57;
-            this.label11.Text = "Fecha";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.label3.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.label3.Location = new System.Drawing.Point(12, 452);
+            this.label3.Location = new System.Drawing.Point(12, 385);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(171, 20);
             this.label3.TabIndex = 58;
@@ -677,72 +592,167 @@ namespace CapaPresentacion
             this.lblCantidad.AutoSize = true;
             this.lblCantidad.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.lblCantidad.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.lblCantidad.Location = new System.Drawing.Point(185, 454);
+            this.lblCantidad.Location = new System.Drawing.Point(185, 387);
             this.lblCantidad.Name = "lblCantidad";
             this.lblCantidad.Size = new System.Drawing.Size(18, 20);
             this.lblCantidad.TabIndex = 59;
             this.lblCantidad.Text = "#";
             // 
+            // groupBox1
+            // 
+            this.groupBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(42)))), ((int)(((byte)(52)))), ((int)(((byte)(93)))));
+            this.groupBox1.Controls.Add(this.progressBar1);
+            this.groupBox1.Controls.Add(this.btnPagar);
+            this.groupBox1.Controls.Add(this.btnSalir);
+            this.groupBox1.Controls.Add(this.btnGenerar);
+            this.groupBox1.Controls.Add(this.label5);
+            this.groupBox1.Controls.Add(this.txtVencimiento);
+            this.groupBox1.Controls.Add(this.label2);
+            this.groupBox1.Controls.Add(this.lblEstado);
+            this.groupBox1.Controls.Add(this.txtCAE);
+            this.groupBox1.Controls.Add(this.pictureBox7);
+            this.groupBox1.Controls.Add(this.lblEstadoAfip);
+            this.groupBox1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.groupBox1.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.groupBox1.Location = new System.Drawing.Point(15, 431);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(1039, 112);
+            this.groupBox1.TabIndex = 69;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Autorizacion";
+            // 
+            // progressBar1
+            // 
+            this.progressBar1.Location = new System.Drawing.Point(488, 59);
+            this.progressBar1.Name = "progressBar1";
+            this.progressBar1.Size = new System.Drawing.Size(163, 23);
+            this.progressBar1.TabIndex = 76;
+            // 
+            // btnPagar
+            // 
+            this.btnPagar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(188)))), ((int)(((byte)(101)))));
+            this.btnPagar.Enabled = false;
+            this.btnPagar.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btnPagar.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.btnPagar.Location = new System.Drawing.Point(815, 28);
+            this.btnPagar.Name = "btnPagar";
+            this.btnPagar.Size = new System.Drawing.Size(90, 54);
+            this.btnPagar.TabIndex = 75;
+            this.btnPagar.Text = "Pagar";
+            this.btnPagar.UseVisualStyleBackColor = false;
+            this.btnPagar.Click += new System.EventHandler(this.btnPagar_Click);
+            // 
+            // btnSalir
+            // 
+            this.btnSalir.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(118)))), ((int)(((byte)(113)))));
+            this.btnSalir.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btnSalir.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.btnSalir.Location = new System.Drawing.Point(935, 28);
+            this.btnSalir.Name = "btnSalir";
+            this.btnSalir.Size = new System.Drawing.Size(90, 54);
+            this.btnSalir.TabIndex = 74;
+            this.btnSalir.Text = "Salir";
+            this.btnSalir.UseVisualStyleBackColor = false;
+            // 
+            // btnGenerar
+            // 
+            this.btnGenerar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(188)))), ((int)(((byte)(101)))));
+            this.btnGenerar.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btnGenerar.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.btnGenerar.Location = new System.Drawing.Point(693, 28);
+            this.btnGenerar.Name = "btnGenerar";
+            this.btnGenerar.Size = new System.Drawing.Size(90, 54);
+            this.btnGenerar.TabIndex = 70;
+            this.btnGenerar.Text = "Generar";
+            this.btnGenerar.UseVisualStyleBackColor = false;
+            this.btnGenerar.Click += new System.EventHandler(this.btnGenerar_Click);
+            // 
             // label5
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label5.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.label5.Location = new System.Drawing.Point(728, 125);
+            this.label5.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.label5.Location = new System.Drawing.Point(208, 63);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(37, 15);
-            this.label5.TabIndex = 60;
-            this.label5.Text = "FACT:";
+            this.label5.Size = new System.Drawing.Size(80, 15);
+            this.label5.TabIndex = 72;
+            this.label5.Text = "Vencimiento:";
             // 
-            // textBox1
+            // txtVencimiento
             // 
-            this.textBox1.Enabled = false;
-            this.textBox1.Location = new System.Drawing.Point(830, 119);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(29, 23);
-            this.textBox1.TabIndex = 61;
-            this.textBox1.Text = "1";
+            this.txtVencimiento.Enabled = false;
+            this.txtVencimiento.Location = new System.Drawing.Point(295, 59);
+            this.txtVencimiento.Name = "txtVencimiento";
+            this.txtVencimiento.Size = new System.Drawing.Size(167, 23);
+            this.txtVencimiento.TabIndex = 73;
+            this.txtVencimiento.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
-            // label22
+            // label2
             // 
-            this.label22.AutoSize = true;
-            this.label22.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label22.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.label22.Location = new System.Drawing.Point(835, 102);
-            this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(22, 15);
-            this.label22.TabIndex = 62;
-            this.label22.Text = "PV";
-            this.label22.Click += new System.EventHandler(this.label22_Click);
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label2.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.label2.Location = new System.Drawing.Point(205, 29);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(31, 15);
+            this.label2.TabIndex = 70;
+            this.label2.Text = "CAE:";
+            // 
+            // lblEstado
+            // 
+            this.lblEstado.AutoSize = true;
+            this.lblEstado.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lblEstado.Location = new System.Drawing.Point(533, 31);
+            this.lblEstado.Name = "lblEstado";
+            this.lblEstado.Size = new System.Drawing.Size(14, 15);
+            this.lblEstado.TabIndex = 59;
+            this.lblEstado.Text = "#";
+            // 
+            // txtCAE
+            // 
+            this.txtCAE.Enabled = false;
+            this.txtCAE.Location = new System.Drawing.Point(250, 25);
+            this.txtCAE.Name = "txtCAE";
+            this.txtCAE.Size = new System.Drawing.Size(212, 23);
+            this.txtCAE.TabIndex = 71;
+            this.txtCAE.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // pictureBox7
+            // 
+            this.pictureBox7.Image = global::CapaPresentacion.Properties.Resources.Afip_logo2;
+            this.pictureBox7.Location = new System.Drawing.Point(25, 25);
+            this.pictureBox7.Name = "pictureBox7";
+            this.pictureBox7.Size = new System.Drawing.Size(164, 72);
+            this.pictureBox7.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox7.TabIndex = 57;
+            this.pictureBox7.TabStop = false;
+            // 
+            // lblEstadoAfip
+            // 
+            this.lblEstadoAfip.AutoSize = true;
+            this.lblEstadoAfip.Location = new System.Drawing.Point(487, 30);
+            this.lblEstadoAfip.Name = "lblEstadoAfip";
+            this.lblEstadoAfip.Size = new System.Drawing.Size(46, 15);
+            this.lblEstadoAfip.TabIndex = 58;
+            this.lblEstadoAfip.Text = "Estado:";
             // 
             // frmVenta
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(29)))), ((int)(((byte)(38)))), ((int)(((byte)(69)))));
-            this.ClientSize = new System.Drawing.Size(1064, 576);
-            this.Controls.Add(this.label22);
-            this.Controls.Add(this.textBox1);
-            this.Controls.Add(this.label5);
+            this.ClientSize = new System.Drawing.Size(1064, 554);
+            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.lblCantidad);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.label11);
             this.Controls.Add(this.label19);
-            this.Controls.Add(this.dateTimePicker1);
             this.Controls.Add(this.txtTotal);
             this.Controls.Add(this.label18);
-            this.Controls.Add(this.txtNumero);
-            this.Controls.Add(this.txtTipo);
             this.Controls.Add(this.txtIVA);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
             this.Controls.Add(this.label17);
             this.Controls.Add(this.txtSubtotal);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.btnCancelar);
             this.Controls.Add(this.dataGridLineaVenta);
             this.Controls.Add(this.groupBox5);
-            this.Controls.Add(this.btnAgregar);
             this.Controls.Add(this.panel1);
             this.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.Name = "frmVenta";
@@ -761,6 +771,9 @@ namespace CapaPresentacion
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridLineaVenta)).EndInit();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -769,12 +782,6 @@ namespace CapaPresentacion
         #endregion
 
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.DateTimePicker dateTimePicker1;
-        private System.Windows.Forms.Button btnCancelar;
-        private System.Windows.Forms.TextBox txtNumero;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox txtTipo;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.GroupBox groupBox5;
         private System.Windows.Forms.TextBox txtDomicilio;
@@ -787,13 +794,11 @@ namespace CapaPresentacion
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.TextBox txtStock;
         private System.Windows.Forms.Label label16;
-        private System.Windows.Forms.Button btnAgregar;
         private System.Windows.Forms.TextBox txtPrecioVenta;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.TextBox txtDescripcion;
         private System.Windows.Forms.DataGridView dataGridLineaVenta;
         private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label label19;
         private System.Windows.Forms.TextBox txtTotal;
         private System.Windows.Forms.Label label18;
@@ -806,7 +811,6 @@ namespace CapaPresentacion
         private System.Windows.Forms.Label label27;
         private System.Windows.Forms.TextBox txtCantidad;
         private System.Windows.Forms.PictureBox pictureBox6;
-        private System.Windows.Forms.Label label11;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.PictureBox pictureBox5;
@@ -816,14 +820,24 @@ namespace CapaPresentacion
         private System.Windows.Forms.Label label20;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Label label5;
         public System.Windows.Forms.MaskedTextBox mtxtCuit;
         public System.Windows.Forms.TextBox txtCodigo;
         private System.Windows.Forms.ComboBox cmbTalle;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.ComboBox cmbColor;
         private System.Windows.Forms.Label label21;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.Label label22;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.PictureBox pictureBox7;
+        private System.Windows.Forms.Button btnPagar;
+        private System.Windows.Forms.Button btnSalir;
+        private System.Windows.Forms.Button btnGenerar;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label lblEstado;
+        private System.Windows.Forms.Label lblEstadoAfip;
+        private System.Windows.Forms.TextBox txtVencimiento;
+        private System.Windows.Forms.TextBox txtCAE;
+        private System.Windows.Forms.ProgressBar progressBar1;
+        private System.Windows.Forms.ComboBox comboBox1;
     }
 }
