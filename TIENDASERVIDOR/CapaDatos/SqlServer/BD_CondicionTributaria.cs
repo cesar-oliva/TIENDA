@@ -105,7 +105,7 @@ namespace CapaDatos
                                 IdCondicionTributaria = Convert.ToInt32(data.Rows[i]["IdCondicionTributaria"]),
                                 CodigoCondicionTributaria = data.Rows[i]["CodigoCondicionTributaria"].ToString(),
                                 DescripcionCondicionTributaria = data.Rows[i]["DescripcionCondicionTributaria"].ToString(),
-                                OEstado = Operaciones.BuscarEstado(data.Rows[i]["Estado"].ToString()),
+                                OEstado = Operaciones.BuscarByDescripcion(data.Rows[i]["Estado"].ToString()),
                                 FechaRegistro = Convert.ToDateTime(data.Rows[i]["FechaRegistro"])
                             };
                             condicionTributariaTabla.Add(user);

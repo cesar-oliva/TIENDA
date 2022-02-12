@@ -1,5 +1,7 @@
-﻿using CapaDatos;
+﻿using CapaAbstraccion;
+using CapaDatos;
 using CapaNegocio;
+using CapaServicioServidor.DataObjectTransfer;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,19 +13,21 @@ namespace CapaServicioServidor
 {
     // NOTA: puede usar el comando "Rename" del menú "Refactorizar" para cambiar el nombre de clase "ServiceRubroProducto" en el código, en svc y en el archivo de configuración a la vez.
     // NOTA: para iniciar el Cliente de prueba WCF para probar este servicio, seleccione ServiceRubroProducto.svc o ServiceRubroProducto.svc.cs en el Explorador de soluciones e inicie la depuración.
-    public class ServiceRubroProducto : IServiceRubroProducto
+    public class ServiceRubroProducto : IServiceCrud<DtoRubroProducto>
     {
-        public bool AgregarRubroProducto(DtoRubroProducto oRubroProducto)
+        BD_RubroProducto bd_RubroProducto = new BD_RubroProducto();
+        BD_Impuesto bd_Impuesto = new BD_Impuesto();
+
+        public bool Registrar(DtoRubroProducto oDtoRubroProducto)
         {
             var nuevo = new RubroProducto
             {
-                CodigoRubroProducto = oRubroProducto.CodigoRubroProducto,
-                DescripcionRubroProducto = oRubroProducto.DescripcionRubroProducto,
-                MargenGanancia = oRubroProducto.MargenGanancia,
-                OImpuesto = oRubroProducto.OImpuesto,
-                OEstado = oRubroProducto.OEstado
+                DescripcionRubroProducto = oDtoRubroProducto.DescripcionRubroProducto,
+                MargenGanancia = oDtoRubroProducto.MargenGanancia,
+                OImpuesto = bd_Impuesto.BuscarByDescripcion(oDtoRubroProducto.DescripcionImpuesto),
+                OEstado = Operaciones.BuscarByDescripcion(oDtoRubroProducto.DescripcionEstado)
             };
-            int i = CapaDatos.BD_RubroProducto.RegistrarRubroProducto(nuevo);
+            int i = bd_RubroProducto.Registrar(nuevo);
             if (i != 0)
             {
                 return true;
@@ -33,39 +37,38 @@ namespace CapaServicioServidor
                 return false;
             }
         }
-        public bool EliminarRubroProducto(int IdRubroProducto)
+        public bool Eliminar(int IdRubroProducto)
         {
-            return CapaDatos.BD_RubroProducto.EliminarRubroProducto(IdRubroProducto);
+            return bd_RubroProducto.Eliminar(IdRubroProducto);
         }
-        public bool ModificarRubroProducto(DtoRubroProducto oRubroProducto)
+
+        public bool Actualizar(DtoRubroProducto oDtoRubroProducto)
         {
             var nuevo = new RubroProducto
             {
-                CodigoRubroProducto = oRubroProducto.CodigoRubroProducto,
-                DescripcionRubroProducto = oRubroProducto.DescripcionRubroProducto,
-                MargenGanancia = oRubroProducto.MargenGanancia,
-                OImpuesto = oRubroProducto.OImpuesto,
-                OEstado = oRubroProducto.OEstado
+                DescripcionRubroProducto = oDtoRubroProducto.DescripcionRubroProducto,
+                MargenGanancia = oDtoRubroProducto.MargenGanancia,
+                OImpuesto = bd_Impuesto.BuscarByDescripcion(oDtoRubroProducto.DescripcionImpuesto),
+                OEstado = Operaciones.BuscarByDescripcion(oDtoRubroProducto.DescripcionEstado)
             };
 
-            return CapaDatos.BD_RubroProducto.ActualizarRubroProducto(nuevo, oRubroProducto.IdRubroProducto);
+            return bd_RubroProducto.Actualizar(nuevo);
 
         }
 
-        public List<DtoRubroProducto> ListaRubroProducto()
+        public List<DtoRubroProducto> Mostrar()
         {
-            List<RubroProducto> dato = CapaDatos.BD_RubroProducto.MostrarRubroProducto();
+            List<RubroProducto> dato = bd_RubroProducto.Mostrar();
             List<DtoRubroProducto> rub = new List<DtoRubroProducto>();
             foreach (var item in dato)
             {
                 DtoRubroProducto RubroProducto = new DtoRubroProducto
                 {
                     IdRubroProducto = item.IdRubroProducto,
-                    CodigoRubroProducto = item.CodigoRubroProducto,
                     DescripcionRubroProducto = item.DescripcionRubroProducto,
                     MargenGanancia = item.MargenGanancia,
-                    OImpuesto = item.OImpuesto,
-                    OEstado = item.OEstado,
+                    DescripcionImpuesto = item.OImpuesto.Descripcion,
+                    DescripcionEstado = item.OEstado.ToString(),
                     FechaRegistro = item.FechaRegistro
                 };
                 rub.Add(RubroProducto);
@@ -73,27 +76,13 @@ namespace CapaServicioServidor
             return rub;
 
         }
-        public RubroProducto ObtenerRubroProductoByDescripcion(string oRubroProducto)
+        public RubroProducto BuscarByDescripcion(string DescripcionRubroProducto)
         {
-            return BD_RubroProducto.BuscarRubroProductoByDescripcion(oRubroProducto);
+            return bd_RubroProducto.BuscarByDescripcion(DescripcionRubroProducto);
         }
-        public RubroProducto ObtenerRubroProductoById(int oRubroProducto)
+        public RubroProducto BuscarById(int idRubroProducto)
         {
-            return BD_RubroProducto.BuscarRubroProductoById(oRubroProducto);
-        }
-        public Estado ObtenerEstadoByDescripcion(string oEstado)
-        {
-            if (oEstado.Equals("Activo")) return Estado.Activo;
-            return Estado.Inactivo;
-        }
-
-        public Impuesto ObtenerImpuestoById(int oImpuesto)
-        {
-            return BD_Impuesto.BuscarImpuestoById(oImpuesto);
-        }
-        public Impuesto ObtenerImpuestoByDescripcion(string oImpuesto)
-        {
-            return BD_Impuesto.BuscarImpuestoByDescripcion(oImpuesto);
+            return bd_RubroProducto.BuscarById(idRubroProducto);
         }
     }
 }

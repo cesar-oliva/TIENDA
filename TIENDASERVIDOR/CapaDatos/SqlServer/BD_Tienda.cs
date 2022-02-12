@@ -110,7 +110,7 @@ namespace CapaDatos.SqlServer
                                 CuitTienda = Convert.ToString(data.Rows[i]["CuitTienda"]),
                                 Direccion = Convert.ToString(data.Rows[i]["Direccion"]),
                                 Telefono = Convert.ToString(data.Rows[i]["Telefono"]),
-                                OEstado = Operaciones.BuscarEstado(data.Rows[i]["Estado"].ToString()),
+                                OEstado = Operaciones.BuscarByDescripcion(data.Rows[i]["Estado"].ToString()),
                             };
                             tiendaTabla.Add(tienda);
                         }

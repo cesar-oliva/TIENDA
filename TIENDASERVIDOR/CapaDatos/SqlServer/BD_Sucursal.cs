@@ -105,7 +105,7 @@ namespace CapaDatos
                                 Domicilio = data.Rows[i]["Domicilio"].ToString(),
                                 Telefono = data.Rows[i]["Telefono"].ToString(),
                                 oPuntoDeVenta = BD_PuntoDeVenta.BuscarListaPuntoDeVenta(Convert.ToInt32(data.Rows[i]["IdPuntoDeVenta"].ToString())),
-                                oEstado = Operaciones.BuscarEstado(data.Rows[i]["Estado"].ToString()),
+                                oEstado = Operaciones.BuscarByDescripcion(data.Rows[i]["Estado"].ToString()),
                                 FechaRegistro = Convert.ToDateTime(data.Rows[i]["FechaRegistro"])
                             };
                             sucursalTabla.Add(suc);

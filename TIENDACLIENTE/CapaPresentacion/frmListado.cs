@@ -13,6 +13,7 @@ namespace CapaPresentacion
 {
     public partial class frmListado : Form
     {
+        string cuit = "";
         public frmListado()
         {
             InitializeComponent();
@@ -73,11 +74,24 @@ namespace CapaPresentacion
             }
             lblTotalRegistros.Text = Convert.ToString(tabla.Rows.Count);
         }
-        private void txtFiltro_TextChanged(object sender, EventArgs e)
+        private void txtFiltro_TextChanged_1(object sender, EventArgs e)
         {
             string columnaFiltro = cmbFiltro.SelectedItem.ToString();
             (tabla.DataSource as DataTable).DefaultView.RowFilter = string.Format(columnaFiltro + " like '%{0}%'", txtFiltro.Text);
         }
+        public string ObtenerCliente()
+        {
+            return cuit;
+        }
 
+        private void pictureBox2_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void tabla_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            cuit = tabla.Rows[e.RowIndex].Cells["Cuit"].Value.ToString();
+        }
     }
 }

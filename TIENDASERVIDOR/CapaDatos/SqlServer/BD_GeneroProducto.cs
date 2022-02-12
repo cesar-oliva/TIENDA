@@ -100,7 +100,7 @@ namespace CapaDatos
                             {
                                 IdGeneroProducto = Convert.ToInt32(data.Rows[i]["IdGeneroProducto"]),
                                 DescripcionGeneroProducto = data.Rows[i]["DescripcionGeneroProducto"].ToString(),
-                                OEstado = Operaciones.BuscarEstado(data.Rows[i]["Estado"].ToString()),
+                                OEstado = Operaciones.BuscarByDescripcion(data.Rows[i]["Estado"].ToString()),
                                 FechaRegistro = Convert.ToDateTime(data.Rows[i]["FechaRegistro"])
                             };
                             GeneroProductoTabla.Add(marc);

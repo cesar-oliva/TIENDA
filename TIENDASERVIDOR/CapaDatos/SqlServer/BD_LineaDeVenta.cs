@@ -12,6 +12,8 @@ namespace CapaDatos
 {
     public class BD_LineaDeVenta
     {
+        BD_Producto bd_Producto = new BD_Producto();    
+
         //public int IdLineaDeVenta { get; set; }
         //public Venta oVenta { get; set; }
         //public Producto oProducto { get; set; }
@@ -106,7 +108,7 @@ namespace CapaDatos
                             {
                                 IdLineaDeVenta = Convert.ToInt32(data.Rows[i]["IdComprobante"]),
                                 OVenta = BD_Venta.BuscarVenta(Convert.ToInt32(data.Rows[i]["IdVenta"].ToString())),
-                                OProducto = BD_Producto.BuscarProducto(Convert.ToInt32(data.Rows[i]["IdProducto"].ToString())),
+                                //OProducto = bd_Producto.BuscarById(Convert.ToInt32(data.Rows[i]["IdProducto"].ToString())),
                                 Cantidad = Convert.ToInt32(data.Rows[i]["Cantidad"].ToString()),
                                 PrecioUnitario = Convert.ToDouble(data.Rows[i]["PrecioUnitario"].ToString()),
                             };

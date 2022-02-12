@@ -61,7 +61,7 @@ namespace CapaDatos.SqlServer
                                 OPersona = BD_Persona.BuscarPersona(Convert.ToInt32(data.Rows[i]["IdPersona"])),
                                 Cuil = Convert.ToString(data.Rows[i]["Cuil"]),
                                 FechaAlta = Convert.ToDateTime(data.Rows[i]["FechaAlta"]),
-                                OEstado = Operaciones.BuscarEstado(data.Rows[i]["Estado"].ToString()),
+                                OEstado = Operaciones.BuscarByDescripcion(data.Rows[i]["Estado"].ToString()),
                             };
                             empleadoTabla.Add(emp);
                         }

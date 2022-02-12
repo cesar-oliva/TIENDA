@@ -11,16 +11,18 @@ namespace CapaServicioServidor
 {
     // NOTA: puede usar el comando "Rename" del menú "Refactorizar" para cambiar el nombre de clase "ServiceMarca" en el código, en svc y en el archivo de configuración a la vez.
     // NOTA: para iniciar el Cliente de prueba WCF para probar este servicio, seleccione ServiceMarca.svc o ServiceMarca.svc.cs en el Explorador de soluciones e inicie la depuración.
-    public class ServiceMarca : IServiceMarca
+    public class ServiceMarca : IServiceCrud<DtoMarca>
     {
-        public bool AgregarMarca(DtoMarca oMarca)
+        BD_MarcaProducto bd_MarcaProducto = new BD_MarcaProducto();
+
+        public bool Registrar(DtoMarca oMarca)
         {
-            var nuevo = new Marca
+            var m = new MarcaProducto
             {
-                DescripcionMarca = oMarca.Descripcion,
+                DescripcionMarcaProducto = oMarca.DescripcionMarcaProducto,
                 OEstado = oMarca.OEstado
             };
-            int i = CapaDatos.BD_Marca.RegistrarMarca(nuevo);
+            int i = bd_MarcaProducto.Registrar(m);
             if (i != 0)
             {
                 return true;
@@ -30,31 +32,31 @@ namespace CapaServicioServidor
                 return false;
             }
         }
-        public bool EliminarMarca(int IdMarca)
+        public bool Eliminar(int IdMarca)
         {
-            return CapaDatos.BD_Marca.EliminarMarca(IdMarca);
+            return bd_MarcaProducto.Eliminar(IdMarca);
         }
-        public bool ModificarMarca(DtoMarca oMarca, int IdMarca)
+        public bool Actualizar(DtoMarca oMarca)
         {
-            var nuevo = new Marca
+            var m = new MarcaProducto
             {
-                DescripcionMarca = oMarca.Descripcion,
+                DescripcionMarcaProducto = oMarca.DescripcionMarcaProducto,
                 OEstado = oMarca.OEstado,
             };
 
-            return CapaDatos.BD_Marca.ActualizarMarca(nuevo, IdMarca);
+            return bd_MarcaProducto.Actualizar(m);
 
         }
-        public List<DtoMarca> ListaMarca()
+        public List<DtoMarca> Mostrar()
         {
-            List<Marca> dato = CapaDatos.BD_Marca.MostrarMarca();
+            List<MarcaProducto> dato = bd_MarcaProducto.Mostrar();
             List<DtoMarca> marc = new List<DtoMarca>();
             foreach (var item in dato)
             {
                 DtoMarca marca = new DtoMarca
                 {
-                    IdMarca = item.IdMarca,
-                    Descripcion = item.DescripcionMarca,
+                    IdMarcaProducto = item.IdMarcaProducto,
+                    DescripcionMarcaProducto = item.DescripcionMarcaProducto,
                     OEstado = item.OEstado,
                 };
                 marc.Add(marca);
@@ -62,9 +64,10 @@ namespace CapaServicioServidor
             return marc;
 
         }
-        public Marca ObtenerMarca(string oMarca)
+
+        public DtoMarca Formulario()
         {
-            return BD_Marca.BuscarMarcaByDescripcion(oMarca);
+            throw new NotImplementedException();
         }
     }
 }

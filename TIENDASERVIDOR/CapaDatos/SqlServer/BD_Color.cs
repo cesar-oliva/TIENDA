@@ -19,10 +19,10 @@ namespace CapaDatos.SqlServer
             {
                 try
                 {
-                    string SqlQuery = "INSERT INTO Color(CodigoColor,DescripcionColor)" +
-                                      "VALUES(@CodigoColor@DescripcionColor)";
+                    string SqlQuery = "INSERT INTO Color(DescripcionColor)" +
+                                      "VALUES(@DescripcionColor)";
                     SqlCommand cmd = new SqlCommand(SqlQuery, oConexion);
-                    cmd.Parameters.AddWithValue("CodigoColor", oColor.CodigoColor);
+                    //cmd.Parameters.AddWithValue("CodigoColor", oColor.CodigoColor);
                     cmd.Parameters.AddWithValue("DescripcionColor", oColor.DescripcionColor);
                     oConexion.Open();
                     respuesta = cmd.ExecuteNonQuery();
@@ -44,10 +44,10 @@ namespace CapaDatos.SqlServer
             {
                 try
                 {
-                    String SqlQuery = "UPDATE Color SET CodigoColor = @CodigoColor,DescripcionColor = @DescripcionColor, Estado = @Estado  WHERE IdColor = @IdColor";
+                    String SqlQuery = "UPDATE Color SET DescripcionColor = @DescripcionColor, Estado = @Estado  WHERE IdColor = @IdColor";
                     SqlCommand cmd = new SqlCommand(SqlQuery, oConexion);
                     cmd.Parameters.AddWithValue("IdColor", oColor.IdColor);
-                    cmd.Parameters.AddWithValue("CodigoColor", oColor.CodigoColor);
+                    //cmd.Parameters.AddWithValue("CodigoColor", oColor.CodigoColor);
                     cmd.Parameters.AddWithValue("DescripcionColor", oColor.DescripcionColor);
                     cmd.Parameters.AddWithValue("Estado", oColor.OEstado);
                     oConexion.Open();
@@ -102,9 +102,9 @@ namespace CapaDatos.SqlServer
                             var color = new Color
                             {
                                 IdColor = Convert.ToInt32(data.Rows[i]["IdColor"]),
-                                CodigoColor = data.Rows[i]["CodigoColor"].ToString(),
+                                //CodigoColor = data.Rows[i]["CodigoColor"].ToString(),
                                 DescripcionColor = data.Rows[i]["DescripcionColor"].ToString(),
-                                OEstado = Operaciones.BuscarEstado(data.Rows[i]["Estado"].ToString()),
+                                OEstado = Operaciones.BuscarByDescripcion(data.Rows[i]["Estado"].ToString()),
                                 FechaRegistro = Convert.ToDateTime(data.Rows[i]["FechaRegistro"])
                             };
                             colorTabla.Add(color);

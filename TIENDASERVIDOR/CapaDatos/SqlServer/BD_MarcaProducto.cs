@@ -1,4 +1,5 @@
-﻿using CapaNegocio;
+﻿using CapaAbstraccion;
+using CapaNegocio;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -10,18 +11,18 @@ using System.Windows;
 
 namespace CapaDatos
 {
-    public class BD_Marca
+    public class BD_MarcaProducto:ICrud<MarcaProducto>
     {
-        public static int RegistrarMarca(Marca oMarca)
+             public int Registrar(MarcaProducto oMarca)
         {
             int respuesta;
             using (SqlConnection oConexion = new SqlConnection(Conexion.conexion))
             {
                 try
                 {
-                    string SqlQuery = "INSERT INTO Marca(DescripcionMarca)VALUES(@DescripcionMarca)";
+                    string SqlQuery = "INSERT INTO Marca(DescripcionMarcaProducto)VALUES(@DescripcionMarcaProducto)";
                     SqlCommand cmd = new SqlCommand(SqlQuery, oConexion);
-                    cmd.Parameters.AddWithValue("DescripcionMarca", oMarca.DescripcionMarca);
+                    cmd.Parameters.AddWithValue("DescripcionMarcaProducto", oMarca.DescripcionMarcaProducto);
                     oConexion.Open();
                     respuesta = cmd.ExecuteNonQuery();
 
@@ -35,17 +36,17 @@ namespace CapaDatos
             }
             return respuesta;
         }
-        public static bool ActualizarMarca(Marca oMarca, int IdMarca)
+        public bool Actualizar(MarcaProducto oMarca)
         {
             int respuesta;
             using (SqlConnection oConexion = new SqlConnection(Conexion.conexion))
             {
                 try
                 {
-                    String SqlQuery = "UPDATE Marca SET DescripcionMarca = @DescripcionMarca, Estado = @Estado  WHERE IdMarca = @IdMarca";
+                    String SqlQuery = "UPDATE Marca SET DescripcionMarcaProducto = @DescripcionMarcaProducto, Estado = @Estado  WHERE IdMarcaProducto = @IdMarcaProducto";
                     SqlCommand cmd = new SqlCommand(SqlQuery, oConexion);
-                    cmd.Parameters.AddWithValue("IdMarca", IdMarca);
-                    cmd.Parameters.AddWithValue("DescripcionMarca", oMarca.DescripcionMarca);
+                    cmd.Parameters.AddWithValue("IdMarcaProducto", oMarca.IdMarcaProducto);
+                    cmd.Parameters.AddWithValue("DescripcionMarcaProducto", oMarca.DescripcionMarcaProducto);
                     cmd.Parameters.AddWithValue("Estado", oMarca.OEstado);
                     oConexion.Open();
                     respuesta = cmd.ExecuteNonQuery();
@@ -58,16 +59,16 @@ namespace CapaDatos
                 }
             }
         }
-        public static bool EliminarMarca(int IdMarca)
+        public bool Eliminar(int IdMarca)
         {
             int respuesta;
             using (SqlConnection oConexion = new SqlConnection(Conexion.conexion))
             {
                 try
                 {
-                    String SqlQuery = "UPDATE marca SET Estado = @Estado WHERE IdMarca = @IdMarca";
+                    String SqlQuery = "UPDATE marca SET Estado = @Estado WHERE IdMarcaProducto = @IdMarcaProducto";
                     SqlCommand cmd = new SqlCommand(SqlQuery, oConexion);
-                    cmd.Parameters.AddWithValue("IdMarca", IdMarca);
+                    cmd.Parameters.AddWithValue("IdMarcaProducto", IdMarca);
                     cmd.Parameters.AddWithValue("Estado", Estado.Inactivo);
                     oConexion.Open();
                     respuesta = cmd.ExecuteNonQuery();
@@ -81,26 +82,26 @@ namespace CapaDatos
                 }
             }
         }
-        public static List<Marca> MostrarMarca()
+        public List<MarcaProducto> Mostrar()
         {
-            List<Marca> marcaTabla = new List<Marca>();
+            List<MarcaProducto> marcaTabla = new List<MarcaProducto>();
             DataTable data = new DataTable();
             using (SqlConnection oConexion = new SqlConnection(Conexion.conexion))
             {
                 try
                 {
-                    String SqlQuery = "SELECT * FROM MARCA";
+                    String SqlQuery = "SELECT * FROM MARCAPRODUCTO";
                     SqlDataAdapter adapter = new SqlDataAdapter(SqlQuery, oConexion);
                     using (adapter)
                     {
                         adapter.Fill(data);
                         for (int i = 0; i < data.Rows.Count; i++)
                         {
-                            var marc = new Marca
+                            var marc = new MarcaProducto
                             {
-                                IdMarca = Convert.ToInt32(data.Rows[i]["IdMarca"]),
-                                DescripcionMarca = data.Rows[i]["DescripcionMarca"].ToString(),
-                                OEstado = Operaciones.BuscarEstado(data.Rows[i]["Estado"].ToString()),
+                                IdMarcaProducto = Convert.ToInt32(data.Rows[i]["IdMarcaProducto"]),
+                                DescripcionMarcaProducto = data.Rows[i]["DescripcionMarcaProducto"].ToString(),
+                                OEstado = Operaciones.BuscarByDescripcion(data.Rows[i]["Estado"].ToString()),
                             };
                             marcaTabla.Add(marc);
                         }
@@ -116,30 +117,21 @@ namespace CapaDatos
 
             }
         }
-        public static Marca BuscarMarca(Marca oMarca)
+        public MarcaProducto BuscarByDescripcion(string oDescripcionMarca)
         {
-            List<Marca> lista = MostrarMarca();
+            List<MarcaProducto> lista = Mostrar();
             foreach (var item in lista)
             {
-                if (oMarca.IdMarca.Equals(item.IdMarca)) return item;
+                if (item.DescripcionMarcaProducto.Equals(oDescripcionMarca)) return item;
             }
             return null;
         }
-        public static Marca BuscarMarcaByDescripcion(string oMarca)
+        public MarcaProducto BuscarById(int oIdMarca)
         {
-            List<Marca> lista = MostrarMarca();
+            List<MarcaProducto> lista = Mostrar();
             foreach (var item in lista)
             {
-                if (item.DescripcionMarca.Equals(oMarca)) return item;
-            }
-            return null;
-        }
-        public static Marca BuscarMarcaById(int oMarca)
-        {
-            List<Marca> lista = MostrarMarca();
-            foreach (var item in lista)
-            {
-                if (item.IdMarca.Equals(oMarca)) return item;
+                if (item.IdMarcaProducto.Equals(oIdMarca)) return item;
             }
             return null;
         }

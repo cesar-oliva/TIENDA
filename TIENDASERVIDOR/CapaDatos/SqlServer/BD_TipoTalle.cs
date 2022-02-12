@@ -12,6 +12,7 @@ namespace CapaDatos.SqlServer
 {
     public class BD_TipoTalle
     {
+        BD_RubroProducto bd_RubroProducto = new BD_RubroProducto();
 
         public static int RegistrarTipoTalle(TipoTalle oTipoTalle)
         {
@@ -20,9 +21,12 @@ namespace CapaDatos.SqlServer
             {
                 try
                 {
-                    string SqlQuery = "INSERT INTO TipoTalle(DescripcionTipoTalle)VALUES(@DescripcionTipoTalle)";
+                    string SqlQuery = "INSERT INTO TipoTalle(IdRubroProducto,IdGeneroProducto,DescripcionTipoTalle)VALUES(@IdRubroProducto,@IdGeneroProducto,@DescripcionTipoTalle)";
                     SqlCommand cmd = new SqlCommand(SqlQuery, oConexion);
-                    cmd.Parameters.AddWithValue("Descripcion", oTipoTalle.DescripcionTipoTalle);
+                    cmd.Parameters.AddWithValue("IdRubroProducto", oTipoTalle.ORubroProducto.IdRubroProducto);
+                    cmd.Parameters.AddWithValue("IdGeneroProducto", oTipoTalle.OGeneroProducto.IdGeneroProducto);
+                    cmd.Parameters.AddWithValue("DescripcionTipoTalle", oTipoTalle.DescripcionTipoTalle);
+
                     oConexion.Open();
                     respuesta = cmd.ExecuteNonQuery();
 
@@ -43,9 +47,11 @@ namespace CapaDatos.SqlServer
             {
                 try
                 {
-                    String SqlQuery = "UPDATE TipoTalle SET DescripcionTipotalle = @DescripcionTipoTalle, Estado = @Estado  WHERE IdTipoTalle = @IdTipoTalle";
+                    String SqlQuery = "UPDATE TipoTalle SET IdRubroProducto = @ IdRubroProducto, IdGeneroProducto = @IdGeneroProducto,DescripcionTipotalle = @DescripcionTipoTalle, Estado = @Estado  WHERE IdTipoTalle = @IdTipoTalle";
                     SqlCommand cmd = new SqlCommand(SqlQuery, oConexion);
                     cmd.Parameters.AddWithValue("IdTipoTalle", IdTipoTalle);
+                    cmd.Parameters.AddWithValue("IdRubroProducto", oTipoTalle.ORubroProducto.IdRubroProducto);
+                    cmd.Parameters.AddWithValue("IdGeneroProducto", oTipoTalle.OGeneroProducto.IdGeneroProducto);
                     cmd.Parameters.AddWithValue("DescripcionTipoTalle", oTipoTalle.DescripcionTipoTalle);                  
                     cmd.Parameters.AddWithValue("Estado", oTipoTalle.OEstado);
                     oConexion.Open();
@@ -100,8 +106,11 @@ namespace CapaDatos.SqlServer
                             var TipoTalle = new TipoTalle
                             {
                                 IdTipoTalle = Convert.ToInt32(data.Rows[i]["IdTipoTalle"]),
+                                OGeneroProducto = BD_GeneroProducto.BuscarGeneroProductoById(Convert.ToInt32(data.Rows[i]["IdGeneroProducto"])),
+                               
+                                //ORubroProducto = bd_RubroProducto.BuscarById(Convert.ToInt32(data.Rows[i]["IdRubroProducto"])),
                                 DescripcionTipoTalle = data.Rows[i]["DescripcionTipoTalle"].ToString(),
-                                OEstado = Operaciones.BuscarEstado(data.Rows[i]["Estado"].ToString()),
+                                OEstado = Operaciones.BuscarByDescripcion(data.Rows[i]["Estado"].ToString()),
                                 FechaRegistro = Convert.ToDateTime(data.Rows[i]["FechaRegistro"].ToString()),
                             };
                             TipoTalleTabla.Add(TipoTalle);

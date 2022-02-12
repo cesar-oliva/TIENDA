@@ -15,6 +15,9 @@ namespace CapaPresentacion
     public partial class frmDetalleProducto : Form
     {
         DataTable TablaProducto = new();
+        ServiceCrudOf_DtoProductoClient client_Prod = new();
+        ServiceCrudOf_DtoRubroProductoClient client_Rubr = new();
+
         public frmDetalleProducto()
         {
             InitializeComponent();
@@ -31,9 +34,9 @@ namespace CapaPresentacion
         }
         private void CargarDatosProductos()
         {
-            using ServiceProducto.ServiceProductoClient client = new();
-            using ServiceRubroProducto.ServiceRubroProductoClient client_rub = new();
-            var oListaProducto = client.ListaProducto();
+            //using ServiceProducto.ServiceProductoClient client = new();
+            //using ServiceRubroProducto.ServiceRubroProductoClient client_rub = new();
+            var oListaProducto = client_Prod.Mostrar();
             if (oListaProducto.Count() > 0 && oListaProducto != null)
             {
                 lblTotalRegistros.Text = oListaProducto.Count().ToString();
@@ -57,13 +60,13 @@ namespace CapaPresentacion
                 TablaProducto.Columns.Add("Estado", typeof(string));
                 foreach (DtoProducto row in oListaProducto)
                 {
-                    if (row.OEstado.Equals(ServiceProducto.Estado.Activo))
-                    {
-                        foreach (var item in row.OProductoVenta)
-                        {
-                            TablaProducto.Rows.Add(row.IdProducto, row.CodigoProducto, row.DescripcionProducto, row.OGeneroProducto.ToString(), client_rub.ObtenerRubroProductoById(row.ORubroProducto.IdRubroProducto).DescripcionRubroProducto, row.OMarca.DescripcionMarca, row.OProductoVenta.Count(), row.OTipoTalle.DescripcionTipoTalle, item.OColor.DescripcionColor, client_rub.ObtenerRubroProductoById(row.ORubroProducto.IdRubroProducto).MargenGanancia, client_rub.ObtenerRubroProductoById(row.ORubroProducto.IdRubroProducto).OImpuesto.Alicuota, item.Costo * (((client_rub.ObtenerRubroProductoById(row.ORubroProducto.IdRubroProducto).OImpuesto.Alicuota) / 100) + 1) * (((client_rub.ObtenerRubroProductoById(row.ORubroProducto.IdRubroProducto).MargenGanancia) / 100) + 1), 15, row.OEstado);
-                        }
-                    }
+                    //if (row.OEstado.Equals(ServiceProducto.Estado.Activo))
+                    //{
+                    //    foreach (var item in row.OProductoVenta)
+                    //    {
+                    //        TablaProducto.Rows.Add(row.IdProducto, row.CodigoProducto, row.DescripcionProducto, row.OGeneroProducto.ToString(), client_rub.ObtenerRubroProductoById(row.ORubroProducto.IdRubroProducto).DescripcionRubroProducto, row.OMarca.DescripcionMarca, row.OProductoVenta.Count(), row.OTipoTalle.DescripcionTipoTalle, item.OColor.DescripcionColor, client_rub.ObtenerRubroProductoById(row.ORubroProducto.IdRubroProducto).MargenGanancia, "", item.Costo * (((client_rub.ObtenerRubroProductoById(row.ORubroProducto.IdRubroProducto).OImpuesto.Alicuota) / 100) + 1) * (((client_rub.ObtenerRubroProductoById(row.ORubroProducto.IdRubroProducto).MargenGanancia) / 100) + 1), 15, row.OEstado);
+                    //    }
+                    //}
                 }
                 dataGridDetalleProducto.DataSource = TablaProducto;
                 dataGridDetalleProducto.AutoResizeColumns();

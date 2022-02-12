@@ -1,4 +1,5 @@
-﻿using CapaNegocio;
+﻿using CapaAbstraccion;
+using CapaNegocio;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -10,19 +11,20 @@ using System.Windows;
 
 namespace CapaDatos
 {
-    public class BD_RubroProducto
+    public class BD_RubroProducto:ICrud<RubroProducto>
     {
-        public static int RegistrarRubroProducto(RubroProducto oRubro)
+        BD_Impuesto bd_Impuesto = new BD_Impuesto();    
+
+        public int Registrar(RubroProducto oRubro)
         {
             int respuesta;
             using (SqlConnection oConexion = new SqlConnection(Conexion.conexion))
             {
                 try
                 {
-                    string SqlQuery = "INSERT INTO RubroProducto(CodigoRubroProducto,DescripcionRubroProducto,MargenGanancia,IdImpuesto)" +
-                                      "VALUES(@CodigoRubroProducto,@DescripcionRubroProducto,@MargenGanancia,@IdImpuesto)";
+                    string SqlQuery = "INSERT INTO RubroProducto(DescripcionRubroProducto,MargenGanancia,IdImpuesto)" +
+                                      "VALUES(@DescripcionRubroProducto,@MargenGanancia,@IdImpuesto)";
                     SqlCommand cmd = new SqlCommand(SqlQuery, oConexion);
-                    cmd.Parameters.AddWithValue("CodigoRubroProducto", oRubro.CodigoRubroProducto);
                     cmd.Parameters.AddWithValue("DescripcionRubroProducto", oRubro.DescripcionRubroProducto);
                     cmd.Parameters.AddWithValue("MargenGanancia", oRubro.MargenGanancia);
                     cmd.Parameters.AddWithValue("IdImpuesto", oRubro.OImpuesto.IdImpuesto);
@@ -40,21 +42,20 @@ namespace CapaDatos
             }
             return respuesta;
         }
-        public static bool ActualizarRubroProducto(RubroProducto oRubro, int IdRubroProducto)
+        public bool Actualizar(RubroProducto oRubro)
         {
             int respuesta;
             using (SqlConnection oConexion = new SqlConnection(Conexion.conexion))
             {
                 try
                 {
-                    String SqlQuery = "UPDATE RubroProducto SET CodigoRubroProducto = @CodigoRubroProducto, DescripcionRubroProducto = @DescripcionRubroProducto,MargenGanancia = @MargenGanancia, IdImpuesto = @IdImpuesto, Estado = @Estado  WHERE IdRubroProducto = @IdRubroProducto";
+                    String SqlQuery = "UPDATE RubroProducto SET DescripcionRubroProducto = @DescripcionRubroProducto,MargenGanancia = @MargenGanancia, IdImpuesto = @IdImpuesto, Estado = @Estado  WHERE IdRubroProducto = @IdRubroProducto";
                     SqlCommand cmd = new SqlCommand(SqlQuery, oConexion);
-                    cmd.Parameters.AddWithValue("CodigoRubroProducto", oRubro.CodigoRubroProducto);
                     cmd.Parameters.AddWithValue("DescripcionRubroProducto", oRubro.DescripcionRubroProducto);
                     cmd.Parameters.AddWithValue("MargenGanancia", oRubro.MargenGanancia);
                     cmd.Parameters.AddWithValue("IdImpuesto", oRubro.OImpuesto.IdImpuesto);
                     cmd.Parameters.AddWithValue("Estado", oRubro.OEstado);
-                    cmd.Parameters.AddWithValue("IdRubroProducto", IdRubroProducto);
+                    cmd.Parameters.AddWithValue("IdRubroProducto", oRubro.IdRubroProducto);
                     oConexion.Open();
                     respuesta = cmd.ExecuteNonQuery();
                     return true;
@@ -66,7 +67,7 @@ namespace CapaDatos
                 }
             }
         }
-        public static bool EliminarRubroProducto(int IdRubro)
+        public bool Eliminar(int IdRubro)
         {
             int respuesta;
             using (SqlConnection oConexion = new SqlConnection(Conexion.conexion))
@@ -89,7 +90,7 @@ namespace CapaDatos
                 }
             }
         }
-        public static List<RubroProducto> MostrarRubroProducto()
+        public List<RubroProducto> Mostrar()
         {
             List<RubroProducto> rubroTabla = new List<RubroProducto>();
             DataTable data = new DataTable();
@@ -106,12 +107,11 @@ namespace CapaDatos
                         {
                             var rub = new RubroProducto
                             {
-                                IdRubroProducto = Convert.ToInt32(data.Rows[i]["IdRubroProducto"]),
-                                CodigoRubroProducto = data.Rows[i]["CodigoRubroProducto"].ToString(),   
+                                IdRubroProducto = Convert.ToInt32(data.Rows[i]["IdRubroProducto"]), 
                                 DescripcionRubroProducto = data.Rows[i]["DescripcionRubroProducto"].ToString(),
                                 MargenGanancia = Convert.ToDouble(data.Rows[i]["MargenGanancia"].ToString()),
-                                OImpuesto = BD_Impuesto.BuscarImpuestoById(Convert.ToInt32(data.Rows[i]["IdImpuesto"].ToString())),
-                                OEstado = Operaciones.BuscarEstado(data.Rows[i]["Estado"].ToString()),
+                                OImpuesto = bd_Impuesto.BuscarById(Convert.ToInt32(data.Rows[i]["IdImpuesto"].ToString())),
+                                OEstado = Operaciones.BuscarByDescripcion(data.Rows[i]["Estado"].ToString()),
                                 FechaRegistro = Convert.ToDateTime(data.Rows[i]["FechaRegistro"])
                             };
                             rubroTabla.Add(rub);
@@ -128,30 +128,22 @@ namespace CapaDatos
 
             }
         }
-        public static RubroProducto BuscarRubroProducto(RubroProducto oRubro)
+        
+        public RubroProducto BuscarByDescripcion(string oDescripcionRubro)
         {
-            List<RubroProducto> lista = MostrarRubroProducto();
+            List<RubroProducto> lista = Mostrar();
             foreach (var item in lista)
             {
-                if (oRubro.IdRubroProducto.Equals(item.IdRubroProducto)) return item;
+                if (item.DescripcionRubroProducto.Equals(oDescripcionRubro)) return item;
             }
             return null;
         }
-        public static RubroProducto BuscarRubroProductoByDescripcion(string oRubro)
+        public RubroProducto BuscarById(int oIdRubro)
         {
-            List<RubroProducto> lista = MostrarRubroProducto();
+            List<RubroProducto> lista = Mostrar();
             foreach (var item in lista)
             {
-                if (item.DescripcionRubroProducto.Equals(oRubro)) return item;
-            }
-            return null;
-        }
-        public static RubroProducto BuscarRubroProductoById(int oRubro)
-        {
-            List<RubroProducto> lista = MostrarRubroProducto();
-            foreach (var item in lista)
-            {
-                if (item.IdRubroProducto.Equals(oRubro)) return item;
+                if (item.IdRubroProducto.Equals(oIdRubro)) return item;
             }
             return null;
         }

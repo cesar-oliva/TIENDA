@@ -15,14 +15,14 @@ namespace CapaPresentacion
     public partial class mtnRubroProducto : Form
     {
         private bool modoEditar = false;
+        ServiceCrudOf_DtoRubroProductoClient client_rubr = new();
         public mtnRubroProducto(DtoRubroProducto pRubroProducto = null)
         {
             InitializeComponent();
             CargarCombosSeleccion();
-            ServiceRubroProductoClient client_rubr = new();
-            var RubroProducto = client_rubr.ListaRubroProducto();
+            var DtoRubroProducto = client_rubr.Mostrar();
             var IdRubroProducto = 0;
-            foreach (var item in RubroProducto)
+            foreach (var item in DtoRubroProducto)
             {
                 if (item.IdRubroProducto >= IdRubroProducto) IdRubroProducto = item.IdRubroProducto + 1;
             }
@@ -34,8 +34,8 @@ namespace CapaPresentacion
                 txtCodigo.Text = pRubroProducto.CodigoRubroProducto;
                 txtDescripcion.Text = pRubroProducto.DescripcionRubroProducto;
                 txtMargenGanancia.Text = pRubroProducto.MargenGanancia.ToString();
-                CmbImpuesto.Text = pRubroProducto.OImpuesto.Descripcion.ToString();
-                cmbEstado.Text = pRubroProducto.OEstado.ToString();
+                //CmbImpuesto.Text = pRubroProducto.OImpuesto.Descripcion.ToString();
+                cmbEstado.Text = pRubroProducto.DescripcionEstado.ToString();
             }
         }
         private void CargarCombosSeleccion()
@@ -71,21 +71,20 @@ namespace CapaPresentacion
         }
         private void Btn_Guardar_Click(object sender, EventArgs e)
         {
-            ServiceRubroProductoClient client_rubr = new();
             ServiceImpuestoClient client_imp = new();
-            _ = client_rubr.ListaRubroProducto();
+            _ = client_rubr.Mostrar();
             var Codigo = txtCodigo.Text.Trim();
             var Descripcion = txtDescripcion.Text.Trim();
             var margenGanancia = Convert.ToDouble(txtMargenGanancia.Text.Trim());
-            var oImpuesto = client_rubr.ObtenerImpuestoByDescripcion(CmbImpuesto.Items[CmbImpuesto.SelectedIndex].ToString());
-            var oEstado = client_rubr.ObtenerEstadoByDescripcion(cmbEstado.Items[cmbEstado.SelectedIndex].ToString());
+            var oImpuesto = CmbImpuesto.Items[CmbImpuesto.SelectedIndex].ToString();
+            var oEstado = cmbEstado.Items[cmbEstado.SelectedIndex].ToString();
             DtoRubroProducto rub = new()
             {
                 CodigoRubroProducto = Codigo,
                 DescripcionRubroProducto = Descripcion,
                 MargenGanancia = margenGanancia,
-                OImpuesto = oImpuesto,
-                OEstado = oEstado
+                DescripcionImpuesto = oImpuesto,
+                DescripcionEstado = oEstado
             };
             bool Respuesta;
             string msgSuccess;
@@ -93,14 +92,14 @@ namespace CapaPresentacion
             if (modoEditar)
             {
                 rub.IdRubroProducto = Convert.ToInt32(txtId.Text.Trim());
-                Respuesta = client_rubr.ModificarRubroProducto(rub);
+                Respuesta = client_rubr.Actualizar(rub);
                 msgSuccess = "Rubro Modificado \n¿Desea modificar otro Rubro ahora?";
                 msgError = "No se pudo modificar el Rubro, \nes posible que ya se encuentre registrado";
             }
             else
             {
 
-                Respuesta = client_rubr.AgregarRubroProducto(rub);
+                Respuesta = client_rubr.Registrar(rub);
                 msgSuccess = "Rubro Registrado \n¿Desea registrar un nuevo Rubro ahora?";
                 msgError = "No se pudo registrar el Rubro, \nes posible que ya se encuentre registrado";
 

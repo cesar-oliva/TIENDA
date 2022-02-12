@@ -103,7 +103,7 @@ namespace CapaDatos
                                 CodigoPuntoDeVenta = data.Rows[i]["CodigoPuntoDeVenta"].ToString(),
                                 DomicilioFacturacion = data.Rows[i]["DomicilioFacturacion"].ToString(),
                                 NombreFantasia = data.Rows[i]["NombreFantasia"].ToString(),
-                                OEstado = Operaciones.BuscarEstado(data.Rows[i]["Estado"].ToString()),
+                                OEstado = Operaciones.BuscarByDescripcion(data.Rows[i]["Estado"].ToString()),
                                 FechaRegistro = Convert.ToDateTime(data.Rows[i]["FechaRegistro"].ToString())
                             };
                             marcaTabla.Add(marc);

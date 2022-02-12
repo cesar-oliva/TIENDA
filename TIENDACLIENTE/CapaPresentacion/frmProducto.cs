@@ -11,7 +11,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Estado = ServiceProducto.Estado;
 
 namespace CapaPresentacion
 {
@@ -19,6 +18,11 @@ namespace CapaPresentacion
     {
         DataTable TablaProducto = new();
         frmMensaje msj = new();
+        ServiceCrudOf_DtoProductoClient client_Prod = new();
+        ServiceColorClient client_color = new();
+        ServiceTalleClient client_talle = new();
+
+
         public FrmProducto()
         {
             InitializeComponent();
@@ -36,8 +40,7 @@ namespace CapaPresentacion
         #region TABLAS FORMULARIO
         private void CargarDatosProductos()
         {
-            using ServiceProducto.ServiceProductoClient client = new();
-            var oListaProducto = client.ListaProducto();
+            var oListaProducto = client_Prod.Mostrar();
             if (oListaProducto.Count() > 0 && oListaProducto != null)
             {
                 lblTotalRegistros.Text = oListaProducto.Count().ToString();
@@ -48,17 +51,16 @@ namespace CapaPresentacion
                 TablaProducto.Columns.Add("IdProducto", typeof(int));
                 TablaProducto.Columns.Add("CodigoProducto", typeof(string));
                 TablaProducto.Columns.Add("DescripcionProducto", typeof(string));
-                TablaProducto.Columns.Add("GeneroProducto", typeof(string));
                 TablaProducto.Columns.Add("RubroProducto", typeof(string));
-                TablaProducto.Columns.Add("Marca", typeof(string));
-                TablaProducto.Columns.Add("TipoTalle", typeof(string));
+                TablaProducto.Columns.Add("MarcaProducto", typeof(string));
+                TablaProducto.Columns.Add("CostoProducto", typeof(double));
                 TablaProducto.Columns.Add("Estado", typeof(string));
                 TablaProducto.Columns.Add("FechaRegistro", typeof(DateTime));
                 foreach (DtoProducto row in oListaProducto)
                 {
-                    if (row.OEstado.Equals(ServiceProducto.Estado.Activo))
+                    if (row.DescripcionEstado.Equals("Activo"))
                     {        
-                            TablaProducto.Rows.Add(row.IdProducto, row.CodigoProducto, row.DescripcionProducto, row.OGeneroProducto.DescripcionGeneroProducto, row.ORubroProducto.DescripcionRubroProducto, row.OMarca.DescripcionMarca, row.OTipoTalle.DescripcionTipoTalle,  row.OEstado, row.FechaRegistro);    
+                            TablaProducto.Rows.Add(row.IdProducto, row.CodigoProducto, row.DescripcionProducto, row.DescripcionRubroProducto, row.DescripcionMarcaProducto, row.CostoProducto, row.DescripcionEstado, row.FechaRegistro);    
                     }    
                 }
                 dataGridProducto.DataSource = TablaProducto;
@@ -67,10 +69,9 @@ namespace CapaPresentacion
                 dataGridProducto.Columns["IdProducto"].Visible = false;
                 dataGridProducto.Columns["CodigoProducto"].Visible = true;
                 dataGridProducto.Columns["DescripcionProducto"].Visible = true;
-                dataGridProducto.Columns["GeneroProducto"].Visible = true;
                 dataGridProducto.Columns["RubroProducto"].Visible = true;
-                dataGridProducto.Columns["Marca"].Visible = true;
-                dataGridProducto.Columns["TipoTalle"].Visible = true;
+                dataGridProducto.Columns["MarcaProducto"].Visible = true;
+                dataGridProducto.Columns["CostoProducto"].Visible = true;
                 dataGridProducto.Columns["Estado"].Visible = true;
                 dataGridProducto.Columns["FechaRegistro"].Visible = true;
                 foreach (DataGridViewColumn cl in dataGridProducto.Columns)
@@ -82,7 +83,7 @@ namespace CapaPresentacion
                 }
                 cmbFiltro.SelectedIndex = 0;
             }
-            lblTotalRegistros.Text = Convert.ToString(dataGridProducto.Rows.Count-1);
+            lblTotalRegistros.Text = Convert.ToString(dataGridProducto.Rows.Count);
         }
         #endregion
         #region FILTRO DE BUSQUEDA
@@ -98,14 +99,10 @@ namespace CapaPresentacion
             MtnProducto mtn = new();
             mtn.ShowDialog();
             CargarDatosProductos();
-
         }
 
         private void Btn_ModificarProducto_Click(object sender, EventArgs e)
         {
-            using ServiceProducto.ServiceProductoClient client = new();
-            ServiceColorClient client_color = new();
-            ServiceTalleClient client_talle = new();
             if (dataGridProducto.SelectedRows.Count > 0)
             {
                 DataGridViewRow currentRow = dataGridProducto.SelectedRows[0];
@@ -113,15 +110,12 @@ namespace CapaPresentacion
                 DtoProducto oProducto = new()
                 {
                     IdProducto = Convert.ToInt32(dataGridProducto.Rows[index].Cells["IdProducto"].Value),
-                    CodigoProducto = Convert.ToString(dataGridProducto.Rows[index].Cells["Codigo"].Value),
-                    DescripcionProducto = Convert.ToString(dataGridProducto.Rows[index].Cells["Descripcion"].Value),
-                    OGeneroProducto = client.ObtenerGeneroProducto(Convert.ToString(dataGridProducto.Rows[index].Cells["GeneroProducto"].Value)),
-                    ORubroProducto = client.ObtenerRubroProducto(Convert.ToString(dataGridProducto.Rows[index].Cells["RubroProducto"].Value)),
-                    OMarca = client.ObtenerMarca(Convert.ToString(dataGridProducto.Rows[index].Cells["Marca"].Value)),
-                    //OColor = client.ObtenerColor(Convert.ToString(dataGridProducto.Rows[index].Cells["Color"].Value)),
-                    OTipoTalle = client.ObtenerTipoTalle(Convert.ToString(dataGridProducto.Rows[index].Cells["TipoTalle"].Value)),
-                    //Costo = Convert.ToDouble(dataGridProducto.Rows[index].Cells["Costo"].Value),
-                    OEstado = client.ObtenerEstado(Convert.ToString(dataGridProducto.Rows[index].Cells["Estado"].Value))
+                    CodigoProducto = Convert.ToString(dataGridProducto.Rows[index].Cells["CodigoProducto"].Value),
+                    DescripcionProducto = Convert.ToString(dataGridProducto.Rows[index].Cells["DescripcionProducto"].Value),
+                    DescripcionRubroProducto = Convert.ToString(dataGridProducto.Rows[index].Cells["RubroProducto"].Value),
+                    DescripcionMarcaProducto = Convert.ToString(dataGridProducto.Rows[index].Cells["MarcaProducto"].Value),
+                    CostoProducto = Convert.ToDouble(dataGridProducto.Rows[index].Cells["CostoProducto"].Value),
+                    DescripcionEstado = Convert.ToString(dataGridProducto.Rows[index].Cells["Estado"].Value)
                 };
                 MtnProducto form = new(oProducto);
                 form.ShowDialog();
@@ -136,20 +130,19 @@ namespace CapaPresentacion
 
         private void Btn_EliminarProducto_Click(object sender, EventArgs e)
         {
-            using ServiceProducto.ServiceProductoClient client = new();
             if (dataGridProducto.SelectedRows.Count > 0)
             {
                 DataGridViewRow currentRow = dataGridProducto.SelectedRows[0];
                 int index = currentRow.Index;
 
                 int IdProducto = Convert.ToInt32(dataGridProducto.Rows[index].Cells["IdProducto"].Value);
-                string Descripcion = Convert.ToString(dataGridProducto.Rows[index].Cells["Descripcion"].Value);
+                string Descripcion = Convert.ToString(dataGridProducto.Rows[index].Cells["DescripcionProducto"].Value);
 
                 DialogResult resmsj = msj.MsjConsulta("¿Desea eliminar el producto\n "+Descripcion+" ?", "MSG-CONSULTA", "SI","NO");
                 if (resmsj.Equals(DialogResult.OK))
                 {
 
-                    bool Respuesta = client.EliminarProducto(IdProducto);
+                    bool Respuesta = client_Prod.Eliminar(IdProducto);
                     if (Respuesta)
                     {
                         DialogResult resmsj_2 = msj.MsjInformacion("El producto "+Descripcion+" fue eliminado", "MSG-INFORMACION", "ACEPTAR");

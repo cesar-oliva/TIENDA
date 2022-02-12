@@ -7,14 +7,34 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.Text;
+using CapaServicioServidor.DataObjectTransfer.Impuesto;
 
 namespace CapaServicioServidor
 {
     // NOTA: puede usar el comando "Rename" del menú "Refactorizar" para cambiar el nombre de clase "ServiceImpuesto" en el código, en svc y en el archivo de configuración a la vez.
     // NOTA: para iniciar el Cliente de prueba WCF para probar este servicio, seleccione ServiceImpuesto.svc o ServiceImpuesto.svc.cs en el Explorador de soluciones e inicie la depuración.
-    public class ServiceImpuesto : IServiceImpuesto
+    public class ServiceImpuesto : IServiceCrud<DtoImpuesto>
     {
-        public bool ModificarImpuesto(DtoImpuesto oImpuesto, int IdImpuesto)
+        BD_Impuesto bd_Impuesto = new BD_Impuesto();
+
+        public bool Actualizar(DtoImpuesto oImpuesto)
+        {
+            var nuevo = new Impuesto
+            {
+                IdImpuesto = oImpuesto.IdImpuesto,
+                Descripcion = oImpuesto.Descripcion,
+                Alicuota = oImpuesto.Alicuota,
+                OEstado = oImpuesto.OEstado
+            };
+
+            return bd_Impuesto.Actualizar(nuevo);
+        }
+        public bool Eliminar(int IdImpuesto)
+        {
+            return bd_Impuesto.Eliminar(IdImpuesto);
+        }
+
+        public bool Registrar(DtoImpuesto oImpuesto)
         {
             var nuevo = new Impuesto
             {
@@ -22,29 +42,21 @@ namespace CapaServicioServidor
                 Alicuota = oImpuesto.Alicuota,
                 OEstado = oImpuesto.OEstado
             };
-
-            return BD_Impuesto.ModificarImpuesto(nuevo,IdImpuesto);
-        }
-        public bool EliminarImpuesto(int IdImpuesto)
-        {
-            return BD_Impuesto.EliminarImpuesto(IdImpuesto);
-        }
-
-        public bool IngresarImpuesto(DtoImpuesto oImpuesto)
-        {
-            var nuevo = new Impuesto
+            if (bd_Impuesto.Actualizar(nuevo))
             {
-                Descripcion = oImpuesto.Descripcion,
-                Alicuota = oImpuesto.Alicuota,
-                OEstado = oImpuesto.OEstado
-            };
-            return BD_Impuesto.RegistrarImpuesto(nuevo);
-        }
+                return true;
+            }
+            else
+            {
 
-        public List<DtoImpuesto> ListaImpuesto()
+                return false;
+            }
+       }
+
+        public List<DtoImpuesto> Mostrar()
         {
             List<DtoImpuesto> lista = new List<DtoImpuesto>();
-            foreach (var item in BD_Impuesto.MostrarImpuesto())
+            foreach (var item in bd_Impuesto.Mostrar())
             {
                 DtoImpuesto prod = new DtoImpuesto
                 {
@@ -58,11 +70,6 @@ namespace CapaServicioServidor
                 
             }
             return lista;
-        }
-
-        public bool BuscarImpuestoById(int IdImpuesto)
-        {
-            return BuscarImpuestoById(IdImpuesto);
         }
     }
 }

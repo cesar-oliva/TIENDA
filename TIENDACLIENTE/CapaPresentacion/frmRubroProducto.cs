@@ -15,6 +15,7 @@ namespace CapaPresentacion
     public partial class FrmRubroProducto : Form
     {
         DataTable TablaRubro = new();
+        ServiceCrudOf_DtoRubroProductoClient client = new ();
         public FrmRubroProducto()
         {
             InitializeComponent();
@@ -32,8 +33,7 @@ namespace CapaPresentacion
         }
         private void CargarDatosRubroProducto()
         {
-            using ServiceRubroProducto.ServiceRubroProductoClient client = new();
-            var oListaRubro = client.ListaRubroProducto();
+            var oListaRubro = client.Mostrar();
             if (oListaRubro.Count() > 0 && oListaRubro != null)
             {
                 lblTotalRegistros.Text = oListaRubro.Count().ToString();
@@ -42,24 +42,24 @@ namespace CapaPresentacion
                 TablaRubro.Rows.Clear();
                 cmbFiltro.Items.Clear();
                 TablaRubro.Columns.Add("IdRubroProducto", typeof(int));
-                TablaRubro.Columns.Add("CodigoRubroProducto", typeof(string));
+                //TablaRubro.Columns.Add("CodigoRubroProducto", typeof(string));
                 TablaRubro.Columns.Add("DescripcionRubroProducto", typeof(string));
                 TablaRubro.Columns.Add("MargenGanancia", typeof(string));
                 TablaRubro.Columns.Add("Impuesto", typeof(string));
                 TablaRubro.Columns.Add("Estado", typeof(string));
                 TablaRubro.Columns.Add("FechaRegistro", typeof(DateTime));
-                foreach (DtoRubroProducto row in oListaRubro)
-                {
-                    if (row.OEstado.Equals(ServiceRubroProducto.Estado.Activo))
-                    {
-                        TablaRubro.Rows.Add(row.IdRubroProducto, row.CodigoRubroProducto, row.DescripcionRubroProducto, row.MargenGanancia, row.OImpuesto.Descripcion, row.OEstado, row.FechaRegistro);
-                    }      
-                }
+                //foreach (DtoRubroProducto row in oListaRubro)
+                //{
+                //    if (row.OEstado.Equals(ServiceRubroProducto.Estado.Activo))
+                //    {
+                //        TablaRubro.Rows.Add(row.IdRubroProducto, row.DescripcionRubroProducto, row.MargenGanancia, row.OImpuesto.Descripcion, row.OEstado, row.FechaRegistro);
+                //    }      
+                //}
                 dataGridRubro.DataSource = TablaRubro;
                 dataGridRubro.AutoResizeColumns();
                 dataGridRubro.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
                 dataGridRubro.Columns["IdRubroProducto"].Visible = false;
-                dataGridRubro.Columns["CodigoRubroProducto"].Visible = true;
+                //dataGridRubro.Columns["CodigoRubroProducto"].Visible = true;
                 dataGridRubro.Columns["DescripcionRubroProducto"].Visible = true;
                 dataGridRubro.Columns["MargenGanancia"].Visible = true;
                 dataGridRubro.Columns["Impuesto"].Visible = true;
@@ -87,7 +87,6 @@ namespace CapaPresentacion
 
         private void Btn_Modificar_Click(object sender, EventArgs e)
         {
-            using ServiceRubroProducto.ServiceRubroProductoClient client = new();
             if (dataGridRubro.SelectedRows.Count > 0)
             {
                 DataGridViewRow currentRow = dataGridRubro.SelectedRows[0];
@@ -95,11 +94,11 @@ namespace CapaPresentacion
                 DtoRubroProducto oRubroProducto = new()
                 {
                     IdRubroProducto = Convert.ToInt32(dataGridRubro.Rows[index].Cells["IdRubroProducto"].Value),
-                    CodigoRubroProducto = Convert.ToString(dataGridRubro.Rows[index].Cells["CodigoRubroProducto"].Value),
+                    //CodigoRubroProducto = Convert.ToString(dataGridRubro.Rows[index].Cells["CodigoRubroProducto"].Value),
                     DescripcionRubroProducto = Convert.ToString(dataGridRubro.Rows[index].Cells["DescripcionRubroProducto"].Value),
                     MargenGanancia = Convert.ToDouble(dataGridRubro.Rows[index].Cells["MargenGanancia"].Value),
-                    OImpuesto = client.ObtenerImpuestoByDescripcion(Convert.ToString(dataGridRubro.Rows[index].Cells["Impuesto"].Value)),
-                    OEstado = client.ObtenerEstadoByDescripcion(Convert.ToString(dataGridRubro.Rows[index].Cells["Estado"].Value))
+                    DescripcionImpuesto = Convert.ToString(dataGridRubro.Rows[index].Cells["Impuesto"].Value),
+                    DescripcionEstado = Convert.ToString(dataGridRubro.Rows[index].Cells["Estado"].Value)
                 };
                 mtnRubroProducto form = new(oRubroProducto);
                 form.ShowDialog();
@@ -113,7 +112,6 @@ namespace CapaPresentacion
 
         private void Btn_Eliminar_Click(object sender, EventArgs e)
         {
-            using ServiceRubroProducto.ServiceRubroProductoClient client = new();
             if (dataGridRubro.SelectedRows.Count > 0)
             {
                 DataGridViewRow currentRow = dataGridRubro.SelectedRows[0];
@@ -125,7 +123,7 @@ namespace CapaPresentacion
                 if (MessageBox.Show(string.Format("{0} '{1}' {2}", "¿Desea eliminar el producto", Descripcion,IdRubroProducto ,"permanentemente?"), "Mensaje", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
 
-                    bool Respuesta = client.EliminarRubroProducto(IdRubroProducto);
+                    bool Respuesta = client.Eliminar(IdRubroProducto);
                     if (Respuesta)
                     {
                         MessageBox.Show(string.Format("{0} {1} {2}", "El producto", Descripcion, "fue eliminado"), "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Information);

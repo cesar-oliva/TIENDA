@@ -108,7 +108,7 @@ namespace CapaDatos
                                 Descripcion = data.Rows[i]["Descripcion"].ToString(),
                                 OPuntoDeVenta = BD_PuntoDeVenta.BuscarPuntoDeVenta(Convert.ToInt32(data.Rows[i]["IdPuntoDeVenta"].ToString())),
                                 ContadorNumero = Convert.ToInt32(data.Rows[i]["ContadorNumero"].ToString()),
-                                OEstado = Operaciones.BuscarEstado(data.Rows[i]["Estado"].ToString()),
+                                OEstado = Operaciones.BuscarByDescripcion(data.Rows[i]["Estado"].ToString()),
                                 FechaRegistro = Convert.ToDateTime(data.Rows[i]["FechaRegistro"].ToString())
                             };
                             marcaTabla.Add(marc);

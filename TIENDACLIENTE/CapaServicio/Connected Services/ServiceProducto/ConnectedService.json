@@ -1,0 +1,23 @@
+{
+  "ExtendedData": {
+    "inputs": [
+      "http://localhost:10524/ServiceProducto.svc"
+    ],
+    "collectionTypes": [
+      "System.Collections.ArrayList",
+      "System.Collections.Generic.Dictionary`2"
+    ],
+    "namespaceMappings": [
+      "*, ServiceProducto"
+    ],
+    "references": [
+      "Microsoft.Bcl.AsyncInterfaces, {Microsoft.Bcl.AsyncInterfaces, 5.0.0}",
+      "ServiceStack.Interfaces, {ServiceStack.Interfaces, 5.13.2}",
+      "System.Runtime, {System.Runtime, 4.3.0}",
+      "System.Runtime.Serialization.Primitives, {System.Runtime.Serialization.Primitives, 4.3.0}"
+    ],
+    "sync": true,
+    "targetFramework": "net5.0",
+    "typeReuseMode": "All"
+  }
+}

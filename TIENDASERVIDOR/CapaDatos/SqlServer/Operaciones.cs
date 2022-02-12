@@ -10,33 +10,16 @@ namespace CapaDatos
 {
     public static class Operaciones
     {
-        public static int BuscarEstado(Estado oEstado)
+        public static Estado BuscarByDescripcion(string descripcionEstado)
         {
-            if (oEstado.Equals(Estado.Activo)) return 0;
-            return 1;
+            if (descripcionEstado.Equals("True")|| descripcionEstado.Equals("Activo"))
+            {
+                return Estado.Activo;
+            }
+            else
+            {
+                return Estado.Inactivo;
+            }
         }
-        //public static int BuscarGenero(GeneroProducto oGenero)
-        //{
-        //    if (oGenero.Equals(GeneroProducto.Unisex)) return 0;
-        //    if (oGenero.Equals(GeneroProducto.Masculino)) return 1;
-        //    return 2;
-        //}
-        public static Estado BuscarEstado(string oEstado)
-        {
-            if (oEstado.Equals("False")) return Estado.Activo;
-            return Estado.Inactivo;
-        }
-        public static Estado BuscarEstado(int oEstado)
-        {
-            if (oEstado.Equals(0)) return Estado.Activo;
-            return Estado.Inactivo;
-        }
-        //public static GeneroProducto BuscarGenero(string oGenero)
-        //{
-        //    if (oGenero.Equals("Unisex")) return GeneroProducto.Unisex;
-        //    if (oGenero.Equals("Masculino")) return GeneroProducto.Masculino;
-        //    return GeneroProducto.Femenino;
-        //}
-        
     }
 }

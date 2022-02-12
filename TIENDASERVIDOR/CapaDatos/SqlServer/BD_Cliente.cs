@@ -61,7 +61,7 @@ namespace CapaDatos
                                 RazonSocial = data.Rows[i]["RazonSocial"].ToString(),
                                 OCondicionTributaria = BD_CondicionTributaria.BuscarCondicionTributariaById(Convert.ToInt32(data.Rows[i]["IdCondicionTributaria"])),
                                 DomicilioFiscal = data.Rows[i]["DomicilioFiscal"].ToString(),
-                                OEstado = Operaciones.BuscarEstado(data.Rows[i]["Estado"].ToString()),
+                                OEstado = Operaciones.BuscarByDescripcion(data.Rows[i]["Estado"].ToString()),
                                 FechaRegistro = Convert.ToDateTime(data.Rows[i]["FechaRegistro"])
                             };
                             clienteTabla.Add(user);

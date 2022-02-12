@@ -1,4 +1,5 @@
-﻿using CapaNegocio;
+﻿using CapaAbstraccion;
+using CapaNegocio;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -10,37 +11,35 @@ using System.Windows;
 
 namespace CapaDatos
 {
-    public class BD_Impuesto
+    public class BD_Impuesto:ICrud<Impuesto>
     {
 
-        public static bool RegistrarImpuesto(Impuesto oImpuesto)
+        public int Registrar(Impuesto oImpuesto)
         {
-            bool respuesta = false;
+            int respuesta;
             using (SqlConnection oConexion = new SqlConnection(Conexion.conexion))
             {
                 try
                 {
                     string SqlQuery = "INSERT INTO Impuesto(DescripcionImpusto,Alicuota)" +
-                                     "VALUES(@Descripcion,@Alicuota,@Estado)";
+                                     "VALUES(@DescripcionImpuesto,@Alicuota,@Estado)";
                     SqlCommand cmd = new SqlCommand(SqlQuery, oConexion);
                     cmd.Parameters.AddWithValue("DescripcionImpuesto", oImpuesto.Descripcion);
                     cmd.Parameters.AddWithValue("Alicuota", oImpuesto.Alicuota);
                     oConexion.Open();
-                    if(cmd.ExecuteNonQuery()>0) respuesta = true;
-                    MessageBox.Show("El producto de dio de alta con exito");
+                    respuesta = cmd.ExecuteNonQuery();
                 }
                 catch (Exception ex)
                 {
                     MessageBox.Show("Error al cargar el producto: " + ex.Message);
-                    return respuesta;
+                    return 0;
                 }
-
             }
             return respuesta;
         }
-        public static bool ModificarImpuesto(Impuesto oImpuesto, int IdImpuesto)
+        public bool Actualizar(Impuesto oImpuesto)
         {
-            int respuesta;
+            bool respuesta = false;
             using (SqlConnection oConexion = new SqlConnection(Conexion.conexion))
             {
                 try
@@ -49,21 +48,20 @@ namespace CapaDatos
                     SqlCommand cmd = new SqlCommand(SqlQuery, oConexion);
                     cmd.Parameters.AddWithValue("DescripcionImpuesto", oImpuesto.Descripcion);
                     cmd.Parameters.AddWithValue("Alicuota", oImpuesto.Alicuota);
-                    cmd.Parameters.AddWithValue("Estado", Operaciones.BuscarEstado(oImpuesto.OEstado));
-                    cmd.Parameters.AddWithValue("IdImpuesto",IdImpuesto);
+                    cmd.Parameters.AddWithValue("Estado", Operaciones.BuscarByDescripcion(oImpuesto.OEstado.ToString()));
+                    cmd.Parameters.AddWithValue("IdImpuesto", oImpuesto.IdImpuesto);
                     oConexion.Open();
-                    respuesta = cmd.ExecuteNonQuery();
-                    MessageBox.Show("Se actualizo el producto descripcin:" + oImpuesto.Descripcion);
-                    return true;
+                    if (cmd.ExecuteNonQuery() > 0) respuesta = true;
                 }
                 catch (Exception ex)
                 {
                     MessageBox.Show(ex.Message);
-                    return false;
+                    return respuesta;
                 }
             }
+            return respuesta;
         }
-        public static bool EliminarImpuesto(int IdImpuesto)
+        public bool Eliminar(int idImpuesto)
         {
             int respuesta;
             using (SqlConnection oConexion = new SqlConnection(Conexion.conexion))
@@ -72,7 +70,7 @@ namespace CapaDatos
                 {
                     String SqlQuery = "DELETE FROM Impuesto WHERE IdImpuesto = @IdImpuesto";
                     SqlCommand cmd = new SqlCommand(SqlQuery, oConexion);
-                    cmd.Parameters.AddWithValue("IdImpuesto", IdImpuesto);
+                    cmd.Parameters.AddWithValue("IdImpuesto", idImpuesto);
                     oConexion.Open();
                     respuesta = cmd.ExecuteNonQuery();
                     return true;
@@ -85,7 +83,7 @@ namespace CapaDatos
                 }
             }
         }
-        public static List<Impuesto> MostrarImpuesto()
+        public List<Impuesto> Mostrar()
         {
             List<Impuesto> Tabla = new List<Impuesto>();
             DataTable data = new DataTable();
@@ -106,7 +104,7 @@ namespace CapaDatos
                                 IdImpuesto = Convert.ToInt32(data.Rows[i]["IdImpuesto"]),
                                 Descripcion = data.Rows[i]["DescripcionImpuesto"].ToString(),
                                 Alicuota = Convert.ToDouble(data.Rows[i]["Alicuota"].ToString()),
-                                OEstado = Operaciones.BuscarEstado(data.Rows[i]["Estado"].ToString()),
+                                OEstado = Operaciones.BuscarByDescripcion(data.Rows[i]["Estado"].ToString()),
                                 FechaRegistro = Convert.ToDateTime(data.Rows[i]["FechaRegistro"])
                             };
                             Tabla.Add(imp);
@@ -123,21 +121,21 @@ namespace CapaDatos
 
             }
         }
-        public static Impuesto BuscarImpuestoById(int idImpuesto)
+        public Impuesto BuscarById(int idImpuesto)
         {
-            List<Impuesto> lista = MostrarImpuesto();
+            List<Impuesto> lista = Mostrar();
             foreach (var item in lista)
             {
                 if (idImpuesto.Equals(item.IdImpuesto)) return item;
             }
             return null;
         }
-        public static Impuesto BuscarImpuestoByDescripcion(string oImpuesto)
+        public Impuesto BuscarByDescripcion(string descripcionImpuesto)
         {
-            var lista = MostrarImpuesto();
+            var lista = Mostrar();
             foreach (var item in lista)
             {
-                if (item.Descripcion.Equals(oImpuesto)) return item;
+                if (item.Descripcion.Equals(descripcionImpuesto)) return item;
             }
             return null;
         }

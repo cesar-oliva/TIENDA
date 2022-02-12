@@ -37,7 +37,7 @@ namespace CapaDatos
                                 FechaNacimiento = Convert.ToDateTime(data.Rows[i]["FechaNacimiento"].ToString()),
                                 Domicilio = data.Rows[i]["Domicilio"].ToString(),
                                 Telefono = data.Rows[i]["Telefono"].ToString(),
-                                OEstado = Operaciones.BuscarEstado(data.Rows[i]["Estado"].ToString()),
+                                OEstado = Operaciones.BuscarByDescripcion(data.Rows[i]["Estado"].ToString()),
                                 FechaRegistro = Convert.ToDateTime(data.Rows[i]["FechaRegistro"])
                             };
                             personaTabla.Add(pers);

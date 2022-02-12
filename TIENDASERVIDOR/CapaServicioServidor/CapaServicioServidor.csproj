@@ -43,6 +43,9 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ValueTuple.4.5.0\lib\netstandard1.0\System.ValueTuple.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -70,6 +73,7 @@
     <Content Include="ServiceImpuesto.svc" />
     <Content Include="ServiceMarca.svc" />
     <Content Include="ServiceProducto.svc" />
+    <Content Include="ServiceDetalleProducto.svc" />
     <Content Include="ServiceRubroProducto.svc" />
     <Content Include="ServiceTalle.svc" />
     <Content Include="ServiceTipoTalle.svc" />
@@ -78,18 +82,23 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IServiceCliente.cs" />
-    <Compile Include="IServiceColor.cs" />
-    <Compile Include="IServiceCondicionTributaria.cs" />
-    <Compile Include="IServiceDetalleDeVenta.cs" />
-    <Compile Include="IServiceGeneroProducto.cs" />
-    <Compile Include="IServiceImpuesto.cs" />
-    <Compile Include="IServiceMarca.cs" />
-    <Compile Include="IServiceRubroProducto.cs" />
-    <Compile Include="IServiceTalle.cs" />
-    <Compile Include="IServiceTipoTalle.cs" />
-    <Compile Include="IServiceUsuario.cs" />
-    <Compile Include="IServiceVenta.cs" />
+    <Compile Include="Abstraction\IFormulario.cs" />
+    <Compile Include="Abstraction\IServiceCliente.cs" />
+    <Compile Include="Abstraction\IServiceColor.cs" />
+    <Compile Include="Abstraction\IServiceCondicionTributaria.cs" />
+    <Compile Include="Abstraction\IServiceDetalleDeVenta.cs" />
+    <Compile Include="Abstraction\IServiceGeneroProducto.cs" />
+    <Compile Include="Abstraction\IServiceMarca.cs" />
+    <Compile Include="Abstraction\IServiceDetalleProducto.cs" />
+    <Compile Include="Abstraction\IServiceTalle.cs" />
+    <Compile Include="Abstraction\IServiceTipoTalle.cs" />
+    <Compile Include="Abstraction\IServiceUsuario.cs" />
+    <Compile Include="Abstraction\IServiceVenta.cs" />
+    <Compile Include="DataObjectTransfer\Impuesto\DtoImpuesto.cs" />
+    <Compile Include="DataObjectTransfer\Producto\DtoDetalleProducto.cs" />
+    <Compile Include="DataObjectTransfer\Producto\DtoProducto.cs" />
+    <Compile Include="DataObjectTransfer\RubroProducto\DtoRubroProducto.cs" />
+    <Compile Include="DataObjectTransfer\Producto\DtoFormProducto.cs" />
     <Compile Include="ServiceCliente.svc.cs">
       <DependentUpon>ServiceCliente.svc</DependentUpon>
     </Compile>
@@ -114,8 +123,11 @@
     <Compile Include="ServiceProducto.svc.cs">
       <DependentUpon>ServiceProducto.svc</DependentUpon>
     </Compile>
-    <Compile Include="IServiceProducto.cs" />
+    <Compile Include="Abstraction\IServiceCrud.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ServiceDetalleProducto.svc.cs">
+      <DependentUpon>ServiceDetalleProducto.svc</DependentUpon>
+    </Compile>
     <Compile Include="ServiceRubroProducto.svc.cs">
       <DependentUpon>ServiceRubroProducto.svc</DependentUpon>
     </Compile>
@@ -145,6 +157,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\CapaAbstraccion\CapaAbstraccion.csproj">
+      <Project>{7CBED3FC-0984-4FB8-919C-45C06DACA411}</Project>
+      <Name>CapaAbstraccion</Name>
+    </ProjectReference>
     <ProjectReference Include="..\CapaDatos\CapaDatos.csproj">
       <Project>{1447a366-704a-4a8d-853a-7c26b3be7557}</Project>
       <Name>CapaDatos</Name>

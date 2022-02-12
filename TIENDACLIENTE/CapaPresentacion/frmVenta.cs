@@ -1,6 +1,7 @@
 ﻿using ServiceCliente;
 using ServiceHomologacionAfip;
 using ServiceProducto;
+using ServiceRubroProducto;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -18,6 +19,9 @@ namespace CapaPresentacion
     {
         DataTable TablaDetalleProducto = new();
         int id = 0;
+        ServiceCrudOf_DtoProductoClient client = new();
+        ServiceCrudOf_DtoRubroProductoClient client_rub = new ();
+
         public frmVenta()
         {
             InitializeComponent();
@@ -108,30 +112,29 @@ namespace CapaPresentacion
         private void pictureBox1_Click(object sender, EventArgs e)
         {
             frmListado list = new();
-            list.ShowDialog();   
+            list.ShowDialog();
+            mtxtCuit.Text=list.ObtenerCliente();
         }
 
         private void txtCodigo_KeyPress(object sender, KeyPressEventArgs e)
         {
-            using ServiceProducto.ServiceProductoClient client = new();
-            using ServiceRubroProducto.ServiceRubroProductoClient client_rub = new();
-            var oListaProducto = client.ListaProducto();
+            var oListaProducto = client.Mostrar();
             bool bandera = false;
             if ((int)e.KeyChar == (int)Keys.Enter)
             {
                 foreach (var item in oListaProducto)
                 {
-                    foreach (var pv in item.OProductoVenta)
+                    foreach (var pv in item.DetallePoducto)
                     {
-                        if (txtCodigo.Text.Trim().ToString().Equals(item.CodigoProducto.ToString()))
-                        {
-                            txtDescripcion.Text = item.DescripcionProducto.ToString();
-                            txtPrecioVenta.Text = Convert.ToString((pv.Costo * (((client_rub.ObtenerRubroProductoById(item.ORubroProducto.IdRubroProducto).MargenGanancia) / 100) + 1)));
-                            txtStock.Text = "25";
-                            bandera = true;
-                            txtCantidad.Focus();
-                            id = client_rub.ObtenerRubroProductoById(item.ORubroProducto.IdRubroProducto).OImpuesto.IdImpuesto;
-                        }
+                        //if (txtCodigo.Text.Trim().ToString().Equals(item.CodigoProducto.ToString()))
+                        //{
+                        //    txtDescripcion.Text = item.DescripcionProducto.ToString();
+                        //    txtPrecioVenta.Text = Convert.ToString((pv.Costo * (((client_rub.ObtenerRubroProductoById(item.ORubroProducto.IdRubroProducto).MargenGanancia) / 100) + 1)));
+                        //    txtStock.Text = "25";
+                        //    bandera = true;
+                        //    txtCantidad.Focus();
+                        //    id = client_rub.ObtenerRubroProductoById(item.ORubroProducto.IdRubroProducto).OImpuesto.IdImpuesto;
+                        //}
                     }
                 }
                 if (bandera == false)
@@ -144,8 +147,7 @@ namespace CapaPresentacion
 
         private void pictureBox2_Click(object sender, EventArgs e)
         {
-            using ServiceRubroProducto.ServiceRubroProductoClient client_rub = new();
-            dataGridLineaVenta.Rows.Add(Convert.ToString(dataGridLineaVenta.Rows.Count), txtCodigo.Text.Trim(), txtDescripcion.Text.Trim(), txtPrecioVenta.Text.Trim(), client_rub.ObtenerImpuestoById(id).Alicuota.ToString(), txtCantidad.Text.Trim(), Convert.ToString(Convert.ToDouble(txtPrecioVenta.Text.Trim()) * Convert.ToInt32(txtCantidad.Text.Trim())));
+            dataGridLineaVenta.Rows.Add(Convert.ToString(dataGridLineaVenta.Rows.Count), txtCodigo.Text.Trim(), txtDescripcion.Text.Trim(), txtPrecioVenta.Text.Trim(), "21", txtCantidad.Text.Trim(), Convert.ToString(Convert.ToDouble(txtPrecioVenta.Text.Trim()) * Convert.ToInt32(txtCantidad.Text.Trim())));
             lblCantidad.Text = Convert.ToString(dataGridLineaVenta.Rows.Count - 1);
             txtCodigo.Text = "";
             txtDescripcion.Text = "";
@@ -184,6 +186,7 @@ namespace CapaPresentacion
         private void btnGenerar_Click(object sender, EventArgs e)
         {
             progressBar1.Value = 0;
+            btnGenerar.Enabled = false;
             lblEstado.Text = "procesando...";
             Thread.Sleep(10);
             using ServiceWrapper.LoginServiceClient client = new();
@@ -267,6 +270,7 @@ namespace CapaPresentacion
             }
             else
             {
+                btnGenerar.Enabled = true;
                 lblEstado.Text = "RECHAZADA";
                 lblEstado.ForeColor = System.Drawing.Color.Red;
             }
@@ -281,7 +285,7 @@ namespace CapaPresentacion
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if(comboBox1.SelectedIndex == 1)
+            if(comboBox1.SelectedIndex == 0)
             {
                 mtxtCuit.Text = "";
                 mtxtCuit.Mask = "00-00000000-0";
@@ -295,6 +299,11 @@ namespace CapaPresentacion
                 mtxtCuit.Focus();
                 mtxtCuit.SelectionStart = 0;
             }
+        }
+
+        private void btnSalir_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

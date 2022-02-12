@@ -62,6 +62,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="SqlServer\BD_DetalleProducto.cs" />
     <Compile Include="SqlServer\BD_GeneroProducto.cs" />
     <Compile Include="MailServices\MailServer.cs" />
     <Compile Include="MailServices\MailSupport.cs" />
@@ -74,7 +75,7 @@
     <Compile Include="SqlServer\BD_Persona.cs" />
     <Compile Include="SqlServer\BD_PuntoDeVenta.cs" />
     <Compile Include="SqlServer\BD_Impuesto.cs" />
-    <Compile Include="SqlServer\BD_Marca.cs" />
+    <Compile Include="SqlServer\BD_MarcaProducto.cs" />
     <Compile Include="SqlServer\BD_Producto.cs" />
     <Compile Include="SqlServer\BD_Rol.cs" />
     <Compile Include="SqlServer\BD_RubroProducto.cs" />
@@ -89,6 +90,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\CapaAbstraccion\CapaAbstraccion.csproj">
+      <Project>{7CBED3FC-0984-4FB8-919C-45C06DACA411}</Project>
+      <Name>CapaAbstraccion</Name>
+    </ProjectReference>
     <ProjectReference Include="..\CapaNegocio\CapaNegocio.csproj">
       <Project>{b134c4bc-5c66-4a0f-bf5f-697cff67f962}</Project>
       <Name>CapaNegocio</Name>

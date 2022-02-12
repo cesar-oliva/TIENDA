@@ -18,35 +18,50 @@ namespace ServiceMarca
     public partial class DtoMarca : object
     {
         
-        private string DescripcionField;
+        private string DescripcionMarcaProductoField;
         
-        private int IdMarcaField;
+        private System.DateTime FechaRegistroField;
+        
+        private int IdMarcaProductoField;
         
         private ServiceMarca.Estado OEstadoField;
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Descripcion
+        public string DescripcionMarcaProducto
         {
             get
             {
-                return this.DescripcionField;
+                return this.DescripcionMarcaProductoField;
             }
             set
             {
-                this.DescripcionField = value;
+                this.DescripcionMarcaProductoField = value;
             }
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public int IdMarca
+        public System.DateTime FechaRegistro
         {
             get
             {
-                return this.IdMarcaField;
+                return this.FechaRegistroField;
             }
             set
             {
-                this.IdMarcaField = value;
+                this.FechaRegistroField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int IdMarcaProducto
+        {
+            get
+            {
+                return this.IdMarcaProductoField;
+            }
+            set
+            {
+                this.IdMarcaProductoField = value;
             }
         }
         
@@ -76,102 +91,44 @@ namespace ServiceMarca
         Activo = 1,
     }
     
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.3")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="Marca", Namespace="http://schemas.datacontract.org/2004/07/CapaNegocio")]
-    public partial class Marca : object
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServiceMarca.IServiceCrudOf_DtoMarca")]
+    public interface IServiceCrudOf_DtoMarca
     {
         
-        private string DescripcionMarcaField;
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceCrudOf_DtoMarca/Registrar", ReplyAction="http://tempuri.org/IServiceCrudOf_DtoMarca/RegistrarResponse")]
+        bool Registrar(ServiceMarca.DtoMarca oEntity);
         
-        private int IdMarcaField;
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceCrudOf_DtoMarca/Registrar", ReplyAction="http://tempuri.org/IServiceCrudOf_DtoMarca/RegistrarResponse")]
+        System.Threading.Tasks.Task<bool> RegistrarAsync(ServiceMarca.DtoMarca oEntity);
         
-        private ServiceMarca.Estado OEstadoField;
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceCrudOf_DtoMarca/Actualizar", ReplyAction="http://tempuri.org/IServiceCrudOf_DtoMarca/ActualizarResponse")]
+        bool Actualizar(ServiceMarca.DtoMarca oEntity);
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string DescripcionMarca
-        {
-            get
-            {
-                return this.DescripcionMarcaField;
-            }
-            set
-            {
-                this.DescripcionMarcaField = value;
-            }
-        }
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceCrudOf_DtoMarca/Actualizar", ReplyAction="http://tempuri.org/IServiceCrudOf_DtoMarca/ActualizarResponse")]
+        System.Threading.Tasks.Task<bool> ActualizarAsync(ServiceMarca.DtoMarca oEntity);
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int IdMarca
-        {
-            get
-            {
-                return this.IdMarcaField;
-            }
-            set
-            {
-                this.IdMarcaField = value;
-            }
-        }
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceCrudOf_DtoMarca/Eliminar", ReplyAction="http://tempuri.org/IServiceCrudOf_DtoMarca/EliminarResponse")]
+        bool Eliminar(int idEntity);
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public ServiceMarca.Estado OEstado
-        {
-            get
-            {
-                return this.OEstadoField;
-            }
-            set
-            {
-                this.OEstadoField = value;
-            }
-        }
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceCrudOf_DtoMarca/Eliminar", ReplyAction="http://tempuri.org/IServiceCrudOf_DtoMarca/EliminarResponse")]
+        System.Threading.Tasks.Task<bool> EliminarAsync(int idEntity);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceCrudOf_DtoMarca/Mostrar", ReplyAction="http://tempuri.org/IServiceCrudOf_DtoMarca/MostrarResponse")]
+        ServiceMarca.DtoMarca[] Mostrar();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceCrudOf_DtoMarca/Mostrar", ReplyAction="http://tempuri.org/IServiceCrudOf_DtoMarca/MostrarResponse")]
+        System.Threading.Tasks.Task<ServiceMarca.DtoMarca[]> MostrarAsync();
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.3")]
-    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServiceMarca.IServiceMarca")]
-    public interface IServiceMarca
-    {
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceMarca/AgregarMarca", ReplyAction="http://tempuri.org/IServiceMarca/AgregarMarcaResponse")]
-        bool AgregarMarca(ServiceMarca.DtoMarca oMarca);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceMarca/AgregarMarca", ReplyAction="http://tempuri.org/IServiceMarca/AgregarMarcaResponse")]
-        System.Threading.Tasks.Task<bool> AgregarMarcaAsync(ServiceMarca.DtoMarca oMarca);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceMarca/ModificarMarca", ReplyAction="http://tempuri.org/IServiceMarca/ModificarMarcaResponse")]
-        bool ModificarMarca(ServiceMarca.DtoMarca oMarca, int IdMarca);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceMarca/ModificarMarca", ReplyAction="http://tempuri.org/IServiceMarca/ModificarMarcaResponse")]
-        System.Threading.Tasks.Task<bool> ModificarMarcaAsync(ServiceMarca.DtoMarca oMarca, int IdMarca);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceMarca/EliminarMarca", ReplyAction="http://tempuri.org/IServiceMarca/EliminarMarcaResponse")]
-        bool EliminarMarca(int IdMarca);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceMarca/EliminarMarca", ReplyAction="http://tempuri.org/IServiceMarca/EliminarMarcaResponse")]
-        System.Threading.Tasks.Task<bool> EliminarMarcaAsync(int IdMarca);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceMarca/ListaMarca", ReplyAction="http://tempuri.org/IServiceMarca/ListaMarcaResponse")]
-        ServiceMarca.DtoMarca[] ListaMarca();
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceMarca/ListaMarca", ReplyAction="http://tempuri.org/IServiceMarca/ListaMarcaResponse")]
-        System.Threading.Tasks.Task<ServiceMarca.DtoMarca[]> ListaMarcaAsync();
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceMarca/ObtenerMarca", ReplyAction="http://tempuri.org/IServiceMarca/ObtenerMarcaResponse")]
-        ServiceMarca.Marca ObtenerMarca(string oMarca);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceMarca/ObtenerMarca", ReplyAction="http://tempuri.org/IServiceMarca/ObtenerMarcaResponse")]
-        System.Threading.Tasks.Task<ServiceMarca.Marca> ObtenerMarcaAsync(string oMarca);
-    }
-    
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.3")]
-    public interface IServiceMarcaChannel : ServiceMarca.IServiceMarca, System.ServiceModel.IClientChannel
+    public interface IServiceCrudOf_DtoMarcaChannel : ServiceMarca.IServiceCrudOf_DtoMarca, System.ServiceModel.IClientChannel
     {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.0.3")]
-    public partial class ServiceMarcaClient : System.ServiceModel.ClientBase<ServiceMarca.IServiceMarca>, ServiceMarca.IServiceMarca
+    public partial class ServiceCrudOf_DtoMarcaClient : System.ServiceModel.ClientBase<ServiceMarca.IServiceCrudOf_DtoMarca>, ServiceMarca.IServiceCrudOf_DtoMarca
     {
         
         /// <summary>
@@ -181,87 +138,77 @@ namespace ServiceMarca
         /// <param name="clientCredentials">Credenciales de cliente</param>
         static partial void ConfigureEndpoint(System.ServiceModel.Description.ServiceEndpoint serviceEndpoint, System.ServiceModel.Description.ClientCredentials clientCredentials);
         
-        public ServiceMarcaClient() : 
-                base(ServiceMarcaClient.GetDefaultBinding(), ServiceMarcaClient.GetDefaultEndpointAddress())
+        public ServiceCrudOf_DtoMarcaClient() : 
+                base(ServiceCrudOf_DtoMarcaClient.GetDefaultBinding(), ServiceCrudOf_DtoMarcaClient.GetDefaultEndpointAddress())
         {
-            this.Endpoint.Name = EndpointConfiguration.BasicHttpBinding_IServiceMarca.ToString();
+            this.Endpoint.Name = EndpointConfiguration.BasicHttpBinding_IServiceCrudOf_DtoMarca.ToString();
             ConfigureEndpoint(this.Endpoint, this.ClientCredentials);
         }
         
-        public ServiceMarcaClient(EndpointConfiguration endpointConfiguration) : 
-                base(ServiceMarcaClient.GetBindingForEndpoint(endpointConfiguration), ServiceMarcaClient.GetEndpointAddress(endpointConfiguration))
-        {
-            this.Endpoint.Name = endpointConfiguration.ToString();
-            ConfigureEndpoint(this.Endpoint, this.ClientCredentials);
-        }
-        
-        public ServiceMarcaClient(EndpointConfiguration endpointConfiguration, string remoteAddress) : 
-                base(ServiceMarcaClient.GetBindingForEndpoint(endpointConfiguration), new System.ServiceModel.EndpointAddress(remoteAddress))
+        public ServiceCrudOf_DtoMarcaClient(EndpointConfiguration endpointConfiguration) : 
+                base(ServiceCrudOf_DtoMarcaClient.GetBindingForEndpoint(endpointConfiguration), ServiceCrudOf_DtoMarcaClient.GetEndpointAddress(endpointConfiguration))
         {
             this.Endpoint.Name = endpointConfiguration.ToString();
             ConfigureEndpoint(this.Endpoint, this.ClientCredentials);
         }
         
-        public ServiceMarcaClient(EndpointConfiguration endpointConfiguration, System.ServiceModel.EndpointAddress remoteAddress) : 
-                base(ServiceMarcaClient.GetBindingForEndpoint(endpointConfiguration), remoteAddress)
+        public ServiceCrudOf_DtoMarcaClient(EndpointConfiguration endpointConfiguration, string remoteAddress) : 
+                base(ServiceCrudOf_DtoMarcaClient.GetBindingForEndpoint(endpointConfiguration), new System.ServiceModel.EndpointAddress(remoteAddress))
         {
             this.Endpoint.Name = endpointConfiguration.ToString();
             ConfigureEndpoint(this.Endpoint, this.ClientCredentials);
         }
         
-        public ServiceMarcaClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
+        public ServiceCrudOf_DtoMarcaClient(EndpointConfiguration endpointConfiguration, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(ServiceCrudOf_DtoMarcaClient.GetBindingForEndpoint(endpointConfiguration), remoteAddress)
+        {
+            this.Endpoint.Name = endpointConfiguration.ToString();
+            ConfigureEndpoint(this.Endpoint, this.ClientCredentials);
+        }
+        
+        public ServiceCrudOf_DtoMarcaClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
                 base(binding, remoteAddress)
         {
         }
         
-        public bool AgregarMarca(ServiceMarca.DtoMarca oMarca)
+        public bool Registrar(ServiceMarca.DtoMarca oEntity)
         {
-            return base.Channel.AgregarMarca(oMarca);
+            return base.Channel.Registrar(oEntity);
         }
         
-        public System.Threading.Tasks.Task<bool> AgregarMarcaAsync(ServiceMarca.DtoMarca oMarca)
+        public System.Threading.Tasks.Task<bool> RegistrarAsync(ServiceMarca.DtoMarca oEntity)
         {
-            return base.Channel.AgregarMarcaAsync(oMarca);
+            return base.Channel.RegistrarAsync(oEntity);
         }
         
-        public bool ModificarMarca(ServiceMarca.DtoMarca oMarca, int IdMarca)
+        public bool Actualizar(ServiceMarca.DtoMarca oEntity)
         {
-            return base.Channel.ModificarMarca(oMarca, IdMarca);
+            return base.Channel.Actualizar(oEntity);
         }
         
-        public System.Threading.Tasks.Task<bool> ModificarMarcaAsync(ServiceMarca.DtoMarca oMarca, int IdMarca)
+        public System.Threading.Tasks.Task<bool> ActualizarAsync(ServiceMarca.DtoMarca oEntity)
         {
-            return base.Channel.ModificarMarcaAsync(oMarca, IdMarca);
+            return base.Channel.ActualizarAsync(oEntity);
         }
         
-        public bool EliminarMarca(int IdMarca)
+        public bool Eliminar(int idEntity)
         {
-            return base.Channel.EliminarMarca(IdMarca);
+            return base.Channel.Eliminar(idEntity);
         }
         
-        public System.Threading.Tasks.Task<bool> EliminarMarcaAsync(int IdMarca)
+        public System.Threading.Tasks.Task<bool> EliminarAsync(int idEntity)
         {
-            return base.Channel.EliminarMarcaAsync(IdMarca);
+            return base.Channel.EliminarAsync(idEntity);
         }
         
-        public ServiceMarca.DtoMarca[] ListaMarca()
+        public ServiceMarca.DtoMarca[] Mostrar()
         {
-            return base.Channel.ListaMarca();
+            return base.Channel.Mostrar();
         }
         
-        public System.Threading.Tasks.Task<ServiceMarca.DtoMarca[]> ListaMarcaAsync()
+        public System.Threading.Tasks.Task<ServiceMarca.DtoMarca[]> MostrarAsync()
         {
-            return base.Channel.ListaMarcaAsync();
-        }
-        
-        public ServiceMarca.Marca ObtenerMarca(string oMarca)
-        {
-            return base.Channel.ObtenerMarca(oMarca);
-        }
-        
-        public System.Threading.Tasks.Task<ServiceMarca.Marca> ObtenerMarcaAsync(string oMarca)
-        {
-            return base.Channel.ObtenerMarcaAsync(oMarca);
+            return base.Channel.MostrarAsync();
         }
         
         public virtual System.Threading.Tasks.Task OpenAsync()
@@ -276,7 +223,7 @@ namespace ServiceMarca
         
         private static System.ServiceModel.Channels.Binding GetBindingForEndpoint(EndpointConfiguration endpointConfiguration)
         {
-            if ((endpointConfiguration == EndpointConfiguration.BasicHttpBinding_IServiceMarca))
+            if ((endpointConfiguration == EndpointConfiguration.BasicHttpBinding_IServiceCrudOf_DtoMarca))
             {
                 System.ServiceModel.BasicHttpBinding result = new System.ServiceModel.BasicHttpBinding();
                 result.MaxBufferSize = int.MaxValue;
@@ -290,7 +237,7 @@ namespace ServiceMarca
         
         private static System.ServiceModel.EndpointAddress GetEndpointAddress(EndpointConfiguration endpointConfiguration)
         {
-            if ((endpointConfiguration == EndpointConfiguration.BasicHttpBinding_IServiceMarca))
+            if ((endpointConfiguration == EndpointConfiguration.BasicHttpBinding_IServiceCrudOf_DtoMarca))
             {
                 return new System.ServiceModel.EndpointAddress("http://localhost:10524/ServiceMarca.svc");
             }
@@ -299,18 +246,18 @@ namespace ServiceMarca
         
         private static System.ServiceModel.Channels.Binding GetDefaultBinding()
         {
-            return ServiceMarcaClient.GetBindingForEndpoint(EndpointConfiguration.BasicHttpBinding_IServiceMarca);
+            return ServiceCrudOf_DtoMarcaClient.GetBindingForEndpoint(EndpointConfiguration.BasicHttpBinding_IServiceCrudOf_DtoMarca);
         }
         
         private static System.ServiceModel.EndpointAddress GetDefaultEndpointAddress()
         {
-            return ServiceMarcaClient.GetEndpointAddress(EndpointConfiguration.BasicHttpBinding_IServiceMarca);
+            return ServiceCrudOf_DtoMarcaClient.GetEndpointAddress(EndpointConfiguration.BasicHttpBinding_IServiceCrudOf_DtoMarca);
         }
         
         public enum EndpointConfiguration
         {
             
-            BasicHttpBinding_IServiceMarca,
+            BasicHttpBinding_IServiceCrudOf_DtoMarca,
         }
     }
 }

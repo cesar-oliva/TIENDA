@@ -11,7 +11,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CapaDatos", "CapaDatos\Capa
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HostServer", "HostServer\HostServer.csproj", "{09BCF363-2D99-4257-B040-6F651D58A64D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CapaPrueba", "CapaPrueba\CapaPrueba.csproj", "{5835D417-AE10-4569-907A-937BBB01F9ED}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CapaPrueba", "CapaPrueba\CapaPrueba.csproj", "{5835D417-AE10-4569-907A-937BBB01F9ED}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CapaAbstraccion", "CapaAbstraccion\CapaAbstraccion.csproj", "{7CBED3FC-0984-4FB8-919C-45C06DACA411}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -61,6 +63,14 @@ Global
 		{5835D417-AE10-4569-907A-937BBB01F9ED}.Release|Any CPU.Build.0 = Release|Any CPU
 		{5835D417-AE10-4569-907A-937BBB01F9ED}.Release|x64.ActiveCfg = Release|Any CPU
 		{5835D417-AE10-4569-907A-937BBB01F9ED}.Release|x64.Build.0 = Release|Any CPU
+		{7CBED3FC-0984-4FB8-919C-45C06DACA411}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7CBED3FC-0984-4FB8-919C-45C06DACA411}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7CBED3FC-0984-4FB8-919C-45C06DACA411}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{7CBED3FC-0984-4FB8-919C-45C06DACA411}.Debug|x64.Build.0 = Debug|Any CPU
+		{7CBED3FC-0984-4FB8-919C-45C06DACA411}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7CBED3FC-0984-4FB8-919C-45C06DACA411}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7CBED3FC-0984-4FB8-919C-45C06DACA411}.Release|x64.ActiveCfg = Release|Any CPU
+		{7CBED3FC-0984-4FB8-919C-45C06DACA411}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

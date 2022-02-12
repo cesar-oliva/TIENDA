@@ -198,8 +198,8 @@ namespace CapaPresentacion
             // 
             this.comboBox1.FormattingEnabled = true;
             this.comboBox1.Items.AddRange(new object[] {
-            "DNI",
-            "CUIT"});
+            "CUIT",
+            "DNI"});
             this.comboBox1.Location = new System.Drawing.Point(6, 23);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(60, 23);
@@ -305,8 +305,8 @@ namespace CapaPresentacion
             this.groupBox5.Controls.Add(this.cmbTalle);
             this.groupBox5.Controls.Add(this.label4);
             this.groupBox5.Controls.Add(this.cmbColor);
-            this.groupBox5.Controls.Add(this.label21);
             this.groupBox5.Controls.Add(this.pictureBox2);
+            this.groupBox5.Controls.Add(this.label21);
             this.groupBox5.Controls.Add(this.pictureBox5);
             this.groupBox5.Controls.Add(this.pictureBox4);
             this.groupBox5.Controls.Add(this.label27);
@@ -332,7 +332,7 @@ namespace CapaPresentacion
             // 
             this.cmbTalle.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.cmbTalle.FormattingEnabled = true;
-            this.cmbTalle.Location = new System.Drawing.Point(536, 36);
+            this.cmbTalle.Location = new System.Drawing.Point(392, 36);
             this.cmbTalle.Name = "cmbTalle";
             this.cmbTalle.Size = new System.Drawing.Size(115, 25);
             this.cmbTalle.TabIndex = 67;
@@ -343,7 +343,7 @@ namespace CapaPresentacion
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.label4.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.label4.Location = new System.Drawing.Point(536, 19);
+            this.label4.Location = new System.Drawing.Point(392, 19);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(35, 15);
             this.label4.TabIndex = 68;
@@ -353,7 +353,7 @@ namespace CapaPresentacion
             // 
             this.cmbColor.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.cmbColor.FormattingEnabled = true;
-            this.cmbColor.Location = new System.Drawing.Point(386, 36);
+            this.cmbColor.Location = new System.Drawing.Point(533, 36);
             this.cmbColor.Name = "cmbColor";
             this.cmbColor.Size = new System.Drawing.Size(126, 25);
             this.cmbColor.TabIndex = 65;
@@ -364,7 +364,7 @@ namespace CapaPresentacion
             this.label21.AutoSize = true;
             this.label21.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.label21.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.label21.Location = new System.Drawing.Point(386, 18);
+            this.label21.Location = new System.Drawing.Point(533, 18);
             this.label21.Name = "label21";
             this.label21.Size = new System.Drawing.Size(39, 15);
             this.label21.TabIndex = 66;
@@ -653,6 +653,7 @@ namespace CapaPresentacion
             this.btnSalir.TabIndex = 74;
             this.btnSalir.Text = "Salir";
             this.btnSalir.UseVisualStyleBackColor = false;
+            this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
             // 
             // btnGenerar
             // 

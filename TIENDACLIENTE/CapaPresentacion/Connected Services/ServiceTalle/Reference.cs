@@ -317,6 +317,10 @@ namespace ServiceTalle
         
         private ServiceTalle.Estado OEstadoField;
         
+        private ServiceTalle.GeneroProducto OGeneroProductoField;
+        
+        private ServiceTalle.RubroProducto ORubroProductoField;
+        
         [System.Runtime.Serialization.DataMemberAttribute()]
         public string DescripcionTipoTalle
         {
@@ -366,6 +370,32 @@ namespace ServiceTalle
             set
             {
                 this.OEstadoField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public ServiceTalle.GeneroProducto OGeneroProducto
+        {
+            get
+            {
+                return this.OGeneroProductoField;
+            }
+            set
+            {
+                this.OGeneroProductoField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public ServiceTalle.RubroProducto ORubroProducto
+        {
+            get
+            {
+                return this.ORubroProductoField;
+            }
+            set
+            {
+                this.ORubroProductoField = value;
             }
         }
     }

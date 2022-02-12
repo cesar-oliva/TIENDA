@@ -1,4 +1,6 @@
-﻿using CapaDatos.SqlServer;
+﻿
+using CapaAbstraccion;
+using CapaDatos.SqlServer;
 using CapaNegocio;
 using System;
 using System.Collections.Generic;
@@ -11,9 +13,13 @@ using System.Windows;
 
 namespace CapaDatos
 {
-    public class BD_Producto
+    public class BD_Producto:ICrud<Producto>
     {
-        public static int RegistrarProducto(Producto oProducto)
+        // Declaro una instancia de clase
+        BD_MarcaProducto bd_MarcaProducto = new BD_MarcaProducto();
+        BD_RubroProducto bd_RubroProducto = new BD_RubroProducto();
+
+        public int Registrar(Producto oProducto)
         {
             int respuesta;
             DataTable data = new DataTable();
@@ -21,29 +27,28 @@ namespace CapaDatos
             {
                 try
                 {
-                    string SqlQuery = "INSERT INTO Producto(CodigoProducto,DescripcionProducto,IdGeneroProducto,IdRubroProducto,IdMarca,IdTipoTalle)" +
-                                     "VALUES(@codigoProducto,@DescripcionProducto,@IdGeneroProducto,@IdRubroProducto,@IdMarca,@IdTipoTalle)";
+                    string SqlQuery = "INSERT INTO Producto(CodigoProducto,IdRubroProducto,DescripcionProducto,IdMarcaProducto,CostoProducto,Estado)" +
+                                     "VALUES(@codigoProducto,@IdRubroProducto,@DescripcionProducto,@IdMarcaProducto,@CostoProducto,@Estado)";
                     SqlCommand cmd = new SqlCommand(SqlQuery, oConexion);
                     cmd.Parameters.AddWithValue("CodigoProducto", oProducto.CodigoProducto);
+                    cmd.Parameters.AddWithValue("IdRubroProducto", oProducto.ORubroProducto.IdRubroProducto);
                     cmd.Parameters.AddWithValue("DescripcionProducto", oProducto.DescripcionProducto);
-                    cmd.Parameters.AddWithValue("IdGeneroProducto", BD_GeneroProducto.BuscarGeneroProducto(oProducto.OGeneroProducto).IdGeneroProducto);
-                    cmd.Parameters.AddWithValue("IdRubroProducto", BD_RubroProducto.BuscarRubroProducto(oProducto.ORubroProducto).IdRubroProducto);
-                    cmd.Parameters.AddWithValue("IdMarca", BD_Marca.BuscarMarca(oProducto.OMarca).IdMarca);
-                    cmd.Parameters.AddWithValue("IdTipoTalle", BD_TipoTalle.BuscarTipoTalle(oProducto.OTipoTalle).IdTipoTalle);
+                    cmd.Parameters.AddWithValue("IdMarcaProducto", oProducto.OMarcaProducto.IdMarcaProducto);
+                    cmd.Parameters.AddWithValue("CostoProducto", oProducto.CostoProducto);
+                    cmd.Parameters.AddWithValue("Estado", Estado.Activo);
                     oConexion.Open();
                     respuesta = cmd.ExecuteNonQuery();
-
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Error al cargar el producto: "+ex.Message);
+                    MessageBox.Show("Error al Registrar el producto: " + ex.Message);
                     return 0;
                 }
             }
             return respuesta;
         }
         #region ACTUALIZAR PRODUCTO
-        public static bool ModificarProducto(Producto oProducto)
+        public bool Actualizar(Producto oProducto)
         {
             bool respuesta = false;
             int cantidad;
@@ -51,16 +56,15 @@ namespace CapaDatos
             {
                 try
                 {
-                    string SqlQuery = "UPDATE PRODUCTO SET CodigoProducto=@CodigoProducto,DescripcionProducto=@DescripcionProducto,GeneroProducto=@GeneroProducto,IdRubroProducto=@IdRubroProducto,IdMarca=@IdMarca," +
-                                      "IdTipoTalle=@IdTipoTalle,Estado=@Estado WHERE IdProducto=@IdProducto";
+                    string SqlQuery = "UPDATE PRODUCTO SET CodigoProducto=@CodigoProducto,IdRubroProducto=@IdRubroProducto,DescripcionProducto=@DescripcionProducto,IdMarcaProducto=@IdMarcaProducto," +
+                                      "CostoProducto=@CostoProducto,Estado=@Estado WHERE IdProducto=@IdProducto";
                     SqlCommand cmd = new SqlCommand(SqlQuery, oConexion);
                     cmd.Parameters.AddWithValue("@CodigoProducto", oProducto.CodigoProducto);
+                    cmd.Parameters.AddWithValue("@IdRubroProducto",oProducto.ORubroProducto.IdRubroProducto);
                     cmd.Parameters.AddWithValue("@DescripcionProducto", oProducto.DescripcionProducto);
-                    cmd.Parameters.AddWithValue("@GeneroProducto", oProducto.OGeneroProducto.ToString());
-                    cmd.Parameters.AddWithValue("@IdRubroProducto", BD_RubroProducto.BuscarRubroProducto(oProducto.ORubroProducto).IdRubroProducto);
-                    cmd.Parameters.AddWithValue("@IdMarca", BD_Marca.BuscarMarca(oProducto.OMarca).IdMarca);
-                    cmd.Parameters.AddWithValue("@IdTipoTalle", BD_TipoTalle.BuscarTipoTalle(oProducto.OTipoTalle).IdTipoTalle);
-                    cmd.Parameters.AddWithValue("@Estado", Operaciones.BuscarEstado(oProducto.OEstado));
+                    cmd.Parameters.AddWithValue("@IdMarcaProducto", oProducto.OMarcaProducto.IdMarcaProducto);
+                    cmd.Parameters.AddWithValue("@CostoProducto", oProducto.CostoProducto);
+                    cmd.Parameters.AddWithValue("@Estado", Operaciones.BuscarByDescripcion(oProducto.OEstado.ToString()));
                     cmd.Parameters.AddWithValue("@IdProducto", oProducto.IdProducto);
                     oConexion.Open();
                     cantidad = cmd.ExecuteNonQuery();
@@ -78,13 +82,13 @@ namespace CapaDatos
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(ex.Message);
+                    MessageBox.Show("Error en Actualizar Producto: " + ex.Message);
                     return respuesta;
-                }            
+                }
             }
         }
         #endregion
-        public static bool EliminarProducto(int IdProducto)
+        public bool Eliminar(int IdProducto)
         {
             int respuesta;
             using (SqlConnection oConexion = new SqlConnection(Conexion.conexion))
@@ -101,13 +105,13 @@ namespace CapaDatos
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(ex.Message);
+                    MessageBox.Show("Error en Eliminar Producto: " + ex.Message);
                     return false;
 
                 }
             }
         }
-        public static List<Producto> MostrarProducto()
+        public List<Producto> Mostrar()
         {
             List<Producto> Tabla = new List<Producto>();
             DataTable data = new DataTable();
@@ -127,91 +131,44 @@ namespace CapaDatos
                             {
                                 IdProducto = Convert.ToInt32(data.Rows[i]["IdProducto"].ToString()),
                                 CodigoProducto = data.Rows[i]["CodigoProducto"].ToString(),
+                                ORubroProducto = bd_RubroProducto.BuscarById(Convert.ToInt32(data.Rows[i]["IdRubroProducto"].ToString())),
                                 DescripcionProducto = data.Rows[i]["DescripcionProducto"].ToString(),
-                                OGeneroProducto = BD_GeneroProducto.BuscarGeneroProductoById(Convert.ToInt32(data.Rows[i]["IdGeneroProducto"].ToString())),
-                                ORubroProducto = BD_RubroProducto.BuscarRubroProductoById(Convert.ToInt32(data.Rows[i]["IdRubroProducto"].ToString())),
-                                OMarca = BD_Marca.BuscarMarcaById(Convert.ToInt32(data.Rows[i]["IdMarca"].ToString())),
-                                OTipoTalle = BD_TipoTalle.BuscarTipoTalleById(Convert.ToInt32(data.Rows[i]["IdTipoTalle"].ToString())),
-                                //OProductoVenta = new List<ProductoVenta>(),
-                                OEstado = Operaciones.BuscarEstado(data.Rows[i]["Estado"].ToString()),
+                                OMarcaProducto = bd_MarcaProducto.BuscarById(Convert.ToInt32(data.Rows[i]["IdMarcaProducto"].ToString())),
+                                CostoProducto = Convert.ToDouble(data.Rows[i]["CostoProducto"].ToString()),
+                                OEstado = Operaciones.BuscarByDescripcion(data.Rows[i]["Estado"].ToString()),
                                 FechaRegistro = Convert.ToDateTime(data.Rows[i]["FechaRegistro"].ToString())
                             };
-                            //prod = cargarProductosVenta(prod);
                             Tabla.Add(prod);
-                        } 
+                        }
                     }
                     return Tabla;
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(ex.Message);
+                    MessageBox.Show("Error en Mostrar Producto: "+ex.Message);
                     return Tabla;
                 }
 
             }
         }
-        public static Producto BuscarProducto(Producto oProducto)
+        public Producto BuscarByDescripcion(string oDescripcionProducto)
         {
-            List<Producto> lista = MostrarProducto();
+            List<Producto> lista = Mostrar();
             foreach (var item in lista)
             {
-                if (oProducto.IdProducto.Equals(item.IdProducto)) return item;
+                if (item.DescripcionProducto.Equals(oDescripcionProducto)) return item;
             }
             return null;
         }
-        public static Producto BuscarProducto(string oProducto)
-        {
-            List<Producto> lista = MostrarProducto();
-            foreach (var item in lista)
-            {
-                if (item.DescripcionProducto.Equals(oProducto)) return item;
-            }
-            return null;
-        }
-        public static Producto BuscarProducto(int oProducto)
-        {
-            List<Producto> lista = MostrarProducto();
-            foreach (var item in lista)
-            {
-                if (item.IdProducto.Equals(oProducto)) return item;
-            }
-            return null;
-        }
-        public static Producto cargarProductosVenta(Producto prod)
-        {
-            DataTable data = new DataTable();
-            using (SqlConnection oConexion = new SqlConnection(Conexion.conexion))
-            try
-            {
-            String SqlQuery = "Select * from ProductoVenta";
-            SqlDataAdapter adapter = new SqlDataAdapter(SqlQuery, oConexion);
-            using (adapter)
-            {
-                adapter.Fill(data);
-                for (int i = 0; i < data.Rows.Count; i++)
-                {
-                    if (prod.IdProducto.Equals(Convert.ToInt32(data.Rows[i]["IdProducto"])))
-                    {
-                        var prodVenta = new ProductoVenta
-                        {
-                            OColor = BD_Color.BuscarColor(Convert.ToInt32(data.Rows[i]["IdColor"].ToString())),
-                            OTalle = BD_Talle.BuscarTalle(Convert.ToInt32(data.Rows[i]["IdTalle"].ToString())),
-                            Costo = Convert.ToDouble(data.Rows[i]["Costo"].ToString()),
-                            Cantidad = Convert.ToInt32(data.Rows[i]["Cantidad"].ToString()),
-                        };
-                        prod.OProductoVenta.Add(prodVenta);
-                    }
-                    
-                }
-            }
-            return prod;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-                return prod;
-            }
 
+        public Producto BuscarById(int oIdProducto)
+        {
+            List<Producto> lista = Mostrar();
+            foreach (var item in lista)
+            {
+                if (item.IdProducto.Equals(oIdProducto)) return item;
+            }
+            return null;
         }
     }
 }

@@ -101,7 +101,7 @@ namespace CapaDatos.SqlServer
                             {
                                 IdRol = Convert.ToInt32(data.Rows[i]["IdRol"]),
                                 Descripcion = Convert.ToString(data.Rows[i]["Descripcion"]),
-                                OEstado = Operaciones.BuscarEstado(data.Rows[i]["Estado"].ToString()),
+                                OEstado = Operaciones.BuscarByDescripcion(data.Rows[i]["Estado"].ToString()),
                                 FechaRegistro = Convert.ToDateTime(data.Rows[i]["FechaRegistro"].ToString())
                             };
                             rolTabla.Add(rol);

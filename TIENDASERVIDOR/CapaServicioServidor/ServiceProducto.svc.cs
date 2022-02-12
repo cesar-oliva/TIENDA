@@ -2,27 +2,70 @@
 using CapaDatos.SqlServer;
 using CapaNegocio;
 using System.Collections.Generic;
+using CapaServicioServidor.DataObjectTransfer;
+using CapaServicioServidor.Abstraction;
+using CapaServicioServidor.DataObjectTransfer.Producto;
 
 namespace CapaServicioServidor
 {
     // NOTA: puede usar el comando "Rename" del menú "Refactorizar" para cambiar el nombre de clase "Service1" en el código, en svc y en el archivo de configuración.
     // NOTE: para iniciar el Cliente de prueba WCF para probar este servicio, seleccione Service1.svc o Service1.svc.cs en el Explorador de soluciones e inicie la depuración.
-    public class ServiceProducto : IServiceProducto
+    public class ServiceProducto : IServiceCrud<DtoProducto>,IFormulario<DtoFormProducto>,IServiceDetalleProducto
     {
-        public bool ModificarProducto(DtoProducto oProducto)
+        BD_Producto bd_Producto = new BD_Producto();
+        BD_MarcaProducto bd_MarcaProducto = new BD_MarcaProducto();
+        BD_RubroProducto bd_RubroProducto = new BD_RubroProducto();
+        BD_DetalleProducto bd_DetalleProducto = new BD_DetalleProducto();
+
+        public bool Registrar(DtoProducto oDtoProducto)
         {
-            int IdProducto = oProducto.IdProducto;
-            string CodigoProducto = oProducto.CodigoProducto;
-            string DescripcionProducto = oProducto.DescripcionProducto;
-            GeneroProducto oGeneroProducto = oProducto.OGeneroProducto;
-            RubroProducto Rubro = oProducto.ORubroProducto;
-            Marca oMarca = oProducto.OMarca;
-            TipoTalle oTipoTalle = oProducto.OTipoTalle;
-            List<ProductoVenta> oProductoVenta = oProducto.OProductoVenta;
-            Estado oEstado = oProducto.OEstado;
-            var nuevo = new Producto(IdProducto,CodigoProducto, DescripcionProducto, oGeneroProducto, Rubro,oMarca,oProductoVenta,oTipoTalle,oEstado);
+            Producto p = new Producto();
+            p.CodigoProducto = oDtoProducto.CodigoProducto;
+            p.DescripcionProducto = oDtoProducto.DescripcionProducto;
+            p.ORubroProducto = bd_RubroProducto.BuscarByDescripcion(oDtoProducto.DescripcionRubroProducto);
+            p.OMarcaProducto = bd_MarcaProducto.BuscarByDescripcion(oDtoProducto.DescripcionMarcaProducto);
+            p.CostoProducto = oDtoProducto.CostoProducto;
+            p.OEstado = Operaciones.BuscarByDescripcion(oDtoProducto.DescripcionEstado);
+            /// falta cargar los datos del datagrid en un array
+            ////
+            //////
+            //////IMPORTANTE//////
+          
+            DtoDetalleProducto detProd = new DtoDetalleProducto();
+            oDtoProducto.DetallePoducto.Add(detProd);
             
-            if (BD_Producto.ModificarProducto(nuevo))
+            //////
+            
+            if (bd_Producto.Registrar(p) > 0)
+            {
+                foreach (var item in oDtoProducto.DetallePoducto)
+                {
+                    ///pasar a detalle
+                    DetalleProducto det = new DetalleProducto();
+                    //det.IdProducto = item.
+                    //bd_DetalleProducto.Registrar(item);
+                }
+                return true;
+            }
+            else
+            {
+
+                return false;
+            }
+        }
+
+        public bool Actualizar(DtoProducto oDtoProducto)
+        {
+            Producto p = new Producto();
+
+            p.IdProducto = oDtoProducto.IdProducto;
+            p.CodigoProducto = oDtoProducto.CodigoProducto;
+            p.DescripcionProducto = oDtoProducto.DescripcionProducto;
+            p.ORubroProducto = bd_RubroProducto.BuscarByDescripcion(oDtoProducto.DescripcionRubroProducto);
+            p.OMarcaProducto = bd_MarcaProducto.BuscarByDescripcion(oDtoProducto.DescripcionMarcaProducto);
+            p.CostoProducto = oDtoProducto.CostoProducto;
+            p.OEstado = Operaciones.BuscarByDescripcion(oDtoProducto.DescripcionEstado);
+            if (bd_Producto.Actualizar(p))
             {
                 return true;
             }
@@ -33,49 +76,25 @@ namespace CapaServicioServidor
             }
         }
 
-        public bool EliminarProducto(int IdProducto)
+        public bool Eliminar(int IdProducto)
         {
-            return BD_Producto.EliminarProducto(IdProducto);
+            return bd_Producto.Eliminar(IdProducto);
         }
 
-        public bool IngresarProducto(DtoProducto oProducto)
-        {
-            string CodigoProducto = oProducto.CodigoProducto;
-            string DescripcionProducto = oProducto.DescripcionProducto;
-            GeneroProducto oGeneroProducto = oProducto.OGeneroProducto;
-            RubroProducto Rubro = oProducto.ORubroProducto;
-            Marca oMarca = oProducto.OMarca;
-            TipoTalle oTipoTalle = oProducto.OTipoTalle;
-            List<ProductoVenta> oProductoVenta = oProducto.OProductoVenta;
-            Estado oEstado = oProducto.OEstado;
-            var nuevo = new Producto(CodigoProducto, DescripcionProducto,oGeneroProducto,Rubro,oMarca,oProductoVenta,oTipoTalle,oEstado);
-            if (BD_Producto.RegistrarProducto(nuevo) > 0)
-            {
-                return true;
-            }
-            else
-            {
-
-                return false;
-            }
-        }
-
-        public List<DtoProducto> ListaProducto()
+        public List<DtoProducto> Mostrar()
         {
             List<DtoProducto> lista = new List<DtoProducto>();
-            foreach (var item in BD_Producto.MostrarProducto())
+            foreach (var item in bd_Producto.Mostrar())
             { 
                 DtoProducto prod = new DtoProducto
                 {
                     IdProducto = item.IdProducto,
                     CodigoProducto = item.CodigoProducto,
                     DescripcionProducto = item.DescripcionProducto,
-                    OGeneroProducto = item.OGeneroProducto,
-                    ORubroProducto = item.ORubroProducto,
-                    OMarca = item.OMarca,
-                    OProductoVenta = item.OProductoVenta, 
-                    OTipoTalle = item.OTipoTalle,     
-                    OEstado = item.OEstado,
+                    DescripcionRubroProducto = item.ORubroProducto.DescripcionRubroProducto,
+                    DescripcionMarcaProducto = item.OMarcaProducto.DescripcionMarcaProducto,
+                    CostoProducto = item.CostoProducto,
+                    DescripcionEstado = item.OEstado.ToString(),
                     FechaRegistro = item.FechaRegistro
                 };
                 lista.Add(prod);
@@ -83,57 +102,82 @@ namespace CapaServicioServidor
             return lista;
         }
 
-        public Estado ObtenerEstado(string oEstado)
+        public DtoFormProducto GetFormulario()
         {
-            if (oEstado.Equals("Activo")) return Estado.Activo;
-            return Estado.Inactivo;
-        }
+            DtoFormProducto form = new DtoFormProducto();
+            form.ListRubroProducto = new List<string>();
+            form.ListMarcaProducto= new List<string>();
+            form.ListGeneroProducto = new List<string>();
+            form.ListTipoTalle = new List<string>();
+            form.ListTalle = new List<(string,string)>();
+            form.ListColor = new List<string>();
+            form.ListEstado = new List<string>();
+            var genero = BD_GeneroProducto.MostrarGeneroProducto();
+            var marca = bd_MarcaProducto.Mostrar();
+            var rubro = bd_RubroProducto.Mostrar();
+            var tipo = BD_TipoTalle.MostrarTipoTalle();
+            var talle = BD_Talle.MostrarTalle();
+            var color = BD_Color.MostrarColor() ;
+            form.ListEstado.Add("Activo");
+            form.ListEstado.Add("Inactivo");
 
-        public GeneroProducto ObtenerGeneroProducto(string oGeneroProducto)
-        {
-            return BD_GeneroProducto.BuscarGeneroProductoByDescripcion(oGeneroProducto);
-        }
-
-        public Marca ObtenerMarca(string oMarca)
-        {
-            return BD_Marca.BuscarMarcaByDescripcion(oMarca);
-        }
-
-        public RubroProducto ObtenerRubroProducto(string oRubroProducto)
-        {
-            return BD_RubroProducto.BuscarRubroProductoByDescripcion(oRubroProducto);
-        }
-
-        public Producto BuscarProductoById(int idProducto)
-        {
-            return BD_Producto.BuscarProducto(idProducto);
-        }
-
-        public Color ObtenerColor(string oColor)
-        {
-            return BD_Color.BuscarColor(oColor);
-        }
-
-        public TipoTalle ObtenerTipoTalle(string oTipoTalle)
-        {
-            return BD_TipoTalle.BuscarTipoTalleByDescripcion(oTipoTalle);
-        }
-        public Talle ObtenerTalle(string oTalle)
-        {
-            return BD_Talle.BuscarTalle(oTalle);
-        }
-
-        public ProductoVenta ObtenerProductoVenta(Color oColor, Talle oTalle, double costo, int cantidad, Estado oEstado)
-        {
-            ProductoVenta p = new ProductoVenta()
+            foreach (var item in genero)
             {
-                OColor = oColor,
-                OTalle = oTalle,
-                Costo = costo,
-                Cantidad = cantidad,
-                OEstado = oEstado
+                form.ListGeneroProducto.Add(item.DescripcionGeneroProducto);
+            }
+            foreach (var item in rubro)
+            {
+                form.ListRubroProducto.Add(item.DescripcionRubroProducto);
+            }
+            foreach (var item in marca)
+            {
+                form.ListMarcaProducto.Add(item.DescripcionMarcaProducto);
+            }
+            foreach (var item in tipo)
+            {
+                form.ListTipoTalle.Add(item.DescripcionTipoTalle);
+                foreach (var item2 in talle)
+                {
+                    if (item.IdTipoTalle.Equals(item2.OTipoTalle.IdTipoTalle))
+                    {
+                        form.ListTalle.Add((item.DescripcionTipoTalle, item2.DescripcionTalle));
+                    }
+                }
+            }
+
+            foreach (var item in color)
+            {
+                form.ListColor.Add(item.DescripcionColor);
+            }
+
+            return form;
+        }
+
+        public List<DtoDetalleProducto> MostrarDetalle()
+        {
+            List<DtoDetalleProducto> lista = new List<DtoDetalleProducto>();
+            foreach (var item in bd_DetalleProducto.Mostrar())
+            {
+                DtoDetalleProducto detprod = new DtoDetalleProducto
+                {
+                    IdDetalleProducto = item.IdDetalleProducto,
+                    CodigoProducto = bd_Producto.BuscarById(item.IdProducto).CodigoProducto,
+                    DescripcionProducto = bd_Producto.BuscarById(item.IdProducto).DescripcionProducto,
+                    //TalleProducto
+                    //ColorProducto
+                    PrecioCosto = bd_Producto.BuscarById(item.IdProducto).CostoProducto,
+                    MargenGanancia = bd_RubroProducto.BuscarById(bd_Producto.BuscarById(item.IdProducto).ORubroProducto.IdRubroProducto).MargenGanancia,
+                    StockProducto = item.StockProducto,
+                    DescripcionEstado = item.OEstado.ToString(),
             };
-            return p;
+                lista.Add(detprod);
+            }
+            return lista;
+        }
+
+        public DetalleProducto BuscarDetalleProductoById(int idProductoVenta)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }
